@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author 林跃涛
+ * @author 罗圣荣
  * @version 1.0
  * @date 2019/7/19 11:08
  */
@@ -30,7 +30,7 @@ public class Test {
     public void test(){
         System.out.println(userService);
         User user = userService.selectByPrimaryKey(1);
-        System.out.println(user.getUserId());
+        System.out.println(user);
     }
 
 }
