@@ -1,7 +1,7 @@
 package cn.neusoft.retailer.web;
 
-import cn.neusoft.retailer.web.pojo.User;
-import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.pojo.Company;
+import cn.neusoft.retailer.web.service.CompanyAdminService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath*:applicationContext.xml","classpath*:springmvc.xml"})
 public class Test {
     @Autowired
-    private UserService userService;
+    private CompanyAdminService companyAdminService;
     /**
      *@描述
      *@参数
@@ -28,9 +28,8 @@ public class Test {
      */
     @org.junit.Test
     public void test(){
-        System.out.println(userService);
-        User user = userService.selectByPrimaryKey(1);
-        System.out.println(user.getUserId());
+        companyAdminService.insertByCompanyId(new Company());
+        System.out.println(companyAdminService.deleteByCompanyId(123));
     }
 
 }

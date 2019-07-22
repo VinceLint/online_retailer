@@ -10,6 +10,10 @@ public interface BrandMapper {
 
     Brand selectByPrimaryKey(Integer brandId);
 
+    List<Brand> selectByCompany(Integer brandComid);
+
+    Brand selectByName(String brand_name);
+
     List<Brand> selectAll();
 
     int updateByPrimaryKey(Brand record);
