@@ -31,6 +31,13 @@
     from company
     where company_id = #{companyId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByCompanyName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select company_id, company_name, company_location, company_contact, company_birthday
+    from company
+    where company_name = #{companyName,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap" >
     select company_id, company_name, company_location, company_contact, company_birthday
     from company

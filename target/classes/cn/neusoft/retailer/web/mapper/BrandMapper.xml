@@ -29,6 +29,19 @@
     from brand
     where brand_id = #{brandId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByCompany" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select brand_id, brand_name, brand_com_id, brand_mer_id
+    from brand
+    where brand_com_id = #{brandComid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select brand_id, brand_name, brand_com_id, brand_mer_id
+    from brand
+    where brand_name = #{brand_name,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap" >
     select brand_id, brand_name, brand_com_id, brand_mer_id
     from brand

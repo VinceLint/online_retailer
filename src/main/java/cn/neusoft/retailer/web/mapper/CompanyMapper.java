@@ -10,6 +10,8 @@ public interface CompanyMapper {
 
     Company selectByPrimaryKey(Integer companyId);
 
+    Company selectByCompanyName(String companyName);
+
     List<Company> selectAll();
 
     int updateByPrimaryKey(Company record);
