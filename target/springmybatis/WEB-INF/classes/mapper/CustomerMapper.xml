@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+mapper 用于定义一个映射配置文件的根节点
+namespace属性是用来配置命名空间，主要进行session级别的缓存管理
+命名空间默认情况下，使用我们当前操作的实体类的全路径
+-->
+<mapper namespace="cn.neusoft.retailer.web.mapper.CustomerMapper">
+
+    <!--<select id="findUsers" resultType="com.damu.entity.Users">-->
+    <select id="findCustomerById" resultType="cn.neusoft.retailer.web.po.Customer">
+        select * from customer
+        <if test="id != null ">
+            where id = #{id}
+        </if>
+    </select>
+</mapper>
