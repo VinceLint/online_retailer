@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib uri="http://www.springframework.org/tags/form"   prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!DOCTYPE html>
 <html>
@@ -49,6 +52,7 @@
             $("#errorChineseName").html("公司中文名不能为空");
             return false;
         } else {
+            alert("djwjjew")
             $("#errorChineseName").html("");
         }
         if (english == null || english == "") {
@@ -69,53 +73,57 @@
 </script>
 <body>
 <div class="container">
-
-    <form action="user-company.jsp" method="post" onsubmit="return checkform()">
+    <form action="/company" method="post" onsubmit="return checkform()">
         <div class="form-group">
-            <label for="ChineseName">公司中文名称 Company Name</label>
-            <input type="text" class="form-control" id="ChineseName" placeholder="Company Name">
+            <label >公司中文名称 Company Name</label>
+            <input type="text" id="ChineseName" class="form-control" name="userName" placeholder="Company Name"/>
             <span ><font color="red" id="errorChineseName" >${errorInfoChineseName }</font></span>
         </div>
         <br>
         <div class="form-group">
-            <label for="EnglishName">公司名称 Company Name</label>
-            <input type="text" class="form-control" id="EnglishName" placeholder="Company Name">
+            <label>公司名称 Company Name</label>
+            <input type="text" id = "EnglishName" class="form-control" name="mvoEngName" placeholder="Company Name"/>
             <span><font color="red" id="errorEnglishName">${errorInfoEnglishName }</font></span>
         </div>
         <br>
         <div class="form-group">
-            <label for="Telephone">公司电话 Telephone</label>
-            <input type="text" class="form-control" id="Telephone" placeholder="Company Name">
+            <label>公司电话 Telephone</label>
+            <input type="text" id = "Telephone" class="form-control" name="userPhone" placeholder="Company Name"/>
             <span><font color="red" id="errorTelephone">${errorInfoTelephone }</font></span>
         </div>
         <br>
         <div class="form-group">
-            <label for="Email">公司邮箱 Email</label>
-            <input type="text" class="form-control" id="Email" placeholder="Email">
+            <label >公司邮箱 Email</label>
+            <input type="text" class="form-control" name="userMail" placeholder="Email"/>
 
         </div>
         <br>
 
         <div class="form-group-lg">
-            <label for="Introduction">公司简介 Introduction</label>
-            <textarea id="Introduction" class="form-control" placeholder="Introduction" rows="5"></textarea>
+            <label >公司简介 Introduction</label>
+            <textarea name="mvoIntroduction" class="form-control" placeholder="Introduction" rows="5"></textarea>
         </div>
         <br>
 
         <div class="form-group-lg">
-            <label for="GMC-Report-Type">品牌商认证类型 GMC Report Type</label>
-            <textarea id="GMC-Report-Type" class="form-control" placeholder="GMC Report" rows="5"></textarea>
+            <label>公司类型 GMC Report Type</label>
+            <select class="form-control projectfile" id="statenums">
+                <c:forEach var="item" items="${typeList}">
+                    <option value="${item.key}">${item.value}</option>
+                </c:forEach>
+            </select>
         </div>
         <br>
 
+
         <div class="form-group-lg">
-            <label for="GMC-Report-Url">品牌商认证类型 GMC Report url</label>
-            <textarea id="GMC-Report-Url" class="form-control" placeholder="GMC Report Url" rows="5"></textarea>
+            <label>品牌商认证url GMC Report url</label>
+            <input name="mvoUrl" class="form-control" placeholder="GMC Report Url"></input>
         </div>
 
         <div class="form-group">
-            <label for="Logo">选择商标Logo</label>
-            <input type="file" id="Logo">
+            <label>选择商标Logo</label>
+            <input type="file" name="Logo"/>
         </div>
         <br>
 
