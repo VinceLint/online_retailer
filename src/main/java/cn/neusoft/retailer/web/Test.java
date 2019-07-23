@@ -1,6 +1,5 @@
 package cn.neusoft.retailer.web;
 
-import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,7 @@ public class Test {
      */
     @org.junit.Test
     public void test(){
-        System.out.println(userService);
-        User user = userService.selectByPrimaryKey(1);
-        System.out.println(user);
+
     }
 
 }

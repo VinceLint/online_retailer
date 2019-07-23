@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           https://www.springframework.org/schema/context/spring-context.xsd
+
+
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+    </bean>
+
+    <!--配置sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--Spring注解扫描-->
+    <context:annotation-config/>
+    <!--<aop:aspectj-autoproxy/>-->
+    <!--Spring组件扫描-->
+    <context:component-scan base-package="cn.neusoft.retailer.web"/>
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--开启事务注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 不需要一个个地注册你的所有映射器。
+     你可以让 MyBatis-Spring 对类路径进行扫描来发现它们。
+     通过使用逗号或分号分隔，你可以设置多个包
+     会自动注入 SqlSessionFactory-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+    <!--<property name="basePackage" value="cn.neusoft.retailer.web.mapper" />-->
+
+    <!--&lt;!&ndash; 如果使用多个数据源，使用sqlSessionFactoryBeanName属性指定SqlSessionFactory&ndash;&gt;-->
+    <!--<property name="sqlSessionFactoryBeanName"  value="sqlSessionFactory" />-->
+    <!--</bean>-->
+
+    <!--接口mapper-->
+    <bean id="brandMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.BrandMapper"></property>
+    </bean>
+    <bean id="companyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.CompanyMapper"></property>
+    </bean>
+    <bean id="dictionaryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.DictionaryMapper"></property>
+    </bean>
+    <bean id="goodsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.GoodsMapper"></property>
+    </bean>
+    <bean id="goodsSizeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.GoodsSizeMapper"></property>
+    </bean>
+    <bean id="logisticsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.LogisticsMapper"></property>
+    </bean>
+    <bean id="logisticsNodeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.LogisticsNodeMapper"></property>
+    </bean>
+    <bean id="menuMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.MenuMapper"></property>
+    </bean>
+    <bean id="orderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.OrderMapper"></property>
+    </bean>
+    <bean id="parameterMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.ParameterMapper"></property>
+    </bean>
+    <bean id="storeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.StoreMapper"></property>
+    </bean>
+    <bean id="transactionRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.TransactionRecordMapper"></property>
+    </bean>
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.UserMapper"></property>
+    </bean>
+    <bean id="userWishlistMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.UserWishlistMapper"></property>
+    </bean>
+    <bean id="walletMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.WalletMapper"></property>
+    </bean>
+    <bean id="wishDetailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.WishDetailMapper"></property>
+    </bean>
+</beans>

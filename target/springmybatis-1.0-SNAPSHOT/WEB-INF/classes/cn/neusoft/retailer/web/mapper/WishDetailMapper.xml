@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.WishDetailMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.WishDetail" >
+    <id column="wish_detail_id" property="wishDetailId" jdbcType="INTEGER" />
+    <result column="wish_list_id" property="wishListId" jdbcType="INTEGER" />
+    <result column="wish_goods_id" property="wishGoodsId" jdbcType="INTEGER" />
+    <result column="wish_goods_amount" property="wishGoodsAmount" jdbcType="INTEGER" />
+    <result column="wish_goods_status" property="wishGoodsStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wish_detail
+    where wish_detail_id = #{wishDetailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.WishDetail" >
+    insert into wish_detail (wish_detail_id, wish_list_id, wish_goods_id, 
+      wish_goods_amount, wish_goods_status)
+    values (#{wishDetailId,jdbcType=INTEGER}, #{wishListId,jdbcType=INTEGER}, #{wishGoodsId,jdbcType=INTEGER}, 
+      #{wishGoodsAmount,jdbcType=INTEGER}, #{wishGoodsStatus,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.WishDetail" >
+    update wish_detail
+    set wish_list_id = #{wishListId,jdbcType=INTEGER},
+      wish_goods_id = #{wishGoodsId,jdbcType=INTEGER},
+      wish_goods_amount = #{wishGoodsAmount,jdbcType=INTEGER},
+      wish_goods_status = #{wishGoodsStatus,jdbcType=INTEGER}
+    where wish_detail_id = #{wishDetailId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select wish_detail_id, wish_list_id, wish_goods_id, wish_goods_amount, wish_goods_status
+    from wish_detail
+    where wish_detail_id = #{wishDetailId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select wish_detail_id, wish_list_id, wish_goods_id, wish_goods_amount, wish_goods_status
+    from wish_detail
+  </select>
+</mapper>

@@ -9,4 +9,5 @@ import cn.neusoft.retailer.web.pojo.User;
  */
 public interface UserService {
     User selectByPrimaryKey(Integer userId);
+
 }

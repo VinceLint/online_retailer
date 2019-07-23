@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.BrandMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.Brand" >
+    <id column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="brand_com_id" property="brandComId" jdbcType="INTEGER" />
+    <result column="brand_mer_id" property="brandMerId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from brand
+    where brand_id = #{brandId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Brand" >
+    insert into brand (brand_id, brand_name, brand_com_id, 
+      brand_mer_id)
+    values (#{brandId,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR}, #{brandComId,jdbcType=INTEGER}, 
+      #{brandMerId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Brand" >
+    update brand
+    set brand_name = #{brandName,jdbcType=VARCHAR},
+      brand_com_id = #{brandComId,jdbcType=INTEGER},
+      brand_mer_id = #{brandMerId,jdbcType=INTEGER}
+    where brand_id = #{brandId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select brand_id, brand_name, brand_com_id, brand_mer_id
+    from brand
+    where brand_id = #{brandId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select brand_id, brand_name, brand_com_id, brand_mer_id
+    from brand
+  </select>
+</mapper>
