@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteByPrimaryKey(Integer userId) {
-        return false;
+        return userMapper.deleteByPrimaryKey(userId) != 0;
     }
 
 }
