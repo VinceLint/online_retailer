@@ -10,7 +10,7 @@ public interface UserMapper {
 
     int insert(User record);
 
-    User selectByPrimaryKey(@Param("userId") Integer userId);
+    User selectByPrimaryKey(@Param(value = "userId") Integer userId);
 
     List<User> selectAll();
 

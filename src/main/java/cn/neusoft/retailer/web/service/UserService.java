@@ -9,4 +9,13 @@ import cn.neusoft.retailer.web.pojo.User;
  */
 public interface UserService {
     User selectByPrimaryKey(Integer userId);
+
+    /**
+     * @描述:用户登录
+     * @参数: [userName, userPassword]
+     * @返回值: cn.neusoft.retailer.web.pojo.User
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/23
+     */
+    User login(String userName, String userPassword);
 }

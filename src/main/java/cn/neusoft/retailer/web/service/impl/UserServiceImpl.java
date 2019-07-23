@@ -15,9 +15,22 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    
     @Override
     public User selectByPrimaryKey(Integer userId) {
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    /**
+     * @描述:用户登录
+     * @参数: [userName, userPassword]
+     * @返回值: cn.neusoft.retailer.web.pojo.User
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/23
+     */
+    @Override
+    public User login(String userName, String userPassword) {
+        return null;
     }
 
 }
