@@ -41,6 +41,7 @@
         }
         if (english == null || english == "") {
             $("#errorEnglishName").html("公司英文名不能为空");
+            return false;
         } else {
             $("#errorEnglishName").html("");
         }
@@ -52,13 +53,16 @@
             $("#errorTelephone").html("");
         }
 
-        state = $('#type option:selected').val();
+        var state = $('#type option:selected').val();
+        if (state == null){
+            state = 0
+        }
         $("#state").val(state)
         return true;
     }
 
     $("#type").change(function () {
-        state = $('#type option:selected').val();
+        var state = $('#type option:selected').val();
         $("#state").val(state)
     })
 
@@ -129,7 +133,7 @@
         <div class="form-group-lg">
             <label>公司类型 GMC Report Type</label>
 
-            <input type="hidden" id="state" name="mvoType" class="projectfile" value="${user.mvoType}"/>
+            <input type="hidden" id="state" name="mvoType" class="projectfile" value="0"/>
             <select id="type" class="selectpicker">
                 <c:forEach var="item" items="${typeList}">
                     <c:if test="${item.key == user.mvoType}">
