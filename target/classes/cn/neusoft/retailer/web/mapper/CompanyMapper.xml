@@ -7,6 +7,7 @@
     <result column="company_location" property="companyLocation" jdbcType="VARCHAR" />
     <result column="company_contact" property="companyContact" jdbcType="VARCHAR" />
     <result column="company_birthday" property="companyBirthday" jdbcType="DATE" />
+    <result column="company_introduction" property="companyIntroduction" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from company
@@ -14,9 +15,9 @@
   </delete>
   <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Company" >
     insert into company (company_id, company_name, company_location, 
-      company_contact, company_birthday)
+      company_contact, company_birthday,company_introduction)
     values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyLocation,jdbcType=VARCHAR}, 
-      #{companyContact,jdbcType=VARCHAR}, #{companyBirthday,jdbcType=DATE})
+      #{companyContact,jdbcType=VARCHAR}, #{companyBirthday,jdbcType=DATE}, #{company_introduction, jdbc=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Company" >
     update company
@@ -24,6 +25,7 @@
       company_location = #{companyLocation,jdbcType=VARCHAR},
       company_contact = #{companyContact,jdbcType=VARCHAR},
       company_birthday = #{companyBirthday,jdbcType=DATE}
+      company_introduction = #{companyIntroduction, jdbcType = VARCHAR}
     where company_id = #{companyId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -39,7 +41,7 @@
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap" >
-    select company_id, company_name, company_location, company_contact, company_birthday
+    select company_id, company_name, company_location, company_contact, company_birthday, company_introduction
     from company
   </select>
 </mapper>
