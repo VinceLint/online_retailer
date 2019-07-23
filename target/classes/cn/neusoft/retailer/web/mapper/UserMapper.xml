@@ -4,45 +4,53 @@
   <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.User" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_mail" property="userMail" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="user_wal_id" property="userWalId" jdbcType="INTEGER" />
     <result column="user_privilege" property="userPrivilege" jdbcType="INTEGER" />
     <result column="mvo_type" property="mvoType" jdbcType="INTEGER" />
     <result column="mvo_url" property="mvoUrl" jdbcType="VARCHAR" />
+    <result column="mvo_eng_name" property="mvoEngName" jdbcType="VARCHAR" />
+    <result column="mvo_introduction" property="mvoIntroduction" jdbcType="LONGVARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.User" >
-    insert into user (user_id, user_password, user_mail, 
-      user_phone, user_wal_id, user_privilege, 
-      mvo_type, mvo_url)
-    values (#{userId,jdbcType=INTEGER}, #{userPassword,jdbcType=VARCHAR}, #{userMail,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=VARCHAR}, #{userWalId,jdbcType=INTEGER}, #{userPrivilege,jdbcType=INTEGER}, 
-      #{mvoType,jdbcType=INTEGER}, #{mvoUrl,jdbcType=VARCHAR})
+    insert into user (user_id, user_password, user_name, 
+      user_mail, user_phone, user_wal_id, 
+      user_privilege, mvo_type, mvo_url, 
+      mvo_eng_name, mvo_introduction)
+    values (#{userId,jdbcType=INTEGER}, #{userPassword,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userMail,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userWalId,jdbcType=INTEGER}, 
+      #{userPrivilege,jdbcType=INTEGER}, #{mvoType,jdbcType=INTEGER}, #{mvoUrl,jdbcType=VARCHAR}, 
+      #{mvoEngName,jdbcType=VARCHAR}, #{mvoIntroduction,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.User" >
     update user
     set user_password = #{userPassword,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
       user_mail = #{userMail,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=VARCHAR},
       user_wal_id = #{userWalId,jdbcType=INTEGER},
       user_privilege = #{userPrivilege,jdbcType=INTEGER},
       mvo_type = #{mvoType,jdbcType=INTEGER},
-      mvo_url = #{mvoUrl,jdbcType=VARCHAR}
+      mvo_url = #{mvoUrl,jdbcType=VARCHAR},
+      mvo_eng_name = #{mvoEngName,jdbcType=VARCHAR},
+      mvo_introduction = #{mvoIntroduction,jdbcType=LONGVARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select user_id, user_password, user_mail, user_phone, user_wal_id, user_privilege,
-    mvo_type, mvo_url
+    select user_id, user_password, user_name, user_mail, user_phone, user_wal_id, user_privilege, 
+    mvo_type, mvo_url, mvo_eng_name, mvo_introduction
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select user_id, user_password, user_mail, user_phone, user_wal_id, user_privilege,
-    mvo_type, mvo_url
+    select user_id, user_password, user_name, user_mail, user_phone, user_wal_id, user_privilege, 
+    mvo_type, mvo_url, mvo_eng_name, mvo_introduction
     from user
   </select>
 </mapper>
