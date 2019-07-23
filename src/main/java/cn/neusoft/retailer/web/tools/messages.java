@@ -5,10 +5,26 @@ package cn.neusoft.retailer.web.tools;
  * @version 1.0
  * @date 2019-07-23 23:14
  */
-//前端消息包：1-success，0-false
+//前端消息包：1-ok，0-remove
 public class messages {
     private int status;
     private String describe;
+
+    public messages(int status, String describe, String icon) {
+        this.status = status;
+        this.describe = describe;
+        this.icon = icon;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    private String icon;
 
     public messages(int status, String describe) {
         this.status = status;

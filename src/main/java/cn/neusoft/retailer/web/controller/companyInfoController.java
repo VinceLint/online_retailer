@@ -87,10 +87,14 @@ public class companyInfoController {
 
         //上诉过程校验完毕，用service类写入数据库，返回结果
         //这里只更新中文名，英文名，电话，邮箱，简介公司类型，品牌商认证，其他不归我管
-//        if (userService.updateByPrimaryKey(user)){
-//
-//        }
-        modelAndView.addObject("msg", new messages(1, "修改成功！"));
+        //补全密码用户名做测试
+        user.setUserPassword("bjwdehwjehjw");
+        user.setUserId(123);
+        if (userService.updateByPrimaryKey(user)){
+            modelAndView.addObject("msg", new messages(1, "修改成功！", "ok"));
+        }else {
+            modelAndView.addObject("msg", new messages(0, "修改失败！", "remove"));
+        }
 
         return modelAndView;
     }

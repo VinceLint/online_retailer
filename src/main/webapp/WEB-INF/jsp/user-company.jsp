@@ -65,6 +65,10 @@
     window.onload = function () {
         if (${msg.status == 1}) {
             $('.bs-example-modal-sm').modal()
+            $('.bs-example-modal-sm').css({color: "lawngreen"})
+        } else if (${msg.status == 0}) {
+            $('.bs-example-modal-sm').modal()
+            $('.bs-example-modal-sm').css({color: "red"})
         }
     }
 </script>
@@ -73,10 +77,12 @@
 
 <%--模态框展示修改结果--%>
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-     style="text-align: center;font-weight: bold;font-size: 20px">
+     style="text-align: center;font-weight: bold;font-size: 20px;color: lawngreen">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>${msg.describe}
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" style="color: blue"></span>
+            <span class="glyphicon glyphicon-${msg.icon}" aria-hidden="true"></span>${msg.describe}
+            <span class="glyphicon glyphicon-triangle-left" aria-hidden="true" style="color: blue"></span>
         </div>
     </div>
 </div>
