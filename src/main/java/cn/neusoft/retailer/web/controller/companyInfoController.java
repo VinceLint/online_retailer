@@ -12,7 +12,7 @@ import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.mvoType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,7 +25,7 @@ public class companyInfoController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/company")
+    @RequestMapping("/company")
     public ModelAndView update(@RequestParam(value = "file", required = false) CommonsMultipartFile Logo, User user, String type) {
         ModelAndView modelAndView = new ModelAndView("user-company");
         Map<Integer, String> map_id = new HashMap<Integer, String>();
@@ -34,8 +34,9 @@ public class companyInfoController {
             map_id.put(index++, e.toString());
         }
         modelAndView.addObject("typeList", map_id);
+        System.out.println("Logo : " + Logo);
+        System.out.println("type : " + type);
+        user.toString();
         return modelAndView;
     }
-
-
 }

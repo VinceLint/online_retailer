@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ taglib uri="http://www.springframework.org/tags/form"   prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!DOCTYPE html>
@@ -10,7 +10,13 @@
     <meta charset="utf-8">
     <title>品牌商管理</title>
 </head>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!--  boostrap jquery在线引用，需要联网  -->
+<!-- Latest compiled and minified CSS -->
+<script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -36,10 +42,13 @@
         color: #1c4374;
         font: 18px pxGeorgia, "Times New Roman", Times, serif;
     }
-    font{
+
+    font {
         font-weight: bold;
         font-size: medium;
     }
+
+
 </style>
 <script type="text/javascript">
     function checkform() {
@@ -52,7 +61,6 @@
             $("#errorChineseName").html("公司中文名不能为空");
             return false;
         } else {
-            alert("djwjjew")
             $("#errorChineseName").html("");
         }
         if (english == null || english == "") {
@@ -73,45 +81,48 @@
 </script>
 <body>
 <div class="container">
-    <form action="/company" method="post" onsubmit="return checkform()">
+    <form action="/online_retailer/company" method="post" onsubmit="return checkform()">
         <div class="form-group">
-            <label >公司中文名称 Company Name</label>
-            <input type="text" id="ChineseName" class="form-control" name="userName" placeholder="Company Name"/>
-            <span ><font color="red" id="errorChineseName" >${errorInfoChineseName }</font></span>
-        </div>
-        <br>
-        <div class="form-group">
-            <label>公司名称 Company Name</label>
-            <input type="text" id = "EnglishName" class="form-control" name="mvoEngName" placeholder="Company Name"/>
-            <span><font color="red" id="errorEnglishName">${errorInfoEnglishName }</font></span>
-        </div>
-        <br>
-        <div class="form-group">
-            <label>公司电话 Telephone</label>
-            <input type="text" id = "Telephone" class="form-control" name="userPhone" placeholder="Company Name"/>
-            <span><font color="red" id="errorTelephone">${errorInfoTelephone }</font></span>
-        </div>
-        <br>
-        <div class="form-group">
-            <label >公司邮箱 Email</label>
-            <input type="text" class="form-control" name="userMail" placeholder="Email"/>
+            <label>公司中文名称 Company Name</label> <span><font color="red"
+                                                           id="errorChineseName">${errorInfoChineseName }</font></span>
 
+            <input type="text" id="ChineseName" class="form-control" name="userName" placeholder="Company Name"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>公司英文名称 English Name</label> <span><font color="red"
+                                                         id="errorEnglishName">${errorInfoEnglishName }</font></span>
+
+            <input type="text" id="EnglishName" class="form-control" name="mvoEngName" placeholder="Company Name"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>公司电话 Telephone</label> <span><font color="red"
+                                                      id="errorTelephone">${errorInfoTelephone }</font></span>
+
+            <input type="text" id="Telephone" class="form-control" name="userPhone" placeholder="Company Name"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>公司邮箱 Email</label>
+            <input type="text" class="form-control" name="userMail" placeholder="Email"/>
         </div>
         <br>
 
         <div class="form-group-lg">
-            <label >公司简介 Introduction</label>
+            <label>公司简介 Introduction</label>
             <textarea name="mvoIntroduction" class="form-control" placeholder="Introduction" rows="5"></textarea>
         </div>
         <br>
 
         <div class="form-group-lg">
             <label>公司类型 GMC Report Type</label>
-            <select class="form-control projectfile" id="statenums">
+            <select id="type" class="selectpicker">
                 <c:forEach var="item" items="${typeList}">
                     <option value="${item.key}">${item.value}</option>
                 </c:forEach>
             </select>
+
         </div>
         <br>
 

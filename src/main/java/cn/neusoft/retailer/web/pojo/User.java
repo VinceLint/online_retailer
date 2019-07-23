@@ -1,5 +1,6 @@
 package cn.neusoft.retailer.web.pojo;
 
+
 public class User {
     private Integer userId;
 
@@ -27,7 +28,7 @@ public class User {
         return userId;
     }
 
-    public User(){
+    public User() {
 
     }
 
@@ -113,5 +114,22 @@ public class User {
 
     public void setMvoIntroduction(String mvoIntroduction) {
         this.mvoIntroduction = mvoIntroduction == null ? null : mvoIntroduction.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userPassword='" + userPassword + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userMail='" + userMail + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userWalId=" + userWalId +
+                ", userPrivilege=" + userPrivilege +
+                ", mvoType=" + mvoType +
+                ", mvoUrl='" + mvoUrl + '\'' +
+                ", mvoEngName='" + mvoEngName + '\'' +
+                ", mvoIntroduction='" + mvoIntroduction + '\'' +
+                '}';
     }
 }
