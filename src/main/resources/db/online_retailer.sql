@@ -234,6 +234,7 @@ CREATE TABLE `transaction_record`  (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `user_id` int(11) NOT NULL,
+  `user_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_mail` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,

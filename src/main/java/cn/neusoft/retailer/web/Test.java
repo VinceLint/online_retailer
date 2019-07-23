@@ -1,14 +1,14 @@
 package cn.neusoft.retailer.web;
 
-import cn.neusoft.retailer.web.pojo.Company;
-import cn.neusoft.retailer.web.service.CompanyAdminService;
+import cn.neusoft.retailer.web.pojo.User;
+import cn.neusoft.retailer.web.service.UserService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author 林跃涛
+ * @author 罗圣荣
  * @version 1.0
  * @date 2019/7/19 11:08
  */
@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath*:applicationContext.xml","classpath*:springmvc.xml"})
 public class Test {
     @Autowired
-    private CompanyAdminService companyAdminService;
+    private UserService userService;
     /**
      *@描述
      *@参数
@@ -28,8 +28,9 @@ public class Test {
      */
     @org.junit.Test
     public void test(){
-        companyAdminService.insertByCompanyId(new Company());
-        System.out.println(companyAdminService.deleteByCompanyId(123));
+        System.out.println(userService);
+        User user = userService.selectByPrimaryKey(1);
+        System.out.println(user);
     }
 
 }
