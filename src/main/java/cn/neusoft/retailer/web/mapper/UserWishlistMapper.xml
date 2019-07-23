@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.UserWishlistMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.UserWishlist" >
+    <id column="wishlist_id" property="wishlistId" jdbcType="INTEGER" />
+    <result column="bvo_id" property="bvoId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_wishlist
+    where wishlist_id = #{wishlistId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.UserWishlist" >
+    insert into user_wishlist (wishlist_id, bvo_id)
+    values (#{wishlistId,jdbcType=INTEGER}, #{bvoId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.UserWishlist" >
+    update user_wishlist
+    set bvo_id = #{bvoId,jdbcType=INTEGER}
+    where wishlist_id = #{wishlistId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select wishlist_id, bvo_id
+    from user_wishlist
+    where wishlist_id = #{wishlistId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select wishlist_id, bvo_id
+    from user_wishlist
+  </select>
+</mapper>

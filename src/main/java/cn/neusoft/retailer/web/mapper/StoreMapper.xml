@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.StoreMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.Store" >
+    <id column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="store_type" property="storeType" jdbcType="INTEGER" />
+    <result column="store_own" property="storeOwn" jdbcType="INTEGER" />
+    <result column="store_score" property="storeScore" jdbcType="REAL" />
+    <result column="store_sell" property="storeSell" jdbcType="INTEGER" />
+    <result column="store_url" property="storeUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Store" >
+    insert into store (store_id, store_name, store_type, 
+      store_own, store_score, store_sell, 
+      store_url)
+    values (#{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{storeType,jdbcType=INTEGER}, 
+      #{storeOwn,jdbcType=INTEGER}, #{storeScore,jdbcType=REAL}, #{storeSell,jdbcType=INTEGER}, 
+      #{storeUrl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Store" >
+    update store
+    set store_name = #{storeName,jdbcType=VARCHAR},
+      store_type = #{storeType,jdbcType=INTEGER},
+      store_own = #{storeOwn,jdbcType=INTEGER},
+      store_score = #{storeScore,jdbcType=REAL},
+      store_sell = #{storeSell,jdbcType=INTEGER},
+      store_url = #{storeUrl,jdbcType=VARCHAR}
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select store_id, store_name, store_type, store_own, store_score, store_sell, store_url
+    from store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select store_id, store_name, store_type, store_own, store_score, store_sell, store_url
+    from store
+  </select>
+</mapper>

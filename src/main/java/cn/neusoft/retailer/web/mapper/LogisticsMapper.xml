@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.LogisticsMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.Logistics" >
+    <id column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="log_com_name" property="logComName" jdbcType="VARCHAR" />
+    <result column="log_cou_name" property="logCouName" jdbcType="VARCHAR" />
+    <result column="log_cou_phone" property="logCouPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from logistics
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Logistics" >
+    insert into logistics (log_id, log_com_name, log_cou_name, 
+      log_cou_phone)
+    values (#{logId,jdbcType=VARCHAR}, #{logComName,jdbcType=VARCHAR}, #{logCouName,jdbcType=VARCHAR}, 
+      #{logCouPhone,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Logistics" >
+    update logistics
+    set log_com_name = #{logComName,jdbcType=VARCHAR},
+      log_cou_name = #{logCouName,jdbcType=VARCHAR},
+      log_cou_phone = #{logCouPhone,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select log_id, log_com_name, log_cou_name, log_cou_phone
+    from logistics
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select log_id, log_com_name, log_cou_name, log_cou_phone
+    from logistics
+  </select>
+</mapper>

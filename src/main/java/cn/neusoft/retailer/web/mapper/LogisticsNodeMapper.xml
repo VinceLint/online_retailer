@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.LogisticsNodeMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.LogisticsNode" >
+    <id column="log_node_id" property="logNodeId" jdbcType="VARCHAR" />
+    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="log_node_name" property="logNodeName" jdbcType="VARCHAR" />
+    <result column="log_arr_time" property="logArrTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from logistics_node
+    where log_node_id = #{logNodeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.LogisticsNode" >
+    insert into logistics_node (log_node_id, log_id, log_node_name, 
+      log_arr_time)
+    values (#{logNodeId,jdbcType=VARCHAR}, #{logId,jdbcType=VARCHAR}, #{logNodeName,jdbcType=VARCHAR}, 
+      #{logArrTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.LogisticsNode" >
+    update logistics_node
+    set log_id = #{logId,jdbcType=VARCHAR},
+      log_node_name = #{logNodeName,jdbcType=VARCHAR},
+      log_arr_time = #{logArrTime,jdbcType=TIMESTAMP}
+    where log_node_id = #{logNodeId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select log_node_id, log_id, log_node_name, log_arr_time
+    from logistics_node
+    where log_node_id = #{logNodeId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select log_node_id, log_id, log_node_name, log_arr_time
+    from logistics_node
+  </select>
+</mapper>
