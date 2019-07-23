@@ -8,63 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="09bf7990-946f-4270-b74e-dfac6f959c2b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/CompanyMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/CompanyMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsSizeMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsSizeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/LogisticsMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/LogisticsMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/LogisticsNodeMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/LogisticsNodeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/MenuMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/MenuMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/ParameterMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/ParameterMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/StoreMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/StoreMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/TransactionRecordMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/TransactionRecordMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserWishlistMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserWishlistMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/WalletMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/WalletMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/WishDetailMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/WishDetailMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Brand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Company.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Dictionary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Goods.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/GoodsSize.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Logistics.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/LogisticsNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Menu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Order.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Parameter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Store.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/TransactionRecord.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/UserWishlist.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Wallet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/WishDetail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/applicationContext.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/BrandMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/BrandMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/CompanyMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/GoodsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/GoodsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/db/online_retailer.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/online_retailer.sql" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -328,6 +272,14 @@
               <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -340,7 +292,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563854191342" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563854740585" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -358,8 +310,8 @@
       <recent name="cn.neusoft.retailer.web.utils" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\project\springmybatis\src\main\webapp\WEB-INF" />
       <recent name="E:\project\springmybatis\src\main\resources\db" />
+      <recent name="E:\project\springmybatis\src\main\webapp\WEB-INF" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -560,6 +512,14 @@
       <workItem from="1563765393978" duration="6948000" />
       <workItem from="1563775196492" duration="6428000" />
     </task>
+    <task id="LOCAL-00001" summary="更新数据库,重新生成mapper">
+      <created>1563854293490</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1563854293490</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -595,7 +555,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41699000" />
+    <option name="totallyTimeSpent" value="42241000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -639,6 +599,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="更新数据库,重新生成mapper" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新数据库,重新生成mapper" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/success.jsp" />
