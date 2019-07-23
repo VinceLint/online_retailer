@@ -31,7 +31,7 @@ public class Test {
     public void test(){
         System.out.println(userService);
         User user = userService.selectByPrimaryKey(1);
-        System.out.println(user.getUserId());
+        System.out.println(user);
     }
 
 }
