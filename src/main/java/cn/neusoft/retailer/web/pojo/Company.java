@@ -13,6 +13,9 @@ public class Company {
 
     private Date companyBirthday;
 
+    private String companyIntroduction;
+
+
     public Integer getCompanyId() {
         return companyId;
     }
@@ -51,5 +54,13 @@ public class Company {
 
     public void setCompanyBirthday(Date companyBirthday) {
         this.companyBirthday = companyBirthday;
+    }
+
+    public String getCompanyIntroduction() {
+        return companyIntroduction;
+    }
+
+    public void setCompanyIntroduction(String companyIntroduction) {
+        this.companyIntroduction = companyIntroduction;
     }
 }
