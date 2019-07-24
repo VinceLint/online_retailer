@@ -14,6 +14,7 @@ public interface UserService {
     User selectByName(String userName);
     User selectByEnglishName(String englishName);
     List<User> selectAll();
+    boolean insertByUserInfo(User user);
     boolean updateByPrimaryKey(User user);
     boolean deleteByPrimaryKey(Integer userId);
 }

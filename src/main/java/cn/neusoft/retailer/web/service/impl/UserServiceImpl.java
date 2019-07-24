@@ -23,9 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User selectByName(String userName) {
-        return selectByName(userName);
-    }
+    public User selectByName(String userName) { return selectByName(userName); }
 
     @Override
     public User selectByEnglishName(String englishName) {
@@ -38,13 +36,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateByPrimaryKey(User user) {
-        return userMapper.updateByPrimaryKey(user) != 0;
+    public boolean insertByUserInfo(User user) {
+        return true;
     }
 
     @Override
-    public boolean deleteByPrimaryKey(Integer userId) {
-        return userMapper.deleteByPrimaryKey(userId) != 0;
-    }
+    public boolean updateByPrimaryKey(User user) { return userMapper.updateByPrimaryKey(user) != 0; }
+
+    @Override
+    public boolean deleteByPrimaryKey(Integer userId) { return userMapper.deleteByPrimaryKey(userId) != 0; }
 
 }

@@ -1,16 +1,6 @@
-
-<!--A Design by W3layouts
-   Author: W3layout
-   Author URL: http://w3layouts.com
-   License: Creative Commons Attribution 3.0 Unported
-   License URL: http://creativecommons.org/licenses/by/3.0/
-   -->
 <!DOCTYPE html>
-
 <html>
-
 <head>
-    <title>Gadget Sign Up Form a Flat Responsive Widget Template :: w3layouts </title>
     <!-- Meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,51 +17,56 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 </head>
 <body>
-<h1 class="error">Gadget Sign Up Form</h1>
-<!---728x90--->
+<h1 class="welcome">WELCOME</h1>
 <div class="w3layouts-two-grids">
-    <!---728x90--->
     <div class="mid-class">
-        <div class="img-right-side">
-            <h3>Manage Your Gadgets Account</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget Lorem ipsum dolor sit
-                amet, consectetuer adipiscing elit. Aenean commodo ligula ege</p>
-            <img src="images/b11.png" class="img-fluid" alt="">
-        </div>
         <div class="txt-left-side">
             <h2> Sign Up Here </h2>
             <form action="#" method="post">
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
-                    <input id="username" type="text" placeholder=" Name" required="">
+                    <input id="user_name" type="text" placeholder=" Name" required="required">
 
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l">
                     <span class="fa fa-phone" aria-hidden="true"></span>
-                    <input id="phone" type="text"placeholder="Phone" required="">
+                    <input id="user_phone" type="text"placeholder="Phone" required="required">
 
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l">
                     <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                    <input id="email" type="email" placeholder="Email" required="">
+                    <input id="user_mail" type="email" placeholder="Email" required="required">
 
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
 
                     <span class="fa fa-lock" aria-hidden="true"></span>
-                    <input id="password" type="password" placeholder="Password" required="">
+                    <input id="user_password" type="password" placeholder="Password" required="required">
                     <div class="clear"></div>
                 </div>
                 <div class="main-two-w3ls">
                     <div class="left-side-forget">
-                        <input type="checkbox" class="checked">
-                        <span class="remenber-me">Remember me </span>
+                        <input name="mvo_ornot" type="checkbox" class="checked">
+                        <span class="mvo">A MVO? </span>
                     </div>
-                    <div class="right-side-forget">
+                    <!--<div class="right-side-forget">
                         <a href="#" class="for">Forgot password...?</a>
+                    </div>-->
+                </div>
+                <div class="mvo_info">
+                    <p></p>
+                    <div class="form-left-to-w3l">
+                        <span class="fa fa-bookmark-o" aria-hidden="true"></span>
+                        <input id="mvo_type" type="text" placeholder="GMC Report Type" required="required">
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-left-to-w3l">
+                        <span class="fa fa-share" aria-hidden="true"></span>
+                        <input id="mvo_url" type="text" placeholder="GMC Report Url" required="required">
+                        <div class="clear"></div>
                     </div>
                 </div>
                 <div class="btnn">
@@ -79,7 +74,7 @@
                 </div>
             </form>
             <div class="w3layouts_more-buttn">
-                <h3>Don't Have an account..?
+                <h3>Have an account..?
                     <a href="#">Login Here
                     </a>
                 </h3>
@@ -90,20 +85,34 @@
 </div>
 <script type="text/javascript" src="js/jquery-3.4.1.js" ></script>
 <script>
-    //addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); }
     $(function(){
+        var user_privilege;
+        $("input[name='mvo_ornot']").on("click",function(){
+            if($(this).prop("checked")){
+                $(".mvo_info").css("display","block");
+                $(".main-two-w3ls").css("padding-bottom","20px");
+                user_privilege = 1;
+            }
+            else{
+                $(".mvo_info").css("display","none");
+                $(".main-two-w3ls").css("padding-bottom","0px");
+                user_privilege = 2;
+            }
+        }),
         $("#signup").on("click",function(){
-            alert("fasdfsaf");
             $.ajax({
                 type: "POST",
-                url: "/user/register.do",
+                url: "/online_retailer/user/register.do",
                 dataType: "json",
                 data:
                     {
-                        username: $("#username").val(),
-                        email: $("#email").val(),
-                        phone: $("#phone").val(),
-                        password: $("#password").val()
+                        user_name: $("#user_name").val(),
+                        user_mail: $("#user_mail").val(),
+                        user_phone: $("#user_phone").val(),
+                        user_password: $("#user_password").val(),
+                        user_privilege: user_privilege,
+                        mvo_type: $("#mvo_type").val(),
+                        mvo_url: $("#mvo_url").val()
                     },
                 traditional: true,
                 xhrFields:
@@ -112,7 +121,7 @@
                     },
                 success: function (result)
                 {
-                    window.location.href="https://github.com/login";
+                    window.location.href="https://www.baidu.com";
                 },
                 error: function ()
                 {
