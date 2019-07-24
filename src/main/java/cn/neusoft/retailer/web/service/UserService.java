@@ -2,6 +2,8 @@ package cn.neusoft.retailer.web.service;
 
 import cn.neusoft.retailer.web.pojo.User;
 
+import java.util.List;
+
 /**
  * @author 林跃涛
  * @version 1.0
@@ -9,13 +11,9 @@ import cn.neusoft.retailer.web.pojo.User;
  */
 public interface UserService {
     User selectByPrimaryKey(Integer userId);
-
-    /**
-     * @描述:用户登录
-     * @参数: [userName, userPassword]
-     * @返回值: cn.neusoft.retailer.web.pojo.User
-     * @创建人: 罗圣荣
-     * @创建时间: 2019/7/23
-     */
-    User login(String userName, String userPassword);
+    User selectByName(String userName);
+    User selectByEnglishName(String englishName);
+    List<User> selectAll();
+    boolean updateByPrimaryKey(User user);
+    boolean deleteByPrimaryKey(Integer userId);
 }

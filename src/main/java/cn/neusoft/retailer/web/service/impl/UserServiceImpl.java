@@ -6,6 +6,8 @@ import cn.neusoft.retailer.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author 林跃涛
  * @version 1.0
@@ -15,22 +17,34 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
-    
     @Override
     public User selectByPrimaryKey(Integer userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
 
-    /**
-     * @描述:用户登录
-     * @参数: [userName, userPassword]
-     * @返回值: cn.neusoft.retailer.web.pojo.User
-     * @创建人: 罗圣荣
-     * @创建时间: 2019/7/23
-     */
     @Override
-    public User login(String userName, String userPassword) {
-        return null;
+    public User selectByName(String userName) {
+        return selectByName(userName);
+    }
+
+    @Override
+    public User selectByEnglishName(String englishName) {
+        return selectByEnglishName(englishName);
+    }
+
+    @Override
+    public List<User> selectAll() {
+        return selectAll();
+    }
+
+    @Override
+    public boolean updateByPrimaryKey(User user) {
+        return userMapper.updateByPrimaryKey(user) != 0;
+    }
+
+    @Override
+    public boolean deleteByPrimaryKey(Integer userId) {
+        return userMapper.deleteByPrimaryKey(userId) != 0;
     }
 
 }

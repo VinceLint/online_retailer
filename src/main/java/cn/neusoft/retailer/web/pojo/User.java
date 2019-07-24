@@ -27,6 +27,10 @@ public class User {
         return userId;
     }
 
+    public User(){
+
+    }
+
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
