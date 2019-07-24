@@ -1,12 +1,18 @@
 package cn.neusoft.retailer.web.controller;
 
+import cn.neusoft.retailer.web.pojo.Dictionary;
 import cn.neusoft.retailer.web.service.DictionaryService;
+import net.sf.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,12 +26,28 @@ public class DictionaryController {
     private DictionaryService dictionaryService;
 
     @RequestMapping(value = "/insertDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String insert(@RequestBody String json) throws Exception{
-        ObjectMapper mapper = new ObjectMapper();
-        //这个对象就是你前端提交的对象
-        Map<String, Object> m = mapper.readValue(json, Map.class);
-        //这个是演示所以就不返回了
-        return null;
+    @ResponseBody
+    public Map<String,Object> insert(@RequestBody String json) throws Exception{
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        JSONObject jsonObject = new JSONObject(json); // 首先把字符串转成 JSONArray  对象
+//        判断是否插入成功
+        if(dictionaryService.insert(jsonObject)){
+            resultMap.put("result","SUCCESS");
+        }else{
+            resultMap.put("result","Error");
+        }
+        return resultMap;
+    }
+
+
+    @RequestMapping("/toDictionary")
+    public String  toDic(){
+        System.out.println(dictionaryService);
+        List<Dictionary> dictionaryList = dictionaryService.selectAll();
+        System.out.println(dictionaryList.toString());
+        JSONArray jsonarray = JSONArray.fromObject(dictionaryList);
+        System.out.println(jsonarray);
+        return "html/dictionary.html";
     }
 
 }

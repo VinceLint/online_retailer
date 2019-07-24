@@ -13,4 +13,6 @@ public interface DictionaryMapper {
     List<Dictionary> selectAll();
 
     int updateByPrimaryKey(Dictionary record);
+
+    List<Dictionary> selectByType(String type);
 }

@@ -1,6 +1,7 @@
 package cn.neusoft.retailer.web.service;
 
 import cn.neusoft.retailer.web.pojo.Dictionary;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public interface DictionaryService {
     int deleteByPrimaryKey(Integer dicId);
 
-    int insert(Dictionary record);
+    boolean insert(JSONObject jsonObject);
 
     Dictionary selectByPrimaryKey(Integer dicId);
 

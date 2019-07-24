@@ -6,7 +6,7 @@
 		<title></title>
 		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 	</head>
-	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/jquery-1.9.1.js"></script>
 	<body>
 		<div id="app">
 			<el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
@@ -30,7 +30,7 @@
 			<el-button type="primary" icon="el-icon-delete"></el-button>
 			<div class="update">
 				<el-dialog title="数据字典" :visible.sync="dialogVisible">
-					<el-form ref="form" :model="form" label-width="80px" @>
+					<el-form ref="form" :model="form" label-width="80px">
 						<el-form-item label="字典类型" prop="type" :rules="[
       						{ required: true, message: '字典类型不能为空'},
       						{ max: 20, message: '字典类型不超过20个字符'}
@@ -60,7 +60,7 @@
 							<el-button @click="dialogVisible = false">取 消</el-button>
 							<el-button type="primary" @click="onSubmit">确 定</el-button>
 						</el-form-item>
-						</el-from>
+					</el-from>
 				</el-dialog>
 			</div>
 
@@ -140,10 +140,33 @@
 						}
 						//新增提交
 						else {
-							this.$reqs.post("/addDictionary", this.form, config).then(function(result) {
-								console.log(result);
-							})
-						}
+							var dtype = this.form.type
+							$.ajax({
+								type: "POST",
+								url: "http://localhost:8090/springmybatis//insertDictionary",
+								contentType: "application/json; charset=utf-8",
+								data: JSON.stringify(this.form),
+								dataType: "json",
+								success: function(data) {
+									//成功信息
+									console.log("success")
+									if (data.result=="SUCCESS"){
+										var newData = {
+											type: dtype,
+											describe: this.form.describe,
+											code: this.form.code,
+											cvalue: this.form.cvalue}
+										this.tableData.push(newData)
+										alert("插入成功!")
+									}
+									else alert("插入失败")
+								},
+								error: function(message) {
+									//失败信息
+									console.log("error")
+								}
+							});
+						}this.dialogVisible = false;
 					}
 
 				}
