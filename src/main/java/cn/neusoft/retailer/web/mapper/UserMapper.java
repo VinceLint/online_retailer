@@ -1,7 +1,6 @@
 package cn.neusoft.retailer.web.mapper;
 
 import cn.neusoft.retailer.web.pojo.User;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ public interface UserMapper {
 
     int insert(User record);
 
-    User selectByPrimaryKey(@Param("userId") Integer userId);
+    User selectByPrimaryKey(Integer userId);
 
     List<User> selectAll();
 

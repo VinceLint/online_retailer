@@ -2,6 +2,7 @@ package cn.neusoft.retailer.web.controller;
 
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,10 +24,16 @@ public class testController {
 
     @RequestMapping(value = "test/{userName}")
     @ResponseBody
-    public HashMap<Integer, User> test(@PathVariable("userName") String userName){
-        User user = userService.selectByPrimaryKey(123);
+    public String test(@PathVariable("userName") String userName) throws Exception {
+        System.out.println("123");
+        User user = userService.selectByPrimaryKey(Integer.parseInt(userName));
+        System.out.println("user : " + user.toString());
         HashMap<Integer, User> hashMap =  new HashMap<Integer, User>();
         hashMap.put(1, user);
-        return hashMap;
+        hashMap.put(2, user);
+        System.out.println("hashMap : " + hashMap);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = objectMapper.writeValueAsString(user);
+        return jsonString;
     }
 }
