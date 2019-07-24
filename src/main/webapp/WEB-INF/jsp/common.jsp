@@ -5,11 +5,13 @@
   Time: 21:57
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <html>
+<%--引入vue--%>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!--  easyui在线引用，需要联网  -->
 <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
@@ -37,7 +39,7 @@
 
 
 <head>
-    <title>测试</title>
+    <title>test</title>
 </head>
 <body>
 
