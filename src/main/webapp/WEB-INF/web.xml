@@ -36,6 +36,7 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
   
   <!--中文乱码过滤器-->
   <filter>
