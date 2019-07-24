@@ -23,8 +23,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @Controller
-public class companyInfoController {
+public class CompanyInfoController {
     @Autowired
     private UserService userService;
 
