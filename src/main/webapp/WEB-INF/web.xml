@@ -36,12 +36,7 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>*.css</url-pattern>
-    <url-pattern>*.js</url-pattern>
-    <url-pattern>*.jpg</url-pattern>
-  </servlet-mapping>
+
   
   <!--中文乱码过滤器-->
   <filter>

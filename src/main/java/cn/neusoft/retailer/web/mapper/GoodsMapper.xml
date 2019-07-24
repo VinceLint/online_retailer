@@ -34,7 +34,7 @@
       goods_describe = #{goodsDescribe,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultType="cn.neusoft.retailer.web.pojo.Goods" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select goods_id, goods_title, goods_pic, goods_price, brand_id, goods_amount, goods_class, 
     goods_describe
     from goods

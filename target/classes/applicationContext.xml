@@ -57,10 +57,6 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
         <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.BrandMapper"></property>
     </bean>
-    <bean id="companyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.CompanyMapper"></property>
-    </bean>
     <bean id="dictionaryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
         <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.DictionaryMapper"></property>

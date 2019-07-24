@@ -11,11 +11,9 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 22/07/2019 10:58:46
+ Date: 23/07/2019 11:55:58
 */
 
-CREATE DATABASE online_retailer;
-USE online_retailer;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -26,26 +24,11 @@ DROP TABLE IF EXISTS `brand`;
 CREATE TABLE `brand`  (
   `brand_id` int(11) NOT NULL,
   `brand_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `brand_com_id` int(11) NULL DEFAULT NULL,
   `brand_mer_id` int(11) NULL DEFAULT NULL,
+  `brand_url` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`brand_id`) USING BTREE,
-  INDEX `brand_com_id`(`brand_com_id`) USING BTREE,
   INDEX `brand_mer_id`(`brand_mer_id`) USING BTREE,
-  CONSTRAINT `brand_ibfk_1` FOREIGN KEY (`brand_com_id`) REFERENCES `company` (`company_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `brand_ibfk_2` FOREIGN KEY (`brand_mer_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for company
--- ----------------------------
-DROP TABLE IF EXISTS `company`;
-CREATE TABLE `company`  (
-  `company_id` int(11) NOT NULL,
-  `company_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `company_location` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `company_contact` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `company_birthday` date NULL DEFAULT NULL,
-  PRIMARY KEY (`company_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -94,20 +77,20 @@ CREATE TABLE `goods_size`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for loan_sel_relationship
+-- Table structure for loan_sel_relation
 -- ----------------------------
-DROP TABLE IF EXISTS `loan_sel_relationship`;
-CREATE TABLE `loan_sel_relationship`  (
-  `loan_sel_relationship_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `loan_sel_relation`;
+CREATE TABLE `loan_sel_relation`  (
+  `loan_sel_rel_id` int(11) NOT NULL AUTO_INCREMENT,
   `bvo_id` int(11) NULL DEFAULT NULL,
   `goods_id` int(11) NULL DEFAULT NULL,
   `goods_amount` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`loan_sel_relationship_id`) USING BTREE,
+  PRIMARY KEY (`loan_sel_rel_id`) USING BTREE,
   INDEX `goods_id`(`goods_id`) USING BTREE,
   INDEX `bvo_id`(`bvo_id`) USING BTREE,
-  CONSTRAINT `loan_sel_relationship_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `loan_sel_relationship_ibfk_2` FOREIGN KEY (`bvo_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  CONSTRAINT `loan_sel_relation_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `loan_sel_relation_ibfk_2` FOREIGN KEY (`bvo_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for logistics
@@ -234,16 +217,24 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `user_id` int(11) NOT NULL,
   `user_password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `user_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_mail` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_wal_id` int(11) NULL DEFAULT NULL,
   `user_privilege` int(255) NULL DEFAULT NULL,
   `mvo_type` int(255) NULL DEFAULT NULL,
   `mvo_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `mvo_introduction` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `mvo_eng_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE,
   INDEX `user_wal_id`(`user_wal_id`) USING BTREE,
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_wal_id`) REFERENCES `wallet` (`wal_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user_wishlist

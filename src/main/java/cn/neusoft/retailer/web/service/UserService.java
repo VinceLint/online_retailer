@@ -2,6 +2,8 @@ package cn.neusoft.retailer.web.service;
 
 import cn.neusoft.retailer.web.pojo.User;
 
+import java.util.List;
+
 /**
  * @author 林跃涛
  * @version 1.0
@@ -9,4 +11,9 @@ import cn.neusoft.retailer.web.pojo.User;
  */
 public interface UserService {
     User selectByPrimaryKey(Integer userId);
+    User selectByName(String userName);
+    User selectByEnglishName(String englishName);
+    List<User> selectAll();
+    boolean updateByPrimaryKey(User user);
+    boolean deleteByPrimaryKey(Integer userId);
 }

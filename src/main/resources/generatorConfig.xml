@@ -99,11 +99,10 @@
 		</javaClientGenerator>
 
 		<table tableName="brand"></table>
-		<table tableName="company"></table>
 		<table tableName="dictionary"></table>
 		<table tableName="goods"></table>
 		<table tableName="goods_size"></table>
-		<table tableName="load_sel_relationship"></table>
+		<table tableName="load_sel_relation"></table>
 		<table tableName="logistics"></table>
 		<table tableName="logistics_node"></table>
 		<table tableName="menu"></table>
