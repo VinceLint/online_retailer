@@ -25,11 +25,19 @@ public class DictionaryController {
     @Autowired
     private DictionaryService dictionaryService;
 
+    @RequestMapping(value = "/initDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public JSONArray init() throws Exception{
+        List<Dictionary> dictionaryList = dictionaryService.selectAll();
+        JSONArray jsonarray = JSONArray.fromObject(dictionaryList);
+        return jsonarray;
+    }
+
     @RequestMapping(value = "/insertDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String,Object> insert(@RequestBody String json) throws Exception{
         Map<String,Object> resultMap = new HashMap<String, Object>();
-        JSONObject jsonObject = new JSONObject(json); // 首先把字符串转成 JSONArray  对象
+        JSONObject jsonObject = new JSONObject(json); // 首先把字符串转成 JSONObject  对象
 //        判断是否插入成功
         if(dictionaryService.insert(jsonObject)){
             resultMap.put("result","SUCCESS");
@@ -39,14 +47,23 @@ public class DictionaryController {
         return resultMap;
     }
 
+    @RequestMapping(value = "/updateDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String,Object> update(@RequestBody String json) throws Exception{
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        org.json.JSONArray jsonArray = new org.json.JSONArray(json);// 首先把字符串转成 JSONArray  对象
+        System.out.println(jsonArray);
+//        判断是否插入成功
+        if(dictionaryService.update(jsonArray)){
+            resultMap.put("result","SUCCESS");
+        }else{
+            resultMap.put("result","Error");
+        }
+        return resultMap;
+    }
 
     @RequestMapping("/toDictionary")
     public String  toDic(){
-        System.out.println(dictionaryService);
-        List<Dictionary> dictionaryList = dictionaryService.selectAll();
-        System.out.println(dictionaryList.toString());
-        JSONArray jsonarray = JSONArray.fromObject(dictionaryList);
-        System.out.println(jsonarray);
         return "html/dictionary.html";
     }
 

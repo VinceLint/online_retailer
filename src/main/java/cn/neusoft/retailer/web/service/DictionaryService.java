@@ -14,6 +14,7 @@ public interface DictionaryService {
     int deleteByPrimaryKey(Integer dicId);
 
     boolean insert(JSONObject jsonObject);
+    boolean update(org.json.JSONArray jsonArray);
 
     Dictionary selectByPrimaryKey(Integer dicId);
 
