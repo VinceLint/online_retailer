@@ -2,44 +2,14 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="online_retailer:war" />
-      <artifact name="online_retailer:war exploded" />
+      <artifact name="springmybatis:war" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09bf7990-946f-4270-b74e-dfac6f959c2b" name="Default Changelist" comment="Merge remote-tracking branch 'remotes/origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;pom.xml&#10;#&#9;src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java&#10;#&#9;src/main/java/cn/neusoft/retailer/web/tools/MyString.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/DictionaryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/DictionaryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/DictionaryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/dictionary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/test.html" afterDir="false" />
+    <list default="true" id="09bf7990-946f-4270-b74e-dfac6f959c2b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CompanyInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CompanyInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/testController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/testController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Dictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/Messages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/string.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/springmvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/springmvc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/HTML/common.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/common.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/HTML/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/applicationContext.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/DictionaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/DictionaryMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/springmvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/springmvc.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,16 +25,70 @@
     <option name="MAKE_PROJECT_ON_SAVE" value="true" />
     <option name="PARALLEL_COMPILATION" value="true" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="95" column="32" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
+            <state relative-caret-position="720">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandOrderController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CompanyInfoController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-96">
+              <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/DictionaryController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="33" column="32" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/DictionaryService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/DictionaryServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,33 +97,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/target/online_retailer-1.0-SNAPSHOT/html/dictionary.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="170" column="20" selection-start-line="170" selection-start-column="20" selection-end-line="170" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/testController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="230" column="18" lean-forward="true" selection-start-line="230" selection-start-column="18" selection-end-line="230" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/DictionaryController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="25" column="47" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-              <folding>
-                <element signature="e#999#1017#0" expanded="true" />
-                <element signature="e#1137#1150#0" expanded="true" />
-                <element signature="e#1209#1225#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="2112">
+              <caret line="112" column="17" lean-forward="true" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -107,26 +126,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/register.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="112" column="57" selection-start-line="112" selection-start-column="57" selection-end-line="112" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="91" column="7" selection-start-line="91" selection-start-column="7" selection-end-line="91" selection-end-column="7" />
+            <state relative-caret-position="72">
+              <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -137,24 +138,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Tag Library Descriptor" />
-        <option value="Interface" />
         <option value="Jsp File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>mysql</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="Huston &lt;1114197985@qq.com&gt;" />
-        <option value="林扬凯" />
-      </list>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -168,6 +158,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/mybatis.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/success.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CustomerController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/CustomerMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/CustomerServiceImpl.java" />
@@ -179,35 +170,23 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/db/online_retailer.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java" />
         <option value="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/jsp/user-company.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/index.jsp" />
-        <option value="$PROJECT_DIR$/src/main/resources/springmvc.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/mvoType.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/messages.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/companyInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/UserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user-company.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/string.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/login.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MyString.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CompanyInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/register.html" />
         <option value="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/DictionaryService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/DictionaryServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/DictionaryController.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/springmvc.xml" />
+        <option value="$PROJECT_DIR$/target/online_retailer-1.0-SNAPSHOT/html/dictionary.html" />
       </list>
     </option>
   </component>
@@ -221,7 +200,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+        <option name="mavenHome" value="F:/maven/apache-maven-3.5.0" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -253,12 +232,13 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="979" />
-    <option name="height" value="1040" />
+    <option name="x" value="952" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -269,38 +249,38 @@
         <subPane>
           <expand>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -308,8 +288,8 @@
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -317,8 +297,8 @@
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -327,27 +307,89 @@
               <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="online_retailer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online_retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="cn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="cn" type="462c0819:PsiDirectoryNode" />
+              <item name="neusoft" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="cn" type="462c0819:PsiDirectoryNode" />
+              <item name="neusoft" type="462c0819:PsiDirectoryNode" />
+              <item name="retailer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="cn" type="462c0819:PsiDirectoryNode" />
+              <item name="neusoft" type="462c0819:PsiDirectoryNode" />
+              <item name="retailer" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="online_retailer-1.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="online_retailer-1.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+              <item name="html" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="online_retailer-1.0-SNAPSHOT" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springmybatis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="springmybatis" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -357,33 +399,28 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563854900664" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/css" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563979755226" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\IdeaProjects\online_retailer\src\main\webapp\css" />
-      <recent name="E:\project\springmybatis\src\main\resources\mapper" />
-      <recent name="E:\project\springmybatis\src\main\resources" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\project\springmybatis\src\main\resources\db" />
+      <recent name="E:\project\springmybatis\src\main\webapp\WEB-INF" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="cn.neusoft.retailer.web.utils" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/webapp" />
-      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
-      <recent name="E:\project\springmybatis\src\main\resources\db" />
-      <recent name="E:\project\springmybatis\src\main\webapp\WEB-INF" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\project\springmybatis\src\main\resources\mapper" />
+      <recent name="E:\project\springmybatis\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -398,39 +435,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UserController.test">
-    <configuration name="CompanyInfoController.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="online_retailer" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.neusoft.retailer.web.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web.controller" />
-      <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.controller.CompanyInfoController" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MyString.testUrl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="online_retailer" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.neusoft.retailer.web.tools.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web.tools" />
-      <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.tools.MyString" />
-      <option name="METHOD_NAME" value="testUrl" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.12">
     <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springmybatis" />
       <extension name="coverage">
@@ -446,8 +451,56 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test.Test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springmybatis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.neusoft.retailer.web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web" />
+      <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.Test" />
+      <option name="METHOD_NAME" value="Test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test.Test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springmybatis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.neusoft.retailer.web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web" />
+      <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.Test" />
+      <option name="METHOD_NAME" value="Test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test.Test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springmybatis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.neusoft.retailer.web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web" />
+      <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.Test" />
+      <option name="METHOD_NAME" value="Test3" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="online_retailer" />
+      <module name="springmybatis" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="cn.neusoft.retailer.web.*" />
@@ -458,39 +511,16 @@
       <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.Test" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserController.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="online_retailer" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.neusoft.retailer.web.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web.controller" />
-      <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.controller.UserController" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tomcat 9.0.20" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.20" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8088/online_retailer/index.jsp" />
-      <option name="UPDATING_POLICY" value="hot-swap-classes" />
+    <configuration name="Tomcat 9.0.12" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.12" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="online_retailer:war exploded">
+        <artifact name="springmybatis:war">
           <settings>
-            <option name="CONTEXT_PATH" value="online_retailer" />
-          </settings>
-        </artifact>
-        <artifact name="online_retailer:war">
-          <settings>
-            <option name="CONTEXT_PATH" value="/online_retailer" />
+            <option name="CONTEXT_PATH" value="/springmybatis" />
           </settings>
         </artifact>
       </deployment>
@@ -554,26 +584,24 @@
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
           <artifact name="springmybatis:war" />
-          <artifact name="online_retailer:war exploded" />
-          <artifact name="online_retailer:war" />
         </option>
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.Test.Test1" />
+      <item itemvalue="JUnit.Test.Test2" />
+      <item itemvalue="JUnit.Test.Test3" />
       <item itemvalue="JUnit.Test.test" />
       <item itemvalue="JUnit.Test" />
-      <item itemvalue="Tomcat Server.Tomcat 9.0.20" />
-      <item itemvalue="JUnit.MyString.testUrl" />
-      <item itemvalue="JUnit.UserController.test" />
-      <item itemvalue="JUnit.CompanyInfoController.test" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.12" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserController.test" />
-        <item itemvalue="JUnit.CompanyInfoController.test" />
-        <item itemvalue="JUnit.MyString.testUrl" />
         <item itemvalue="JUnit.Test.test" />
         <item itemvalue="JUnit.Test" />
+        <item itemvalue="JUnit.Test.Test3" />
+        <item itemvalue="JUnit.Test.Test2" />
+        <item itemvalue="JUnit.Test.Test1" />
       </list>
     </recent_temporary>
   </component>
@@ -593,9 +621,7 @@
       <workItem from="1563764287223" duration="577000" />
       <workItem from="1563765393978" duration="6948000" />
       <workItem from="1563775196492" duration="6428000" />
-      <workItem from="1563855659955" duration="13161000" />
-      <workItem from="1563929330777" duration="788000" />
-      <workItem from="1564016331803" duration="7036000" />
+      <workItem from="1563934872300" duration="2790000" />
     </task>
     <task id="LOCAL-00001" summary="更新数据库,重新生成mapper">
       <created>1563854293490</created>
@@ -611,129 +637,72 @@
       <option name="project" value="LOCAL" />
       <updated>1563854780566</updated>
     </task>
-    <task id="LOCAL-00003" summary="update">
-      <created>1563859318880</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1563859318880</updated>
-    </task>
-    <task id="LOCAL-00004" summary="移动jsp文件夹位置到WEB-INF">
-      <created>1563860705379</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1563860705380</updated>
-    </task>
-    <task id="LOCAL-00005" summary="移动jsp文件夹位置到WEB-INF">
-      <created>1563884526065</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1563884526066</updated>
-    </task>
-    <task id="LOCAL-00006" summary="修改jsp">
-      <created>1563884864936</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1563884864936</updated>
-    </task>
-    <task id="LOCAL-00007" summary="更新jsp页面，完善前后端校验，增加工具类">
-      <created>1563895513325</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1563895513325</updated>
-    </task>
-    <task id="LOCAL-00008" summary="修改公司信息功能基本完成，等待登录页面的session完成跳转">
-      <created>1563898144953</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1563898144953</updated>
-    </task>
-    <task id="LOCAL-00009" summary="修改商品类型初始不选会null的情况">
-      <created>1563898807758</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1563898807758</updated>
-    </task>
-    <task id="LOCAL-00010" summary="修改common类编码">
-      <created>1563929716429</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1563929716429</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test_test - 2019.07.24 at 00h 07m 27s.xml">
+    <history-entry file="Test_test - 2019.07.23 at 11h 08m 12s.xml">
       <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MyString_testUrl - 2019.07.25 at 09h 56m 28s.xml">
-      <configuration name="MyString.testUrl" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.23 at 11h 12m 18s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MyString_testUrl - 2019.07.25 at 09h 56m 37s.xml">
-      <configuration name="MyString.testUrl" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.23 at 11h 13m 58s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserController_test - 2019.07.25 at 10h 03m 06s.xml">
-      <configuration name="UserController.test" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.23 at 11h 44m 57s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserController_test - 2019.07.25 at 10h 09m 05s.xml">
-      <configuration name="UserController.test" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.24 at 10h 31m 55s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CompanyInfoController_test - 2019.07.25 at 10h 12m 17s.xml">
-      <configuration name="CompanyInfoController.test" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.24 at 10h 32m 34s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserController_test - 2019.07.25 at 10h 42m 04s.xml">
-      <configuration name="UserController.test" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.24 at 10h 36m 37s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserController_test - 2019.07.25 at 10h 43m 36s.xml">
-      <configuration name="UserController.test" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.24 at 10h 39m 02s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserController_test - 2019.07.25 at 10h 46m 07s.xml">
-      <configuration name="UserController.test" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.24 at 21h 51m 56s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserController_test - 2019.07.25 at 10h 51m 02s.xml">
-      <configuration name="UserController.test" configurationId="JUnit" />
+    <history-entry file="Test_test - 2019.07.24 at 21h 55m 19s.xml">
+      <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81369000" />
+    <option name="totallyTimeSpent" value="49530000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Learn" order="0" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.23927614" />
-      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="3" />
-      <window_info id="Image Layers" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="UI Designer" order="6" />
-      <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info id="Web" order="8" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20375335" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49731904" visible="true" weight="0.28328612" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.28592375" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.2614458" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32991204" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50268096" side_tool="true" weight="0.28328612" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3243626" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067025" side_tool="true" weight="0.48387095" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32650074" />
       <window_info anchor="bottom" id="Problems" order="12" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
       <window_info anchor="bottom" id="Database Changes" order="14" />
-      <window_info anchor="bottom" id="Version Control" order="15" weight="0.32891566" />
+      <window_info anchor="bottom" id="Version Control" order="15" />
       <window_info anchor="bottom" id="Application Servers" order="16" weight="0.329429" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -750,35 +719,42 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更新数据库,重新生成mapper" />
-    <MESSAGE value="update" />
-    <MESSAGE value="移动jsp文件夹位置到WEB-INF" />
-    <MESSAGE value="修改jsp" />
-    <MESSAGE value="更新jsp页面，完善前后端校验，增加工具类" />
-    <MESSAGE value="修改公司信息功能基本完成，等待登录页面的session完成跳转" />
-    <MESSAGE value="修改商品类型初始不选会null的情况" />
-    <MESSAGE value="修改common类编码" />
-    <MESSAGE value="Merge remote-tracking branch 'remotes/origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;pom.xml&#10;#&#9;src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java&#10;#&#9;src/main/java/cn/neusoft/retailer/web/tools/MyString.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'remotes/origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;pom.xml&#10;#&#9;src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java&#10;#&#9;src/main/java/cn/neusoft/retailer/web/tools/MyString.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新数据库,重新生成mapper" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/target/classes/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-288" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/LogisticsNodeMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/MenuMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/ParameterMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-792" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/CompanyMapper.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserWishlistMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -786,8 +762,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-config.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.3/mybatis-3.4.3.jar!/org/apache/ibatis/builder/xml/XMLMapperBuilder.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
@@ -802,8 +794,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.xml">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -822,13 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -836,9 +835,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Store.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
+        <state relative-caret-position="48">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
@@ -859,64 +872,130 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Logistics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
+        <state relative-caret-position="48">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/lang/Thread.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/brandOrderList.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+        <state relative-caret-position="72">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/db/online_retailer.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+        <state relative-caret-position="383">
+          <caret line="232" selection-start-line="232" selection-end-line="232" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/Messages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/string.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/mvoType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1183">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/DictionaryMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/html/dictionary.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="22" selection-end-line="176" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Dictionary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/generatorConfig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="100" column="41" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/springmvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="12" selection-end-line="20" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/testController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CompanyInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-96">
+          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user-company.jsp" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common.jsp" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/string.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/mvoType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/DictionaryServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-177">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/UniqueID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-24">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandOrderController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="182">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -924,184 +1003,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/css/style.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="41" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MyString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="76" column="23" selection-start-line="76" selection-start-column="23" selection-end-line="76" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/html/dictionary.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="134" column="58" lean-forward="true" selection-start-line="134" selection-start-column="58" selection-end-line="134" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" column="11" selection-start-line="61" selection-start-column="11" selection-end-line="61" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/db/online_retailer.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="217" column="29" selection-start-line="217" selection-start-column="29" selection-end-line="217" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/testController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/Messages.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="63" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/DictionaryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CompanyInfoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/generatorConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="100" column="41" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/springmvc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="12" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="91" column="7" selection-start-line="91" selection-start-column="7" selection-end-line="91" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="112" column="57" selection-start-line="112" selection-start-column="57" selection-end-line="112" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-          <folding>
-            <element signature="e#999#1017#0" expanded="true" />
-            <element signature="e#1137#1150#0" expanded="true" />
-            <element signature="e#1209#1225#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/DictionaryController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="25" column="47" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="95" column="32" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="72">
+          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="230" column="18" lean-forward="true" selection-start-line="230" selection-start-column="18" selection-end-line="230" selection-end-column="18" />
+        <state relative-caret-position="2112">
+          <caret line="112" column="17" lean-forward="true" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/DictionaryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="33" column="32" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/DictionaryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/DictionaryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/online_retailer-1.0-SNAPSHOT/html/dictionary.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="170" column="20" selection-start-line="170" selection-start-column="20" selection-end-line="170" selection-end-column="20" />
         </state>
       </provider>
     </entry>
