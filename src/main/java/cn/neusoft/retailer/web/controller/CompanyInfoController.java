@@ -169,4 +169,17 @@ public class CompanyInfoController {
         return hashMap;
     }
 
+    @RequestMapping(value = "companyDelete/{brandId}")
+    @ResponseBody
+    public HashMap<String, String> deleteBrand(@PathVariable("brandId") Integer brandId){
+        HashMap<String, String> hashMap = new HashMap<>();
+        if (brandService.deleteByPrimaryKey(brandId)){
+            hashMap.put("result", "true");
+        }else {
+            hashMap.put("result", "false");
+        }
+        return hashMap;
+    }
+
+
 }
