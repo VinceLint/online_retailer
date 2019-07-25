@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!-- Meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -17,6 +18,7 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 </head>
+
 <body>
 <h1 class="welcome">WELCOME</h1>
 <div class="w3layouts-two-grids">
@@ -62,31 +64,45 @@
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
     $(function () {
-        $("#login_in").on("click", function () {
-            if ($("#userName").val() != "" && $("#userPassword").val() != "") {
-                $.ajax({
-                    type: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    url: "/online_retailer/user/register.do",
-                    dataType: "json",
-                    data: JSON.stringify({
-                        "userName": $("#userName").val(),
-                        "userPassword": $("#userPassword").val()
-                    }),
-                    async: false,
-                    success: function (result) {
-                        window.location.href = "https://www.baidu.com";
-                    },
-                    error: function () {
-                        alert("注册失败");
-                    }
-                });
+        console.log("it's running");
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "/online_retailer/user/getCookie",
+            dataType: "json",
+            success: function (data) {
+                $("#userName").val(data.userName);
+                $("#userPassword").val(data.userPassword);
+                $("input[name='remember-me']").attr("checked", true);
+            },
+            error: function () {
+                console.log("cookies信息获取失败！");
             }
-        })
+        });
+    })
+    $("#login_in").on("click", function () {
+        if ($("#userName").val() != "" && $("#userPassword").val() != "") {
+            console.log("it's ready");
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/online_retailer/user/loginValidate.do",
+                dataType: "json",
+                data: JSON.stringify({
+                    "userName": $("#userName").val(),
+                    "userPassword": $("#userPassword").val()
+                }),
+                async: false,
+                success: function (result) {
+                    window.location.href = "https://www.baidu.com";
+                },
+                error: function () {
+                    console.log("Login Failed");
+                }
+            });
+        }
     })
 </script>
 </body>
+
 </html>

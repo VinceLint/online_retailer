@@ -29,7 +29,7 @@
                     <input id="userName" type="text" placeholder=" Name" required="required"/>
                     <div class="clear"></div>
                 </div>
-<!--                <span class="tip" id="ntip">用户名为2-17位中字</span>-->
+                <!--                <span class="tip" id="ntip">用户名为2-17位中字</span>-->
                 <div class="form-left-to-w3l">
                     <span class="fa fa-phone" aria-hidden="true"></span>
                     <input id="userPhone" type="text" placeholder="Phone" required="required"/>
@@ -84,7 +84,7 @@
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
     $(function () {
-        var userPrivilege;
+        var userPrivilege = 0;
         $("input[name='mvo_ornot']").on("click", function () {
             if ($(this).prop("checked")) {
                 $(".mvo_info").css("display", "block");
@@ -99,7 +99,7 @@
             } else {
                 $(".mvo_info").css("display", "none");
                 $(".main-two-w3ls").css("padding-bottom", "0px");
-                userPrivilege = 2;
+                userPrivilege = 0;
             }
         });
         $("#signup").on("click", function () {
@@ -121,7 +121,7 @@
                     async: false,
                     success: function (result) {
                         // console.log(result);
-                        if(!result[0]){
+                        if (!result[0]) {
 
                         }
 
@@ -135,4 +135,5 @@
     })
 </script>
 </body>
+
 </html>
