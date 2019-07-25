@@ -37,7 +37,7 @@
 
 		<!-- 数据库连接信息 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-						connectionURL="jdbc:mysql://127.0.0.1:3306/online_retailer?characterEncoding=UTF-8" userId="root" password="123456">
+						connectionURL="jdbc:mysql://127.0.0.1:3306/online_retailer?characterEncoding=UTF-8" userId="root" password="rootroot">
 		</jdbcConnection>
 
 		<!-- java类型处理器 用于处理数据库中的类型到Java中的类型，

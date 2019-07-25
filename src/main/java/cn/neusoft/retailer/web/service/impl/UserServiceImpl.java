@@ -13,6 +13,7 @@ import java.util.List;
  * @version 1.0
  * @date 2019/7/22 12:52
  */
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectByName(String userName) {
-        return selectByName(userName);
+        return userMapper.selectByName(userName);
     }
 
     @Override
@@ -34,17 +35,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> selectAll() {
-        return selectAll();
+        return userMapper.selectAll();
     }
 
     @Override
-    public boolean updateByPrimaryKey(User user) {
-        return userMapper.updateByPrimaryKey(user) != 0;
+    public boolean insertByUserInfo(User user) {
+        return  userMapper.insert(user);
     }
 
     @Override
-    public boolean deleteByPrimaryKey(Integer userId) {
-        return userMapper.deleteByPrimaryKey(userId) != 0;
-    }
+    public boolean updateByPrimaryKey(User user) { return userMapper.updateByPrimaryKey(user) != 0; }
+
+    @Override
+    public boolean deleteByPrimaryKey(Integer userId) { return userMapper.deleteByPrimaryKey(userId) != 0; }
 
 }

@@ -4,9 +4,9 @@ package cn.neusoft.retailer.web.pojo;
 public class User {
     private Integer userId;
 
-    private String userPassword;
-
     private String userName;
+
+    private String userPassword;
 
     private String userMail;
 
@@ -36,20 +36,20 @@ public class User {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getUserPassword() {
         return userPassword;
     }
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword == null ? null : userPassword.trim();
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getUserMail() {
@@ -126,7 +126,7 @@ public class User {
                 ", userPhone='" + userPhone + '\'' +
                 ", userWalId=" + userWalId +
                 ", userPrivilege=" + userPrivilege +
-                ", mvoType=" + mvoType +
+                ", MvoType=" + mvoType +
                 ", mvoUrl='" + mvoUrl + '\'' +
                 ", mvoEngName='" + mvoEngName + '\'' +
                 ", mvoIntroduction='" + mvoIntroduction + '\'' +
