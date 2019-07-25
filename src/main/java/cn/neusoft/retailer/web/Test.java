@@ -2,6 +2,7 @@ package cn.neusoft.retailer.web;
 
 import cn.neusoft.retailer.web.mapper.UserMapper;
 import cn.neusoft.retailer.web.pojo.User;
+import cn.neusoft.retailer.web.service.OrderService;
 import cn.neusoft.retailer.web.service.UserService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath*:applicationContext.xml","classpath*:springmvc.xml"})
 
 public class Test {
+    @Autowired
+    private OrderService orderService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -37,4 +40,18 @@ public class Test {
         userMapper.insert(user);
     }
 
+    /**
+     *@描述 测试OrderService
+     *@参数
+     *@返回值
+     *@创建人 胡献涛
+     *@创建时间  2019/7/24 21:35
+     *@修改人和其它信息
+     */
+    @org.junit.Test
+    public void testOrderService(){
+        orderService.selectByBrandUserId(1).forEach(map->{
+            System.out.println(map);
+        });
+    }
 }
