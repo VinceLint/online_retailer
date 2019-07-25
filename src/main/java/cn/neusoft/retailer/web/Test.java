@@ -1,8 +1,6 @@
 package cn.neusoft.retailer.web;
 
 import cn.neusoft.retailer.web.mapper.UserMapper;
-import cn.neusoft.retailer.web.pojo.User;
-import cn.neusoft.retailer.web.service.UserService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,8 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath*:applicationContext.xml","classpath*:springmvc.xml"})
 
 public class Test {
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
     @Autowired
     private UserMapper userMapper;
     /**
@@ -32,9 +30,10 @@ public class Test {
      */
     @org.junit.Test
     public void test(){
-        User user = new User();
-        user.setUserId(123);
-        userMapper.insert(user);
+//        User user = new User();
+//        user.setUserId(123);
+//        userMapper.insert(user);
+        userMapper.selectByName("admin");
     }
 
 }

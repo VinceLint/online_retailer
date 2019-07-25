@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 //一些处理String的工具
 public class MyString {
     //判断是否是汉字
-    public static boolean ifchinese(String string) {
-        String reg = "[\\u4e00-\\u9fa5]+";
+    public static boolean ifChinese(String string) {
+        String reg = "[\\u4e00-\\u9fa5]{2,12}$";
         return string.matches(reg);
     }
 

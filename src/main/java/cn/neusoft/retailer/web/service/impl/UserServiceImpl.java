@@ -13,6 +13,7 @@ import java.util.List;
  * @version 1.0
  * @date 2019/7/22 12:52
  */
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean insertByUserInfo(User user) {
-        return true;
+        return  userMapper.insert(user);
     }
 
     @Override

@@ -27,9 +27,9 @@
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
                     <input id="userName" type="text" placeholder=" Name" required="required"/>
-
                     <div class="clear"></div>
                 </div>
+<!--                <span class="tip" id="ntip">用户名为2-17位中字</span>-->
                 <div class="form-left-to-w3l">
                     <span class="fa fa-phone" aria-hidden="true"></span>
                     <input id="userPhone" type="text" placeholder="Phone" required="required"/>
@@ -120,9 +120,11 @@
                     }),
                     async: false,
                     success: function (result) {
-                        for(var val in result) {
-                            console.log(val);
+                        // console.log(result);
+                        if(!result[0]){
+
                         }
+
                     },
                     error: function (message) {
                         console.log(message);
