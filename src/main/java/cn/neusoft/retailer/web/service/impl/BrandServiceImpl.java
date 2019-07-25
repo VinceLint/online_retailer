@@ -51,4 +51,9 @@ public class BrandServiceImpl implements BrandService {
     public int selectCountBrand(Integer brandId) {
         return brandMapper.selectCountBrand(brandId);
     }
+
+    @Override
+    public List<Brand> selectByPage(Integer brandMerId, Integer pageStart, Integer pageSize) {
+        return brandMapper.selectByPage(brandMerId, pageStart, pageSize);
+    }
 }
