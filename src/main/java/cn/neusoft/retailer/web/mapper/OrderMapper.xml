@@ -79,6 +79,14 @@
     order_send_time, order_cancel_time, order_complete_time, order_log_id, deliver_name, 
     deliver_address, deliver_phone, bs_id, receiver_name, receiver_address, receiver_phone, 
     receiver_code, trans_fare, trans_way
-    from order
+    from `order`
+  </select>
+
+
+  <select id="selectByProperty" resultMap="BaseResultMap">
+    select * from `order` where ${propertyName}=#{value}
+  </select>
+  <select id="selectByBrandUserId" resultType="java.util.Map">
+    select * from `order`,goods,brand where `order`.goods_id=goods.goods_id and goods.brand_id=brand.brand_id and brand.brand_mer_id=#{brandUserId};
   </select>
 </mapper>

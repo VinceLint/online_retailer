@@ -4,6 +4,8 @@ package cn.neusoft.retailer.web.pojo;
 public class User {
     private Integer userId;
 
+    private String userName;
+
     private String userPassword;
 
     private String userName;
@@ -34,6 +36,14 @@ public class User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserPassword() {

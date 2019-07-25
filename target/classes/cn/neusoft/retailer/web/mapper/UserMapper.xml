@@ -58,7 +58,7 @@
     select user_id, user_password, user_name, user_mail, user_phone, user_wal_id, user_privilege,
            mvo_type, mvo_url, mvo_eng_name, mvo_introduction
     from user
-    where mvo_eng_name = #{userId,jdbcType=VARCHAR}
+    where mvo_eng_name = #{userName,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select user_id, user_password, user_name, user_mail, user_phone, user_wal_id, user_privilege, 
