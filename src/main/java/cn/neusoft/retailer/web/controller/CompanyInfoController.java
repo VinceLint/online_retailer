@@ -151,4 +151,8 @@ public class CompanyInfoController {
         return null;
     }
 
+    public HashMap<String, Object> brandPage(Integer pageNow, Integer pageEnd, Integer userId){
+        return null;
+    }
+
 }
