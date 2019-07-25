@@ -7,26 +7,34 @@ package cn.neusoft.retailer.web.controller;
  */
 
 
+import cn.neusoft.retailer.web.pojo.Brand;
 import cn.neusoft.retailer.web.pojo.User;
+import cn.neusoft.retailer.web.service.BrandService;
 import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.Messages;
-import cn.neusoft.retailer.web.tools.mvoType;
+import cn.neusoft.retailer.web.tools.MvoType;
 import cn.neusoft.retailer.web.tools.MyString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class CompanyInfoController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BrandService brandService;
 
 
     //    登录之后进入的第一个控制器，判断当前用户是商家函数用户，商家直接显示公司信息
@@ -36,6 +44,13 @@ public class CompanyInfoController {
         //获得登录者信息
         User user = (User) request.getSession().getAttribute("user");
         //根据类型跳转
+        if (user.getUserPrivilege() == 0){
+
+        }else if (user.getUserPrivilege() == 1){
+
+        }else if (user.getUserPrivilege() == 2){
+
+        }
         return null;
     }
 
@@ -76,7 +91,7 @@ public class CompanyInfoController {
         //商家类型放入,返回界面时select下拉组件需要
         Map<Integer, java.lang.String> map_id = new HashMap<Integer, java.lang.String>();
         int index = 0;
-        for (mvoType e : mvoType.values()) {
+        for (MvoType e : MvoType.values()) {
             map_id.put(index++, e.toString());
         }
         modelAndView.addObject("typeList", map_id);
@@ -98,4 +113,42 @@ public class CompanyInfoController {
 
         return modelAndView;
     }
+
+//    显示公司信息
+    @RequestMapping(value = "companyInfo")
+    @ResponseBody
+    public Map<String, Object> companyInfoShow(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Map<String, Object> hashMap = new HashMap<>();
+        ModelAndView modelAndView = new ModelAndView();
+        User user = (User) request.getSession().getAttribute("user");
+        user = userService.selectByPrimaryKey(123);
+        user.setUserPrivilege(1);
+         //判断是否是品牌商 品牌商可以修改自己品牌
+        if (user.getUserPrivilege() == 1){
+            List<Brand> brandList = brandService.selectByMerId(user.getUserId());
+            List<User> userList = new LinkedList<>();
+            List<String> mvoType = new LinkedList<>();
+            userList.add(user);
+            for (int i = 0; i < userList.size() ; i++) {
+                for (MvoType e : MvoType.values()){
+                    if (userList.get(i).getMvoType() == e.ordinal()){
+                        mvoType.add("<span class=\"label label-primary\">" + e.name() + "</span>");
+                    }
+                    else {
+                        mvoType.add("<span class=\"label label-danger\">错误类型，无法匹配！</span>");
+                    }
+                }
+            }
+            hashMap.put("mvoType", mvoType);
+            hashMap.put("companyList", userList);
+            hashMap.put("brandList", brandList);
+            return hashMap;
+        }
+        //判断是否是管理员 管理员只能修改品牌商的东西
+        if (user.getUserPrivilege() == 2){
+
+        }
+        return null;
+    }
+
 }

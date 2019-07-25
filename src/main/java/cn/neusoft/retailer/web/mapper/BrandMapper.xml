@@ -33,4 +33,15 @@
     select brand_id, brand_name, brand_mer_id, brand_url
     from brand
   </select>
+  <select id="selectBymerId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select brand_id, brand_name, brand_mer_id, brand_url
+    from brand
+    where brand_mer_id = #{brandMerId,jdbcType=INTEGER}
+  </select>
+  <select id="selectCountBrand" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select count(*)
+    from brand
+    where brand_mer_id = #{brandMerId,jdbcType=INTEGER}
+  </select>
+
 </mapper>
