@@ -20,8 +20,8 @@
             message: "un"
         },
         methods: {
-            findUser: function () {
-                var that = this
+            findUser:function () {
+                var that = this;
                 req.post('/test/123').then(function (response) {
                     that.message = response.data;
                     //var objects = JSON.parse(response.data)

@@ -126,7 +126,7 @@ public class User {
                 ", userPhone='" + userPhone + '\'' +
                 ", userWalId=" + userWalId +
                 ", userPrivilege=" + userPrivilege +
-                ", mvoType=" + mvoType +
+                ", MvoType=" + mvoType +
                 ", mvoUrl='" + mvoUrl + '\'' +
                 ", mvoEngName='" + mvoEngName + '\'' +
                 ", mvoIntroduction='" + mvoIntroduction + '\'' +

@@ -2,6 +2,7 @@ package cn.neusoft.retailer.web.controller;
 
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.service.impl.UserServiceImpl;
 import cn.neusoft.retailer.web.tools.MyString;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,6 @@ public class UserController {
 
         System.out.println(user.toString());
         ArrayList<Boolean> result = new ArrayList<>();
-        result.add(false);
 
         String userName = user.getUserName();
         String userMail = user.getUserMail();
@@ -40,6 +40,10 @@ public class UserController {
         Integer userPrivilege = user.getUserPrivilege();
         Integer mvoType = user.getMvoType();
         String mvoUrl = user.getMvoUrl();
+
+        System.out.println(userService);
+        User user1 = userService.selectByName("admin");
+        System.out.println(user1);
 
 //        //判断用户名是否重复
 //        if (userName == null || userService.selectByName(userName) != null) {
@@ -92,14 +96,21 @@ public class UserController {
     }
 
     @Test
-    public void test(){
-        User user = userService.selectByName("admin");
-        System.out.println(user.toString());
+    public void test() throws Exception {
+        UserService userService = new UserServiceImpl();
+        System.out.println(userService);
+        List<User> userList = userService.selectAll();
+        System.out.println(userList);
+        for (User user: userList
+             ) {
+            System.out.println(
+                    user
+            );
+        }
     }
 
     @ResponseBody
     public User login(@RequestBody User user){
-
         return null;
     }
 }

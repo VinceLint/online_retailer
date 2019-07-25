@@ -2,7 +2,6 @@ package cn.neusoft.retailer.web.controller;
 
 import cn.neusoft.retailer.web.pojo.Dictionary;
 import cn.neusoft.retailer.web.service.DictionaryService;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,8 +45,8 @@ public class DictionaryController {
         List<Dictionary> dictionaryList = dictionaryService.selectAll();
         System.out.println(dictionaryList.toString());
 
-        JSONArray jsonarray = JSONArray.fromObject(dictionaryList);
-        System.out.println(jsonarray);
+//        JSONArray jsonarray = JSONArray.fromObject(dictionaryList);
+//        System.out.println(jsonarray);
         return "html/dictionary.html";
     }
 

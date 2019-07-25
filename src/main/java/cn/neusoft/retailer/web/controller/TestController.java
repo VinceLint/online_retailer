@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @date 2019-07-24 09:53
  */
 @Controller
-public class testController {
+public class TestController {
 
     @Autowired
     private UserService userService;

@@ -23,7 +23,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User selectByName(String userName) { return selectByName(userName); }
+    public User selectByName(String userName) {
+        return userMapper.selectByName(userName);
+    }
 
     @Override
     public User selectByEnglishName(String englishName) {
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> selectAll() {
-        return selectAll();
+        return userMapper.selectAll();
     }
 
     @Override
