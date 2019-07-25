@@ -5,9 +5,9 @@ public class Brand {
 
     private String brandName;
 
-    private Integer brandComId;
-
     private Integer brandMerId;
+
+    private String brandUrl;
 
     public Integer getBrandId() {
         return brandId;
@@ -25,19 +25,29 @@ public class Brand {
         this.brandName = brandName == null ? null : brandName.trim();
     }
 
-    public Integer getBrandComId() {
-        return brandComId;
-    }
-
-    public void setBrandComId(Integer brandComId) {
-        this.brandComId = brandComId;
-    }
-
     public Integer getBrandMerId() {
         return brandMerId;
     }
 
     public void setBrandMerId(Integer brandMerId) {
         this.brandMerId = brandMerId;
+    }
+
+    public String getBrandUrl() {
+        return brandUrl;
+    }
+
+    public void setBrandUrl(String brandUrl) {
+        this.brandUrl = brandUrl == null ? null : brandUrl.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "brandId=" + brandId +
+                ", brandName='" + brandName + '\'' +
+                ", brandMerId=" + brandMerId +
+                ", brandUrl='" + brandUrl + '\'' +
+                '}';
     }
 }

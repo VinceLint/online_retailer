@@ -6,6 +6,8 @@ import cn.neusoft.retailer.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author 林跃涛
  * @version 1.0
@@ -16,8 +18,33 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
     @Override
-    public User selectByPrimaryKey(Integer userId) {
+    public User selectByPrimaryKey(Integer userId) throws Exception {
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public User selectByName(String userName) {
+        return selectByName(userName);
+    }
+
+    @Override
+    public User selectByEnglishName(String englishName) {
+        return selectByEnglishName(englishName);
+    }
+
+    @Override
+    public List<User> selectAll() {
+        return selectAll();
+    }
+
+    @Override
+    public boolean updateByPrimaryKey(User user) {
+        return userMapper.updateByPrimaryKey(user) != 0;
+    }
+
+    @Override
+    public boolean deleteByPrimaryKey(Integer userId) {
+        return userMapper.deleteByPrimaryKey(userId) != 0;
     }
 
 }

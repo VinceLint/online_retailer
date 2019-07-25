@@ -17,4 +17,8 @@ public interface BrandMapper {
     List<Brand> selectAll();
 
     int updateByPrimaryKey(Brand record);
+
+    List<Brand> selectBymerId(Integer brandMerId);
+
+    int selectCountBrand(Integer brandMerId);
 }

@@ -11,6 +11,17 @@ public class Dictionary {
 
     private String dicValue;
 
+    public Dictionary() {
+    }
+
+    public Dictionary(Integer dicId, String dicType, String dicDiscribe, Integer dicCode, String dicValue) {
+        this.dicId = dicId;
+        this.dicType = dicType;
+        this.dicDiscribe = dicDiscribe;
+        this.dicCode = dicCode;
+        this.dicValue = dicValue;
+    }
+
     public Integer getDicId() {
         return dicId;
     }
