@@ -2,9 +2,10 @@
 <html>
 <head>
     <!-- Meta tags -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Gadget Sign Up Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords"
+          content="Gadget Sign Up Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design"/>
 
     <!-- Meta tags -->
     <!-- font-awesome icons -->
@@ -25,14 +26,14 @@
             <form action="#" method="post">
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
-                    <input id="username" type="text" placeholder=" Name" required="required">
+                    <input id="userName" type="text" placeholder=" Name" required="required"/>
 
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
 
                     <span class="fa fa-lock" aria-hidden="true"></span>
-                    <input id="password" type="password" placeholder="Password" required="required">
+                    <input id="userPassword" type="password" placeholder="Password" required="required"/>
                     <div class="clear"></div>
                 </div>
                 <div class="main-two-w3ls">
@@ -45,7 +46,7 @@
                     </div>
                 </div>
                 <div class="btnn">
-                    <button id="login_in" type="button">Login in </button>
+                    <button id="login_in" type="submit">Login in</button>
                 </div>
             </form>
             <div class="w3layouts_more-buttn">
@@ -58,30 +59,32 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="js/jquery-3.4.1.js" ></script>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
-    $(function(){
+    $(function () {
         $("#login_in").on("click", function () {
-            $.ajax({
-                type: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                url: "/online_retailer/user/register.do",
-                dataType: "json",
-                data:JSON.stringify({
-                    "userName": $("#userName").val(),
-                    "userPassword": $("#userPassword").val()
-                }),
-                async: false,
-                success:function (result) {
-                    window.location.href = "https://www.baidu.com";
-                },
-                error: function () {
-                    alert("注册失败");
-                }
-            });
+            if ($("#userName").val() != "" && $("#userPassword").val() != "") {
+                $.ajax({
+                    type: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    url: "/online_retailer/user/register.do",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        "userName": $("#userName").val(),
+                        "userPassword": $("#userPassword").val()
+                    }),
+                    async: false,
+                    success: function (result) {
+                        window.location.href = "https://www.baidu.com";
+                    },
+                    error: function () {
+                        alert("注册失败");
+                    }
+                });
+            }
         })
     })
 </script>

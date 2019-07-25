@@ -2,13 +2,16 @@ package cn.neusoft.retailer.web.controller;
 
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
-import cn.neusoft.retailer.web.tools.UniqueID;
-import cn.neusoft.retailer.web.tools.string;
+import cn.neusoft.retailer.web.tools.MyString;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 罗圣荣
@@ -24,9 +27,11 @@ public class UserController {
 
     @RequestMapping(value = "/register.do")
     @ResponseBody
-    public User register(@RequestBody User user) {
+    public List<Boolean> register(@RequestBody User user) {
 
         System.out.println(user.toString());
+        ArrayList<Boolean> result = new ArrayList<>();
+        result.add(false);
 
         String userName = user.getUserName();
         String userMail = user.getUserMail();
@@ -36,35 +41,60 @@ public class UserController {
         Integer mvoType = user.getMvoType();
         String mvoUrl = user.getMvoUrl();
 
-        //判断用户名是否重复
-        if (userName == null || userService.selectByName(userName) != null) {
-            return null;
-        }
+//        //判断用户名是否重复
+//        if (userName == null || userService.selectByName(userName) != null) {
+//            result.add(false);
+//        }else {
+//            result.add(true);
+//        }
 
         //判断是否符合email格式
-        if (userMail == null || !string.isEmail(userMail)) {
-            return null;
+        if (userMail == null || !MyString.isEmail(userMail)) {
+            result.add(false);
+        }else {
+            result.add(true);
         }
 
         //判断是否符合电话号码格式
-        if (userPhone == null || userPhone.length() > 11 || !string.ifNumber(userPhone)) {
-            return null;
+        if (userPhone == null || userPhone.length() > 11 || !MyString.ifNumber(userPhone)) {
+            result.add(false);
+        }else {
+            result.add(true);
         }
 
         //判断是否符合密码格式
-        if (userPassword == null || !string.isPassword(userPassword)) {
-            return null;
+        if (userPassword == null || !MyString.isPassword(userPassword)) {
+            result.add(false);
+        }else {
+            result.add(true);
         }
 
         //判断是否符合url格式
-        if (!string.isURL(mvoUrl)) {
-            return null;
+        //非品牌商
+        if(mvoUrl == "")
+            mvoUrl = null;
+        if (!MyString.isURL(mvoUrl)) {
+            result.add(false);
+        }else {
+            result.add(true);
         }
 
-        user.setUserId(UniqueID.getGuid());
+        for (boolean a:result
+             ) {
+            System.out.println(a);
+        }
 
-        userService.insertByUserInfo(user);
-        return null;
+//        user.setUserId(UniqueID.getGuid());
+
+//        userService.insertByUserInfo(user);
+
+        return result;
+    }
+
+    @Test
+    public void test(){
+        User user = userService.selectByName("admin");
+        System.out.println(user.toString());
     }
 
     @ResponseBody

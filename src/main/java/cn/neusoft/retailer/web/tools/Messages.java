@@ -6,11 +6,11 @@ package cn.neusoft.retailer.web.tools;
  * @date 2019-07-23 23:14
  */
 //前端消息包：1-ok，0-remove
-public class messages {
+public class Messages {
     private int status;
     private String describe;
 
-    public messages(int status, String describe, String icon) {
+    public Messages(int status, String describe, String icon) {
         this.status = status;
         this.describe = describe;
         this.icon = icon;
@@ -26,7 +26,7 @@ public class messages {
 
     private String icon;
 
-    public messages(int status, String describe) {
+    public Messages(int status, String describe) {
         this.status = status;
         this.describe = describe;
     }

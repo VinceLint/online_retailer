@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>test</title>
+</head>
+<body>
+<script src="../js/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="test">
+    <button @click="findUser">hqjdw</button>
+    {{message}}
+</div>
+<script type="text/javascript">
+    req = axios.create({
+        baseURL: 'http://localhost:8080/online_retailer',
+        timeout: 3000
+    })
+    var test = new Vue({
+        el: '#test',
+        data: {
+            message: "un"
+        },
+        methods: {
+            findUser: function () {
+                var that = this
+                req.post('/test/123').then(function (response) {
+                    that.message = response.data;
+                    //var objects = JSON.parse(response.data)
+                    // that.message = response.data
+                    // console.log(that.message, 1)
+                    console.log(response.data)
+                }).catch(function (error) {
+                    console.log(error);
+                    that.message = error;
+                })
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

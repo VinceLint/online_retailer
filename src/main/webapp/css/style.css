@@ -381,7 +381,7 @@ h1.welcome {
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
 }
-button[type=button] {
+button[type=submit] {
     background: #67e878;
     outline: none;
     color: #fff;
@@ -399,7 +399,7 @@ button[type=button] {
     -ms-transition: 0.5s all;
     box-shadow: 0px 0px 8px 0px #60f574;
 }
-button[type=button]:hover,a.for:hover,.w3layouts_more-buttn a:hover{opacity:0.8;}
+button[type=submit]:hover,a.for:hover,.w3layouts_more-buttn a:hover{opacity:0.8;}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
      color:#b7b6b6;
 }
@@ -570,7 +570,7 @@ h1.welcome {
 .copyrigh-wthree {
     padding: 3em 0em 4.5em;
 }
-button[type=button] {
+button[type=submit] {
     font-size: 15px;
     padding: 19px 20px;
     margin: 53px 0px;
@@ -594,7 +594,7 @@ h1.welcome {
 .w3layouts-two-grids {
     width: 85%;
 }
-button[type=button] {
+button[type=submit] {
     padding: 17px 20px;
 }
 }
@@ -606,7 +606,7 @@ button[type=button] {
 .txt-left-side h2 {
     margin-bottom: 29px;
 }
-button[type=button] {
+button[type=submit] {
     margin: 50px 0px;
 }
 }
@@ -631,7 +631,7 @@ h1.welcome {
 
     padding-left: 16px;
 }	
-button[type=button] {
+button[type=submit] {
     margin: 47px 0px;
 }
 }
@@ -687,7 +687,7 @@ h1.welcome {
     margin: 0px 0px 24px;
     padding-bottom: 11px;
 }
-button[type=button] {
+button[type=submit] {
     margin: 42px 0px;
 }
 }
@@ -698,7 +698,7 @@ h1.welcome {
 .txt-left-side {
     padding: 2.3em 2.2em 1.8em;
 }
-button[type=button] {
+button[type=submit] {
     padding: 14px 20px;
 }	
 }
@@ -712,7 +712,7 @@ h1.welcome {
 .form-left-to-w3l input[type="text"], .form-left-to-w3l input[type="email"], .form-left-to-w3l input[type="password"] {
     padding-left: 14px;
 }
-button[type=button] {
+button[type=submit] {
     margin: 39px 0px;
 }	
 }
@@ -729,7 +729,7 @@ button[type=button] {
 .w3layouts-two-grids {
     width: 61%;
 }
-button[type=button] {
+button[type=submit] {
     font-size: 14px;
 }
 .copyrigh-wthree p {
@@ -768,7 +768,7 @@ h1.welcome {
 h1.welcome {
     font-size: 34px;
 	}
-button[type=button] {
+button[type=submit] {
     margin: 36px 0px;
 }
 }
@@ -776,7 +776,7 @@ button[type=button] {
 .w3layouts-two-grids {
     width: 78%;
 }	
-button[type=button] {
+button[type=submit] {
     padding: 12px 20px;
     font-size: 13px;
 }
@@ -815,7 +815,7 @@ letter-spacing: 1px;
 }
 }
 @media(max-width:414px){
-	button[type=button] {
+	button[type=submit] {
     margin: 29px 0px;
 }
 .form-left-to-w3l {

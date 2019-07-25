@@ -26,26 +26,26 @@
             <form action="#" method="post">
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
-                    <input id="userName" type="text" placeholder=" Name" required="required">
+                    <input id="userName" type="text" placeholder=" Name" required="required"/>
 
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l">
                     <span class="fa fa-phone" aria-hidden="true"></span>
-                    <input id="userPhone" type="text" placeholder="Phone" required="required">
+                    <input id="userPhone" type="text" placeholder="Phone" required="required"/>
 
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l">
                     <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                    <input id="userMail" type="email" placeholder="Email" required="required">
+                    <input id="userMail" type="email" placeholder="Email" required="required"/>
 
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
 
                     <span class="fa fa-lock" aria-hidden="true"></span>
-                    <input id="userPassword" type="password" placeholder="Password" required="required">
+                    <input id="userPassword" type="password" placeholder="Password" required="required"/>
                     <div class="clear"></div>
                 </div>
                 <div class="main-two-w3ls">
@@ -58,17 +58,17 @@
                     <p></p>
                     <div class="form-left-to-w3l">
                         <span class="fa fa-bookmark-o" aria-hidden="true"></span>
-                        <input id="mvoType" type="text" placeholder="GMC Report Type" required="required">
+                        <input id="mvoType" type="text" placeholder="GMC Report Type" required="required"/>
                         <div class="clear"></div>
                     </div>
                     <div class="form-left-to-w3l">
                         <span class="fa fa-share" aria-hidden="true"></span>
-                        <input id="mvoUrl" type="text" placeholder="GMC Report Url" required="required">
+                        <input id="mvoUrl" type="text" placeholder="GMC Report Url" required="required"/>
                         <div class="clear"></div>
                     </div>
                 </div>
                 <div class="btnn">
-                    <button id="signup" type="button">Sign Up</button>
+                    <button id="signup" type="submit">Sign Up</button>
                 </div>
             </form>
             <div class="w3layouts_more-buttn">
@@ -90,6 +90,12 @@
                 $(".mvo_info").css("display", "block");
                 $(".main-two-w3ls").css("padding-bottom", "20px");
                 userPrivilege = 1;
+//          	if($("#mvoType".val()=="")){
+//      			return;
+//      		}
+//      		if($("#mvoUrl".val()=="")){
+//      			return;
+//      		}
             } else {
                 $(".mvo_info").css("display", "none");
                 $(".main-two-w3ls").css("padding-bottom", "0px");
@@ -97,31 +103,32 @@
             }
         });
         $("#signup").on("click", function () {
-            $.ajax({
-                type: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                url: "/online_retailer/user/register.do",
-                dataType: "json",
-                data:JSON.stringify({
-                    "userName": $("#userName").val(),
-                    "userMail": $("#userMail").val(),
-                    "userPhone": $("#userPhone").val(),
-                    "userPassword": $("#userPassword").val(),
-                    "userPrivilege": userPrivilege,
-                    "mvoType": $("#mvoType").val(),
-                    "mvoUrl": $("#mvoUrl").val()
-                }),
-                async: false,
-                success:function (result) {
-                    window.location.href = "https://www.baidu.com";
-                },
-                error: function () {
-                    alert("注册失败");
-                }
-            });
+            if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "") {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/online_retailer/user/register.do",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        "userName": $("#userName").val(),
+                        "userMail": $("#userMail").val(),
+                        "userPhone": $("#userPhone").val(),
+                        "userPassword": $("#userPassword").val(),
+                        "mvoUrl": $("#mvoUrl").val(),
+                        "userPrivilege": userPrivilege,
+                        "mvoType": $("#mvoType").val(),
+                    }),
+                    async: false,
+                    success: function (result) {
+                        for(var val in result) {
+                            console.log(val);
+                        }
+                    },
+                    error: function (message) {
+                        console.log(message);
+                    }
+                });
+            }
         })
     })
 </script>
