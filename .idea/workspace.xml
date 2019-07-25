@@ -6,64 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09bf7990-946f-4270-b74e-dfac6f959c2b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MvoType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/brand-orderlist.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/HTML/brand-orderlist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-apollo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-basic.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-clj.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-css.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-dart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-erlang.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-go.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-hs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-lisp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-llvm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-lua.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-matlab.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-ml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-mumps.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-n.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-pascal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-proto.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-r.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-rd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-scala.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-sql.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-tcl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-tex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-vb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-vhdl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-wiki.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-xq.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/lang-yaml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/prettify.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/prettify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/google-code-prettify/run_prettify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/external/jquery.hotkeys.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/font/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/font/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/font/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/font/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/font/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/richText/bootstrap-combined.no-icons.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/richText/bootstrap-wysiwyg.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/richText/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/richText/jquery.hotkeys.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/webuploader/Uploader.swf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/webuploader/webuploader.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/webuploader/webuploader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/OrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/mapper/OrderMapper.xml" afterDir="false" />
-    </list>
+    <list default="true" id="09bf7990-946f-4270-b74e-dfac6f959c2b" name="Default Changelist" comment="" />
     <list id="d7c67191-a0d9-4bf0-85c3-5c4f81619813" name="Apply: 添加jsp商品页面" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -642,7 +585,7 @@
       <workItem from="1563963808398" duration="15938000" />
       <workItem from="1564016077997" duration="7024000" />
       <workItem from="1564025351606" duration="1138000" />
-      <workItem from="1564028939999" duration="302000" />
+      <workItem from="1564028939999" duration="566000" />
     </task>
     <task id="LOCAL-00001" summary="更新数据库,重新生成mapper">
       <created>1563854293490</created>
@@ -749,7 +692,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564024135473</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="品牌商订单管理">
+      <created>1564029302349</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1564029302349</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -785,7 +735,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112787000" />
+    <option name="totallyTimeSpent" value="113051000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -933,7 +883,8 @@
     <MESSAGE value="修改common类编码" />
     <MESSAGE value="添加依赖" />
     <MESSAGE value="添加jsp商品页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加jsp商品页面" />
+    <MESSAGE value="品牌商订单管理" />
+    <option name="LAST_COMMIT_MESSAGE" value="品牌商订单管理" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
