@@ -49,6 +49,6 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public int selectCountBrand(Integer brandId) {
-        return 0;
+        return brandMapper.selectCountBrand(brandId);
     }
 }
