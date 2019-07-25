@@ -72,7 +72,7 @@ public class CompanyInfoController {
 
         //已通过前台校验，后台校验开始
         //判断是否汉字
-        if (user.getUserName() == null || !MyString.ifchinese(user.getUserName())) {
+        if (user.getUserName() == null || !MyString.ifChinese(user.getUserName())) {
             modelAndView.addObject("errorInfoChineseName", new java.lang.String("不是中文名或名字为空"));
             modelAndView.setViewName("user-company");
             return modelAndView;
