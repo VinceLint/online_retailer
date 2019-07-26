@@ -1,18 +1,21 @@
 package cn.neusoft.retailer.web.mapper;
 
 import cn.neusoft.retailer.web.pojo.User;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
 
-    int insert(User record);
+    boolean insert(User record);
 
-    User selectByPrimaryKey(@Param("userId") Integer userId);
+    User selectByPrimaryKey(Integer userId);
+
+    User selectByName(String userName);
 
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
+
+    User selectByEngName(String userName);
 }

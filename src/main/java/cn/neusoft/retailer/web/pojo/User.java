@@ -6,8 +6,6 @@ public class User {
 
     private String userPassword;
 
-    private String userName;
-
     private String userMail;
 
     private String userPhone;
@@ -42,14 +40,6 @@ public class User {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword == null ? null : userPassword.trim();
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getUserMail() {
@@ -126,7 +116,7 @@ public class User {
                 ", userPhone='" + userPhone + '\'' +
                 ", userWalId=" + userWalId +
                 ", userPrivilege=" + userPrivilege +
-                ", mvoType=" + mvoType +
+                ", MvoType=" + mvoType +
                 ", mvoUrl='" + mvoUrl + '\'' +
                 ", mvoEngName='" + mvoEngName + '\'' +
                 ", mvoIntroduction='" + mvoIntroduction + '\'' +

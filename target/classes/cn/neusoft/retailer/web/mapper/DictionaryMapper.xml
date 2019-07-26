@@ -8,6 +8,9 @@
     <result column="dic_code" property="dicCode" jdbcType="INTEGER" />
     <result column="dic_value" property="dicValue" jdbcType="VARCHAR" />
   </resultMap>
+  <select id="selectByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from dictionary where dic_type = #{type}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from dictionary
     where dic_id = #{dicId,jdbcType=INTEGER}

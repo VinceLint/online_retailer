@@ -10,10 +10,11 @@ import java.util.List;
  * @date 2019/7/22 12:52
  */
 public interface UserService {
-    User selectByPrimaryKey(Integer userId);
+    User selectByPrimaryKey(Integer userId) throws Exception;
     User selectByName(String userName);
     User selectByEnglishName(String englishName);
     List<User> selectAll();
+    boolean insertByUserInfo(User user);
     boolean updateByPrimaryKey(User user);
     boolean deleteByPrimaryKey(Integer userId);
 }

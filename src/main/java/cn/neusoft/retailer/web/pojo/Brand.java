@@ -40,4 +40,14 @@ public class Brand {
     public void setBrandUrl(String brandUrl) {
         this.brandUrl = brandUrl == null ? null : brandUrl.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "brandId=" + brandId +
+                ", brandName='" + brandName + '\'' +
+                ", brandMerId=" + brandMerId +
+                ", brandUrl='" + brandUrl + '\'' +
+                '}';
+    }
 }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords"
+          content="Gadget Sign Up Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design"/>
+
+    <!-- Meta tags -->
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!--stylesheets-->
+    <link href="css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//style sheet end here-->
+    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+</head>
+<body>
+<h1 class="welcome">WELCOME</h1>
+<div class="w3layouts-two-grids">
+    <div class="mid-class">
+        <div class="txt-left-side">
+            <h2> Sign Up Here </h2>
+            <form action="#" method="post">
+                <div class="form-left-to-w3l">
+                    <span class="fa fa-user-o" aria-hidden="true"></span>
+                    <input id="userName" type="text" placeholder=" Name" required="required"/>
+                    <div class="clear"></div>
+                </div>
+<!--                <span class="tip" id="ntip">用户名为2-17位中字</span>-->
+                <div class="form-left-to-w3l">
+                    <span class="fa fa-phone" aria-hidden="true"></span>
+                    <input id="userPhone" type="text" placeholder="Phone" required="required"/>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l">
+                    <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                    <input id="userMail" type="email" placeholder="Email" required="required"/>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l ">
+
+                    <span class="fa fa-lock" aria-hidden="true"></span>
+                    <input id="userPassword" type="password" placeholder="Password" required="required"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="main-two-w3ls">
+                    <div class="left-side-forget">
+                        <input name="mvo_ornot" type="checkbox" class="checked">
+                        <span class="mvo">A MVO? </span>
+                    </div>
+                </div>
+                <div class="mvo_info">
+                    <p></p>
+                    <div class="form-left-to-w3l">
+                        <span class="fa fa-bookmark-o" aria-hidden="true"></span>
+                        <input id="mvoType" type="text" placeholder="GMC Report Type" required="required"/>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-left-to-w3l">
+                        <span class="fa fa-share" aria-hidden="true"></span>
+                        <input id="mvoUrl" type="text" placeholder="GMC Report Url" required="required"/>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="btnn">
+                    <button id="signup" type="submit">Sign Up</button>
+                </div>
+            </form>
+            <div class="w3layouts_more-buttn">
+                <h3>Have an account..?
+                    <a href="login.html">Login Here
+                    </a>
+                </h3>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script>
+    $(function () {
+        var userPrivilege;
+        $("input[name='mvo_ornot']").on("click", function () {
+            if ($(this).prop("checked")) {
+                $(".mvo_info").css("display", "block");
+                $(".main-two-w3ls").css("padding-bottom", "20px");
+                userPrivilege = 1;
+//          	if($("#mvoType".val()=="")){
+//      			return;
+//      		}
+//      		if($("#mvoUrl".val()=="")){
+//      			return;
+//      		}
+            } else {
+                $(".mvo_info").css("display", "none");
+                $(".main-two-w3ls").css("padding-bottom", "0px");
+                userPrivilege = 2;
+            }
+        });
+        $("#signup").on("click", function () {
+            if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "") {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/online_retailer/user/register.do",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        "userName": $("#userName").val(),
+                        "userMail": $("#userMail").val(),
+                        "userPhone": $("#userPhone").val(),
+                        "userPassword": $("#userPassword").val(),
+                        "mvoUrl": $("#mvoUrl").val(),
+                        "userPrivilege": userPrivilege,
+                        "mvoType": $("#mvoType").val(),
+                    }),
+                    async: false,
+                    success: function (result) {
+                        // console.log(result);
+                        if(!result[0]){
+
+                        }
+
+                    },
+                    error: function (message) {
+                        console.log(message);
+                    }
+                });
+            }
+        })
+    })
+</script>
+</body>
+</html>
