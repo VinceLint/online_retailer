@@ -421,12 +421,14 @@ input.checked {
 .left-side-forget {
     position: relative;
 }
-.mvo, .remeberme, a.for {
+
+.mvo, .remember, a.for {
     color: #757272;
     letter-spacing: 0px;
     text-transform: capitalize;
 }
-.mvo, .remeberme {
+
+.mvo, .remember {
     margin-left: 15px;
 }
 .left-side-forget, .right-side-forget {
@@ -474,7 +476,8 @@ input.checked {
     font-size: 25px;
     margin-bottom: 37px;
 }
-.mvo, .remeberme, a.for {
+
+    .mvo, .remember, a.for {
     font-size: 13px;
 	}
 .txt-left-side {
@@ -508,7 +511,8 @@ input.checked {
     font-size: 23px;
     margin-bottom: 35px;
 }
-.mvo, .remeberme, a.for {
+
+    .mvo, .remember, a.for {
     font-size: 12px;
 	}
 .txt-left-side {
@@ -543,7 +547,8 @@ h1.welcome {
     font-size: 22px;
     margin-bottom: 34px;
 }
-.mvo, .remeberme, a.for {
+
+    .mvo, .remember, a.for {
     font-size: 11px;
 	}
 .txt-left-side {
@@ -662,7 +667,8 @@ h1.welcome {
 	.txt-left-side h2 {
     font-size: 20px;
 }
-.mvo, .remeberme, a.for {
+
+    .mvo, .remember, a.for {
     font-size: 11px;
 }
 .w3layouts_more-buttn h3 {
@@ -854,7 +860,7 @@ h1.welcome {
     }
 }
 
-.mvo_info, .remeberme_info{
+.mvo_info, .remember_info {
 	display: none;
 }
 
