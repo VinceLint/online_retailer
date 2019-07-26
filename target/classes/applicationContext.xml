@@ -28,13 +28,6 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-    <!--    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">-->
-    <!--        <property name="hostName" value="127.0.0.1"></property>-->
-    <!--        <property name="port" value="6379"/>-->
-    <!--        <property name="usePool" value="true"></property>-->
-    <!--        <property name="poolConfig" ref="poolConfig"></property>-->
-    <!--    </bean>-->
-
     <!--Spring注解扫描-->
     <context:annotation-config/>
     <!--<aop:aspectj-autoproxy/>-->
