@@ -19,11 +19,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -128,7 +132,7 @@ public class CompanyInfoController {
         if (user.getUserPrivilege() == 1) {
             List<User> userList = new LinkedList<>();
             List<String> mvoType = new LinkedList<>();
-            HashMap<String, Object> hashMap1 = brandPage(pageNow, user.getUserId());
+            HashMap<String, Object> hashMap1 = brandPage(pageNow, user.getUserId(), request);
             userList.add(user);
             for (int i = 0; i < userList.size(); i++) {
                 for (MvoType e : MvoType.values()) {
@@ -153,7 +157,7 @@ public class CompanyInfoController {
         return null;
     }
 
-    public HashMap<String, Object> brandPage(Integer pageNow, Integer userId) {
+    public HashMap<String, Object> brandPage(Integer pageNow, Integer userId, HttpServletRequest request) {
         PageBean pageBean = new PageBean(pageNow, PageBean.page_Size);
         pageBean.setTotallSize(brandService.selectCountBrand(userId));
         if (pageBean.getTotallSize() % pageBean.getPageSize() == 0) {
@@ -163,6 +167,9 @@ public class CompanyInfoController {
 
         }
         List<Brand> brandList = brandService.selectByPage(userId, pageBean.getStart(), pageBean.getPageSize());
+        for (int i = 0; i < brandList.size(); i++){
+            brandList.get(i).setBrandUrl("." + brandList.get(i).getBrandUrl());
+        }
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("brandList", brandList);
         hashMap.put("pageBean", pageBean);
@@ -171,15 +178,38 @@ public class CompanyInfoController {
 
     @RequestMapping(value = "companyDelete/{brandId}")
     @ResponseBody
-    public HashMap<String, String> deleteBrand(@PathVariable("brandId") Integer brandId){
+    public HashMap<String, String> deleteBrand(@PathVariable("brandId") Integer brandId) {
         HashMap<String, String> hashMap = new HashMap<>();
-        if (brandService.deleteByPrimaryKey(brandId)){
+        if (brandService.deleteByPrimaryKey(brandId)) {
             hashMap.put("result", "true");
-        }else {
+        } else {
             hashMap.put("result", "false");
         }
         return hashMap;
     }
 
+    @RequestMapping(value = "companyUpdate")
+    public ModelAndView update(HttpServletRequest request, @RequestParam("brandName") String brandName, @RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam(value = "brandId", required = false) Integer brandId) {
+        ModelAndView modelAndView = new ModelAndView();
+        String basePath = request.getServletContext().getRealPath("/");
+        String pictureUrl = brandName + uploadFile.getOriginalFilename().substring(uploadFile.getOriginalFilename().lastIndexOf("."));
+        String imageName = basePath + "/image/" + pictureUrl;
+        try {
+            uploadFile.transferTo(new File(imageName));
+            //存入数据库
+            Brand brand = brandService.selectByPrimaryKey(brandId);
+            brand.setBrandName(brandName);
+            brand.setBrandUrl("/image/" + pictureUrl);
+            brandService.updateByPrimaryKey(brand);
+            modelAndView.addObject("result", "1");
+            System.out.println("已经修改！");
+        } catch (IOException e) {
+            e.printStackTrace();
+            modelAndView.addObject("result", "0");
+        }finally {
+            modelAndView.setViewName("company_brand");
+        }
+        return modelAndView;
+    }
 
 }

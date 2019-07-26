@@ -12,6 +12,7 @@
 
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx.xsd">
+
     <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
 
     <!--配置数据源-->
