@@ -8,12 +8,16 @@
     <result column="dic_code" property="dicCode" jdbcType="INTEGER" />
     <result column="dic_value" property="dicValue" jdbcType="VARCHAR" />
   </resultMap>
-  <select id="selectByType" parameterType="java.lang.String">
+  <select id="selectByType" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from dictionary where dic_type = #{type}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from dictionary
     where dic_id = #{dicId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByDetail" parameterType="cn.neusoft.retailer.web.pojo.Dictionary">
+    delete from dictionary
+    where dic_type = #{dicType,jdbcType=VARCHAR} and dic_code = #{dicCode,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Dictionary" >
     insert into dictionary (dic_id, dic_type, dic_discribe, 

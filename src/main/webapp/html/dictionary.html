@@ -28,7 +28,7 @@
 		</el-table-column>
 	</el-table>
 	<el-button type="primary" icon="el-icon-edit" @click="handleEdit(0,false)"></el-button>
-	<el-button type="primary" icon="el-icon-delete"></el-button>
+	<el-button type="primary" icon="el-icon-delete" @click="handleDel()"></el-button>
 	<div class="update">
 		<el-dialog title="数据字典" :visible.sync="dialogVisible">
 			<el-form ref="form" :model="form" label-width="80px">
@@ -87,6 +87,8 @@
 				},
 				//更新数据需要旧和新的数据,因为type不是唯一的
 				dataForUpdate: [],
+				//需要删除的记录
+				dataForDel: [],
 				dataNotUpdate: {
 					type: '',
 					describe: '',
@@ -95,31 +97,40 @@
 				}
 			}
 		},
+		//初始化数据流
 		created() {
-			$.ajax({
-				type: 'POST',
-				dataType: "json",
-				url: "http://localhost:8090/springmybatis//initDictionary",
-				success: function(res) {
-					$.each(res, function(i, obj) {
-						this.tableData.push({
-							type: obj.dicType,
-							describe: obj.dicDiscribe,
-							code: obj.dicCode,
-							cvalue: obj.dicValue
-						}) //循环遍历，拼接
-					}.bind(this));
-					console.log(this.tableData)
-				}.bind(this),
-				error: function() {
-					alert("初始化数据失败");
-				}
-			});
+			this.init()
 		},
 		methods: {
+			init(){
+				this.tableData = []
+				$.ajax({
+					type: 'POST',
+					dataType: "json",
+					url: "http://localhost:8090/springmybatis//initDictionary",
+					success: function(res) {
+						$.each(res, function(i, obj) {
+							this.tableData.push({
+								type: obj.dicType,
+								describe: obj.dicDiscribe,
+								code: obj.dicCode,
+								cvalue: obj.dicValue
+							}) //循环遍历，拼接
+						}.bind(this));
+						console.log(this.tableData)
+					}.bind(this),
+					error: function() {
+						alert("初始化数据失败");
+					}
+				});
+			},
+			//选中checkbox后的对象数组传给即将删除的
 			handleSelectionChange(val) {
-				if(val.length != 0)
-					console.log(val[0].date)
+				if(val.length != 0) {
+					this.dataForDel = val;
+					console.log(this.dataForDel)
+				}
+
 			},
 			handleEdit(row, isEdit) {
 				//修改
@@ -146,6 +157,7 @@
 				}
 				this.dialogVisible = true;
 			},
+			//新增或者修改的提交
 			onSubmit() {
 				//更新提交
 				if(this.isEdit) {
@@ -216,12 +228,36 @@
 						}
 					});
 				}
-				//						window.location.reload()
+				//手动刷新
+				//window.location.reload()
 				this.dialogVisible = false;
+			},
+			handleDel() {
+				$.ajax({
+					type: "POST",
+					url: "http://localhost:8090/springmybatis//deleteDictionary",
+					contentType: "application/json; charset=utf-8",
+					data: JSON.stringify(this.dataForDel),
+					dataType: "json",
+					success: function(data) {
+						//成功信息
+						console.log("success")
+						if(data.result == "SUCCESS") {
+							this.init()
+							alert("删除成功!")
+						} else {
+							alert("删除失败")
+						}
+					}.bind(this),
+					error: function(message) {
+						//失败信息
+						console.log("error")
+					}
+				});
 			}
 		},
-		watch:{
-			tableData(newVal){
+		watch: {
+			tableData(newVal) {
 				console.log(newVal)
 			}
 		}
