@@ -23,4 +23,6 @@ public interface BrandService {
     List<Brand> selectByMerId(Integer brandId);
 
     int selectCountBrand(Integer brandId);
+
+    List<Brand> selectByPage(Integer brandMerId, Integer pageStart, Integer pageSize);
 }
