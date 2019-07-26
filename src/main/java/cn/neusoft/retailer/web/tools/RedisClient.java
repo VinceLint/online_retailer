@@ -15,7 +15,7 @@ public class RedisClient {
     public static final long TOKEN_EXPIRES_SECOND = 30 * 60;
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private static StringRedisTemplate redisTemplate;
 
     /**
      * @描述: 存入Redis
@@ -25,7 +25,7 @@ public class RedisClient {
      * @创建时间: 2019/7/26
      */
 
-    public boolean set(String key, String value) {
+    public static boolean set(String key, String value) {
         boolean result = false;
         try {
             redisTemplate.opsForValue().set(key, value, TOKEN_EXPIRES_SECOND, TimeUnit.SECONDS);
@@ -36,7 +36,7 @@ public class RedisClient {
         return result;
     }
 
-    public boolean set(String key, String value, long expireTime) {
+    public static boolean set(String key, String value, long expireTime) {
         boolean result = false;
         try {
             redisTemplate.opsForValue().set(key, value, expireTime, TimeUnit.SECONDS);
@@ -54,18 +54,30 @@ public class RedisClient {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/26
      */
-    public String findManageUserAndUpdate(String key) {
+    public static String findAndUpdate(String key, String ip) {
+
+        //判断Cookies是否被盗窃
+        String info = BASE64.decryptBASE64(key);
+        if (!info.substring(44, info.length()).equals(ip)) {
+            return null;
+        }
+
+        //判断token是否过期
         String userName = null;
         try {
             userName = redisTemplate.opsForValue().get(key);
-            set(key, userName);
+            if (userName == null) {
+                return null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //更新token时长
+        set(key, userName);
         return userName;
     }
 
-    public boolean remove(String key) {
+    public static boolean remove(String key) {
         boolean result = false;
         try {
             redisTemplate.delete(key);

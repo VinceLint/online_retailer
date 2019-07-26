@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="btnn">
-                    <button id="login_in" type="submit">Login in</button>
+                    <button id="login_in" type="button">Login in</button>
                 </div>
             </form>
             <div class="w3layouts_more-buttn">
@@ -63,43 +63,47 @@
 </div>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
-    $(function () {
-        console.log("it's running");
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: "/online_retailer/user/getCookie",
-            dataType: "json",
-            success: function (data) {
-                $("#userName").val(data.userName);
-                $("#userPassword").val(data.userPassword);
-                $("input[name='remember-me']").attr("checked", true);
-            },
-            error: function () {
-                console.log("cookies信息获取失败！");
-            }
-        });
-    })
+    // $(function () {
+    //     console.log("it's running");
+    //     $.ajax({
+    //         type: "POST",
+    //         contentType: "application/json; charset=utf-8",
+    //         url: "/online_retailer/user/getCookie",
+    //         dataType: "json",
+    //         success: function (data) {
+    //             $("#userName").val(data.userName);
+    //             $("#userPassword").val(data.userPassword);
+    //             $("input[name='remember-me']").attr("checked", true);
+    //             console.log(data)
+    //         },
+    //         error: function () {
+    //             console.log("cookies信息获取失败！");
+    //         }
+    //     });
+    // });
+    //
     $("#login_in").on("click", function () {
         if ($("#userName").val() != "" && $("#userPassword").val() != "") {
-            console.log("it's ready");
+            var info = {
+                "userName": $("#userName").val(),
+                "userPassword": $("#userPassword").val(),
+                "remember-me": $("input[name='remember-me']").is(':checked')
+            };
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 url: "/online_retailer/user/loginValidate",
                 dataType: "json",
-                data: JSON.stringify({
-                    "userName": $("#userName").val(),
-                    "userPassword": $("#userPassword").val()
-                }),
+                data: JSON.stringify(info),
                 async: false,
-                success: function (result) {
-                    window.location.href = "https://www.baidu.com";
+                success: function (data) {
+                    console.log(data);
                 },
-                error: function () {
-                    console.log("Login Failed");
+                error: function (result) {
+                    console.log("Login Failed: " + result);
                 }
             });
+            console.log()
         }
     })
 </script>

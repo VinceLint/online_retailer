@@ -31,41 +31,47 @@ public class Test {
     private BrandService brandService;
     @Autowired
     private BrandMapper brandMapper;
-    /**
-     *@描述
-     *@参数
-     *@返回值
-     *@创建人
-     *@创建时间  2019/7/22 12:35
-     *@修改人和其它信息
-     */
-    @org.junit.Test
-    public void test(){
-        User user = new User();
-        user.setUserId(123);
-        System.out.println(brandService.selectCountBrand(123));
-        System.out.println(brandMapper.selectByPage(123, 0, 5));
-        brandService.deleteByPrimaryKey(562);
+//    /**
+//     *@描述
+//     *@参数
+//     *@返回值
+//     *@创建人
+//     *@创建时间  2019/7/22 12:35
+//     *@修改人和其它信息
+//     */
+//    @org.junit.Test
+//    public void test(){
+//        User user = new User();
+//        user.setUserId(123);
+//        System.out.println(brandService.selectCountBrand(123));
+//        System.out.println(brandMapper.selectByPage(123, 0, 5));
+//        brandService.deleteByPrimaryKey(562);
 //        for (int i = 0; i < 20; i ++){
 //            Brand brand = new Brand();
 //            brand.setBrandId(i+2000);
 //            brand.setBrandMerId(123);
 //            brandService.insert(brand);
 //        }
-    }
+//    }
 
-    /**
-     *@描述 测试OrderService
-     *@参数
-     *@返回值
-     *@创建人 胡献涛
-     *@创建时间  2019/7/24 21:35
-     *@修改人和其它信息
-     */
+//    /**
+//     *@描述 测试OrderService
+//     *@参数
+//     *@返回值
+//     *@创建人 胡献涛
+//     *@创建时间  2019/7/24 21:35
+//     *@修改人和其它信息
+//     */
+//    @org.junit.Test
+//    public void testOrderService(){
+//        orderService.selectByBrandUserId(1).forEach(map->{
+//            System.out.println(map);
+//        });
+//    }
+
     @org.junit.Test
-    public void testOrderService(){
-        orderService.selectByBrandUserId(1).forEach(map->{
-            System.out.println(map);
-        });
+    public void test() {
+        User user = userService.selectByName("admin");
+        System.out.println(user.toString());
     }
 }

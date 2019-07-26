@@ -3,17 +3,13 @@ package cn.neusoft.retailer.web.controller;
 import cn.neusoft.retailer.web.pojo.Cust_Cookie;
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
-import cn.neusoft.retailer.web.tools.MD5;
-import cn.neusoft.retailer.web.tools.MyString;
-import cn.neusoft.retailer.web.tools.TokenCreation;
-import cn.neusoft.retailer.web.tools.UniqueID;
-import org.junit.runner.RunWith;
+import cn.neusoft.retailer.web.tools.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
@@ -30,8 +26,8 @@ import java.util.Map;
  * @date 2019/7/23 15:52
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
 @Controller
 @RequestMapping("/user")
@@ -40,39 +36,39 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /**
-     * @描述: 选中"记住我"功能后在浏览器保存相应用户信息(Cookies)
-     * @参数: [userName, userPassword, request, response]
-     * @返回值: void
-     * @创建人: 罗圣荣
-     * @创建时间: 2019/7/25
-     */
-    private void saveCookie(String userName, String userPassword, HttpServletRequest request, HttpServletResponse response) {
-
-        if (true) {
-            //创建Cookie
-            Cookie userNameCookie = new Cookie("userName", userName);
-            //可以先加密
-            Cookie userPasswordCookie = new Cookie("userPassword", userPassword);
-            //设置Cookie父路径
-            userNameCookie.setPath(request.getContextPath() + "/");
-            userPasswordCookie.setPath(request.getContextPath() + "/");
-            //是否保存Cookie(根据复选框Remember-me的值)
-            String remember = request.getParameter("remember-me");
-            if (remember == null || remember.equals(false)) {
-                //不保存Cookie
-                userNameCookie.setMaxAge(0);
-                userPasswordCookie.setMaxAge(0);
-            } else {
-                //保存Cookie的时间长度
-                userNameCookie.setMaxAge(7 * 24 * 60 * 60);
-                userPasswordCookie.setMaxAge(7 * 24 * 60 * 60);
-            }
-            //加入Cookie响应头
-            response.addCookie(userNameCookie);
-            response.addCookie(userPasswordCookie);
-        }
-    }
+//    /**
+//     * @描述: 选中"记住我"功能后在浏览器保存token进Cookies(时效7天)
+//     * @参数: [userName, userPassword, request, response]
+//     * @返回值: void
+//     * @创建人: 罗圣荣
+//     * @创建时间: 2019/7/25
+//     */
+//    private void saveCookie(String userName, String userPassword, HttpServletRequest request, HttpServletResponse response) {
+//
+//        if (true) {
+//            //创建Cookie
+//            Cookie userNameCookie = new Cookie("userName", userName);
+//            //可以先加密
+//            Cookie userPasswordCookie = new Cookie("userPassword", userPassword);
+//            //设置Cookie父路径
+//            userNameCookie.setPath(request.getContextPath() + "/");
+//            userPasswordCookie.setPath(request.getContextPath() + "/");
+//            //是否保存Cookie(根据复选框Remember-me的值)
+//            String remember = request.getParameter("remember-me");
+//            if (remember == null || remember.equals(false)) {
+//                //不保存Cookie
+//                userNameCookie.setMaxAge(0);
+//                userPasswordCookie.setMaxAge(0);
+//            } else {
+//                //保存Cookie的时间长度
+//                userNameCookie.setMaxAge(7 * 24 * 60 * 60);
+//                userPasswordCookie.setMaxAge(7 * 24 * 60 * 60);
+//            }
+//            //加入Cookie响应头
+//            response.addCookie(userNameCookie);
+//            response.addCookie(userPasswordCookie);
+//        }
+//    }
 
     /**
      * @描述: 登录页面加载时遍历浏览器记录Cookies信息；若有对应用户信息，直接跳转主界面
@@ -81,7 +77,7 @@ public class UserController {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/25
      */
-    @RequestMapping(value = "/getCookie")
+    @RequestMapping(value = "/TokenValidate")
     @ResponseBody
     public Cust_Cookie getCookie(HttpServletRequest request) {
 
@@ -114,11 +110,11 @@ public class UserController {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/25
      */
-    @RequestMapping(value = "/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public List<Boolean> register(@RequestBody User user) {
 
-//        System.out.println(user.toString());
+        System.out.println(user.toString());
         List<Boolean> result = new ArrayList<>();
 
         String userName = user.getUserName();
@@ -165,7 +161,7 @@ public class UserController {
 
         //判断是否符合url格式
         //非品牌商
-        if (mvoUrl == "")
+        if ("".equals(mvoUrl))
             mvoUrl = null;
         if (!MyString.isURL(mvoUrl)) {
             result.add(false);
@@ -177,7 +173,7 @@ public class UserController {
 //        System.out.println(result);
         System.out.println(token);
 
-        if(token){
+        if (token) {
             user.setUserId(UniqueID.getGuid());
             System.out.println(user.toString());
 
@@ -198,20 +194,59 @@ public class UserController {
      */
     @RequestMapping(value = "/loginValidate")
     @ResponseBody
-    public Map<String, String> login(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, String> login(@RequestBody String json, HttpServletRequest request, HttpServletResponse response) {
 
         Map<String, String> result = new HashMap<>();
-        User user = userService.selectByName(request.getParameter("userName"));
+        JSONObject data = new JSONObject(json);
+        User user = null;
+        String userName = (String) data.get("userName");
+        try {
+            user = userService.selectByName(userName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+            return result;
+        }
         String token;
 
-        if (user == null || !user.getUserPassword().equals(request.getParameter("userPassword"))) {
+        if (user == null || !user.getUserPassword().equals(userName)) {
             result.put("ERROR", "NO USER");
             return result;
         }
 
-        token = TokenCreation.createToken(user.getUserName());
+        token = TokenCreation.createToken(request.getRemoteAddr());
+        //根据"记住我"的值选择Token存放时间
+//        System.out.println(token);
+        if (data.get("remember-me").equals(true)) {
+            try {
+                RedisClient.set(token, user.getUserName(), 7 * 24 * 60 * 60);
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.put("ERROR", e.getMessage());
+                return result;
+            }
+        } else {
+            try {
+                RedisClient.set(token, user.getUserName());
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.put("ERROR", e.getMessage());
+                return result;
+            }
+        }
+//        System.out.println(BASE64.decryptBASE64(token));
+        //传给前端，保存于Cookies
         result.put("SUCCESS", token);
-
+        Cookie cookie = new Cookie("token", token);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        System.out.println(cookie.getValue());
+        try {
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR");
+        }
         return result;
     }
 }

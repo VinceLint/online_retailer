@@ -227,6 +227,15 @@
             <version>1.6.0.RELEASE</version>
         </dependency>
 
+        <!--UUID-->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
