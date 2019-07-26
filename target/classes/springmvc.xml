@@ -7,23 +7,21 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <!-- 配置Controller扫描 -->
-    <context:component-scan base-package="cn.neusoft.retailer.web.controller"/>
+    <context:component-scan base-package="cn.neusoft.retailer.web.controller" />
 
     <!-- 配置注解驱动 -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven />
 
     <!--解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <!--前缀 -->
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+         <!--前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
         <!-- 后缀 -->
-        <property name="suffix" value=".jsp"/>
+        <property name="suffix" value=".jsp" />
     </bean>
+
 
     <!--  静态资源  -->
     <mvc:default-servlet-handler/>
-
-    <!-- redis配置 -->
-    <import resource="spring-redis.xml"/>
-</beans>
+        </beans>
