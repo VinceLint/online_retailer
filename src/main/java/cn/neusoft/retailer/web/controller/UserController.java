@@ -5,6 +5,7 @@ import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.MD5;
 import cn.neusoft.retailer.web.tools.MyString;
+import cn.neusoft.retailer.web.tools.TokenCreation;
 import cn.neusoft.retailer.web.tools.UniqueID;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 罗圣荣
@@ -111,7 +114,7 @@ public class UserController {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/25
      */
-    @RequestMapping(value = "/register.do")
+    @RequestMapping(value = "/register")
     @ResponseBody
     public List<Boolean> register(@RequestBody User user) {
 
@@ -193,9 +196,22 @@ public class UserController {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/25
      */
-    @RequestMapping(value = "/loginValidate.do")
+    @RequestMapping(value = "/loginValidate")
     @ResponseBody
-    public User login(@RequestBody User user) {
-        return null;
+    public Map<String, String> login(HttpServletRequest request, HttpServletResponse response) {
+
+        Map<String, String> result = new HashMap<>();
+        User user = userService.selectByName(request.getParameter("userName"));
+        String token;
+
+        if (user == null || !user.getUserPassword().equals(request.getParameter("userPassword"))) {
+            result.put("ERROR", "NO USER");
+            return result;
+        }
+
+        token = TokenCreation.createToken(user.getUserName());
+        result.put("SUCCESS", token);
+
+        return result;
     }
 }
