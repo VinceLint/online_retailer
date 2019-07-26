@@ -11,6 +11,8 @@
 
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven />
+    <!--文件上传配置-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
     <!--解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

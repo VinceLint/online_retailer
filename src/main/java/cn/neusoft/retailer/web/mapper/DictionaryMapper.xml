@@ -15,6 +15,10 @@
     delete from dictionary
     where dic_id = #{dicId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByDetail" parameterType="cn.neusoft.retailer.web.pojo.Dictionary">
+    delete from dictionary
+    where dic_type = #{dicType,jdbcType=VARCHAR} and dic_code = #{dicCode,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Dictionary" >
     insert into dictionary (dic_id, dic_type, dic_discribe, 
       dic_code, dic_value)

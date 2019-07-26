@@ -3,6 +3,7 @@ package cn.neusoft.retailer.web.service.impl;
 import cn.neusoft.retailer.web.mapper.DictionaryMapper;
 import cn.neusoft.retailer.web.pojo.Dictionary;
 import cn.neusoft.retailer.web.service.DictionaryService;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import java.util.List;
 public class DictionaryServiceImpl implements DictionaryService {
     @Autowired
     private DictionaryMapper dictionaryMapper;
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
     @Override
     public int deleteByPrimaryKey(Integer dicId) {
         return 0;
@@ -118,6 +121,31 @@ public class DictionaryServiceImpl implements DictionaryService {
 //        更新失败
         System.out.println("更新到数据库失败");
         return false;
+    }
+
+    /**
+     *@描述  删除勾选中的JSON数组
+     *@参数  JSONArray对象
+     *@返回值  Boolean对象
+     *@创建人  林跃涛
+     *@创建时间  2019/7/26 10:32
+     *@修改人和其它信息
+     */
+    @Override
+    public boolean deleteByDetail(JSONArray jsonArray) {
+        if (jsonArray.length()==0) return false;
+        Dictionary[] dictionaries = new Dictionary[jsonArray.length()];
+        for(int i=0;i<jsonArray.length();i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            dictionaries[i] = new Dictionary(jsonObject.getString("type"),
+                    jsonObject.getString("describe"),jsonObject.getInt("code"),
+                        jsonObject.getString("cvalue"));
+        }
+
+        for (int i =0;i<dictionaries.length;i++){
+            dictionaryMapper.deleteByDetail(dictionaries[i]);
+        }
+        return true;
     }
 
     @Override

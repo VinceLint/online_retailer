@@ -29,6 +29,5 @@
 <body>
 
 >>>>>>> origin/master
->>>>>>> origin/master
 </body>
 </html>

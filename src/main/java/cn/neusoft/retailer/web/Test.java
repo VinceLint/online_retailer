@@ -45,6 +45,13 @@ public class Test {
         user.setUserId(123);
         System.out.println(brandService.selectCountBrand(123));
         System.out.println(brandMapper.selectByPage(123, 0, 5));
+        brandService.deleteByPrimaryKey(562);
+//        for (int i = 0; i < 20; i ++){
+//            Brand brand = new Brand();
+//            brand.setBrandId(i+2000);
+//            brand.setBrandMerId(123);
+//            brandService.insert(brand);
+//        }
     }
 
     /**
