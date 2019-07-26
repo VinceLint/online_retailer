@@ -62,6 +62,20 @@ public class DictionaryController {
         return resultMap;
     }
 
+    @RequestMapping(value = "/deleteDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String,Object> delete(@RequestBody String json) throws Exception{
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        org.json.JSONArray jsonArray = new org.json.JSONArray(json);
+        //返回结果
+        if(dictionaryService.deleteByDetail(jsonArray)){
+            resultMap.put("result","SUCCESS");
+        }else{
+            resultMap.put("result","Error");
+        }
+        return resultMap;
+    }
+
     @RequestMapping("/toDictionary")
     public String  toDic(){
         return "html/dictionary.html";

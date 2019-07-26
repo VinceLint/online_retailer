@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface DictionaryMapper {
     int deleteByPrimaryKey(Integer dicId);
-
+    int deleteByDetail(Dictionary dictionary);
     int insert(Dictionary record);
 
     Dictionary selectByPrimaryKey(Integer dicId);
