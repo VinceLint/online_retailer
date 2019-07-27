@@ -23,11 +23,11 @@ public class RedisClient {
     private RedisTemplate redisTemplate;
 
     /**
-     * @描述: 存入Redis
-     * @参数: [key, value]
+     * @描述: token存入Redis
+     * @参数: [key, user]
      * @返回值: boolean
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/26
+     * @创建时间: 2019/7/28
      */
     public boolean set(String key, User user) {
         boolean result = false;
@@ -51,6 +51,13 @@ public class RedisClient {
         return result;
     }
 
+    /**
+     * @描述: 校验token并更新(非 " 记住我 " 方式登录时的页面跳转)
+     * @参数: [key, ip, flag]
+     * @返回值: cn.neusoft.retailer.web.pojo.User
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/28
+     */
     public User findAndUpdate(String key, String ip, Boolean flag) {
 
         //判断Cookies是否被盗窃
@@ -71,12 +78,18 @@ public class RedisClient {
         }
         //更新token时长
         if (!flag) {
-            System.out.println(flag);
             set(key, user);
         }
         return user;
     }
 
+    /**
+     * @描述: 移除Redis中的token
+     * @参数: [key]
+     * @返回值: boolean
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/28
+     */
     public boolean remove(String key) {
         boolean result = false;
         try {

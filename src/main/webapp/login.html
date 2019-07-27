@@ -63,17 +63,23 @@
 </div>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
-    // 登录页面加载时后台获取Cookies信息，并进行token校验
+    var path = "http://localhost:8088/online_retailer";
     $(function () {
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "/online_retailer/user/tokenVilidation"
+            url: path + "/user/initFlag",
+            dataType: "json",
+            success: function (data) {
+            },
+            error: function (result) {
+            }
         });
+        // 登录页面加载时后台获取Cookies信息，并进行token校验
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "/online_retailer/user/tokenVilidation",
+            url: path + "/user/tokenVilidation",
             dataType: "json",
             success: function (data) {
                 if (data.SUCCESS) {
@@ -99,7 +105,7 @@
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: "/online_retailer/user/loginValidation",
+                url: path + "/user/loginValidation",
                 dataType: "json",
                 data: JSON.stringify(info),
                 async: false,

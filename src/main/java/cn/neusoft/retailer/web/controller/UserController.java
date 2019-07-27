@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 
+//点击退出按钮，redis和cookies内token内容全删
+//关闭浏览器，若非"记住我"方式登录，redis和cookies内token全删，否则不予处理
+
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
@@ -120,11 +123,11 @@ public class UserController {
     }
 
     /**
-     * @描述: 验证token，需传入一个参数flag判断用户是否通过"记住我"方式登录
-     * @参数: [json, request]
+     * @描述: 验证token
+     * @参数: [request]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/27
+     * @创建时间: 2019/7/28
      */
     @RequestMapping(value = "/tokenVilidation")
     @ResponseBody
@@ -157,9 +160,6 @@ public class UserController {
                 System.out.println("ERROR");
             }
             if (user != null) {
-                if (flag) {
-                    request.getSession().setAttribute("user", user);
-                }
                 result.put("SUCCESS", "身份有效");
                 return result;
             } else {
@@ -208,6 +208,7 @@ public class UserController {
         token = TokenCreation.createToken("127.0.0.1");
 
         user.setUserPassword(null);
+        request.getSession().setAttribute("uesr", user);
 
         //根据"记住我"的值选择Token存放时间
         Cookie cookie;
@@ -233,6 +234,7 @@ public class UserController {
         cookie = new Cookie("token", token);
         cookie.setPath("/online_retailer");
         cookie.setHttpOnly(true);
+        cookie.setMaxAge(999 * 24 * 60 * 60);
         try {
             response.addCookie(cookie);
         } catch (Exception e) {
@@ -240,8 +242,8 @@ public class UserController {
             System.out.println("ERROR");
         }
 
-        //判断是否通过"记住我"方式登录的标识
-        request.getSession().setAttribute("flag", false);
+//        //判断是否通过"记住我"方式登录的标识
+//        request.getSession().setAttribute("flag", false);
 
         return result;
     }

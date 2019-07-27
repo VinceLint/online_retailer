@@ -1,15 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-<<<<<<< HEAD
-  User: GreenArrow
-  Date: 2019-07-22
-  Time: 16:12
+  User: rreez
+  Date: 2019/7/28
+  Time: 1:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:forward page="/WEB-INF/jsp/company_brand.jsp"></jsp:forward>
+
 </head>
 <body>
 
