@@ -8,17 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
 /**
  * @author 罗圣荣
@@ -33,7 +35,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    private RedisClient redisClient = new RedisClient();
+    @Autowired
+    private RedisClient redisClient;
 
     /**
      * @描述: 用户注册
@@ -42,7 +45,7 @@ public class UserController {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/25
      */
-    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/register")
     @ResponseBody
     public List<Boolean> register(@RequestBody User user) {
 
@@ -146,37 +149,21 @@ public class UserController {
             }
             String[] tokenInfo = tokenMessage.split("=");
             String token = tokenInfo[1];
-            String userInfo = null;
 
             try {
-                userInfo = redisClient.findAndUpdate(token, request.getRemoteAddr(), flag);
+                user = redisClient.findAndUpdate(token, "127.0.0.1", flag);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("ERROR");
             }
-
-            if (userInfo != null) {
-                try {
-                    user = (User) SerializeUtils.serializeToObject(userInfo);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("ERROR");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                    System.out.println("ERROR");
+            if (user != null) {
+                if (flag) {
+                    request.getSession().setAttribute("user", user);
                 }
-                if (user != null) {
-                    if (flag) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    result.put("SUCCESS", "身份有效");
-                    return result;
-                } else {
-                    result.put("ERROR", "身份失效，请重新登录");
-                    return result;
-                }
+                result.put("SUCCESS", "身份有效");
+                return result;
             } else {
-                result.put("ERROR", "身份失效，请重新登录!");
+                result.put("ERROR", "身份失效，请重新登录");
                 return result;
             }
         } else {
@@ -187,10 +174,10 @@ public class UserController {
 
     /**
      * @描述: 登陆校验
-     * @参数: [request, response]
-     * @返回值: java.lang.Boolean
+     * @参数: [json, request, response]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/25
+     * @创建时间: 2019/7/28
      */
     @RequestMapping(value = "/loginValidation")
     @ResponseBody
@@ -207,9 +194,6 @@ public class UserController {
             result.put("ERROR", e.getMessage());
             return result;
         }
-
-        String token;
-
         if (user == null) {
             result.put("ERROR", "No User");
             return result;
@@ -220,22 +204,16 @@ public class UserController {
             return result;
         }
 
+        String token;
         token = TokenCreation.createToken("127.0.0.1");
 
-        //user序列化
         user.setUserPassword(null);
-        String userInfo = null;
-        try {
-            userInfo = SerializeUtils.serialize(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         //根据"记住我"的值选择Token存放时间
         Cookie cookie;
         if (data.get("remember-me").equals(true)) {
             try {
-                redisClient.set(token, userInfo, 7 * 24 * 60 * 60);
+                redisClient.set(token, user, 7 * 24 * 60 * 60);
             } catch (Exception e) {
                 e.printStackTrace();
                 result.put("ERROR", e.getMessage());
@@ -243,7 +221,7 @@ public class UserController {
             }
         } else {
             try {
-                redisClient.set(token, userInfo);
+                redisClient.set(token, user);
             } catch (Exception e) {
                 e.printStackTrace();
                 result.put("ERROR", e.getMessage());
@@ -266,6 +244,11 @@ public class UserController {
         request.getSession().setAttribute("flag", false);
 
         return result;
+    }
+
+    @RequestMapping(value = "/initFlag")
+    public void initFlag(HttpServletRequest request) {
+        request.getSession().setAttribute("flag", false);
     }
 
     @RequestMapping(value = "/changeFlag")
