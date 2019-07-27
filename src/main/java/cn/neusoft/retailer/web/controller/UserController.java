@@ -126,42 +126,57 @@ public class UserController {
      */
     @RequestMapping(value = "/tokenVilidation")
     @ResponseBody
-    public Map<String, String> vilidateToken(HttpServletRequest request) {
+    public Map<String, String> vilidateToken(@RequestBody String json, HttpServletRequest request) {
 
-        Map<String, String> data = new HashMap<>();
-        String token = "";
+        Map<String, String> result = new HashMap<>();
+
+        String cookie = request.getHeader("Cookie");
+        JSONObject data = new JSONObject(json);
+        Boolean remember_me = (Boolean) data.get("remember_me");
+        System.out.println(remember_me);
         User user = null;
 
-        //获取客户端保存的所有Cookies
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length > 0) {
-            //遍历
-            for (int i = 0; i < cookies.length; i++) {
-                Cookie cookie = cookies[i];
-                if ("token".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                }
-                String userInfo = redisClient.findAndUpdate(token, request.getRemoteAddr());
-                try {
-                    user = (User) SerializeUtils.serializeToObject(userInfo);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                if (user != null) {
-                    data.put("SUCCESS", "成功登陆");
-                    return data;
+        if (cookie != null) {
+
+            String token = null;
+            String token_remember_me = null;
+
+            //获取相应token
+            String[] info = cookie.split(";");
+            for (String s : info) {
+                if (!s.contains("remember_me")) {
+                    token = s.substring(7, s.length());
                 } else {
-                    data.put("ERROR", "身份过期，请重新登录");
-                    return data;
+                    token_remember_me = s.substring(18, s.length());
                 }
             }
-        }
-        data.put("ERROR", "请登录");
-        return data;
-    }
 
+            String userInfo;
+            if (remember_me) {
+                userInfo = redisClient.findAndUpdate(token_remember_me, request.getRemoteAddr(), false);
+            } else {
+                userInfo = redisClient.findAndUpdate(token, request.getRemoteAddr(), true);
+            }
+
+            try {
+                user = (User) SerializeUtils.serializeToObject(userInfo);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (user != null) {
+                data.put("SUCCESS", "身份有效");
+                return result;
+            } else {
+                data.put("ERROR", "身份过期，请重新登录");
+                return result;
+            }
+        } else {
+            data.put("ERROR", "请登录");
+            return result;
+        }
+    }
 
     /**
      * @描述: 登陆校验
@@ -176,8 +191,8 @@ public class UserController {
 
         Map<String, String> result = new HashMap<>();
         JSONObject data = new JSONObject(json);
-        User user = null;
         String userName = (String) data.get("userName");
+        User user = null;
         try {
             user = userService.selectByName(userName);
         } catch (Exception e) {
@@ -185,10 +200,16 @@ public class UserController {
             result.put("ERROR", e.getMessage());
             return result;
         }
+
         String token;
 
-        if (user == null || !user.getUserPassword().equals(userName)) {
-            result.put("ERROR", "NO USER");
+        if (user == null) {
+            result.put("ERROR", "No User");
+            return result;
+        }
+
+        if (!user.getUserPassword().equals((String) data.get("userPassword"))) {
+            result.put("PASSWDWORNG", "Password is Invalid");
             return result;
         }
 
@@ -204,9 +225,21 @@ public class UserController {
         }
 
         //根据"记住我"的值选择Token存放时间
+        Cookie cookie;
         if (data.get("remember-me").equals(true)) {
             try {
-                redisClient.set(token, userInfo, 7 * 24 * 60 * 60);
+//                redisClient.set(token, userInfo, 7 * 24 * 60 * 60);
+                //传给前端，保存于Cookies
+                result.put("SUCCESS", token);
+                cookie = new Cookie("token_remember_me", token);
+                cookie.setPath("/online_retailer");
+                cookie.setHttpOnly(true);
+                try {
+                    response.addCookie(cookie);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("ERROR");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 result.put("ERROR", e.getMessage());
@@ -214,23 +247,23 @@ public class UserController {
             }
         } else {
             try {
-                redisClient.set(token, userInfo);
+//                redisClient.set(token, userInfo);
+                //传给前端，保存于Cookies
+                result.put("SUCCESS", token);
+                cookie = new Cookie("token", token);
+                cookie.setPath("/online_retailer");
+                cookie.setHttpOnly(true);
+                try {
+                    response.addCookie(cookie);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("ERROR");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 result.put("ERROR", e.getMessage());
                 return result;
             }
-        }
-        //传给前端，保存于Cookies
-        result.put("SUCCESS", token);
-        Cookie cookie = new Cookie("token", token);
-        cookie.setPath("/online_retailer");
-        cookie.setHttpOnly(true);
-        try {
-            response.addCookie(cookie);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("ERROR");
         }
         return result;
     }

@@ -68,10 +68,13 @@
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "/online_retailer/user/sendToken",
+            url: "/online_retailer/user/tokenVilidation",
             dataType: "json",
+            data: JSON.stringify({
+                "remember_me": true
+            }),
             success: function (data) {
-                window.location.href = "http://www.baidu.com";
+                // window.location.href = "http://www.baidu.com";
                 if (data.SUCCESS) {
                     console.log(data.SUCCESS);
                 } else {
@@ -101,8 +104,10 @@
                 success: function (data) {
                     if (data.SUCCESS) {
                         console.log("Login Successed!");
+                    } else if (data.ERROR) {
+                        console.log(data.ERROR);
                     } else {
-                        console.log("Login Failed!");
+                        console.log(data.PASSWDWORNG);
                     }
                 },
                 error: function (result) {

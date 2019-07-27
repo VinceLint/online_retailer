@@ -55,13 +55,13 @@ public class RedisClient {
     }
 
     /**
-     * @描述: 验证token并更新其生命周期
-     * @参数: [key]
+     * @描述: 验证token, 若是页面跳转且成功(flag = true),增加token生命周期30mins；若是"记住我"登录(flag = false),token时长不增加;
+     * @参数: [key, ip, flag]
      * @返回值: java.lang.String
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/26
+     * @创建时间: 2019/7/27
      */
-    public String findAndUpdate(String key, String ip) {
+    public String findAndUpdate(String key, String ip, boolean flag) {
 
         //判断Cookies是否被盗窃
         String info = BASE64.decryptBASE64(key);
@@ -79,10 +79,13 @@ public class RedisClient {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //更新token时长
-        set(key, user);
+        if (flag) {
+            //更新token时长
+            set(key, user);
+        }
         return user;
     }
+
 
     public boolean remove(String key) {
         boolean result = false;
