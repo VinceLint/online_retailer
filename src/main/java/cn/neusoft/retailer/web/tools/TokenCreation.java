@@ -21,8 +21,8 @@ public class TokenCreation {
     public static String createToken(String ip) {
         String timestamp = System.currentTimeMillis() + "";
         String token = timestamp.substring(5, timestamp.length()) + UUID.randomUUID().toString() + ip;
-        System.out.println(token);
-        return BASE64.encryptBASE64(token).replace("=", "-");
+//        System.out.println(token);
+        return BASE64.encryptBASE64(token).replace("=", "-").replace("\n", "").replace("\t", "").replace("\r", "");
     }
 
     @Test

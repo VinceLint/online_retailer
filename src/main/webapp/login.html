@@ -63,25 +63,27 @@
 </div>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
-    // $(function () {
-    //     console.log("it's running");
-    //     $.ajax({
-    //         type: "POST",
-    //         contentType: "application/json; charset=utf-8",
-    //         url: "/online_retailer/user/getCookie",
-    //         dataType: "json",
-    //         success: function (data) {
-    //             $("#userName").val(data.userName);
-    //             $("#userPassword").val(data.userPassword);
-    //             $("input[name='remember-me']").attr("checked", true);
-    //             console.log(data)
-    //         },
-    //         error: function () {
-    //             console.log("cookies信息获取失败！");
-    //         }
-    //     });
-    // });
-    //
+    // 登录页面加载时后台获取Cookies信息，并进行token校验
+    $(function () {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "/online_retailer/user/sendToken",
+            dataType: "json",
+            success: function (data) {
+                window.location.href = "http://www.baidu.com";
+                if (data.SUCCESS) {
+                    console.log(data.SUCCESS);
+                } else {
+                    console.log(data.ERROR);
+                }
+            },
+            error: function (result) {
+                console.log("ERROR: " + result);
+            }
+        });
+    });
+    //登录校验
     $("#login_in").on("click", function () {
         if ($("#userName").val() != "" && $("#userPassword").val() != "") {
             var info = {
@@ -92,20 +94,23 @@
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: "/online_retailer/user/loginValidate",
+                url: "/online_retailer/user/loginValidation",
                 dataType: "json",
                 data: JSON.stringify(info),
                 async: false,
                 success: function (data) {
-                    console.log(data);
+                    if (data.SUCCESS) {
+                        console.log("Login Successed!");
+                    } else {
+                        console.log("Login Failed!");
+                    }
                 },
                 error: function (result) {
-                    console.log("Login Failed: " + result);
+                    console.log("ERROR: " + result);
                 }
             });
-            console.log()
         }
-    })
+    });
 </script>
 </body>
 

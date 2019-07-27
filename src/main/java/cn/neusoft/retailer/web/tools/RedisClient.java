@@ -1,9 +1,16 @@
 package cn.neusoft.retailer.web.tools;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.concurrent.TimeUnit;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
 /**
  * @author 罗圣荣
@@ -15,7 +22,7 @@ public class RedisClient {
     public static final long TOKEN_EXPIRES_SECOND = 30 * 60;
 
     @Autowired
-    private static StringRedisTemplate redisTemplate;
+    private StringRedisTemplate redisTemplate;
 
     /**
      * @描述: 存入Redis
@@ -25,7 +32,7 @@ public class RedisClient {
      * @创建时间: 2019/7/26
      */
 
-    public static boolean set(String key, String value) {
+    public boolean set(String key, String value) {
         boolean result = false;
         try {
             redisTemplate.opsForValue().set(key, value, TOKEN_EXPIRES_SECOND, TimeUnit.SECONDS);
@@ -36,7 +43,7 @@ public class RedisClient {
         return result;
     }
 
-    public static boolean set(String key, String value, long expireTime) {
+    public boolean set(String key, String value, long expireTime) {
         boolean result = false;
         try {
             redisTemplate.opsForValue().set(key, value, expireTime, TimeUnit.SECONDS);
@@ -54,7 +61,7 @@ public class RedisClient {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/26
      */
-    public static String findAndUpdate(String key, String ip) {
+    public String findAndUpdate(String key, String ip) {
 
         //判断Cookies是否被盗窃
         String info = BASE64.decryptBASE64(key);
@@ -63,21 +70,21 @@ public class RedisClient {
         }
 
         //判断token是否过期
-        String userName = null;
+        String user = null;
         try {
-            userName = redisTemplate.opsForValue().get(key);
-            if (userName == null) {
+            user = redisTemplate.opsForValue().get(key);
+            if (user == null) {
                 return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         //更新token时长
-        set(key, userName);
-        return userName;
+        set(key, user);
+        return user;
     }
 
-    public static boolean remove(String key) {
+    public boolean remove(String key) {
         boolean result = false;
         try {
             redisTemplate.delete(key);
@@ -86,5 +93,10 @@ public class RedisClient {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Test
+    public void test() {
+        System.out.println(redisTemplate);
     }
 }

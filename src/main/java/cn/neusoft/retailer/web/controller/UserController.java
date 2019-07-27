@@ -1,6 +1,5 @@
 package cn.neusoft.retailer.web.controller;
 
-import cn.neusoft.retailer.web.pojo.Cust_Cookie;
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.*;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,9 +26,6 @@ import java.util.Map;
  * @date 2019/7/23 15:52
  */
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -36,72 +33,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    /**
-//     * @描述: 选中"记住我"功能后在浏览器保存token进Cookies(时效7天)
-//     * @参数: [userName, userPassword, request, response]
-//     * @返回值: void
-//     * @创建人: 罗圣荣
-//     * @创建时间: 2019/7/25
-//     */
-//    private void saveCookie(String userName, String userPassword, HttpServletRequest request, HttpServletResponse response) {
-//
-//        if (true) {
-//            //创建Cookie
-//            Cookie userNameCookie = new Cookie("userName", userName);
-//            //可以先加密
-//            Cookie userPasswordCookie = new Cookie("userPassword", userPassword);
-//            //设置Cookie父路径
-//            userNameCookie.setPath(request.getContextPath() + "/");
-//            userPasswordCookie.setPath(request.getContextPath() + "/");
-//            //是否保存Cookie(根据复选框Remember-me的值)
-//            String remember = request.getParameter("remember-me");
-//            if (remember == null || remember.equals(false)) {
-//                //不保存Cookie
-//                userNameCookie.setMaxAge(0);
-//                userPasswordCookie.setMaxAge(0);
-//            } else {
-//                //保存Cookie的时间长度
-//                userNameCookie.setMaxAge(7 * 24 * 60 * 60);
-//                userPasswordCookie.setMaxAge(7 * 24 * 60 * 60);
-//            }
-//            //加入Cookie响应头
-//            response.addCookie(userNameCookie);
-//            response.addCookie(userPasswordCookie);
-//        }
-//    }
-
-    /**
-     * @描述: 登录页面加载时遍历浏览器记录Cookies信息；若有对应用户信息，直接跳转主界面
-     * @参数: [request]
-     * @返回值: cn.neusoft.retailer.web.pojo.Cust_Cookie
-     * @创建人: 罗圣荣
-     * @创建时间: 2019/7/25
-     */
-    @RequestMapping(value = "/TokenValidate")
-    @ResponseBody
-    public Cust_Cookie getCookie(HttpServletRequest request) {
-
-        String userName = "";
-        String userPassword = "";
-        //获取客户端保存的所有Cookies
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length > 0) {
-            //遍历
-            for (int i = 0; i < cookies.length; i++) {
-                Cookie cookie = cookies[i];
-                if ("userName".equals(cookie.getName())) {
-                    userName = cookie.getValue();
-                }
-                if ("userPassword".equals(cookie.getName())) {
-                    userPassword = cookie.getValue();
-                }
-            }
-        }
-        Cust_Cookie cookie = new Cust_Cookie();
-        cookie.setUserName(userName);
-        cookie.setUserPassword(userPassword);
-        return cookie;
-    }
+    private RedisClient redisClient = new RedisClient();
 
     /**
      * @描述: 用户注册
@@ -186,13 +118,59 @@ public class UserController {
     }
 
     /**
+     * @描述: 登录页面加载时遍历浏览器Cookies信息, 获取其中token信息并校验是否过期
+     * @参数: [request]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/27
+     */
+    @RequestMapping(value = "/tokenVilidation")
+    @ResponseBody
+    public Map<String, String> vilidateToken(HttpServletRequest request) {
+
+        Map<String, String> data = new HashMap<>();
+        String token = "";
+        User user = null;
+
+        //获取客户端保存的所有Cookies
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            //遍历
+            for (int i = 0; i < cookies.length; i++) {
+                Cookie cookie = cookies[i];
+                if ("token".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                }
+                String userInfo = redisClient.findAndUpdate(token, request.getRemoteAddr());
+                try {
+                    user = (User) SerializeUtils.serializeToObject(userInfo);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if (user != null) {
+                    data.put("SUCCESS", "成功登陆");
+                    return data;
+                } else {
+                    data.put("ERROR", "身份过期，请重新登录");
+                    return data;
+                }
+            }
+        }
+        data.put("ERROR", "请登录");
+        return data;
+    }
+
+
+    /**
      * @描述: 登陆校验
      * @参数: [request, response]
      * @返回值: java.lang.Boolean
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/25
      */
-    @RequestMapping(value = "/loginValidate")
+    @RequestMapping(value = "/loginValidation")
     @ResponseBody
     public Map<String, String> login(@RequestBody String json, HttpServletRequest request, HttpServletResponse response) {
 
@@ -215,11 +193,20 @@ public class UserController {
         }
 
         token = TokenCreation.createToken(request.getRemoteAddr());
+
+        //user序列化
+        user.setUserPassword(null);
+        String userInfo = null;
+        try {
+            userInfo = SerializeUtils.serialize(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //根据"记住我"的值选择Token存放时间
-//        System.out.println(token);
         if (data.get("remember-me").equals(true)) {
             try {
-                RedisClient.set(token, user.getUserName(), 7 * 24 * 60 * 60);
+                redisClient.set(token, userInfo, 7 * 24 * 60 * 60);
             } catch (Exception e) {
                 e.printStackTrace();
                 result.put("ERROR", e.getMessage());
@@ -227,20 +214,18 @@ public class UserController {
             }
         } else {
             try {
-                RedisClient.set(token, user.getUserName());
+                redisClient.set(token, userInfo);
             } catch (Exception e) {
                 e.printStackTrace();
                 result.put("ERROR", e.getMessage());
                 return result;
             }
         }
-//        System.out.println(BASE64.decryptBASE64(token));
         //传给前端，保存于Cookies
         result.put("SUCCESS", token);
         Cookie cookie = new Cookie("token", token);
-        cookie.setPath("/");
+        cookie.setPath("/online_retailer");
         cookie.setHttpOnly(true);
-        System.out.println(cookie.getValue());
         try {
             response.addCookie(cookie);
         } catch (Exception e) {
@@ -249,4 +234,5 @@ public class UserController {
         }
         return result;
     }
+
 }

@@ -25,7 +25,7 @@ public class BASE64 {
         try {
             bytes = (new BASE64Decoder()).decodeBuffer(key);
             String info = new String(bytes);
-            return info.substring(0, info.length() - 1);
+            return info.substring(0, info.length() - 1).replace("\n", "").replace("\t", "").replace("\r", "");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
