@@ -55,7 +55,7 @@
                         '            <td class="success">品牌编号</td>\n' +
                         '            <td class="success">品牌名称</td>\n' +
                         '            <td class="success">品牌图片</td>\n' +
-                        '            <td class="success">操作</td>\n' +
+                        '            <td class="success">品牌商家</td>\n' +
                         '        </thead>'
                     $("#brandInfo").append(head)
                 }
