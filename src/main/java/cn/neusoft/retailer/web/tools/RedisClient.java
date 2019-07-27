@@ -61,7 +61,7 @@ public class RedisClient {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/27
      */
-    public String findAndUpdate(String key, String ip, boolean flag) {
+    public String findAndUpdate(String key, String ip) {
 
         //判断Cookies是否被盗窃
         String info = BASE64.decryptBASE64(key);
@@ -79,10 +79,8 @@ public class RedisClient {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (flag) {
-            //更新token时长
-            set(key, user);
-        }
+        //更新token时长
+        set(key, user);
         return user;
     }
 

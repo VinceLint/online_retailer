@@ -133,9 +133,15 @@ public class UserController {
         String cookie = request.getHeader("Cookie");
         JSONObject data = new JSONObject(json);
         Boolean remember_me = (Boolean) data.get("remember_me");
-        System.out.println(remember_me);
         User user = null;
 
+        /**
+         * @描述: 登录页面加载时遍历浏览器Cookies信息, 获取其中token信息并校验是否过期,需要一个参数区分是否登录界面的判定
+         * @参数: [json, request]
+         * @返回值: java.util.Map<java.lang.String, java.lang.String>
+         * @创建人: 罗圣荣
+         * @创建时间: 2019/7/27
+         */
         if (cookie != null) {
 
             String token = null;
@@ -145,17 +151,19 @@ public class UserController {
             String[] info = cookie.split(";");
             for (String s : info) {
                 if (!s.contains("remember_me")) {
-                    token = s.substring(7, s.length());
+                    String[] s1 = s.split("=");
+                    token = s1[1];
                 } else {
-                    token_remember_me = s.substring(18, s.length());
+                    String[] s1 = s.split("=");
+                    token_remember_me = s1[1];
                 }
             }
 
             String userInfo;
             if (remember_me) {
-                userInfo = redisClient.findAndUpdate(token_remember_me, request.getRemoteAddr(), false);
+                userInfo = redisClient.findAndUpdate(token_remember_me, request.getRemoteAddr());
             } else {
-                userInfo = redisClient.findAndUpdate(token, request.getRemoteAddr(), true);
+                userInfo = redisClient.findAndUpdate(token, request.getRemoteAddr());
             }
 
             try {
@@ -166,14 +174,14 @@ public class UserController {
                 e.printStackTrace();
             }
             if (user != null) {
-                data.put("SUCCESS", "身份有效");
+                result.put("SUCCESS", "身份有效");
                 return result;
             } else {
-                data.put("ERROR", "身份过期，请重新登录");
+                result.put("ERROR", "身份过期，请重新登录");
                 return result;
             }
         } else {
-            data.put("ERROR", "请登录");
+            result.put("ERROR", "请登录");
             return result;
         }
     }
@@ -228,10 +236,9 @@ public class UserController {
         Cookie cookie;
         if (data.get("remember-me").equals(true)) {
             try {
-//                redisClient.set(token, userInfo, 7 * 24 * 60 * 60);
-                //传给前端，保存于Cookies
+                redisClient.set(token, userInfo, 7 * 24 * 60 * 60);
                 result.put("SUCCESS", token);
-                cookie = new Cookie("token_remember_me", token);
+                cookie = new Cookie("token", token);
                 cookie.setPath("/online_retailer");
                 cookie.setHttpOnly(true);
                 try {
@@ -247,7 +254,7 @@ public class UserController {
             }
         } else {
             try {
-//                redisClient.set(token, userInfo);
+                redisClient.set(token, userInfo);
                 //传给前端，保存于Cookies
                 result.put("SUCCESS", token);
                 cookie = new Cookie("token", token);
