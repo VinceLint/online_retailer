@@ -103,11 +103,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.16</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>mysql</groupId>-->
-            <!--<artifactId>mysql-connector-java</artifactId>-->
-            <!--<version>5.1.41</version>-->
-        <!--</dependency>-->
 
         <!--servlet依赖-->
         <dependency>
@@ -224,7 +219,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
-            <version>1.6.0.RELEASE</version>
+            <version>1.7.2.RELEASE</version>
         </dependency>
 
         <!--UUID-->

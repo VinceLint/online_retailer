@@ -70,13 +70,10 @@
             contentType: "application/json; charset=utf-8",
             url: "/online_retailer/user/tokenVilidation",
             dataType: "json",
-            data: JSON.stringify({
-                "remember_me": true
-            }),
             success: function (data) {
-                // window.location.href = "http://www.baidu.com";
                 if (data.SUCCESS) {
                     console.log(data.SUCCESS);
+                    window.location.href = "/online_retailer/user/changeFlag";
                 } else {
                     console.log(data.ERROR);
                 }
@@ -104,6 +101,7 @@
                 success: function (data) {
                     if (data.SUCCESS) {
                         console.log("Login Successed!");
+                        // window.location.href = "http://www.baidu.com";
                     } else if (data.ERROR) {
                         console.log(data.ERROR);
                     } else {
@@ -114,6 +112,7 @@
                     console.log("ERROR: " + result);
                 }
             });
+
         }
     });
 </script>

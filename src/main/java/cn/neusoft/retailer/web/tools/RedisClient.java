@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @date 2019/7/26 2:00
  */
+@Component
 public class RedisClient {
 
     public static final long TOKEN_EXPIRES_SECOND = 30 * 60;
@@ -35,6 +37,7 @@ public class RedisClient {
     public boolean set(String key, String value) {
         boolean result = false;
         try {
+            System.out.println(redisTemplate);
             redisTemplate.opsForValue().set(key, value, TOKEN_EXPIRES_SECOND, TimeUnit.SECONDS);
             result = true;
         } catch (Exception e) {
@@ -61,7 +64,7 @@ public class RedisClient {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/27
      */
-    public String findAndUpdate(String key, String ip) {
+    public String findAndUpdate(String key, String ip, Boolean flag) {
 
         //判断Cookies是否被盗窃
         String info = BASE64.decryptBASE64(key);
@@ -80,7 +83,9 @@ public class RedisClient {
             e.printStackTrace();
         }
         //更新token时长
-        set(key, user);
+        if (!flag) {
+            set(key, user);
+        }
         return user;
     }
 
@@ -98,6 +103,6 @@ public class RedisClient {
 
     @Test
     public void test() {
-        System.out.println(redisTemplate);
+        System.out.println(redisTemplate.toString());
     }
 }

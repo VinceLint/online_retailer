@@ -103,7 +103,6 @@ public class UserController {
         }
 
 //        System.out.println(result);
-        System.out.println(token);
 
         if (token) {
             user.setUserId(UniqueID.getGuid());
@@ -118,66 +117,66 @@ public class UserController {
     }
 
     /**
-     * @描述: 登录页面加载时遍历浏览器Cookies信息, 获取其中token信息并校验是否过期
-     * @参数: [request]
+     * @描述: 验证token，需传入一个参数flag判断用户是否通过"记住我"方式登录
+     * @参数: [json, request]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/27
      */
     @RequestMapping(value = "/tokenVilidation")
     @ResponseBody
-    public Map<String, String> vilidateToken(@RequestBody String json, HttpServletRequest request) {
+    public Map<String, String> vilidateToken(HttpServletRequest request) {
 
         Map<String, String> result = new HashMap<>();
-
         String cookie = request.getHeader("Cookie");
-        JSONObject data = new JSONObject(json);
-        Boolean remember_me = (Boolean) data.get("remember_me");
         User user = null;
 
-        /**
-         * @描述: 登录页面加载时遍历浏览器Cookies信息, 获取其中token信息并校验是否过期,需要一个参数区分是否登录界面的判定
-         * @参数: [json, request]
-         * @返回值: java.util.Map<java.lang.String, java.lang.String>
-         * @创建人: 罗圣荣
-         * @创建时间: 2019/7/27
-         */
-        if (cookie != null) {
+        //判断是否通过"记住我"方式登录
+        Boolean flag;
+        flag = (Boolean) request.getSession().getAttribute("flag");
 
-            String token = null;
-            String token_remember_me = null;
+        if (cookie.contains("token")) {
 
-            //获取相应token
-            String[] info = cookie.split(";");
-            for (String s : info) {
-                if (!s.contains("remember_me")) {
-                    String[] s1 = s.split("=");
-                    token = s1[1];
-                } else {
-                    String[] s1 = s.split("=");
-                    token_remember_me = s1[1];
+            String[] cookieInfo = cookie.split(";");
+            String tokenMessage = null;
+            for (String s : cookieInfo) {
+                if (s.contains("token")) {
+                    tokenMessage = s;
                 }
             }
-
-            String userInfo;
-            if (remember_me) {
-                userInfo = redisClient.findAndUpdate(token_remember_me, request.getRemoteAddr());
-            } else {
-                userInfo = redisClient.findAndUpdate(token, request.getRemoteAddr());
-            }
+            String[] tokenInfo = tokenMessage.split("=");
+            String token = tokenInfo[1];
+            String userInfo = null;
 
             try {
-                user = (User) SerializeUtils.serializeToObject(userInfo);
-            } catch (IOException e) {
+                userInfo = redisClient.findAndUpdate(token, request.getRemoteAddr(), flag);
+            } catch (Exception e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                System.out.println("ERROR");
             }
-            if (user != null) {
-                result.put("SUCCESS", "身份有效");
-                return result;
+
+            if (userInfo != null) {
+                try {
+                    user = (User) SerializeUtils.serializeToObject(userInfo);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("ERROR");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    System.out.println("ERROR");
+                }
+                if (user != null) {
+                    if (flag) {
+                        request.getSession().setAttribute("user", user);
+                    }
+                    result.put("SUCCESS", "身份有效");
+                    return result;
+                } else {
+                    result.put("ERROR", "身份失效，请重新登录");
+                    return result;
+                }
             } else {
-                result.put("ERROR", "身份过期，请重新登录");
+                result.put("ERROR", "身份失效，请重新登录!");
                 return result;
             }
         } else {
@@ -221,7 +220,7 @@ public class UserController {
             return result;
         }
 
-        token = TokenCreation.createToken(request.getRemoteAddr());
+        token = TokenCreation.createToken("127.0.0.1");
 
         //user序列化
         user.setUserPassword(null);
@@ -237,16 +236,6 @@ public class UserController {
         if (data.get("remember-me").equals(true)) {
             try {
                 redisClient.set(token, userInfo, 7 * 24 * 60 * 60);
-                result.put("SUCCESS", token);
-                cookie = new Cookie("token", token);
-                cookie.setPath("/online_retailer");
-                cookie.setHttpOnly(true);
-                try {
-                    response.addCookie(cookie);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("ERROR");
-                }
             } catch (Exception e) {
                 e.printStackTrace();
                 result.put("ERROR", e.getMessage());
@@ -255,24 +244,34 @@ public class UserController {
         } else {
             try {
                 redisClient.set(token, userInfo);
-                //传给前端，保存于Cookies
-                result.put("SUCCESS", token);
-                cookie = new Cookie("token", token);
-                cookie.setPath("/online_retailer");
-                cookie.setHttpOnly(true);
-                try {
-                    response.addCookie(cookie);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("ERROR");
-                }
             } catch (Exception e) {
                 e.printStackTrace();
                 result.put("ERROR", e.getMessage());
                 return result;
             }
         }
+        //传给前端，保存于Cookies
+        result.put("SUCCESS", token);
+        cookie = new Cookie("token", token);
+        cookie.setPath("/online_retailer");
+        cookie.setHttpOnly(true);
+        try {
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR");
+        }
+
+        //判断是否通过"记住我"方式登录的标识
+        request.getSession().setAttribute("flag", false);
+
         return result;
+    }
+
+    @RequestMapping(value = "/changeFlag")
+    public String changeFlag(HttpServletRequest request) {
+        request.getSession().setAttribute("flag", true);
+        return "redirect:http://www.baidu.com";
     }
 
 }
