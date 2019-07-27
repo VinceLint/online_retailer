@@ -56,4 +56,9 @@ public class BrandServiceImpl implements BrandService {
     public List<Brand> selectByPage(Integer brandMerId, Integer pageStart, Integer pageSize) {
         return brandMapper.selectByPage(brandMerId, pageStart, pageSize);
     }
+
+    @Override
+    public List<Brand> selectByBrandSearch(String brandName) {
+        return brandMapper.selectByNameSearch(brandName);
+    }
 }

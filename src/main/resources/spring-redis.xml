@@ -12,8 +12,8 @@
 
     <!-- redis连接池 -->
     <bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxIdle" value="$#{redisConfig['redis.maxIdle']}"></property>
-        <property name="maxTotal" value="$#{redisConfig['redis.maxTotal']}"></property>
+        <property name="maxIdle" value="#{redisConfig['redis.maxIdle']}"></property>
+        <property name="maxTotal" value="#{redisConfig['redis.maxTotal']}"></property>
         <property name="maxWaitMillis" value="#{redisConfig['redis.maxWaitMillis']}"></property>
         <property name="testOnBorrow" value="#{redisConfig['redis.testOnBorrow']}"></property>
     </bean>
