@@ -15,7 +15,10 @@ public interface UserMapper {
 
     List<User> selectAll();
 
-    int updateByPrimaryKey(User record);
+    boolean updateByPrimaryKey(User record);
+
+    boolean updateByName(User record);
 
     User selectByEngName(String userName);
+
 }

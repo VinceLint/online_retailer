@@ -102,10 +102,21 @@ public class UserController {
             //加密保存用户密码
             String ciphertext = MD5.encrypt(userPassword);
             user.setUserPassword(ciphertext);
-            userService.insertByUserInfo(user);
-        }
 
-        return result;
+            try {
+                userService.insertByUserInfo(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.put("ERROR", e.getMessage());
+                return result;
+            }
+
+            result.put("SUCCESS", "注册成功");
+            return result;
+        } else {
+            System.out.println(result.toString());
+            return result;
+        }
     }
 
     /**
@@ -125,7 +136,7 @@ public class UserController {
 
         //判断是否通过"记住我"方式登录
         Boolean flag;
-        flag = (Boolean) request.getSession().getAttribute("flag");
+        flag = (Boolean) request.getSession(false).getAttribute("flag");
 
         if (cookie.contains("token")) {
 
@@ -140,7 +151,8 @@ public class UserController {
             String token = tokenInfo[1];
 
             try {
-                user = redisClient.findAndUpdate(token, "127.0.0.1", flag);
+                //user = redisClient.findAndUpdate(token, "127.0.0.1", flag);
+                user = redisClient.findAndUpdate(token, request.getRemoteAddr(), flag);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("ERROR");
@@ -173,8 +185,9 @@ public class UserController {
         JSONObject data = new JSONObject(json);
         String userName = (String) data.get("userName");
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
 
+        //校验用户信息
         User user = null;
         try {
             user = userService.selectByName(userName);
@@ -204,7 +217,8 @@ public class UserController {
         }
 
         String token;
-        token = TokenCreation.createToken("127.0.0.1");
+//        token = TokenCreation.createToken("127.0.0.1");
+        token = TokenCreation.createToken(request.getRemoteAddr());
 
         user.setUserPassword(null);
         session.setAttribute(userName, user);
@@ -247,14 +261,125 @@ public class UserController {
         return result;
     }
 
+    /**
+     * @描述: 忘记密码
+     * @参数: [json, request]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/29
+     */
+    @RequestMapping(value = "/forgetPasswd")
+    @ResponseBody
+    public Map<String, String> forgetPasswd(@RequestBody String json, HttpServletRequest request) {
+
+        Map<String, String> result = new HashMap<>();
+        JSONObject data = new JSONObject(json);
+        String userName = (String) data.get("userName");
+
+        HttpSession session = request.getSession(false);
+
+        //校验用户信息
+        User user = null;
+        try {
+            user = userService.selectByName(userName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+            return result;
+        }
+        if (user == null) {
+            result.put("INVALID_USERNAME", "用户不存在！");
+            return result;
+        }
+
+        //校验验证码
+        String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        String in_code = (String) data.get("code");
+        if (!code.toLowerCase().equals(in_code.toLowerCase())) {
+            result.put("INVALID_CODE", "验证码不正确！");
+            return result;
+        }
+
+        request.getSession(false).setAttribute("userName", userName);
+        result.put("SUCCESS", userName);
+        return result;
+    }
+
+    /**
+     * @描述: 重置密码
+     * @参数: [json]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/29
+     */
+    @RequestMapping(value = "/resetPasswd")
+    @ResponseBody
+    public Map<String, String> resetPasswd(@RequestBody String json) {
+
+        Map<String, String> result = new HashMap<>();
+
+        JSONObject data = new JSONObject(json);
+        String userName = (String) data.get("userName");
+        String newPasswd = (String) data.get("newPassword");
+
+        User user = null;
+        try {
+            user = userService.selectByName(userName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+        }
+
+        //判断新密码是否符合密码格式
+        if (newPasswd == null || !MyString.isPassword(newPasswd)) {
+            result.put("INVALID_PASSWD", "密码格式不正确！");
+            return result;
+        }
+
+        //加密保存用户密码
+        String ciphertext = MD5.encrypt(newPasswd);
+        user.setUserPassword(ciphertext);
+
+        try {
+            userService.updateByName(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+            return result;
+        }
+
+        result.put("SUCCESS", "重置密码成功");
+        return result;
+    }
+
+
+    @RequestMapping(value = "/getUserName")
+    @ResponseBody
+    public Map<String, String> getUserName(HttpServletRequest request) {
+
+        Map<String, String> result = new HashMap<>();
+        String userName = null;
+
+        HttpSession session = request.getSession(false);
+
+        userName = (String) session.getAttribute("userName");
+
+        session.removeAttribute("userName");
+
+        result.put("userName", userName);
+
+        return result;
+    }
+
     @RequestMapping(value = "/initFlag")
+    @ResponseBody
     public void initFlag(HttpServletRequest request) {
-        request.getSession().setAttribute("flag", false);
+        request.getSession(false).setAttribute("flag", false);
     }
 
     @RequestMapping(value = "/changeFlag")
     public String changeFlag(HttpServletRequest request) {
-        request.getSession().setAttribute("flag", true);
+        request.getSession(false).setAttribute("flag", true);
         return "redirect:http://www.baidu.com";
     }
 

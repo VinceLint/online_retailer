@@ -74,10 +74,8 @@
         });
         //初始Flag(判断是否以"记住我"方式登录的标识)
         $.ajax({
-            type: "POST",
             contentType: "application/json; charset=utf-8",
             url: path + "/user/initFlag",
-            dataType: "json",
             success: function (data) {
             },
             error: function (result) {
@@ -85,14 +83,12 @@
         });
         // 登录页面加载时后台获取Cookies信息，并进行token校验
         $.ajax({
-            type: "POST",
             contentType: "application/json; charset=utf-8",
             url: path + "/user/tokenVilidation",
-            dataType: "json",
             success: function (data) {
                 if (data.SUCCESS) {
                     console.log(data.SUCCESS);
-                    window.location.href = "/online_retailer/user/changeFlag";
+                    window.location.href = (path + "/user/changeFlag");
                 } else {
                     console.log(data.ERROR);
                 }
@@ -147,6 +143,7 @@
                 }
             });
         }
+        return false;
     });
 
     function changeCode() {

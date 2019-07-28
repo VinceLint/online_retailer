@@ -53,7 +53,7 @@
     });
     //信息校验
     $("#next").on("click", function () {
-        if ($("#userName").val() != "" && $("#userPassword").val() != "" && $("#kaptcha").val() != "") {
+        if ($("#userName").val() != "" && $("input[name='kaptcha']").val() != "") {
             var info = {
                 "userName": $("#userName").val(),
                 "code": $("input[name='kaptcha']").val()
@@ -61,19 +61,21 @@
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: path + "/user/",
+                url: path + "/user/forgetPasswd",
                 dataType: "json",
                 data: JSON.stringify(info),
                 async: false,
                 success: function (data) {
                     if (data.SUCCESS) {
-                        console.log("Checked!");
-                        window.location.href = "alterPasswd.html";
-                    } else if () {
-
+                        window.location.href = path + "/alterPasswd.html";
+                    } else if (data.INVALID_USERNAME) {
+                        alert(data.INVALID_USERNAME);
+                        $("#userName").val("");
+                        $("input[name='kaptcha']").val("");
+                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
                     } else {
-                        console.log(data.INVALID_CODE);
-                        alert("验证码不正确！");
+                        alert(data.INVALID_CODE);
+                        $("#userName").val("");
                         $("input[name='kaptcha']").val("");
                         $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
                     }
@@ -83,6 +85,7 @@
                 }
             });
         }
+        return false;
     });
 
     function changeCode() {

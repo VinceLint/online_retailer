@@ -18,6 +18,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
     @Override
     public User selectByPrimaryKey(Integer userId) throws Exception {
         return userMapper.selectByPrimaryKey(userId);
@@ -40,13 +41,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean insertByUserInfo(User user) {
-        return  userMapper.insert(user);
+        return userMapper.insert(user);
     }
 
     @Override
-    public boolean updateByPrimaryKey(User user) { return userMapper.updateByPrimaryKey(user) != 0; }
+    public boolean updateByPrimaryKey(User user) {
+        return userMapper.updateByPrimaryKey(user);
+    }
 
     @Override
-    public boolean deleteByPrimaryKey(Integer userId) { return userMapper.deleteByPrimaryKey(userId) != 0; }
+    public boolean updateByName(User user) {
+        return userMapper.updateByName(user);
+    }
+
+    @Override
+    public boolean deleteByPrimaryKey(Integer userId) {
+        return userMapper.deleteByPrimaryKey(userId) != 0;
+    }
 
 }

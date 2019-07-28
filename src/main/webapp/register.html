@@ -23,7 +23,7 @@
     <div class="mid-class">
         <div class="txt-left-side">
             <h2> 注册 </h2>
-            <form action="#" method="post">
+            <form action="" method="post">
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
                     <input id="userName" placeholder="请输入用户名" required="required" type="text"/>
@@ -82,6 +82,7 @@
 </div>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
+    var path = "http://localhost:8088/online_retailer";
     $(function () {
         var userPrivilege = 0;
         $("input[name='mvo_ornot']").on("click", function () {
@@ -96,55 +97,101 @@
             }
         });
         $("#signup").on("click", function () {
-            if ($("input[name='mvo_ornot']").is(":checked")) {
-                if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "") {
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        url: "/online_retailer/user/register",
-                        dataType: "json",
-                        data: JSON.stringify({
-                            "userName": $("#userName").val(),
-                            "userMail": $("#userMail").val(),
-                            "userPhone": $("#userPhone").val(),
-                            "userPassword": $("#userPassword").val(),
-                            "userPrivilege": userPrivilege
-                        }),
-                        async: false,
-                        success: function (data) {
-
-                        },
-                        error: function (result) {
-                            console.log("ERROR: " + result);
-                        }
-                    });
-                }
+            if ($("#userPassword").val() != $("#checkPassword").val()) {
+                alert("两次密码不一致");
+                $("#userPassword").val("");
+                $("#checkPassword").val("");
             } else {
-                if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "" && $("#mvoUrl").val() != "") {
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        url: "/online_retailer/user/register",
-                        dataType: "json",
-                        data: JSON.stringify({
-                            "userName": $("#userName").val(),
-                            "userMail": $("#userMail").val(),
-                            "userPhone": $("#userPhone").val(),
-                            "userPassword": $("#userPassword").val(),
-                            "mvoUrl": $("#mvoUrl").val(),
-                            "mvoType": $("#mvoType").val(),
-                            "userPrivilege": userPrivilege
-                        }),
-                        async: false,
-                        success: function (data) {
-
-                        },
-                        error: function (result) {
-                            console.log("ERROR: " + result);
-                        }
-                    });
+                if ($("input[name='mvo_ornot']").is(":checked")) {
+                    if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "") {
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: path + "/user/register",
+                            dataType: "json",
+                            data: JSON.stringify({
+                                "userName": $("#userName").val(),
+                                "userMail": $("#userMail").val(),
+                                "userPhone": $("#userPhone").val(),
+                                "userPassword": $("#userPassword").val(),
+                                "userPrivilege": userPrivilege
+                            }),
+                            async: false,
+                            success: function (data) {
+                                if (data.SUCCESS) {
+                                    alert(data.SUCCESS);
+                                    window.location.href = (path + "login.html");
+                                } else if (data.INVALID_USERNAME) {
+                                    alert(data.INVALID_USERNAME);
+                                    $("#userName").val("");
+                                } else if (data.INVALID_EMAIL) {
+                                    alert(data.INVALID_EMAIL);
+                                    $("#userMail").val("");
+                                } else if (data.INVALID_PHONE) {
+                                    alert(data.INVALID_PHONE);
+                                    $("#userPhone").val("");
+                                } else if (data.INVALID_PASSWD) {
+                                    alert(data.INVALID_PASSWD);
+                                    $("#userPassword").val("");
+                                    $("#checkPassword").val("");
+                                } else {
+                                    console.log("ERROR: " + data.ERROR);
+                                }
+                            },
+                            error: function (result) {
+                                console.log("ERROR: " + result);
+                            }
+                        });
+                    }
+                } else {
+                    if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "" && $("#mvoUrl").val() != "") {
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: path + "/user/register",
+                            dataType: "json",
+                            data: JSON.stringify({
+                                "userName": $("#userName").val(),
+                                "userMail": $("#userMail").val(),
+                                "userPhone": $("#userPhone").val(),
+                                "userPassword": $("#userPassword").val(),
+                                "mvoUrl": $("#mvoUrl").val(),
+                                "mvoType": $("#mvoType").val(),
+                                "userPrivilege": userPrivilege
+                            }),
+                            async: false,
+                            success: function (data) {
+                                if (data.SUCCESS) {
+                                    alert(data.SUCCESS);
+                                    window.location.href = (path + "login.html");
+                                } else if (data.INVALID_USERNAME) {
+                                    alert(data.INVALID_USERNAME);
+                                    $("#userName").val("");
+                                } else if (data.INVALID_EMAIL) {
+                                    alert(data.INVALID_EMAIL);
+                                    $("#userMail").val("");
+                                } else if (data.INVALID_PHONE) {
+                                    alert(data.INVALID_PHONE);
+                                    $("#userPhone").val("");
+                                } else if (data.INVALID_PASSWD) {
+                                    alert(data.INVALID_PASSWD);
+                                    $("#userPassword").val("");
+                                    $("#checkPassword").val("");
+                                } else if (data.INVALID_URL) {
+                                    alert(data.INVALID_URL);
+                                    $("#mvoUrl").val("");
+                                } else {
+                                    console.log("ERROR: " + data.ERROR);
+                                }
+                            },
+                            error: function (result) {
+                                console.log("ERROR: " + result);
+                            }
+                        });
+                    }
                 }
             }
+            return false;
         })
     })
 </script>

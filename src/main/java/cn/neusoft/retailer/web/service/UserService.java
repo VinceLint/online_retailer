@@ -16,5 +16,8 @@ public interface UserService {
     List<User> selectAll();
     boolean insertByUserInfo(User user);
     boolean updateByPrimaryKey(User user);
+
+    boolean updateByName(User user);
     boolean deleteByPrimaryKey(Integer userId);
+
 }
