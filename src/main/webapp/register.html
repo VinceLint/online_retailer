@@ -18,40 +18,41 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 </head>
 <body>
-<h1 class="welcome">WELCOME</h1>
+<h1 class="welcome">欢迎</h1>
 <div class="w3layouts-two-grids">
     <div class="mid-class">
         <div class="txt-left-side">
-            <h2> Sign Up Here </h2>
+            <h2> 注册 </h2>
             <form action="#" method="post">
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
                     <input id="userName" type="text" placeholder=" Name" required="required"/>
                     <div class="clear"></div>
                 </div>
-                <!--                <span class="tip" id="ntip">用户名为2-17位中字</span>-->
                 <div class="form-left-to-w3l">
                     <span class="fa fa-phone" aria-hidden="true"></span>
                     <input id="userPhone" type="text" placeholder="Phone" required="required"/>
-
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l">
                     <span class="fa fa-envelope-o" aria-hidden="true"></span>
                     <input id="userMail" type="email" placeholder="Email" required="required"/>
-
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
-
                     <span class="fa fa-lock" aria-hidden="true"></span>
                     <input id="userPassword" type="password" placeholder="Password" required="required"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l ">
+                    <span aria-hidden="true" class="fa fa-lock"></span>
+                    <input id="checkPassword" placeholder="Retype Password" required="required" type="password"/>
                     <div class="clear"></div>
                 </div>
                 <div class="main-two-w3ls">
                     <div class="left-side-forget">
                         <input name="mvo_ornot" type="checkbox" class="checked">
-                        <span class="mvo">A MVO? </span>
+                        <span class="mvo">品牌商? </span>
                     </div>
                 </div>
                 <div class="mvo_info">
@@ -68,12 +69,12 @@
                     </div>
                 </div>
                 <div class="btnn">
-                    <button id="signup" type="submit">Sign Up</button>
+                    <button id="signup" type="submit">注册</button>
                 </div>
             </form>
             <div class="w3layouts_more-buttn">
-                <h3>Have an account..?
-                    <a href="login.html">Login Here
+                <h3>已有账号..?
+                    <a href="login.html">登录
                     </a>
                 </h3>
             </div>
@@ -90,12 +91,6 @@
                 $(".mvo_info").css("display", "block");
                 $(".main-two-w3ls").css("padding-bottom", "20px");
                 userPrivilege = 1;
-//          	if($("#mvoType".val()=="")){
-//      			return;
-//      		}
-//      		if($("#mvoUrl".val()=="")){
-//      			return;
-//      		}
             } else {
                 $(".mvo_info").css("display", "none");
                 $(".main-two-w3ls").css("padding-bottom", "0px");
@@ -103,29 +98,54 @@
             }
         });
         $("#signup").on("click", function () {
-            if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "") {
-                $.ajax({
-                    type: "POST",
-                    contentType: "application/json; charset=utf-8",
-                    url: "/online_retailer/user/register",
-                    dataType: "json",
-                    data: JSON.stringify({
-                        "userName": $("#userName").val(),
-                        "userMail": $("#userMail").val(),
-                        "userPhone": $("#userPhone").val(),
-                        "userPassword": $("#userPassword").val(),
-                        "mvoUrl": $("#mvoUrl").val(),
-                        "userPrivilege": userPrivilege,
-                        "mvoType": $("#mvoType").val(),
-                    }),
-                    async: false,
-                    success: function (result) {
+            if ($("input[name='mvo_ornot']").is(":checked")) {
+                if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "") {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/online_retailer/user/register",
+                        dataType: "json",
+                        data: JSON.stringify({
+                            "userName": $("#userName").val(),
+                            "userMail": $("#userMail").val(),
+                            "userPhone": $("#userPhone").val(),
+                            "userPassword": $("#userPassword").val(),
+                            "userPrivilege": userPrivilege
+                        }),
+                        async: false,
+                        success: function (data) {
 
-                    },
-                    error: function (message) {
-                        console.log(message);
-                    }
-                });
+                        },
+                        error: function (result) {
+                            console.log("ERROR: " + result);
+                        }
+                    });
+                }
+            } else {
+                if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "" && $("#mvoUrl").val() != "") {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/online_retailer/user/register",
+                        dataType: "json",
+                        data: JSON.stringify({
+                            "userName": $("#userName").val(),
+                            "userMail": $("#userMail").val(),
+                            "userPhone": $("#userPhone").val(),
+                            "userPassword": $("#userPassword").val(),
+                            "mvoUrl": $("#mvoUrl").val(),
+                            "mvoType": $("#mvoType").val(),
+                            "userPrivilege": userPrivilege
+                        }),
+                        async: false,
+                        success: function (data) {
+
+                        },
+                        error: function (result) {
+                            console.log("ERROR: " + result);
+                        }
+                    });
+                }
             }
         })
     })

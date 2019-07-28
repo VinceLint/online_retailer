@@ -3,6 +3,7 @@ package cn.neusoft.retailer.web.controller;
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.*;
+import com.google.code.kaptcha.Constants;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -50,70 +50,56 @@ public class UserController {
      */
     @RequestMapping(value = "/register")
     @ResponseBody
-    public List<Boolean> register(@RequestBody User user) {
+    public Map<String, String> register(@RequestBody User user) {
 
-        System.out.println(user.toString());
-        List<Boolean> result = new ArrayList<>();
+        Map<String, String> result = new HashMap<>();
 
         String userName = user.getUserName();
         String userMail = user.getUserMail();
         String userPhone = user.getUserPhone();
         String userPassword = user.getUserPassword();
-        Integer userPrivilege = user.getUserPrivilege();
-        Integer mvoType = user.getMvoType();
         String mvoUrl = user.getMvoUrl();
+        Integer mvoType = user.getMvoType();
+        Integer userPrivilege = user.getUserPrivilege();
 
         boolean token = true;
 
         //判断用户名是否重复
         if (userName == null || userService.selectByName(userName) != null) {
-            result.add(false);
+            result.put("INVALID_USERNAME", "该用户名已被注册！");
             token = false;
-        } else {
-            result.add(true);
         }
 
         //判断是否符合email格式
         if (userMail == null || !MyString.isEmail(userMail)) {
-            result.add(false);
+            result.put("INVALID_EMAIL", "邮箱格式不正确！");
             token = false;
-        } else {
-            result.add(true);
         }
 
         //判断是否符合电话号码格式
         if (userPhone == null || userPhone.length() > 11 || !MyString.ifNumber(userPhone)) {
-            result.add(false);
+            result.put("INVALID_PHONE", "手机号码格式不正确！");
             token = false;
-        } else {
-            result.add(true);
         }
 
         //判断是否符合密码格式
         if (userPassword == null || !MyString.isPassword(userPassword)) {
-            result.add(false);
+            result.put("INVALID_PASSWD", "密码格式不正确！");
             token = false;
-        } else {
-            result.add(true);
         }
 
         //判断是否符合url格式
-        //非品牌商
         if ("".equals(mvoUrl))
             mvoUrl = null;
         if (!MyString.isURL(mvoUrl)) {
-            result.add(false);
+            result.put("INVALID_URL", "url格式不正确！");
             token = false;
-        } else {
-            result.add(true);
         }
-
-//        System.out.println(result);
 
         if (token) {
             user.setUserId(UniqueID.getGuid());
-            System.out.println(user.toString());
 
+            //加密保存用户密码
             String ciphertext = MD5.encrypt(userPassword);
             user.setUserPassword(ciphertext);
             userService.insertByUserInfo(user);
@@ -186,6 +172,9 @@ public class UserController {
         Map<String, String> result = new HashMap<>();
         JSONObject data = new JSONObject(json);
         String userName = (String) data.get("userName");
+
+        HttpSession session = request.getSession();
+
         User user = null;
         try {
             user = userService.selectByName(userName);
@@ -195,12 +184,22 @@ public class UserController {
             return result;
         }
         if (user == null) {
-            result.put("ERROR", "No User");
+            result.put("INVALID_USERNAME", "No User");
             return result;
         }
 
-        if (!user.getUserPassword().equals((String) data.get("userPassword"))) {
-            result.put("PASSWDWORNG", "Password is Invalid");
+        //校验密码
+        String in_passwd = (String) data.get("userPassword");
+        if (!user.getUserPassword().equals(MD5.encrypt(in_passwd))) {
+            result.put("INVALID_PASSWD", "Password Is Invalid");
+            return result;
+        }
+
+        //校验验证码
+        String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        String in_code = (String) data.get("code");
+        if (!code.toLowerCase().equals(in_code.toLowerCase())) {
+            result.put("INVALID_CODE", "Code Is Invalid");
             return result;
         }
 
@@ -208,7 +207,7 @@ public class UserController {
         token = TokenCreation.createToken("127.0.0.1");
 
         user.setUserPassword(null);
-        request.getSession().setAttribute("uesr", user);
+        session.setAttribute(userName, user);
 
         //根据"记住我"的值选择Token存放时间
         Cookie cookie;
@@ -243,7 +242,7 @@ public class UserController {
         }
 
 //        //判断是否通过"记住我"方式登录的标识
-//        request.getSession().setAttribute("flag", false);
+//        session.setAttribute("flag", false);
 
         return result;
     }
