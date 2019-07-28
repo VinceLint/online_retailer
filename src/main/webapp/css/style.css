@@ -456,7 +456,8 @@ input.checked {
     position: relative;
 }
 
-.remenber-me,
+.mvo,
+.remember,
 a.for {
     color: #757272;
     letter-spacing: 0px;
@@ -522,7 +523,8 @@ a.for {
         margin-bottom: 37px;
     }
 
-    .remenber-me,
+    .mvo,
+    .remember,
     a.for {
         font-size: 13px;
     }
@@ -568,7 +570,8 @@ a.for {
         margin-bottom: 35px;
     }
 
-    .remenber-me,
+    .mvo,
+    .remember,
     a.for {
         font-size: 12px;
     }
@@ -615,7 +618,8 @@ a.for {
         margin-bottom: 34px;
     }
 
-    .remenber-me,
+    .mvo,
+    .remember,
     a.for {
         font-size: 11px;
     }
@@ -768,7 +772,8 @@ a.for {
         font-size: 20px;
     }
 
-    .remenber-me,
+    .mvo,
+    .remember,
     a.for {
         font-size: 11px;
     }
@@ -992,7 +997,7 @@ a.for {
     }
 }
 
-@media(max-width:320px) {
+@media (max-width: 320px) {
     .txt-left-side h2 {
         font-size: 17px;
     }
