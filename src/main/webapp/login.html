@@ -28,16 +28,16 @@
             <form action="" method="post">
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
-                    <input id="userName" placeholder="Name" required="" type="text"/>
+                    <input id="userName" placeholder="请输入用户名" required="" type="text"/>
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
                     <span class="fa fa-lock" aria-hidden="true"></span>
-                    <input id="userPassword" placeholder="Password" required="" type="password"/>
+                    <input id="userPassword" placeholder="请输入密码" required="" type="password"/>
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
-                    <input name="kaptcha" placeholder="code" required="" type="text"/>
+                    <input name="kaptcha" placeholder="请输入验证码" required="" type="text"/>
                     <img id="kaptchaImage" src="./kaptcha/getKaptchaImage.do"/>
                     <a href="#" οnclick="changeCode()"></a>
                     <div class="clear"></div>
@@ -48,7 +48,7 @@
                         <span class="remember">记住我 </span>
                     </div>
                     <div class="right-side-forget">
-                        <a class="for" href="#">忘记密码...?</a>
+                        <a class="for" href="forgetPasswd.html">忘记密码...?</a>
                     </div>
                 </div>
                 <div class="btnn">
@@ -104,7 +104,7 @@
     });
     //登录校验
     $("#login_in").on("click", function () {
-        if ($("#userName").val() != "" && $("#userPassword").val() != "") {
+        if ($("#userName").val() != "" && $("#userPassword").val() != "" && $("#kaptcha").val() != "") {
             var info = {
                 "userName": $("#userName").val(),
                 "userPassword": $("#userPassword").val(),
