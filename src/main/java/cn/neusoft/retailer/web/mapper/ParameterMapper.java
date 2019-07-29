@@ -1,6 +1,7 @@
 package cn.neusoft.retailer.web.mapper;
 
 import cn.neusoft.retailer.web.pojo.Parameter;
+
 import java.util.List;
 
 public interface ParameterMapper {
@@ -13,4 +14,6 @@ public interface ParameterMapper {
     List<Parameter> selectAll();
 
     int updateByPrimaryKey(Parameter record);
+
+    List<Parameter> selectByPage(Integer pageNum);
 }
