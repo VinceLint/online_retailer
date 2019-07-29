@@ -121,13 +121,13 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
         <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.DictionaryMapper"></property>
     </bean>
+    <bean id="dropshipMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.DropshipMapper"></property>
+    </bean>
     <bean id="goodsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
         <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.GoodsMapper"></property>
-    </bean>
-    <bean id="goodsSizeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.GoodsSizeMapper"></property>
     </bean>
     <bean id="logisticsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>

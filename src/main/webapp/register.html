@@ -82,7 +82,7 @@
 </div>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
-    var path = "http://localhost:8088/online_retailer";
+    var path = "http://localhost:8090/springmybatis";
     $(function () {
         var userPrivilege = 0;
         $("input[name='mvo_ornot']").on("click", function () {
@@ -121,7 +121,7 @@
                                 alert(data);
                                 if (data.SUCCESS) {
                                     alert(data.SUCCESS);
-                                    window.location.href = (path + "login.html");
+                                    window.location.href = (path + "/login.html");
                                 } else if (data.INVALID_USERNAME) {
                                     alert(data.INVALID_USERNAME);
                                     $("#userName").val("");
