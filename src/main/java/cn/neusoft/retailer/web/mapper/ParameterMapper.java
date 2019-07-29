@@ -13,4 +13,6 @@ public interface ParameterMapper {
     List<Parameter> selectAll();
 
     int updateByPrimaryKey(Parameter record);
+
+    List<Parameter> selectByPage(Integer pageNum);
 }

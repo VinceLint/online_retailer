@@ -9,11 +9,9 @@ public class Store {
 
     private Integer storeOwn;
 
-    private Float storeScore;
+    private String marketplaceId;
 
-    private Integer storeSell;
-
-    private String storeUrl;
+    private String nwsAuthToken;
 
     public Integer getStoreId() {
         return storeId;
@@ -47,27 +45,19 @@ public class Store {
         this.storeOwn = storeOwn;
     }
 
-    public Float getStoreScore() {
-        return storeScore;
+    public String getMarketplaceId() {
+        return marketplaceId;
     }
 
-    public void setStoreScore(Float storeScore) {
-        this.storeScore = storeScore;
+    public void setMarketplaceId(String marketplaceId) {
+        this.marketplaceId = marketplaceId == null ? null : marketplaceId.trim();
     }
 
-    public Integer getStoreSell() {
-        return storeSell;
+    public String getNwsAuthToken() {
+        return nwsAuthToken;
     }
 
-    public void setStoreSell(Integer storeSell) {
-        this.storeSell = storeSell;
-    }
-
-    public String getStoreUrl() {
-        return storeUrl;
-    }
-
-    public void setStoreUrl(String storeUrl) {
-        this.storeUrl = storeUrl == null ? null : storeUrl.trim();
+    public void setNwsAuthToken(String nwsAuthToken) {
+        this.nwsAuthToken = nwsAuthToken == null ? null : nwsAuthToken.trim();
     }
 }
