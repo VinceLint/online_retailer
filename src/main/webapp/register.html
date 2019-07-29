@@ -29,24 +29,24 @@
                     <input id="userName" placeholder="请输入用户名" required="required" type="text"/>
                     <div class="clear"></div>
                 </div>
-                <div class="form-left-to-w3l">
-                    <span class="fa fa-phone" aria-hidden="true"></span>
-                    <input id="userPhone" placeholder="请输入手机号码" required="required" type="text"/>
-                    <div class="clear"></div>
-                </div>
-                <div class="form-left-to-w3l">
-                    <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                    <input id="userMail" placeholder="请输入邮箱地址" required="required" type="email"/>
-                    <div class="clear"></div>
-                </div>
                 <div class="form-left-to-w3l ">
-                    <span class="fa fa-lock" aria-hidden="true"></span>
+                    <span aria-hidden="true" class="fa fa-lock"></span>
                     <input id="userPassword" placeholder="请输入密码" required="required" type="password"/>
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
                     <span aria-hidden="true" class="fa fa-lock"></span>
                     <input id="checkPassword" placeholder="请再次输入新密码" required="required" type="password"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l">
+                    <span aria-hidden="true" class="fa fa-envelope-o"></span>
+                    <input id="userMail" placeholder="请输入邮箱地址" required="required" type="email"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l">
+                    <span class="fa fa-phone" aria-hidden="true"></span>
+                    <input id="userPhone" placeholder="请输入手机号码" required="required" type="text"/>
                     <div class="clear"></div>
                 </div>
                 <div class="left-side-forget">
@@ -102,7 +102,7 @@
                 $("#userPassword").val("");
                 $("#checkPassword").val("");
             } else {
-                if ($("input[name='mvo_ornot']").is(":checked")) {
+                if (!$("input[name='mvo_ornot']").is(":checked")) {
                     if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "") {
                         $.ajax({
                             type: "POST",
@@ -118,22 +118,23 @@
                             }),
                             async: false,
                             success: function (data) {
+                                alert(data);
                                 if (data.SUCCESS) {
                                     alert(data.SUCCESS);
                                     window.location.href = (path + "login.html");
                                 } else if (data.INVALID_USERNAME) {
                                     alert(data.INVALID_USERNAME);
                                     $("#userName").val("");
+                                } else if (data.INVALID_PASSWD) {
+                                    alert(data.INVALID_PASSWD);
+                                    $("#userPassword").val("");
+                                    $("#checkPassword").val("");
                                 } else if (data.INVALID_EMAIL) {
                                     alert(data.INVALID_EMAIL);
                                     $("#userMail").val("");
                                 } else if (data.INVALID_PHONE) {
                                     alert(data.INVALID_PHONE);
                                     $("#userPhone").val("");
-                                } else if (data.INVALID_PASSWD) {
-                                    alert(data.INVALID_PASSWD);
-                                    $("#userPassword").val("");
-                                    $("#checkPassword").val("");
                                 } else {
                                     console.log("ERROR: " + data.ERROR);
                                 }
@@ -161,22 +162,23 @@
                             }),
                             async: false,
                             success: function (data) {
+                                alert(data);
                                 if (data.SUCCESS) {
                                     alert(data.SUCCESS);
-                                    window.location.href = (path + "login.html");
+                                    window.location.href = (path + "/login.html");
                                 } else if (data.INVALID_USERNAME) {
                                     alert(data.INVALID_USERNAME);
                                     $("#userName").val("");
+                                } else if (data.INVALID_PASSWD) {
+                                    alert(data.INVALID_PASSWD);
+                                    $("#userPassword").val("");
+                                    $("#checkPassword").val("");
                                 } else if (data.INVALID_EMAIL) {
                                     alert(data.INVALID_EMAIL);
                                     $("#userMail").val("");
                                 } else if (data.INVALID_PHONE) {
                                     alert(data.INVALID_PHONE);
                                     $("#userPhone").val("");
-                                } else if (data.INVALID_PASSWD) {
-                                    alert(data.INVALID_PASSWD);
-                                    $("#userPassword").val("");
-                                    $("#checkPassword").val("");
                                 } else if (data.INVALID_URL) {
                                     alert(data.INVALID_URL);
                                     $("#mvoUrl").val("");

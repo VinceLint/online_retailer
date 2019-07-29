@@ -62,30 +62,29 @@ public class UserController {
         Integer mvoType = user.getMvoType();
         Integer userPrivilege = user.getUserPrivilege();
 
-        boolean token = true;
-
         //判断用户名是否重复
         if (userName == null || userService.selectByName(userName) != null) {
             result.put("INVALID_USERNAME", "该用户名已被注册！");
-            token = false;
+            return result;
+        }
+
+
+        //判断是否符合密码格式
+        if (userPassword == null || !MyString.isPassword(userPassword)) {
+            result.put("INVALID_PASSWD", "密码格式不正确！");
+            return result;
         }
 
         //判断是否符合email格式
         if (userMail == null || !MyString.isEmail(userMail)) {
             result.put("INVALID_EMAIL", "邮箱格式不正确！");
-            token = false;
+            return result;
         }
 
         //判断是否符合电话号码格式
-        if (userPhone == null || userPhone.length() > 11 || !MyString.ifNumber(userPhone)) {
+        if (userPhone == null || userPhone.length() != 11 || !MyString.ifNumber(userPhone)) {
             result.put("INVALID_PHONE", "手机号码格式不正确！");
-            token = false;
-        }
-
-        //判断是否符合密码格式
-        if (userPassword == null || !MyString.isPassword(userPassword)) {
-            result.put("INVALID_PASSWD", "密码格式不正确！");
-            token = false;
+            return result;
         }
 
         //判断是否符合url格式
@@ -93,35 +92,32 @@ public class UserController {
             mvoUrl = null;
         if (!MyString.isURL(mvoUrl)) {
             result.put("INVALID_URL", "url格式不正确！");
-            token = false;
-        }
-
-        if (token) {
-            user.setUserId(UniqueID.getGuid());
-
-            //加密保存用户密码
-            String ciphertext = MD5.encrypt(userPassword);
-            user.setUserPassword(ciphertext);
-
-            try {
-                userService.insertByUserInfo(user);
-            } catch (Exception e) {
-                e.printStackTrace();
-                result.put("ERROR", e.getMessage());
-                return result;
-            }
-
-            result.put("SUCCESS", "注册成功");
-            return result;
-        } else {
-            System.out.println(result.toString());
             return result;
         }
+
+        user.setUserId(UniqueID.getGuid());
+
+        //加密保存用户密码
+        String ciphertext = MD5.encrypt(userPassword);
+        user.setUserPassword(ciphertext);
+
+        try {
+            userService.insertByUserInfo(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+            return result;
+        }
+
+        result.put("SUCCESS", "注册成功");
+        return result;
+
     }
 
     /**
      * @描述: 验证token
-     * @参数: [request]
+     * @参数: [request]1
+     * 4
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/28
