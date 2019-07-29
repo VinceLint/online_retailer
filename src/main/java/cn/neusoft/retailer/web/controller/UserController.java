@@ -118,7 +118,7 @@ public class UserController {
     @ResponseBody
     public List<Boolean> register(@RequestBody User user) {
 
-//        System.out.println(user.toString());
+        System.out.println(user.toString());
         List<Boolean> result = new ArrayList<>();
 
         String userName = user.getUserName();

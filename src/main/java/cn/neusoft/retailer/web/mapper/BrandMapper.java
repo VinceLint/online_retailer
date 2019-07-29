@@ -25,4 +25,6 @@ public interface BrandMapper {
     int selectCountBrand(Integer brandMerId);
 
     List<Brand> selectByPage(@Param("brandMerId") Integer brandMerId, @Param("pageStart") Integer pageStart,@Param("pageSize") Integer pageSize);
+
+    List<Brand> selectByNameSearch(String search_name);
 }
