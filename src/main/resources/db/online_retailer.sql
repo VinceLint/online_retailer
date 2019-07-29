@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 23/07/2019 11:55:58
+ Date: 29/07/2019 10:29:49
 */
 
 SET NAMES utf8mb4;
@@ -36,12 +36,50 @@ CREATE TABLE `brand`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `dictionary`;
 CREATE TABLE `dictionary`  (
-  `dic_id` int(11) NOT NULL,
+  `dic_id` int(11) NOT NULL AUTO_INCREMENT,
   `dic_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dic_discribe` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dic_code` int(11) NULL DEFAULT NULL,
   `dic_value` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`dic_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 67 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of dictionary
+-- ----------------------------
+INSERT INTO `dictionary` VALUES (1, 'SEX', '性别', 0, '男');
+INSERT INTO `dictionary` VALUES (2, 'SEX', '性别', 1, '女');
+INSERT INTO `dictionary` VALUES (27, 'SEX', '111', 2, 'BTT');
+INSERT INTO `dictionary` VALUES (28, 'SEX', '123', 9, '霍顿1');
+INSERT INTO `dictionary` VALUES (36, 'GOD', '1', 1, '4');
+INSERT INTO `dictionary` VALUES (37, 'GOD', '1', 3, '5');
+INSERT INTO `dictionary` VALUES (39, 'SB', '1', 1, '0');
+INSERT INTO `dictionary` VALUES (56, 'GG', '0', 0, '0');
+INSERT INTO `dictionary` VALUES (57, 'GG', '1', 1, '1');
+INSERT INTO `dictionary` VALUES (58, 'GG', '2', 2, '2');
+INSERT INTO `dictionary` VALUES (59, 'GG', '3', 3, '3');
+INSERT INTO `dictionary` VALUES (60, 'GG', '4', 4, '4');
+INSERT INTO `dictionary` VALUES (61, 'GG', '5', 5, '5');
+INSERT INTO `dictionary` VALUES (62, 'GG', '6', 6, '6');
+
+-- ----------------------------
+-- Table structure for dropship
+-- ----------------------------
+DROP TABLE IF EXISTS `dropship`;
+CREATE TABLE `dropship`  (
+  `dropship_id` int(11) NOT NULL,
+  `bvo_id` int(11) NULL DEFAULT NULL,
+  `goods_id` int(11) NULL DEFAULT NULL,
+  `goods_num` int(11) NULL DEFAULT NULL,
+  `store_id` int(11) NULL DEFAULT NULL,
+  `upc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`dropship_id`) USING BTREE,
+  INDEX `bvo_id`(`bvo_id`) USING BTREE,
+  INDEX `goods_id`(`goods_id`) USING BTREE,
+  INDEX `store_id`(`store_id`) USING BTREE,
+  CONSTRAINT `dropship_ibfk_1` FOREIGN KEY (`bvo_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `dropship_ibfk_2` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `dropship_ibfk_3` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -49,7 +87,7 @@ CREATE TABLE `dictionary`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods`  (
-  `goods_id` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL AUTO_INCREMENT,
   `goods_title` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goods_pic` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goods_price` float(10, 2) NULL DEFAULT NULL,
@@ -57,39 +95,14 @@ CREATE TABLE `goods`  (
   `goods_amount` int(255) NULL DEFAULT NULL,
   `goods_describe` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `goods_class` int(255) NULL DEFAULT NULL,
+  `goods_status` int(255) NULL DEFAULT NULL,
+  `goods_lenght` float(255, 0) NULL DEFAULT NULL,
+  `goods_width` float NULL DEFAULT NULL,
+  `goods_height` float NULL DEFAULT NULL,
+  `goods_weight` float NULL DEFAULT NULL,
   PRIMARY KEY (`goods_id`) USING BTREE,
   INDEX `brand_id`(`brand_id`) USING BTREE,
   CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for goods_size
--- ----------------------------
-DROP TABLE IF EXISTS `goods_size`;
-CREATE TABLE `goods_size`  (
-  `goods_id` int(11) NOT NULL,
-  `lenght` float(255, 0) NULL DEFAULT NULL,
-  `width` float NULL DEFAULT NULL,
-  `height` float NULL DEFAULT NULL,
-  `weight` float NULL DEFAULT NULL,
-  PRIMARY KEY (`goods_id`) USING BTREE,
-  CONSTRAINT `goods_size_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for loan_sel_relation
--- ----------------------------
-DROP TABLE IF EXISTS `loan_sel_relation`;
-CREATE TABLE `loan_sel_relation`  (
-  `loan_sel_rel_id` int(11) NOT NULL AUTO_INCREMENT,
-  `bvo_id` int(11) NULL DEFAULT NULL,
-  `goods_id` int(11) NULL DEFAULT NULL,
-  `goods_amount` int(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`loan_sel_rel_id`) USING BTREE,
-  INDEX `goods_id`(`goods_id`) USING BTREE,
-  INDEX `bvo_id`(`bvo_id`) USING BTREE,
-  CONSTRAINT `loan_sel_relation_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `loan_sel_relation_ibfk_2` FOREIGN KEY (`bvo_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -184,9 +197,8 @@ CREATE TABLE `store`  (
   `store_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `store_type` int(255) NULL DEFAULT NULL,
   `store_own` int(255) NULL DEFAULT NULL,
-  `store_score` float(255, 0) NULL DEFAULT NULL,
-  `store_sell` int(255) NULL DEFAULT NULL,
-  `store_url` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `marketplace_id` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `nws_auth_token` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`store_id`) USING BTREE,
   INDEX `store_own`(`store_own`) USING BTREE,
   CONSTRAINT `store_ibfk_1` FOREIGN KEY (`store_own`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -215,8 +227,8 @@ CREATE TABLE `transaction_record`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `user_id` int(11) NOT NULL ,
-  `user_password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_mail` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -235,6 +247,7 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` VALUES (123, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user_wishlist
@@ -267,16 +280,16 @@ CREATE TABLE `wallet`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `wish_detail`;
 CREATE TABLE `wish_detail`  (
-  `wish_detail_id` int(11) NOT NULL,
+  `wish_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `wish_list_id` int(11) NULL DEFAULT NULL,
   `wish_goods_id` int(11) NULL DEFAULT NULL,
   `wish_goods_amount` int(255) NULL DEFAULT NULL,
   `wish_goods_status` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`wish_detail_id`) USING BTREE,
-  INDEX `wish_goods_id`(`wish_goods_id`) USING BTREE,
   INDEX `wish_list_id`(`wish_list_id`) USING BTREE,
-  CONSTRAINT `wish_detail_ibfk_1` FOREIGN KEY (`wish_goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `wish_detail_ibfk_2` FOREIGN KEY (`wish_list_id`) REFERENCES `user_wishlist` (`wishlist_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `wish_goods_id`(`wish_goods_id`) USING BTREE,
+  CONSTRAINT `wish_detail_ibfk_2` FOREIGN KEY (`wish_list_id`) REFERENCES `user_wishlist` (`wishlist_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `wish_detail_ibfk_3` FOREIGN KEY (`wish_goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
