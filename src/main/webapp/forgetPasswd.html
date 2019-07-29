@@ -15,8 +15,8 @@
     <!--stylesheets-->
     <link href="css/style.css" media="all" rel='stylesheet' type='text/css'>
     <!--//style sheet end here-->
-    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <!--    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">-->
+    <!--    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">-->
 </head>
 
 <body>
@@ -67,7 +67,7 @@
                 async: false,
                 success: function (data) {
                     if (data.SUCCESS) {
-                        window.location.href = path + "/alterPasswd.html";
+                        window.location.href = (path + "/alterPasswd.html");
                     } else if (data.INVALID_USERNAME) {
                         alert(data.INVALID_USERNAME);
                         $("#userName").val("");
@@ -84,8 +84,8 @@
                     console.log("ERROR: " + result);
                 }
             });
+            return false;
         }
-        return false;
     });
 
     function changeCode() {

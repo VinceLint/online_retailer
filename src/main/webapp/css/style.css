@@ -1025,4 +1025,10 @@ a.for {
     font-weight: bold;
     padding-bottom: 6px;
 }
+
+#mvoType {
+    font-size: 12px;
+    border-right: 1px solid #a5a2a2;
+    border-bottom: none;
+}
 /*--//responsive--*/
