@@ -67,6 +67,14 @@
                 console.log("ERROR: " + result);
             }
         });
+        window.onunload(function (event) {
+            if (event.clientX > document.body.clientWidth && event.clientY < 0 || event.altKey) {
+                //关闭时怎么处理
+            } else {
+
+                //刷新时怎么处理
+            }
+        });
         //发送验证码到邮箱
         $("#getCode").on("click", function () {
             $.ajax({

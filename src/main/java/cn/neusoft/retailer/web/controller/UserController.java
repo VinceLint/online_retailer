@@ -115,8 +115,7 @@ public class UserController {
 
     /**
      * @描述: 验证token
-     * @参数: [request]1
-     * 4
+     * @参数: [request]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/28
