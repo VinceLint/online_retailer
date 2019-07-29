@@ -15,6 +15,16 @@ public class Goods {
 
     private Integer goodsClass;
 
+    private Integer goodsStatus;
+
+    private Float goodsLenght;
+
+    private Float goodsWidth;
+
+    private Float goodsHeight;
+
+    private Float goodsWeight;
+
     private String goodsDescribe;
 
     public Integer getGoodsId() {
@@ -71,6 +81,46 @@ public class Goods {
 
     public void setGoodsClass(Integer goodsClass) {
         this.goodsClass = goodsClass;
+    }
+
+    public Integer getGoodsStatus() {
+        return goodsStatus;
+    }
+
+    public void setGoodsStatus(Integer goodsStatus) {
+        this.goodsStatus = goodsStatus;
+    }
+
+    public Float getGoodsLenght() {
+        return goodsLenght;
+    }
+
+    public void setGoodsLenght(Float goodsLenght) {
+        this.goodsLenght = goodsLenght;
+    }
+
+    public Float getGoodsWidth() {
+        return goodsWidth;
+    }
+
+    public void setGoodsWidth(Float goodsWidth) {
+        this.goodsWidth = goodsWidth;
+    }
+
+    public Float getGoodsHeight() {
+        return goodsHeight;
+    }
+
+    public void setGoodsHeight(Float goodsHeight) {
+        this.goodsHeight = goodsHeight;
+    }
+
+    public Float getGoodsWeight() {
+        return goodsWeight;
+    }
+
+    public void setGoodsWeight(Float goodsWeight) {
+        this.goodsWeight = goodsWeight;
     }
 
     public String getGoodsDescribe() {
