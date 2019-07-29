@@ -125,10 +125,6 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
         <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.GoodsMapper"></property>
     </bean>
-    <bean id="goodsSizeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.GoodsSizeMapper"></property>
-    </bean>
     <bean id="logisticsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
         <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.LogisticsMapper"></property>
