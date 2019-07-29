@@ -7,12 +7,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09bf7990-946f-4270-b74e-dfac6f959c2b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/interceptor/AuthenticationInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/jquery.params.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/TokenCreation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/TokenCreation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/springmvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/springmvc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/alterPasswd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/alterPasswd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/forgetPasswd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/forgetPasswd.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/springmvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/springmvc.xml" afterDir="false" />
     </list>
     <list id="1baef8cb-87f0-426a-8243-728d5db24562" name="Check New Branch" comment="Check New Branch" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -40,27 +49,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="115" column="1" selection-start-line="114" selection-end-line="115" selection-end-column="1" />
+            <state relative-caret-position="157">
+              <caret line="94" column="28" selection-start-line="94" selection-start-column="28" selection-end-line="94" selection-end-column="28" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#register#0;class#UserController#0" />
-                <element signature="method#login#0;class#UserController#0" />
-                <element signature="method#forgetPasswd#0;class#UserController#0" />
-                <element signature="method#resetPasswd#0;class#UserController#0" />
+                <element signature="n#head#0;n#html#0;n#!!top" />
+                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/alterPasswd.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="58" column="14" selection-start-line="58" selection-start-column="6" selection-end-line="58" selection-end-column="14" />
+            <state relative-caret-position="-176">
+              <caret line="323" column="9" lean-forward="true" selection-start-line="323" selection-start-column="9" selection-end-line="323" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#register#0;class#UserController#0" />
+                <element signature="method#vilidateToken#0;class#UserController#0" />
+                <element signature="method#login#0;class#UserController#0" />
+                <element signature="method#forgetPasswd#0;class#UserController#0" />
+                <element signature="method#changeFlag#0;class#UserController#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,8 +88,9 @@
         <option value="HTML File" />
         <option value="Jsp File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -84,6 +99,10 @@
       <find>remember</find>
       <find>org.springframework.data</find>
       <find>path</find>
+      <find>login</find>
+      <find>ale</find>
+      <find>session</find>
+      <find>kaptcha</find>
     </findStrings>
   </component>
   <component name="Git.Rebase.Settings">
@@ -109,15 +128,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/jsp/user-company.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/index.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/mvoType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/string.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/messages.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/companyInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/Test.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/user-company.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/HTML/test.html" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/UserServiceImpl.java" />
@@ -126,7 +136,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/html/test.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/html/company-brand.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/company_user.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/Brand.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MvoType.java" />
@@ -139,27 +148,37 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/LogisticsMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MyString.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MD5.java" />
         <option value="$PROJECT_DIR$/src/main/resources/spring-shiro.xml.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/spring-shiro.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/springmvc.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/spring-redis.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/TokenValidate.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/BrandMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/search.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CompanyInfoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CaptchaController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/redis.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/login.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/forgetPasswd.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/alterPasswd.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/register.html" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MD5.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/UniqueID.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/TokenCreation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/TestInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/rebel.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/interceptor/TestInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/interceptor/LoginInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/interceptor/AuthenticationInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/login.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/springmvc.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/js/jquery.params.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/forgetPasswd.html" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/alterPasswd.html" />
       </list>
     </option>
   </component>
@@ -199,7 +218,7 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="-9" />
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
@@ -273,14 +292,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563854900664" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/js" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -293,11 +313,11 @@
       <recent name="cn.neusoft.retailer.web.utils" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IdeaProjects\online_retailer\src\main\webapp\js" />
       <recent name="$PROJECT_DIR$/target/online_retailer-1.0-SNAPSHOT/image" />
       <recent name="E:\IdeaProjects\online_retailer\src\main\resources" />
       <recent name="E:\IdeaProjects\online_retailer\src\main\webapp\fonts" />
       <recent name="E:\IdeaProjects\online_retailer\src\main\webapp\css" />
-      <recent name="E:\project\springmybatis\src\main\resources\mapper" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -313,6 +333,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.20">
+    <configuration name="MD5.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="online_retailer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.neusoft.retailer.web.interceptor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web.tools" />
+      <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.tools.MD5" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springmybatis" />
       <extension name="coverage">
@@ -324,22 +360,6 @@
       <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web" />
       <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.Test" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Test.Test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springmybatis" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.neusoft.retailer.web.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.neusoft.retailer.web" />
-      <option name="MAIN_CLASS_NAME" value="cn.neusoft.retailer.web.Test" />
-      <option name="METHOD_NAME" value="Test1" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -395,8 +415,7 @@
     </configuration>
     <configuration name="Tomcat 9.0.20" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.20" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/online_retailer" />
-      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
-      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="online_retailer:war exploded">
           <settings>
@@ -469,20 +488,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.Test.Test1" />
       <item itemvalue="JUnit.Test.Test2" />
       <item itemvalue="JUnit.Test.Test3" />
       <item itemvalue="JUnit.Test.test" />
       <item itemvalue="JUnit.Test" />
+      <item itemvalue="JUnit.MD5.test" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.20" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MD5.test" />
         <item itemvalue="JUnit.Test" />
         <item itemvalue="JUnit.Test.test" />
         <item itemvalue="JUnit.Test.Test3" />
         <item itemvalue="JUnit.Test.Test2" />
-        <item itemvalue="JUnit.Test.Test1" />
       </list>
     </recent_temporary>
   </component>
@@ -637,19 +656,17 @@
       <option name="project" value="LOCAL" />
       <updated>1564367927235</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Merge remote-tracking branch 'remotes/origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;target/classes/applicationContext.xml">
+      <created>1564392877062</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1564392877062</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test_test - 2019.07.23 at 11h 13m 58s.xml">
-      <configuration name="Test.test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Test_test - 2019.07.23 at 11h 44m 57s.xml">
-      <configuration name="Test.test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Test_test - 2019.07.23 at 12h 27m 13s.xml">
-      <configuration name="Test.test" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Test_test - 2019.07.23 at 12h 28m 13s.xml">
       <configuration name="Test.test" configurationId="JUnit" />
     </history-entry>
@@ -671,9 +688,18 @@
     <history-entry file="MD5_test - 2019.07.26 at 01h 21m 08s.xml">
       <configuration name="MD5.test" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="MD5_test - 2019.07.29 at 18h 51m 15s.xml">
+      <configuration name="MD5.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MD5_test - 2019.07.29 at 18h 51m 28s.xml">
+      <configuration name="MD5.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MD5_test - 2019.07.29 at 18h 51m 39s.xml">
+      <configuration name="MD5.test" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140427000" />
+    <option name="totallyTimeSpent" value="161118000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -686,9 +712,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Learn" order="0" weight="0.3297568" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49827588" visible="true" weight="0.23391421" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49827588" visible="true" weight="0.23391421" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="3" />
       <window_info id="Image Layers" order="4" />
@@ -706,13 +733,13 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.26062322" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5020107" side_tool="true" weight="0.44475922" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.2180723" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.14164306" />
       <window_info anchor="bottom" id="Problems" order="11" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" sideWeight="0.49798927" weight="0.18838526" />
-      <window_info active="true" anchor="bottom" id="Run" order="15" sideWeight="0.49785408" weight="0.36402267" />
-      <window_info anchor="bottom" id="Application Servers" order="16" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="14" sideWeight="0.49798927" weight="0.0878187" />
+      <window_info anchor="bottom" id="Run" order="15" sideWeight="0.49785408" visible="true" weight="0.2592068" />
+      <window_info anchor="bottom" id="Application Servers" order="16" weight="0.19121814" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" sideWeight="0.49879518" weight="0.24964234" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -822,7 +849,8 @@
     <MESSAGE value="Check New Branch" />
     <MESSAGE value="图片上传有点小延迟&#10;搜索功能基本完成，中文搜不了" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="Merge remote-tracking branch 'remotes/origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;target/classes/applicationContext.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'remotes/origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;target/classes/applicationContext.xml" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -832,39 +860,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/OrderMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1275" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/ParameterMapper.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/LogisticsMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/mapper/GoodsSizeMapper.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/db/online_retailer.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="217" column="29" lean-forward="true" selection-start-line="217" selection-start-column="29" selection-end-line="217" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/artifacts/online_retailer_war.xml" />
-    <entry file="file://$PROJECT_DIR$/.idea/artifacts/online_retailer_war_exploded.xml" />
-    <entry file="file://$PROJECT_DIR$/target/classes/cn/neusoft/retailer/web/controller/UserController.class" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/pojo/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/css/font-awesome.min.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -877,62 +872,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/spring-shiro.xml.fxml" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/spring-shiro.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/generatorConfig.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandOrderController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/UniqueID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/TokenValidate.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/PageBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MyString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="613">
-          <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MD5.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MvoType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/RedisClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/SerializeUtils.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/DictionaryController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -940,31 +880,6 @@
           <caret line="40" selection-start-line="40" selection-end-line="40" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/TokenCreation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="e#422#423#0" expanded="true" />
-            <element signature="e#478#479#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="115" column="1" selection-start-line="114" selection-end-line="115" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#register#0;class#UserController#0" />
-            <element signature="method#login#0;class#UserController#0" />
-            <element signature="method#forgetPasswd#0;class#UserController#0" />
-            <element signature="method#resetPasswd#0;class#UserController#0" />
           </folding>
         </state>
       </provider>
@@ -979,20 +894,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/image/CG78B.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/springmvc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="837">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="26" column="42" lean-forward="true" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/image/1832.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1000,27 +901,10 @@
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/target/online_retailer-1.0-SNAPSHOT/image/2003.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/target/online_retailer-1.0-SNAPSHOT/image/b11.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/target/online_retailer-1.0-SNAPSHOT/image/949996.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/company_brand.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -1049,24 +933,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/BASE64.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MD5.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="21" column="92" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="92" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/Messages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MvoType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/UniqueID.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/html/dictionary.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="78" column="27" lean-forward="true" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
+        <state relative-caret-position="191">
+          <caret line="215" column="28" lean-forward="true" selection-start-line="215" selection-start-column="28" selection-end-line="215" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CaptchaController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/RedisClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-721">
-          <caret line="3" column="40" lean-forward="true" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+        <state relative-caret-position="833">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-redis.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/TokenCreation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        <state relative-caret-position="204">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/PageBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/tools/MyString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="127" column="59" lean-forward="true" selection-start-line="127" selection-start-column="59" selection-end-line="127" selection-end-column="59" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#5;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1077,45 +1023,174 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/rebel.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-806">
-          <caret line="188" column="20" lean-forward="true" selection-start-line="188" selection-start-column="20" selection-end-line="188" selection-end-column="20" />
+        <state relative-caret-position="68">
+          <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#781#782#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
+        <state relative-caret-position="-1538">
           <caret line="126" column="11" selection-start-line="126" selection-start-column="11" selection-end-line="126" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/login.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-redis.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="69" column="37" selection-start-line="69" selection-start-column="37" selection-end-line="69" selection-end-column="37" />
+        <state relative-caret-position="210">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/generatorConfig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1751" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="103" column="37" selection-start-line="103" selection-start-column="37" selection-end-line="103" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/interceptor/AuthenticationInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/BrandOrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/jquery-3.4.1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/jquery.params.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="223" column="66" selection-start-line="223" selection-start-column="66" selection-end-line="223" selection-end-column="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/forgetPasswd.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+        <state relative-caret-position="119">
+          <caret line="68" column="29" lean-forward="true" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/CaptchaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/SendMailController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="57" column="53" lean-forward="true" selection-start-line="57" selection-start-column="53" selection-end-line="57" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/alterPasswd.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="58" column="14" selection-start-line="58" selection-start-column="6" selection-end-line="58" selection-end-column="14" />
+        <state relative-caret-position="218">
+          <caret line="113" column="17" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/register.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/neusoft/retailer/web/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="127" column="65" lean-forward="true" selection-start-line="127" selection-start-column="65" selection-end-line="127" selection-end-column="65" />
+        <state relative-caret-position="-176">
+          <caret line="323" column="9" lean-forward="true" selection-start-line="323" selection-start-column="9" selection-end-line="323" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#register#0;class#UserController#0" />
+            <element signature="method#vilidateToken#0;class#UserController#0" />
+            <element signature="method#login#0;class#UserController#0" />
+            <element signature="method#forgetPasswd#0;class#UserController#0" />
+            <element signature="method#changeFlag#0;class#UserController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/springmvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="33" column="57" lean-forward="true" selection-start-line="33" selection-start-column="57" selection-end-line="33" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="94" column="28" selection-start-line="94" selection-start-column="28" selection-end-line="94" selection-end-column="28" />
+          <folding>
+            <element signature="n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -69,18 +69,6 @@
 <script>
     var path = "http://localhost:8080/online_retailer";
     $(function () {
-        $('#kaptchaImage').click(function () {//生成验证码
-            $(this).hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
-        });
-        //初始Flag(判断是否以"记住我"方式登录的标识)
-        $.ajax({
-            contentType: "application/json; charset=utf-8",
-            url: path + "/user/initFlag",
-            success: function (data) {
-            },
-            error: function (result) {
-            }
-        });
         // 登录页面加载时后台获取Cookies信息，并进行token校验
         $.ajax({
             contentType: "application/json; charset=utf-8",
@@ -88,7 +76,11 @@
             success: function (data) {
                 if (data.SUCCESS) {
                     console.log(data.SUCCESS);
-                    window.location.href(path + "/user/changeFlag");
+                    console.log(data.userName);
+                    console.log(data.userPassword);
+                    $("#userName").val(data.userName);
+                    $("#userPassword").val(data.userPassword);
+                    window.location.href = (path + "/user/changeFlag");
                 } else {
                     console.log(data.ERROR);
                 }
@@ -97,52 +89,55 @@
                 console.log("ERROR: " + result);
             }
         });
-    });
-    //登录校验
-    $("#login_in").on("click", function () {
-        if ($("#userName").val() != "" && $("#userPassword").val() != "" && $("#kaptcha").val() != "") {
-            var info = {
-                "userName": $("#userName").val(),
-                "userPassword": $("#userPassword").val(),
-                "code": $("input[name='kaptcha']").val(),
-                "remember-me": $("input[name='remember-me']").is(':checked')
-            };
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: path + "/user/loginValidation",
-                dataType: "json",
-                data: JSON.stringify(info),
-                async: false,
-                success: function (data) {
-                    if (data.SUCCESS) {
-                        console.log("Login Successed!");
-                        // window.location.href = "http://www.baidu.com";
-                    } else if (data.INVALID_USERNAME) {
-                        console.log(data.INVALID_USERNAME);
-                        alert("密码不正确！");
-                        $("#userPassword").val("");
-                        $("input[name='kaptcha']").val("");
-                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
-                    } else if (data.INVALID_PASSWD) {
-                        console.log(data.INVALID_PASSWD);
-                        alert("密码不正确！");
-                        $("#userPassword").val("");
-                        $("input[name='kaptcha']").val("");
-                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
-                    } else {
-                        console.log(data.INVALID_CODE);
-                        alert("验证码不正确！");
-                        $("#userPassword").val("");
-                        $("input[name='kaptcha']").val("");
-                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+        //登录校验
+        $("#login_in").on("click", function () {
+            if ($("#userName").val() != "" && $("#userPassword").val() != "" && $("#kaptcha").val() != "") {
+                var info = {
+                    "userName": $("#userName").val(),
+                    "userPassword": $("#userPassword").val(),
+                    "code": $("input[name='kaptcha']").val(),
+                    "remember-me": $("input[name='remember-me']").is(':checked')
+                };
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: path + "/user/loginValidation",
+                    dataType: "json",
+                    data: JSON.stringify(info),
+                    async: false,
+                    success: function (data) {
+                        if (data.SUCCESS) {
+                            console.log("Login Successed!");
+                            // window.location.href = "http://www.baidu.com";
+                        } else if (data.INVALID_USERNAME) {
+                            console.log(data.INVALID_USERNAME);
+                            alert("密码不正确！");
+                            $("#userPassword").val("");
+                            $("input[name='kaptcha']").val("");
+                            $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+                        } else if (data.INVALID_PASSWD) {
+                            console.log(data.INVALID_PASSWD);
+                            alert("密码不正确！");
+                            $("#userPassword").val("");
+                            $("input[name='kaptcha']").val("");
+                            $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+                        } else {
+                            console.log(data.INVALID_CODE);
+                            alert("验证码不正确！");
+                            $("#userPassword").val("");
+                            $("input[name='kaptcha']").val("");
+                            $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+                        }
+                    },
+                    error: function (result) {
+                        console.log("ERROR: " + result);
                     }
-                },
-                error: function (result) {
-                    console.log("ERROR: " + result);
-                }
-            });
-        }
+                });
+            }
+        });
+        $('#kaptchaImage').click(function () {//生成验证码
+            $(this).hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+        });
     });
 
     function changeCode() {

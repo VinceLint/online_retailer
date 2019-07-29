@@ -124,13 +124,12 @@ public class UserController {
     @ResponseBody
     public Map<String, String> vilidateToken(HttpServletRequest request) {
 
+        //初始化判断是否"记住我"登录的标识Flag
+        request.getSession().setAttribute("flag", false);
+
         Map<String, String> result = new HashMap<>();
         String cookie = request.getHeader("Cookie");
         User user = null;
-
-        //判断是否通过"记住我"方式登录
-        Boolean flag;
-        flag = (Boolean) request.getSession(false).getAttribute("flag");
 
         if (cookie.contains("token")) {
 
@@ -146,13 +145,16 @@ public class UserController {
 
             try {
                 //user = redisClient.findAndUpdate(token, "127.0.0.1", flag);
-                user = redisClient.findAndUpdate(token, request.getRemoteAddr(), flag);
+                user = redisClient.findAndUpdate(token, request.getRemoteAddr(), (Boolean) request.getSession().getAttribute("flag"));
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("ERROR");
+                result.put("ERROR", e.getMessage());
+                return result;
             }
             if (user != null) {
                 result.put("SUCCESS", "身份有效");
+                result.put("userName", user.getUserName());
+                result.put("userPassword", user.getUserPassword());
                 return result;
             } else {
                 result.put("ERROR", "身份失效，请重新登录");
@@ -179,7 +181,7 @@ public class UserController {
         JSONObject data = new JSONObject(json);
         String userName = (String) data.get("userName");
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
 
         //校验用户信息
         User user = null;
@@ -267,7 +269,7 @@ public class UserController {
         JSONObject data = new JSONObject(json);
         String userName = (String) data.get("userName");
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
 
         //校验用户信息
         User user = null;
@@ -291,7 +293,7 @@ public class UserController {
             return result;
         }
 
-        request.getSession(false).setAttribute("userName", userName);
+        request.getSession().setAttribute("userName", userName);
         result.put("SUCCESS", userName);
         return result;
     }
@@ -343,34 +345,15 @@ public class UserController {
         return result;
     }
 
-
-    @RequestMapping(value = "/getUserName")
-    @ResponseBody
-    public Map<String, String> getUserName(HttpServletRequest request) {
-
-        Map<String, String> result = new HashMap<>();
-        String userName = null;
-
-        HttpSession session = request.getSession(false);
-
-        userName = (String) session.getAttribute("userName");
-
-        session.removeAttribute("userName");
-
-        result.put("userName", userName);
-
-        return result;
-    }
-
     @RequestMapping(value = "/initFlag")
     @ResponseBody
     public void initFlag(HttpServletRequest request) {
-        request.getSession(false).setAttribute("flag", false);
+        request.getSession().setAttribute("flag", false);
     }
 
     @RequestMapping(value = "/changeFlag")
     public String changeFlag(HttpServletRequest request) {
-        request.getSession(false).setAttribute("flag", true);
+        request.getSession().setAttribute("flag", true);
         return "redirect:http://www.baidu.com";
     }
 

@@ -24,4 +24,14 @@
     <!--  静态资源  -->
     <mvc:default-servlet-handler/>
 
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有mvc控制器 -->
+            <mvc:mapping path="/n"/>
+
+            <!--            <mvc:exclude-mapping path="/user/login"/>-->
+            <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

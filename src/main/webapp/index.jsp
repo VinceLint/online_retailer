@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:forward page="/WEB-INF/jsp/company_brand.jsp"></jsp:forward>
+    <jsp:forward page=""></jsp:forward>
 </head>
 <body>
 
