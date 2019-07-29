@@ -50,6 +50,10 @@
         where brand_mer_id = #{brandMerId,jdbcType=INTEGER} limit #{pageStart,jdbcType=INTEGER}
             , #{pageSize,jdbcType=INTEGER}
     </select>
-
+    <select id="selectByNameSearch" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select brand_id, brand_name, brand_mer_id, brand_url
+        from brand
+        where brand_name LIKE concat("%", #{search_name,jdbcType=VARCHAR}, "%")
+    </select>
 
 </mapper>
