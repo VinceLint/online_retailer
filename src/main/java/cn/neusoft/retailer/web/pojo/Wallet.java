@@ -13,8 +13,26 @@ public class Wallet {
 
     private String walEmail;
 
+    @Override
+    public String toString() {
+        return "Wallet{" +
+                "walId=" + walId +
+                ", walType=" + walType +
+                ", walPassword='" + walPassword + '\'' +
+                ", walBalance=" + walBalance +
+                ", walPayId='" + walPayId + '\'' +
+                ", walEmail='" + walEmail + '\'' +
+                '}';
+    }
+
     public Integer getWalId() {
         return walId;
+    }
+
+    public Wallet(Integer walId, String walPassword, Float walBalance) {
+        this.walId = walId;
+        this.walPassword = walPassword;
+        this.walBalance = walBalance;
     }
 
     public void setWalId(Integer walId) {
@@ -59,5 +77,8 @@ public class Wallet {
 
     public void setWalEmail(String walEmail) {
         this.walEmail = walEmail == null ? null : walEmail.trim();
+    }
+
+    public Wallet() {
     }
 }

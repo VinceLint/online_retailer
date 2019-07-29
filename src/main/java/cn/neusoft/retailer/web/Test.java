@@ -1,8 +1,9 @@
 package cn.neusoft.retailer.web;
 
 import cn.neusoft.retailer.web.mapper.UserMapper;
-import cn.neusoft.retailer.web.pojo.User;
+import cn.neusoft.retailer.web.pojo.Wallet;
 import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.service.WalletService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,6 +23,8 @@ public class Test {
     private UserService userService;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private WalletService walletService;
     /**
      *@描述
      *@参数
@@ -32,15 +35,10 @@ public class Test {
      */
     @org.junit.Test
     public void test(){
-<<<<<<<<< Temporary merge branch 1
         System.out.println(userService);
-        User user = userService.selectByPrimaryKey(1);
-        System.out.println(user);
-=========
-        User user = new User();
-        user.setUserId(123);
-        userMapper.insert(user);
->>>>>>>>> Temporary merge branch 2
+        Wallet wallet = new Wallet();
+        wallet.setWalId(2);
+        System.out.println(walletService.insert(wallet));
     }
 
 }

@@ -17,10 +17,7 @@
     <link href="//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet" charset="utf-8">
     <link href="//fonts.googleapis.com/css?family=Monoton" rel="stylesheet" charset="utf-8">
     <!-- /fonts -->
-    <!-- css -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" charset="utf-8" />
-    <link href="css/style.css" rel='stylesheet' type='text/css' media="all"  charset="utf-8"/>
-    <!-- /css -->
+
 </head>
 <body>
 <h1 class="w3ls">钱包注册</h1>
@@ -29,7 +26,7 @@
         <h2 class="agileits1">钱包</h2>
         <center>
             <div id='one'>
-                <img id='two' src="img/wallet.jpg" class='play'>
+                <img id='two' src="../../image/wallet.jpg" class='play'>
 
             </div>
 
@@ -79,4 +76,8 @@
 </div>
 <p class="copyright w3l">© 2017 Official Signup Form. All Rights Reserved | Design by <a href="#" target="_blank">庄志宏</a></p>
 </body>
+<!-- css -->
+<link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" charset="utf-8" />
+<link href="../../css/WalStyle.css" rel='stylesheet' type='text/css' media="all"  charset="utf-8"/>
+<!-- /css -->
 </html>

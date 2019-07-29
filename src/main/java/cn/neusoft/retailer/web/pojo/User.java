@@ -9,6 +9,15 @@ public class User {
     private String userMail;
 
     private String userPhone;
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     private Integer userWalId;
 
