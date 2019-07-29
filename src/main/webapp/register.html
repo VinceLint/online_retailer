@@ -54,9 +54,9 @@
                         <input id="mvoUrl" placeholder="证书地址" required="" type="text"/>
                         <div class="clear"></div>
                     </div>
-                    <div class="form-left-to-w3l">
-                        <span id="mvoType">认证类型</span>
-                        <select>
+                    <div class="form-left-to-w3l" id="form-left-to-w3m">
+                        <span style="font-size: 12px">认证类型</span>
+                        <select id="mvoType">
                             <option value="0">百货/超市</option>
                             <option value="1">休闲娱乐</option>
                             <option value="2">服装</option>
@@ -155,7 +155,7 @@
                             "userPhone": $("#userPhone").val(),
                             "userPassword": $("#userPassword").val(),
                             "mvoUrl": $("#mvoUrl").val(),
-                            "mvoType": $("#mvoType").val(),
+                            "mvoType": parseInt($("#mvoType option:selected").val()),
                             "userPrivilege": userPrivilege
                         }),
                         async: false,

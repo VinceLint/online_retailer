@@ -68,7 +68,6 @@ public class UserController {
             return result;
         }
 
-
         //判断是否符合密码格式
         if (userPassword == null || !MyString.isPassword(userPassword)) {
             result.put("INVALID_PASSWD", "密码格式不正确！");
@@ -250,9 +249,6 @@ public class UserController {
             e.printStackTrace();
             System.out.println("ERROR");
         }
-
-//        //判断是否通过"记住我"方式登录的标识
-//        session.setAttribute("flag", false);
 
         return result;
     }
