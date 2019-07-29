@@ -54,7 +54,7 @@
         }
 
         var state = $('#type option:selected').val();
-        if (state == null){
+        if (state == null) {
             state = 0
         }
         $("#state").val(state)
@@ -92,13 +92,17 @@
 </div>
 
 <div class="container">
-    <form action="company" method="post" onsubmit="return checkform()">
+    <form action="http://localhost:8080/online_retailer/company" method="post" onsubmit="return checkform()">
         <div class="form-group">
-            <label>公司中文名称 Company Name</label> <span><font color="red"
-                                                           id="errorChineseName">${errorInfoChineseName }</font></span>
+            <label>公司中文名称 Company Name（品牌商ID：${user.userId}）</label> <span><font color="red"
+                                                                                 id="errorChineseName">${errorInfoChineseName }</font></span>
 
             <input type="text" id="ChineseName" class="form-control" name="userName" placeholder="Company Name"
                    value="${user.userName}"/>
+
+            <input type="text" id="userId" class="form-control" name="userId"
+                   value="${user.userId}" style="display: none"/>
+
         </div>
         <br>
         <div class="form-group">

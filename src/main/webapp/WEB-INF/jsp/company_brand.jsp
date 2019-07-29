@@ -12,14 +12,21 @@
     <title>company_brand</title>
 </head>
 <style>
+
+    img {
+        height: 120px;
+        width: 100px;
+    }
+
     table {
         text-align: center;
     }
 
-    div {
-        height: 340px;
-        text-align: center;
-    }
+
+    /*#company, #brand {*/
+    /*height: 340px;*/
+    /*text-align: center;*/
+    /*}*/
 
     thead {
         font-weight: bold;
@@ -39,14 +46,67 @@
         letter-spacing: 1px
     }
 
-    .modal{
-        height: 100px;
-    }
+
 </style>
 <body>
 
-<%--模态框--%>
-<div id = "true" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+<%--隐藏从属品牌商，方便增加--%>
+<input id="brandMerId" value="" type="text" style="display: none">
+
+<%--搜索跳转表单--%>
+<form style="displa:none;" action="http://localhost:8080/online_retailer/brandSearch" id="searchTransfor"></form>
+
+<%--表单提交post实现修改--%>
+<form style="display: none" action="http://localhost:8080/online_retailer/defaultUser" type="post" id="update">
+</form>
+
+<%--修改--%>
+<div id="updateInfo" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="text-align: center">
+    <div class="modal-dialog" style="height: 100px;width: 440px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">修改品牌信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <%--主要修改代码区--%>
+                    <form method="post" action="http://localhost:8080/online_retailer/companyUpdate"
+                          enctype="multipart/form-data" id="formUpload">
+                        <div class="form-group">
+                            <label style="font-size: 15px;font-weight:bold"><span
+                                    class="glyphicon glyphicon-pencil"
+                                    aria-hidden="true">品牌名称</span></label>
+                            <input name="brandName" type="text" class="form-control" id="brandName"
+                                   placeholder="brand name"/>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 15px;font-weight:bold"><span
+                                    class="glyphicon glyphicon-file" aria-hidden="true">图片上传</span></label>
+                            <input type="file" accept="image/*" class="form-control" id="uploadFile" name="uploadFile">
+                            <input id="brandID_hidden" value="" style="display: none" name="brandId">
+                            <button class="btn btn-success"
+                                    style="text-align:center;float: right;margin: 5px 100px;height: 30px;"
+                                    onclick="return uploadfile()">upload
+                            </button>
+                        </div>
+                    </form>
+
+                    <%--结束--%>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span id="error" style="float: left;color: red; font-size: 13px;font-weight: bold"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--模态框判断成功--%>
+<div id="true" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
      style="text-align: center;font-weight: bold;font-size: 20px;color: dodgerblue">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -57,8 +117,9 @@
     </div>
 </div>
 
-<%--模态框--%>
-<div id = "false" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+
+<%--模态框判断失败--%>
+<div id="false" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
      style="text-align: center;font-weight: bold;font-size: 20px;color: orangered">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -70,28 +131,51 @@
 </div>
 
 
-<div id="company">
+<div id="company" style="text-align: center;">
     <h2 style="text-align: center">[品牌商信息]</h2>
     <table id="companyInfo" class="table table-striped table-hover">
 
     </table>
 </div>
-<div id="brand">
-    <h2 style="text-align: center">[品牌信息]</h2>
+<div id="brand" style="text-align: center">
+    <h2 style="text-align: center">[品牌信息]
+        <button class="btn btn-primary" type="submit" onclick="search()"><span id="basic-addon1"><span
+                class="glyphicon glyphicon-search"
+                aria-hidden="true"></span></span>
+        </button>
+    </h2>
     <table class="table table-hover table-striped" id="brandInfo">
     </table>
 </div>
-<div id="page" style="height: 50px">
+<div id="page" style="height: 50px;text-align: center">
 </div>
 </body>
 
 <script type="text/javascript">
+
     window.onload = copyWithPage(1);
+
+    function addBrand() {
+        console.log($("#brandMerId").val())
+        $(".modal-title").html("添加品牌信息")
+        $("#formUpload").attr("action", "http://localhost:8080/online_retailer/companyAdd/" + $("#brandMerId").val())
+        $("#updateInfo").modal()
+
+        //    需要上传三个值：brandMerId,brandName,picture
+
+    }
+
+    //管理员修改品牌商信息
+    function adminUpdate(userId) {
+        $("#update").attr("action", "http://localhost:8080/online_retailer/defaultUser/" + userId)
+        $("#update").submit()
+
+    }
 
     function deleteBrand(brandId) {
         if (confirm("确定要删除吗？")) {
             $.ajax({
-                url: "companyDelete/" + brandId,
+                url: "http://localhost:8080/online_retailer/companyDelete/" + brandId,
                 async: false,
                 type: "post",
                 dataType: "json",
@@ -100,7 +184,7 @@
                     if (result == "true") {
                         $("#result_true").text("删除成功！")
                         $("#true").modal()
-                    }else if (result == "false"){
+                    } else if (result == "false") {
                         $("#result_false").text("删除失败！")
                         $("#false").modal()
                     }
@@ -114,8 +198,25 @@
 
     }
 
-    function updateBrand(id) {
-        console.log(id)
+    function uploadfile() {
+        var fileList = $('#uploadFile')[0].files;
+        if (fileList.length == 0 || fileList.length > 1) {
+            $("#error").html("只允许上传一张图片或文件为空!")
+            return false;
+        }
+        if ($("#brandName").val() == null || $("#brandName").val() == "") {
+            $("#error").html("名称不允许空！")
+            return false;
+        }
+        $("#formUpload").submit();
+    }
+
+    function updateBrand(id, name) {
+        $("#brandID_hidden").val(id);
+        $(".modal-title").html("修改品牌信息")
+        $("#updateInfo").modal()
+        //设置brandname在模态框可以显示
+        $("#brandName").val(name)
     }
 
 
@@ -125,7 +226,7 @@
         var brands = null;
         var mvoTypes = null;
         $.ajax({
-            url: "companyInfo/" + pageNow,
+            url: "http://localhost:8080/online_retailer/companyInfo/" + pageNow,
             async: false,
             type: "post",
             dataType: "json",
@@ -147,13 +248,14 @@
     }
 
     function companyFill(companys, mvoTypes) {
+        console.log(mvoTypes)
         $("#companyInfo").html("")
         if (companys.length != 0) {
             var head = '    <thead>\n' +
                 '    <tr>\n' +
                 '        <td class="warning">品牌商ID</td>\n' +
                 '        <td class="warning">品牌商中文名</td>\n' +
-                '        <td class="warning">品牌商英文名</td>\n' +
+                '        <td class="warning">品牌商类型</td>\n' +
                 '        <td class="warning">操作</td>\n' +
                 '    </tr>\n' +
                 '    </thead>'
@@ -162,7 +264,7 @@
         for (i = 0; i < companys.length; i++) {
             var html = '<tr><td> <span class="label label-success">' + companys[i].userId + '</span></td><td><span class="label label-warning">' +
                 companys[i].userName + '</span></td><td>' +
-                mvoTypes[i] + '</td><td><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</button> ' +
+                mvoTypes[i] + '</td><td><button type="button" class="btn btn-info" onclick="adminUpdate(' + companys[i].userId + ')"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</button> ' +
                 '</td></tr>'
             $("#companyInfo").append(html)
         }
@@ -175,10 +277,10 @@
             var head = '\n' +
                 '        <thead>\n' +
                 '        <tr>\n' +
+                '            <td class="success">品牌编号</td>\n' +
                 '            <td class="success">品牌名称</td>\n' +
-                '            <td class="success">品牌商ID</td>\n' +
                 '            <td class="success">品牌图片</td>\n' +
-                '            <td class="success">操作</td>\n' +
+                '            <td class="success">操作<button type="button" class="btn btn-info" onclick="addBrand()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></td>\n' +
                 '        </tr>\n' +
                 '        </thead>'
             $("#brandInfo").append(head)
@@ -187,13 +289,16 @@
         for (let i = 0; i < brands.length; i++) {
             var html = '<tr><td><span class="label label-success">' +
                 brands[i].brandId +
-                '</span></td><td><span class=/"label label-warning/">' +
-                brands[i].brandMerId +
+                '</span></td><td><span class="label label-warning">' +
+                (brands[i].brandName || "暂无") +
                 '</td><td>' +
-                brands[i].brandUrl +
+                '<img src=\"' + brands[i].brandUrl + '\" alt=\"缺失图片\" class=\"img-thumbnail\">' +
                 '</span></td><td>'
-            var button_delete = '<button type="button" class="btn btn-danger" onclick="deleteBrand(' + brands[i].brandId + ')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除 </button>'
-            var button_update = '<button type="button" class="btn btn-primary" onclick="updateBrand(' + brands[i].brandId + ')"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 修改 </button>'
+            $("#brandMerId").val(brands[i].brandMerId)
+            var name = (brands[i].brandName || "")
+            name = '\'' + name + '\''
+            var button_delete = '<button type="button" class="btn btn-danger" onclick="deleteBrand(' + brands[i].brandId + ',' + name + ')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除 </button>'
+            var button_update = '<button type="button" class="btn btn-primary" onclick="updateBrand(' + brands[i].brandId + ',' + name + ')"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 修改 </button>'
             html += (button_delete + button_update + '</td></tr>')
             $("#brandInfo").append(html)
         }
@@ -219,8 +324,10 @@
         }
         var html = html_head + page_content + html_tail;
         $("#page").append(html)
+    }
 
-
+    function search() {
+        $("#searchTransfor").submit()
     }
 </script>
 </html>

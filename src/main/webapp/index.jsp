@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-<<<<<<<<< Temporary merge branch 1
+<<<<<<< HEAD
   User: GreenArrow
   Date: 2019-07-22
   Time: 16:12
@@ -9,17 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>hello world</title>
+    <jsp:forward page="/WEB-INF/jsp/company_brand.jsp"></jsp:forward>
 </head>
 <body>
 
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:forward page="/HTML/test.html"></jsp:forward>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 </body>
 </html>

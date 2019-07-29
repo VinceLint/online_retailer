@@ -42,6 +42,20 @@
       mvo_introduction = #{mvoIntroduction,jdbcType=LONGVARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+    <update id="updateByName" parameterType="cn.neusoft.retailer.web.pojo.User">
+    update user
+    set user_password = #{userPassword,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_mail = #{userMail,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_wal_id = #{userWalId,jdbcType=INTEGER},
+      user_privilege = #{userPrivilege,jdbcType=INTEGER},
+      mvo_type = #{mvoType,jdbcType=INTEGER},
+      mvo_url = #{mvoUrl,jdbcType=VARCHAR},
+      mvo_eng_name = #{mvoEngName,jdbcType=VARCHAR},
+      mvo_introduction = #{mvoIntroduction,jdbcType=LONGVARCHAR}
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select user_id, user_password, user_name, user_mail, user_phone, user_wal_id, user_privilege, 
     mvo_type, mvo_url, mvo_eng_name, mvo_introduction

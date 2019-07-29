@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!-- Meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -14,44 +15,49 @@
     <!--stylesheets-->
     <link href="css/style.css" rel='stylesheet' type='text/css' media="all">
     <!--//style sheet end here-->
-    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <!--    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">-->
+    <!--    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">-->
 </head>
+
 <body>
-<h1 class="welcome">WELCOME</h1>
+<h1 class="welcome">欢迎</h1>
 <div class="w3layouts-two-grids">
     <div class="mid-class">
         <div class="txt-left-side">
-            <h2> Login In </h2>
-            <form action="#" method="post">
+            <h2> 登录 </h2>
+            <form action="" method="post">
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
-                    <input id="userName" type="text" placeholder=" Name" required="required"/>
-
+                    <input id="userName" placeholder="请输入用户名" required="" type="text"/>
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
-
                     <span class="fa fa-lock" aria-hidden="true"></span>
-                    <input id="userPassword" type="password" placeholder="Password" required="required"/>
+                    <input id="userPassword" placeholder="请输入密码" required="" type="password"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l ">
+                    <input name="kaptcha" placeholder="请输入验证码" required="" type="text"/>
+                    <img id="kaptchaImage" src="./kaptcha/getKaptchaImage.do"/>
+                    <a href="#" οnclick="changeCode()"></a>
                     <div class="clear"></div>
                 </div>
                 <div class="main-two-w3ls">
                     <div class="left-side-forget">
                         <input name="remember-me" type="checkbox" class="checked">
-                        <span class="remember">Remember me </span>
+                        <span class="remember">记住我 </span>
                     </div>
                     <div class="right-side-forget">
-                        <a href="#" class="for">Forgot password...?</a>
+                        <a class="for" href="forgetPasswd.html">忘记密码...?</a>
                     </div>
                 </div>
                 <div class="btnn">
-                    <button id="login_in" type="submit">Login in</button>
+                    <button id="login_in" type="submit">登录</button>
                 </div>
             </form>
             <div class="w3layouts_more-buttn">
-                <h3>Don't Have an account..?
-                    <a href="register.html">To Register
+                <h3>没有账号..?
+                    <a href="register.html">注册
                     </a>
                 </h3>
             </div>
@@ -61,32 +67,88 @@
 </div>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
+    var path = "http://localhost:8080/online_retailer";
     $(function () {
-        $("#login_in").on("click", function () {
-            if ($("#userName").val() != "" && $("#userPassword").val() != "") {
-                $.ajax({
-                    type: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    url: "/online_retailer/user/register.do",
-                    dataType: "json",
-                    data: JSON.stringify({
-                        "userName": $("#userName").val(),
-                        "userPassword": $("#userPassword").val()
-                    }),
-                    async: false,
-                    success: function (result) {
-                        window.location.href = "https://www.baidu.com";
-                    },
-                    error: function () {
-                        alert("注册失败");
-                    }
-                });
+        $('#kaptchaImage').click(function () {//生成验证码
+            $(this).hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+        });
+        //初始Flag(判断是否以"记住我"方式登录的标识)
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            url: path + "/user/initFlag",
+            success: function (data) {
+            },
+            error: function (result) {
             }
-        })
-    })
+        });
+        // 登录页面加载时后台获取Cookies信息，并进行token校验
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            url: path + "/user/tokenVilidation",
+            success: function (data) {
+                if (data.SUCCESS) {
+                    console.log(data.SUCCESS);
+                    window.location.href(path + "/user/changeFlag");
+                } else {
+                    console.log(data.ERROR);
+                }
+            },
+            error: function (result) {
+                console.log("ERROR: " + result);
+            }
+        });
+    });
+    //登录校验
+    $("#login_in").on("click", function () {
+        if ($("#userName").val() != "" && $("#userPassword").val() != "" && $("#kaptcha").val() != "") {
+            var info = {
+                "userName": $("#userName").val(),
+                "userPassword": $("#userPassword").val(),
+                "code": $("input[name='kaptcha']").val(),
+                "remember-me": $("input[name='remember-me']").is(':checked')
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: path + "/user/loginValidation",
+                dataType: "json",
+                data: JSON.stringify(info),
+                async: false,
+                success: function (data) {
+                    if (data.SUCCESS) {
+                        console.log("Login Successed!");
+                        // window.location.href = "http://www.baidu.com";
+                    } else if (data.INVALID_USERNAME) {
+                        console.log(data.INVALID_USERNAME);
+                        alert("密码不正确！");
+                        $("#userPassword").val("");
+                        $("input[name='kaptcha']").val("");
+                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+                    } else if (data.INVALID_PASSWD) {
+                        console.log(data.INVALID_PASSWD);
+                        alert("密码不正确！");
+                        $("#userPassword").val("");
+                        $("input[name='kaptcha']").val("");
+                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+                    } else {
+                        console.log(data.INVALID_CODE);
+                        alert("验证码不正确！");
+                        $("#userPassword").val("");
+                        $("input[name='kaptcha']").val("");
+                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+                    }
+                },
+                error: function (result) {
+                    console.log("ERROR: " + result);
+                }
+            });
+        }
+    });
+
+    function changeCode() {
+        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+    };
 </script>
 </body>
+
 </html>

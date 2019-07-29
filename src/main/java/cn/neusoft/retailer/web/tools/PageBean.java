@@ -7,7 +7,7 @@ package cn.neusoft.retailer.web.tools;
  */
 public class PageBean {
 
-    public static Integer page_Size = 5;
+    public static Integer page_Size = 4;
     private int pageNow;
     private int pageSize;
     private int start;

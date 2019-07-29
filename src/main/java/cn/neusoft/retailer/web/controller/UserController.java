@@ -2,28 +2,34 @@ package cn.neusoft.retailer.web.controller;
 
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
-import cn.neusoft.retailer.web.tools.MyString;
-import cn.neusoft.retailer.web.tools.UniqueID;
-import org.junit.runner.RunWith;
+import cn.neusoft.retailer.web.tools.*;
+import com.google.code.kaptcha.Constants;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
+
+
+//点击退出按钮，redis和cookies内token内容全删
+//关闭浏览器，若非"记住我"方式登录，redis和cookies内token全删，否则不予处理
+
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
 /**
  * @author 罗圣荣
  * @version 1.0
  * @date 2019/7/23 15:52
  */
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
 @Controller
 @RequestMapping("/user")
@@ -32,81 +38,340 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/register.do")
-    @ResponseBody
-    public List<Boolean> register(@RequestBody User user) {
+    @Autowired
+    private RedisClient redisClient;
 
-//        System.out.println(user.toString());
-        List<Boolean> result = new ArrayList<>();
+    /**
+     * @描述: 用户注册
+     * @参数: [user, request]
+     * @返回值: java.util.List<java.lang.Boolean>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/25
+     */
+    @RequestMapping(value = "/register")
+    @ResponseBody
+    public Map<String, String> register(@RequestBody User user) {
+
+        Map<String, String> result = new HashMap<>();
 
         String userName = user.getUserName();
         String userMail = user.getUserMail();
         String userPhone = user.getUserPhone();
         String userPassword = user.getUserPassword();
-        Integer userPrivilege = user.getUserPrivilege();
-        Integer mvoType = user.getMvoType();
         String mvoUrl = user.getMvoUrl();
-
-        boolean token = true;
+        Integer mvoType = user.getMvoType();
+        Integer userPrivilege = user.getUserPrivilege();
 
         //判断用户名是否重复
-        if (userName == null || userService.selectByName(userName) != null || !MyString.ifChinese(userName)) {
-            result.add(false);
-            token = false;
-        } else {
-            result.add(true);
-        }
-
-        //判断是否符合email格式
-        if (userMail == null || !MyString.isEmail(userMail)) {
-            result.add(false);
-            token = false;
-        } else {
-            result.add(true);
-        }
-
-        //判断是否符合电话号码格式
-        if (userPhone == null || userPhone.length() > 11 || !MyString.ifNumber(userPhone)) {
-            result.add(false);
-            token = false;
-        } else {
-            result.add(true);
+        if (userName == null || userService.selectByName(userName) != null) {
+            result.put("INVALID_USERNAME", "该用户名已被注册！");
+            return result;
         }
 
         //判断是否符合密码格式
         if (userPassword == null || !MyString.isPassword(userPassword)) {
-            result.add(false);
-            token = false;
-        } else {
-            result.add(true);
+            result.put("INVALID_PASSWD", "密码格式不正确！");
+            return result;
+        }
+
+        //判断是否符合email格式
+        if (userMail == null || !MyString.isEmail(userMail)) {
+            result.put("INVALID_EMAIL", "邮箱格式不正确！");
+            return result;
+        }
+
+        //判断是否符合电话号码格式
+        if (userPhone == null || userPhone.length() != 11 || !MyString.ifNumber(userPhone)) {
+            result.put("INVALID_PHONE", "手机号码格式不正确！");
+            return result;
         }
 
         //判断是否符合url格式
-        //非品牌商
-        if (mvoUrl == "")
+        if ("".equals(mvoUrl))
             mvoUrl = null;
         if (!MyString.isURL(mvoUrl)) {
-            result.add(false);
-            token = false;
-        } else {
-            result.add(true);
+            result.put("INVALID_URL", "url格式不正确！");
+            return result;
         }
 
-        System.out.println(result);
-        System.out.println(token);
+        user.setUserId(UniqueID.getGuid());
 
-        if(token){
-            user.setUserId(UniqueID.getGuid());
-            System.out.println(user.toString());
+        //加密保存用户密码
+        String ciphertext = MD5.encrypt(userPassword);
+        user.setUserPassword(ciphertext);
 
+        try {
             userService.insertByUserInfo(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+            return result;
+        }
+
+        result.put("SUCCESS", "注册成功");
+        return result;
+
+    }
+
+    /**
+     * @描述: 验证token
+     * @参数: [request]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/28
+     */
+    @RequestMapping(value = "/tokenVilidation")
+    @ResponseBody
+    public Map<String, String> vilidateToken(HttpServletRequest request) {
+
+        Map<String, String> result = new HashMap<>();
+        String cookie = request.getHeader("Cookie");
+        User user = null;
+
+        //判断是否通过"记住我"方式登录
+        Boolean flag;
+        flag = (Boolean) request.getSession(false).getAttribute("flag");
+
+        if (cookie.contains("token")) {
+
+            String[] cookieInfo = cookie.split(";");
+            String tokenMessage = null;
+            for (String s : cookieInfo) {
+                if (s.contains("token")) {
+                    tokenMessage = s;
+                }
+            }
+            String[] tokenInfo = tokenMessage.split("=");
+            String token = tokenInfo[1];
+
+            try {
+                //user = redisClient.findAndUpdate(token, "127.0.0.1", flag);
+                user = redisClient.findAndUpdate(token, request.getRemoteAddr(), flag);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("ERROR");
+            }
+            if (user != null) {
+                result.put("SUCCESS", "身份有效");
+                return result;
+            } else {
+                result.put("ERROR", "身份失效，请重新登录");
+                return result;
+            }
+        } else {
+            result.put("ERROR", "请登录");
+            return result;
+        }
+    }
+
+    /**
+     * @描述: 登陆校验
+     * @参数: [json, request, response]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/28
+     */
+    @RequestMapping(value = "/loginValidation")
+    @ResponseBody
+    public Map<String, String> login(@RequestBody String json, HttpServletRequest request, HttpServletResponse response) {
+
+        Map<String, String> result = new HashMap<>();
+        JSONObject data = new JSONObject(json);
+        String userName = (String) data.get("userName");
+
+        HttpSession session = request.getSession(false);
+
+        //校验用户信息
+        User user = null;
+        try {
+            user = userService.selectByName(userName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+            return result;
+        }
+        if (user == null) {
+            result.put("INVALID_USERNAME", "No User");
+            return result;
+        }
+
+        //校验密码
+        String in_passwd = (String) data.get("userPassword");
+        if (!user.getUserPassword().equals(MD5.encrypt(in_passwd))) {
+            result.put("INVALID_PASSWD", "Password Is Invalid");
+            return result;
+        }
+
+        //校验验证码
+        String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        String in_code = (String) data.get("code");
+        if (!code.toLowerCase().equals(in_code.toLowerCase())) {
+            result.put("INVALID_CODE", "Code Is Invalid");
+            return result;
+        }
+
+        String token;
+//        token = TokenCreation.createToken("127.0.0.1");
+        token = TokenCreation.createToken(request.getRemoteAddr());
+
+        user.setUserPassword(null);
+        session.setAttribute(userName, user);
+
+        //根据"记住我"的值选择Token存放时间
+        Cookie cookie;
+        if (data.get("remember-me").equals(true)) {
+            try {
+                redisClient.set(token, user, 7 * 24 * 60 * 60);
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.put("ERROR", e.getMessage());
+                return result;
+            }
+        } else {
+            try {
+                redisClient.set(token, user);
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.put("ERROR", e.getMessage());
+                return result;
+            }
+        }
+        //传给前端，保存于Cookies
+        result.put("SUCCESS", token);
+        cookie = new Cookie("token", token);
+        cookie.setPath("/online_retailer");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(999 * 24 * 60 * 60);
+        try {
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR");
         }
 
         return result;
     }
 
+    /**
+     * @描述: 忘记密码
+     * @参数: [json, request]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/29
+     */
+    @RequestMapping(value = "/forgetPasswd")
     @ResponseBody
-    public User login(@RequestBody User user) {
-        return null;
+    public Map<String, String> forgetPasswd(@RequestBody String json, HttpServletRequest request) {
+
+        Map<String, String> result = new HashMap<>();
+        JSONObject data = new JSONObject(json);
+        String userName = (String) data.get("userName");
+
+        HttpSession session = request.getSession(false);
+
+        //校验用户信息
+        User user = null;
+        try {
+            user = userService.selectByName(userName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+            return result;
+        }
+        if (user == null) {
+            result.put("INVALID_USERNAME", "用户不存在！");
+            return result;
+        }
+
+        //校验验证码
+        String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        String in_code = (String) data.get("code");
+        if (!code.toLowerCase().equals(in_code.toLowerCase())) {
+            result.put("INVALID_CODE", "验证码不正确！");
+            return result;
+        }
+
+        request.getSession(false).setAttribute("userName", userName);
+        result.put("SUCCESS", userName);
+        return result;
     }
+
+    /**
+     * @描述: 重置密码
+     * @参数: [json]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/29
+     */
+    @RequestMapping(value = "/resetPasswd")
+    @ResponseBody
+    public Map<String, String> resetPasswd(@RequestBody String json) {
+
+        Map<String, String> result = new HashMap<>();
+
+        JSONObject data = new JSONObject(json);
+        String userName = (String) data.get("userName");
+        String newPasswd = (String) data.get("newPassword");
+
+        User user = null;
+        try {
+            user = userService.selectByName(userName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+        }
+
+        //判断新密码是否符合密码格式
+        if (newPasswd == null || !MyString.isPassword(newPasswd)) {
+            result.put("INVALID_PASSWD", "密码格式不正确！");
+            return result;
+        }
+
+        //加密保存用户密码
+        String ciphertext = MD5.encrypt(newPasswd);
+        user.setUserPassword(ciphertext);
+
+        try {
+            userService.updateByName(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("ERROR", e.getMessage());
+            return result;
+        }
+
+        result.put("SUCCESS", "重置密码成功");
+        return result;
+    }
+
+
+    @RequestMapping(value = "/getUserName")
+    @ResponseBody
+    public Map<String, String> getUserName(HttpServletRequest request) {
+
+        Map<String, String> result = new HashMap<>();
+        String userName = null;
+
+        HttpSession session = request.getSession(false);
+
+        userName = (String) session.getAttribute("userName");
+
+        session.removeAttribute("userName");
+
+        result.put("userName", userName);
+
+        return result;
+    }
+
+    @RequestMapping(value = "/initFlag")
+    @ResponseBody
+    public void initFlag(HttpServletRequest request) {
+        request.getSession(false).setAttribute("flag", false);
+    }
+
+    @RequestMapping(value = "/changeFlag")
+    public String changeFlag(HttpServletRequest request) {
+        request.getSession(false).setAttribute("flag", true);
+        return "redirect:http://www.baidu.com";
+    }
+
 }
