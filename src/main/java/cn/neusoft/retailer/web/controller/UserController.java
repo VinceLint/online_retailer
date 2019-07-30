@@ -217,7 +217,7 @@ public class UserController {
         token = TokenCreation.createToken(request.getRemoteAddr());
 
         user.setUserPassword(null);
-        session.setAttribute(userName, user);
+        session.setAttribute("user", user);
 
         //根据"记住我"的值选择Token存放时间
         Cookie cookie;
