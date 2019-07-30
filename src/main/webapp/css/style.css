@@ -253,7 +253,7 @@ a:hover {
 select,
 input[type="email"],
 input[type="text"],
-input[type=password],
+input[type="password"],
 input[type="button"],
 input[type="submit"],
 textarea {
@@ -302,7 +302,8 @@ body {
 }
 
 .w3layouts-two-grids {
-    width: 82%;
+
+    width: 100%;
     margin: 0px auto;
 }
 

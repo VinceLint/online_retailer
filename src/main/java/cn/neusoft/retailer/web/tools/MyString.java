@@ -37,6 +37,31 @@ public class MyString {
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/24
      */
+    //判断是否符合用户名格式
+    public static boolean isName(String name) {
+
+        Pattern namePattern = Pattern.compile("[a-zA-Z0-9\\u4e00-\\u9fa5]");
+
+        Matcher matcher = namePattern.matcher(name);
+
+        if (matcher.find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //判断是否符合密码格式
+    public static boolean isPassword(String passwd) {
+        Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z])(.{6,16})$");
+        Matcher matcher = passwordPattern.matcher(passwd);
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //判断是否符合email格式
     public static boolean isEmail(String email) {
 
@@ -56,15 +81,9 @@ public class MyString {
         System.out.println(isEmail("abc@qq.com"));
     }
 
-    //判断是否符合密码格式
-    public static boolean isPassword(String passwd) {
-        Pattern Password_Pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z])(.{6,16})$");
-        Matcher matcher = Password_Pattern.matcher(passwd);
-        if (matcher.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+    @Test
+    public void testName() {
+        System.out.println(isName("C1罗XX好1651"));
     }
 
     @Test

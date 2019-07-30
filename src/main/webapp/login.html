@@ -19,7 +19,7 @@
     <!--    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">-->
 </head>
 
-<body>
+<body onunload="clearToken()">
 <h1 class="welcome">欢迎</h1>
 <div class="w3layouts-two-grids">
     <div class="mid-class">
@@ -68,19 +68,18 @@
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script>
     var path = "http://localhost:8080/online_retailer";
+    var flag = false;
     $(function () {
         // 登录页面加载时后台获取Cookies信息，并进行token校验
         $.ajax({
             contentType: "application/json; charset=utf-8",
-            url: path + "/user/tokenVilidation",
+            url: path + "/user/tokenVilidation/" + flag,
             success: function (data) {
                 if (data.SUCCESS) {
                     console.log(data.SUCCESS);
-                    console.log(data.userName);
-                    console.log(data.userPassword);
                     $("#userName").val(data.userName);
                     $("#userPassword").val(data.userPassword);
-                    window.location.href = (path + "/user/changeFlag");
+                    flag = true;
                 } else {
                     console.log(data.ERROR);
                 }
@@ -91,7 +90,7 @@
         });
         //登录校验
         $("#login_in").on("click", function () {
-            if ($("#userName").val() != "" && $("#userPassword").val() != "" && $("#kaptcha").val() != "") {
+            if ($("#kaptcha").val() != "" && $("#userName").val() != "" && $("#userPassword").val() != "") {
                 var info = {
                     "userName": $("#userName").val(),
                     "userPassword": $("#userPassword").val(),
@@ -101,14 +100,14 @@
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
-                    url: path + "/user/loginValidation",
+                    url: path + "/user/loginValidation/" + flag,
                     dataType: "json",
                     data: JSON.stringify(info),
                     async: false,
                     success: function (data) {
                         if (data.SUCCESS) {
                             console.log("Login Successed!");
-                            // window.location.href = "http://www.baidu.com";
+                            window.location.href = "http://www.baidu.com";
                         } else if (data.INVALID_USERNAME) {
                             console.log(data.INVALID_USERNAME);
                             alert("密码不正确！");
@@ -124,7 +123,6 @@
                         } else {
                             console.log(data.INVALID_CODE);
                             alert("验证码不正确！");
-                            $("#userPassword").val("");
                             $("input[name='kaptcha']").val("");
                             $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
                         }
@@ -133,6 +131,7 @@
                         console.log("ERROR: " + result);
                     }
                 });
+                return false;
             }
         });
         $('#kaptchaImage').click(function () {//生成验证码
@@ -140,6 +139,18 @@
         });
     });
 
+    function clearToken() {
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            url: path + "/user/clearToken",
+            success: function (data) {
+                console.log(data.MESSAGE);
+            },
+            error: function (result) {
+                console.log("ERROR: " + result);
+            }
+        })
+    };
     function changeCode() {
         $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
     };
