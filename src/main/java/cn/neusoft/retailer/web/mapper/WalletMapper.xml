@@ -35,8 +35,10 @@
     from wallet
     where wal_id = #{walId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+
+    <select id="selectAll" resultMap="BaseResultMap" >
     select wal_id, wal_type, wal_password, wal_balance, wal_pay_id, wal_email
     from wallet
   </select>
+
 </mapper>
