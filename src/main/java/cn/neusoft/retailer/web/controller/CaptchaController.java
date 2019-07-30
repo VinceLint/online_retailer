@@ -26,6 +26,13 @@ public class CaptchaController {
     @Autowired
     private Producer captchaProducer = null;
 
+    /**
+     * @描述: 生成验证码
+     * @参数: [request, response]
+     * @返回值: org.springframework.web.servlet.ModelAndView
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/30
+     */
     @RequestMapping
     public ModelAndView getKaptchaImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();

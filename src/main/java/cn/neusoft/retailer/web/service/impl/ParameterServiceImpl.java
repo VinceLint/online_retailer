@@ -19,13 +19,14 @@ import java.util.List;
 public class ParameterServiceImpl implements ParameterService {
     @Autowired
     private ParameterMapper parameterMapper;
+
     /**
-     *@描述  根据页号来查询对应的记录
-     *@参数  整型对象
-     *@返回值  参数列表对象
-     *@创建人  林跃涛
-     *@创建时间  2019/7/29 15:24
-     *@修改人和其它信息
+     * @描述 根据页号来查询对应的记录
+     * @参数 整型对象
+     * @返回值 参数列表对象
+     * @创建人 林跃涛
+     * @创建时间 2019/7/29 15:24
+     * @修改人和其它信息
      */
     @Override
     public List<Parameter> selectByPage(Integer pageNum) {

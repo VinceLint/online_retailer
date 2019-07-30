@@ -253,7 +253,7 @@ a:hover {
 select,
 input[type="email"],
 input[type="text"],
-input[type=password],
+input[type="password"],
 input[type="button"],
 input[type="submit"],
 textarea {
@@ -302,7 +302,8 @@ body {
 }
 
 .w3layouts-two-grids {
-    width: 82%;
+
+    width: 100%;
     margin: 0px auto;
 }
 
@@ -1025,4 +1026,20 @@ a.for {
     font-weight: bold;
     padding-bottom: 6px;
 }
+
+#form-left-to-w3m {
+    border-bottom: none;
+}
+
+#mvoType {
+    background: transparent;
+    padding-left: 10px;
+    width: 120px;
+    height: 100%;
+    cursor: pointer;
+    border: 1px #8b9aa3 solid;
+    border-radius: 5px;
+    color: #b7afa7;
+}
+
 /*--//responsive--*/
