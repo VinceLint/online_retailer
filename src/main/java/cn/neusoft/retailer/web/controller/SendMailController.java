@@ -29,6 +29,13 @@ public class SendMailController {
     @Autowired
     private UserService userService;
 
+    /**
+     * @描述: 发送邮件
+     * @参数: [userName]
+     * @返回值: java.lang.String
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/30
+     */
     @RequestMapping("/send/{userName}")
     @ResponseBody
     public String sendMail(@PathVariable("userName") String userName) {

@@ -19,10 +19,6 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-
-//点击退出按钮，redis和cookies内token内容全删
-//关闭浏览器，若非"记住我"方式登录，redis和cookies内token全删，否则不予处理
-
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
@@ -44,10 +40,10 @@ public class UserController {
 
     /**
      * @描述: 用户注册
-     * @参数: [user, request]
-     * @返回值: java.util.List<java.lang.Boolean>
+     * @参数: [user]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/25
+     * @创建时间: 2019/7/30
      */
     @RequestMapping(value = "/register")
     @ResponseBody
@@ -119,10 +115,10 @@ public class UserController {
 
     /**
      * @描述: 验证token
-     * @参数: [request]
+     * @参数: [flag, request]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/28
+     * @创建时间: 2019/7/30
      */
     @RequestMapping(value = "/tokenVilidation/{flag}")
     @ResponseBody
@@ -169,10 +165,10 @@ public class UserController {
 
     /**
      * @描述: 登陆校验
-     * @参数: [json, request, response]
+     * @参数: [json, flag, request, response]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/28
+     * @创建时间: 2019/7/30
      */
     @RequestMapping(value = "/loginValidation/{flag}")
     @ResponseBody
@@ -263,7 +259,7 @@ public class UserController {
      * @参数: [json, request]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/29
+     * @创建时间: 2019/7/30
      */
     @RequestMapping(value = "/forgetPasswd")
     @ResponseBody
@@ -307,7 +303,7 @@ public class UserController {
      * @参数: [json]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/29
+     * @创建时间: 2019/7/30
      */
     @RequestMapping(value = "/resetPasswd")
     @ResponseBody
@@ -349,6 +345,13 @@ public class UserController {
         return result;
     }
 
+    /**
+     * @描述: 若非"记住我"方式登录的用户,Session结束便清楚Token
+     * @参数: [request]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/30
+     */
     @RequestMapping(value = "/clearToken")
     @ResponseBody
     public Map<String, String> clearToken(HttpServletRequest request) {
