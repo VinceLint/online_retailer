@@ -1,6 +1,8 @@
 package cn.neusoft.retailer.web.service;
 
 import cn.neusoft.retailer.web.pojo.Parameter;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -11,4 +13,12 @@ import java.util.List;
  */
 public interface ParameterService {
     List<Parameter> selectByPage(Integer pageNum);
+
+    List<Parameter> selectAll();
+
+    boolean updateByPrimaryKey(JSONObject jsonObject);
+
+    boolean insert(JSONObject jsonObject);
+
+    boolean delete(JSONArray jsonArray);
 }

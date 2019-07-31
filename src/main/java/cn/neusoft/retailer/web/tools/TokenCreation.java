@@ -12,7 +12,7 @@ import java.util.UUID;
 public class TokenCreation {
 
     /**
-     * @描述: 8位时间戳作为登录序列(substring ( 0, 8))，后几位为ip地址(substring(44,.length()))
+     * @描述: 后几位为ip地址(substring ( 44, .length ()))
      * @参数: [ip]
      * @返回值: java.lang.String
      * @创建人: 罗圣荣

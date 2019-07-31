@@ -10,11 +10,19 @@
 <head>
     <title> 钱包注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Official Signup Form Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords"
+          content="Official Signup Form Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
     <!-- fonts -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet" charset="utf-8">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet"
+          charset="utf-8">
     <link href="//fonts.googleapis.com/css?family=Monoton" rel="stylesheet" charset="utf-8">
     <!-- /fonts -->
 
@@ -36,19 +44,23 @@
     <div class="content-agile2">
         <form action="${pageContext.request.contextPath}/toAddWal" method="post">
             <div class="form-control w3layouts">
-                <input type="text" id="firstname" name="walId" placeholder="ID" title="Please enter your First Name" required="">
+                <input type="text" id="firstname" name="walId" placeholder="ID" title="Please enter your First Name"
+                       required="">
             </div>
 
             <div class="form-control w3layouts">
-                <input type="email" id="email" name="walEmail" placeholder="mail@example.com" title="Please enter a valid email" required="">
+                <input type="email" id="email" name="walEmail" placeholder="mail@example.com"
+                       title="Please enter a valid email" required="">
             </div>
 
             <div class="form-control agileinfo">
-                <input type="password" class="lock" name="walPassword" placeholder="Password" id="password1" required="">
+                <input type="password" class="lock" name="walPassword" placeholder="Password" id="password1"
+                       required="">
             </div>
 
             <div class="form-control agileinfo">
-                <input type="password" class="lock" name="confirm-password" placeholder="Confirm Password" id="password2" required="">
+                <input type="password" class="lock" name="confirm-password" placeholder="Confirm Password"
+                       id="password2" required="">
             </div>
 
             <input type="submit" class="register" value="立即注册">
@@ -58,10 +70,11 @@
                 document.getElementById("password1").onchange = validatePassword;
                 document.getElementById("password2").onchange = validatePassword;
             }
-            function validatePassword(){
-                var pass2=document.getElementById("password2").value;
-                var pass1=document.getElementById("password1").value;
-                if(pass1!=pass2)
+
+            function validatePassword() {
+                var pass2 = document.getElementById("password2").value;
+                var pass1 = document.getElementById("password1").value;
+                if (pass1 != pass2)
                     document.getElementById("password2").setCustomValidity("Passwords Don't Match");
                 else
                     document.getElementById("password2").setCustomValidity('');
@@ -74,10 +87,11 @@
     </div>
     <div class="clear"></div>
 </div>
-<p class="copyright w3l">© 2017 Official Signup Form. All Rights Reserved | Design by <a href="#" target="_blank">庄志宏</a></p>
+<p class="copyright w3l">© 2017 Official Signup Form. All Rights Reserved | Design by <a href="#"
+                                                                                         target="_blank">庄志宏</a></p>
 </body>
 <!-- css -->
-<link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" charset="utf-8" />
-<link href="../../css/WalStyle.css" rel='stylesheet' type='text/css' media="all"  charset="utf-8"/>
+<link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" charset="utf-8"/>
+<link href="../../css/WalStyle.css" rel='stylesheet' type='text/css' media="all" charset="utf-8"/>
 <!-- /css -->
 </html>

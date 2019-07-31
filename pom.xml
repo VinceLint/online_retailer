@@ -98,16 +98,16 @@
 
         <!--mysql依赖-->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <!--<dependency>-->
-            <!--<groupId>mysql</groupId>-->
-            <!--<artifactId>mysql-connector-java</artifactId>-->
-        <!--<version>8.0.16</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.16</version>
         </dependency>
+                <!--<dependency>-->
+                    <!--<groupId>mysql</groupId>-->
+                    <!--<artifactId>mysql-connector-java</artifactId>-->
+                    <!--<version>5.1.41</version>-->
+                <!--</dependency>-->
 
         <!--servlet依赖-->
         <dependency>
@@ -193,7 +193,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <!--文件上传-->
         <dependency>
             <groupId>commons-io</groupId>
@@ -262,6 +261,12 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <includes>
+                    <include>**/*.*</include>
                 </includes>
             </resource>
         </resources>

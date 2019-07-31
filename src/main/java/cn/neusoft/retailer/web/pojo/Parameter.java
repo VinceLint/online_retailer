@@ -7,6 +7,12 @@ public class Parameter {
 
     private String parDescribe;
 
+    public Parameter(String parId, Integer parValue, String parDescribe) {
+        this.parId = parId;
+        this.parValue = parValue;
+        this.parDescribe = parDescribe;
+    }
+
     public String getParId() {
         return parId;
     }

@@ -49,32 +49,12 @@
     </div>
 </div>
 <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+<script src="js/jquery.params.js" type="text/javascript"></script>
 <script>
-    /*
-        还需做刷新页面时的userName赋值
-    */
     var path = "http://localhost:8080/online_retailer";
-    var userName;
+    var userName = $.query.get("name");
     var code = null;
     $(function () {
-        $.ajax({
-            contentType: "application/json; charset=utf-8",
-            url: path + "/user/getUserName",
-            success: function (data) {
-                userName = data.userName;
-            },
-            error: function (result) {
-                console.log("ERROR: " + result);
-            }
-        });
-        window.onunload(function (event) {
-            if (event.clientX > document.body.clientWidth && event.clientY < 0 || event.altKey) {
-                //关闭时怎么处理
-            } else {
-
-                //刷新时怎么处理
-            }
-        });
         //发送验证码到邮箱
         $("#getCode").on("click", function () {
             $.ajax({
@@ -131,8 +111,8 @@
                             }
                         });
                     }
+                    return false;
                 }
-                return false;
             }
         );
     })

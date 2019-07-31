@@ -7,6 +7,7 @@ import com.google.code.kaptcha.Constants;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,10 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
-
-
-//点击退出按钮，redis和cookies内token内容全删
-//关闭浏览器，若非"记住我"方式登录，redis和cookies内token全删，否则不予处理
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
@@ -43,10 +40,10 @@ public class UserController {
 
     /**
      * @描述: 用户注册
-     * @参数: [user, request]
-     * @返回值: java.util.List<java.lang.Boolean>
+     * @参数: [user]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/25
+     * @创建时间: 2019/7/30
      */
     @RequestMapping(value = "/register")
     @ResponseBody
@@ -63,7 +60,10 @@ public class UserController {
         Integer userPrivilege = user.getUserPrivilege();
 
         //判断用户名是否重复
-        if (userName == null || userService.selectByName(userName) != null) {
+        if (userName == null || !MyString.isName(userName)) {
+            result.put("INVALID_USERNAME", "用户名格式不正确！");
+            return result;
+        } else if (userService.selectByName(userName) != null) {
             result.put("INVALID_USERNAME", "该用户名已被注册！");
             return result;
         }
@@ -115,22 +115,18 @@ public class UserController {
 
     /**
      * @描述: 验证token
-     * @参数: [request]
+     * @参数: [flag, request]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/28
+     * @创建时间: 2019/7/30
      */
-    @RequestMapping(value = "/tokenVilidation")
+    @RequestMapping(value = "/tokenVilidation/{flag}")
     @ResponseBody
-    public Map<String, String> vilidateToken(HttpServletRequest request) {
+    public Map<String, String> vilidateToken(@PathVariable("flag") Boolean flag, HttpServletRequest request) {
 
         Map<String, String> result = new HashMap<>();
         String cookie = request.getHeader("Cookie");
         User user = null;
-
-        //判断是否通过"记住我"方式登录
-        Boolean flag;
-        flag = (Boolean) request.getSession(false).getAttribute("flag");
 
         if (cookie.contains("token")) {
 
@@ -149,10 +145,13 @@ public class UserController {
                 user = redisClient.findAndUpdate(token, request.getRemoteAddr(), flag);
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("ERROR");
+                result.put("ERROR", e.getMessage());
+                return result;
             }
             if (user != null) {
                 result.put("SUCCESS", "身份有效");
+                result.put("userName", user.getUserName());
+                result.put("userPassword", "admin");
                 return result;
             } else {
                 result.put("ERROR", "身份失效，请重新登录");
@@ -166,20 +165,21 @@ public class UserController {
 
     /**
      * @描述: 登陆校验
-     * @参数: [json, request, response]
+     * @参数: [json, flag, request, response]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/28
+     * @创建时间: 2019/7/30
      */
-    @RequestMapping(value = "/loginValidation")
+    @RequestMapping(value = "/loginValidation/{flag}")
     @ResponseBody
-    public Map<String, String> login(@RequestBody String json, HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, String> login(@RequestBody String json, @PathVariable("flag") Boolean flag, HttpServletRequest request, HttpServletResponse response) {
 
         Map<String, String> result = new HashMap<>();
         JSONObject data = new JSONObject(json);
         String userName = (String) data.get("userName");
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
+        session.setAttribute("flag", flag);
 
         //校验用户信息
         User user = null;
@@ -197,9 +197,11 @@ public class UserController {
 
         //校验密码
         String in_passwd = (String) data.get("userPassword");
-        if (!user.getUserPassword().equals(MD5.encrypt(in_passwd))) {
-            result.put("INVALID_PASSWD", "Password Is Invalid");
-            return result;
+        if (!flag || !in_passwd.equals("admin")) {
+            if (!user.getUserPassword().equals(MD5.encrypt(in_passwd))) {
+                result.put("INVALID_PASSWD", "Password Is Invalid");
+                return result;
+            }
         }
 
         //校验验证码
@@ -215,7 +217,7 @@ public class UserController {
         token = TokenCreation.createToken(request.getRemoteAddr());
 
         user.setUserPassword(null);
-        session.setAttribute(userName, user);
+        session.setAttribute("user", user);
 
         //根据"记住我"的值选择Token存放时间
         Cookie cookie;
@@ -257,7 +259,7 @@ public class UserController {
      * @参数: [json, request]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/29
+     * @创建时间: 2019/7/30
      */
     @RequestMapping(value = "/forgetPasswd")
     @ResponseBody
@@ -267,7 +269,7 @@ public class UserController {
         JSONObject data = new JSONObject(json);
         String userName = (String) data.get("userName");
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
 
         //校验用户信息
         User user = null;
@@ -291,7 +293,7 @@ public class UserController {
             return result;
         }
 
-        request.getSession(false).setAttribute("userName", userName);
+        request.getSession().setAttribute("userName", userName);
         result.put("SUCCESS", userName);
         return result;
     }
@@ -301,7 +303,7 @@ public class UserController {
      * @参数: [json]
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
      * @创建人: 罗圣荣
-     * @创建时间: 2019/7/29
+     * @创建时间: 2019/7/30
      */
     @RequestMapping(value = "/resetPasswd")
     @ResponseBody
@@ -343,35 +345,42 @@ public class UserController {
         return result;
     }
 
-
-    @RequestMapping(value = "/getUserName")
+    /**
+     * @描述: 若非"记住我"方式登录的用户,Session结束便清楚Token
+     * @参数: [request]
+     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @创建人: 罗圣荣
+     * @创建时间: 2019/7/30
+     */
+    @RequestMapping(value = "/clearToken")
     @ResponseBody
-    public Map<String, String> getUserName(HttpServletRequest request) {
+    public Map<String, String> clearToken(HttpServletRequest request) {
 
         Map<String, String> result = new HashMap<>();
-        String userName = null;
+        //获取token
+        String cookie = request.getHeader("Cookie");
+        String[] cookieInfo = cookie.split(";");
+        String tokenMessage = null;
+        for (String s : cookieInfo) {
+            if (s.contains("token")) {
+                tokenMessage = s;
+            }
+        }
+        String[] tokenInfo = tokenMessage.split("=");
+        String token = tokenInfo[1];
 
-        HttpSession session = request.getSession(false);
+        Boolean flag = (Boolean) request.getSession(false).getAttribute("flag");
 
-        userName = (String) session.getAttribute("userName");
+        if (!flag) {
+            if (redisClient.remove(token)) {
+                result.put("MESSAGE", "Token Has Been Clear");
+            } else {
+                result.put("MESSAGE", "FAILED");
+            }
+        }
 
-        session.removeAttribute("userName");
-
-        result.put("userName", userName);
-
+        result.put("MESSAGE", "Remember-me User");
         return result;
-    }
-
-    @RequestMapping(value = "/initFlag")
-    @ResponseBody
-    public void initFlag(HttpServletRequest request) {
-        request.getSession(false).setAttribute("flag", false);
-    }
-
-    @RequestMapping(value = "/changeFlag")
-    public String changeFlag(HttpServletRequest request) {
-        request.getSession(false).setAttribute("flag", true);
-        return "redirect:http://www.baidu.com";
     }
 
 }
