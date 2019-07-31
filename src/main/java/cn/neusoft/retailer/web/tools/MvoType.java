@@ -6,5 +6,5 @@ package cn.neusoft.retailer.web.tools;
  * @date 2019-07-23 16:37
  */
 public enum MvoType {
-    百货超市,休闲娱乐,服装,食品家电,生活服务,化妆品,珠宝,其他
+    百货超市,休闲娱乐,服装,食品,家具家电,生活服务,化妆品,珠宝,其他
 }
