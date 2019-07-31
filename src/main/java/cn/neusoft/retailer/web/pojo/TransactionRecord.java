@@ -3,15 +3,27 @@ package cn.neusoft.retailer.web.pojo;
 import java.util.Date;
 
 public class TransactionRecord {
-    private String traRecId;
+    private Integer traRecId;
 
     private Date traRecDate;
 
+    private String traRecDateStr;
+
+    public String getTraRecDateStr() {
+        return traRecDateStr;
+    }
+
+    public void setTraRecDateStr(String traRecDateStr) {
+        this.traRecDateStr = traRecDateStr;
+    }
+
     private Integer traRecType;
+
 
     private Float traRecSum;
 
     private Integer traRecStatus;
+
 
     private Integer traRecWalId;
 
@@ -19,12 +31,27 @@ public class TransactionRecord {
 
     private String traRecExchangememo;
 
-    public String getTraRecId() {
+    public Integer getTraRecId() {
         return traRecId;
     }
 
-    public void setTraRecId(String traRecId) {
-        this.traRecId = traRecId == null ? null : traRecId.trim();
+
+    @Override
+    public String toString() {
+        return "TransactionRecord{" +
+                "traRecId=" + traRecId +
+                ", traRecDate=" + traRecDate +
+                ", traRecType=" + traRecType +
+                ", traRecSum=" + traRecSum +
+                ", traRecStatus=" + traRecStatus +
+                ", traRecWalId=" + traRecWalId +
+                ", traRecBalance=" + traRecBalance +
+                ", traRecExchangememo='" + traRecExchangememo + '\'' +
+                '}';
+    }
+
+    public void setTraRecId(Integer traRecId) {
+        this.traRecId = traRecId;
     }
 
     public Date getTraRecDate() {

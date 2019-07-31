@@ -22,15 +22,23 @@ import java.util.Map;
 public class WalController {
     @Autowired
     private WalletService walletService;
+
+    @RequestMapping(value = "tobvoWalletList",method = RequestMethod.GET)
+    public String toWalletList(){return "html/bvo-WalletList.html";}
+
     @RequestMapping(value="/toAddWal",method= RequestMethod.GET)
-    public String toAdd(){return "WalSingUp";}
-    @RequestMapping("/toAddWal")
+    public String toAdd(){return "html/WalSignUp.html";}
+
+    @RequestMapping("/toSignWal")
     public String toAddWal(Wallet wallet, Model model, HttpSession session){
         System.out.println(wallet.toString());
+        String pass=wallet.getWalPassword();
+//        String mdpass= MD5.encrypt(pass);
+//        wallet.setWalPassword(mdpass);
         model.addAttribute(wallet.toString());
         wallet.setWalBalance((float) 0);
         walletService.insert(wallet);
-        return "success";
+        return "html/bvo-WalletList.html";
     }
 
     @GetMapping("/bvoWalletList")
@@ -38,14 +46,21 @@ public class WalController {
         return "bvo-WalletList";
     }
 
-    @RequestMapping("/toWalList")
+    @PostMapping("/toWalList")
     @ResponseBody
     public List<Wallet> toWalList( HttpServletResponse response){
-        List<Wallet> list = walletService.selectAll();
+        System.out.println("ok");
+        List<Wallet> list = null;
+       try {
+           list = walletService.selectAll();
 //        JSONObject jsonObject =new JSONObject();
 //        JSONArray jsonArray = JSONArray.fromObject(list);
-
+           System.out.println(list.get(1).toString());
 //        OutUtil.print(jsonArray, response);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+
         return list;
     }
 
@@ -64,6 +79,8 @@ public class WalController {
 
         }else if(i==3) {
             resultmap.put("result","unenough");
+        }else if(i==4) {
+            resultmap.put("result","recordError");
         }else
         {
                 resultmap.put("result","error");

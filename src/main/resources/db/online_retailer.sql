@@ -222,6 +222,7 @@ CREATE TABLE `transaction_record`  (
   CONSTRAINT `transaction_record_ibfk_1` FOREIGN KEY (`tra_rec_wal_id`) REFERENCES `wallet` (`wal_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
+
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------

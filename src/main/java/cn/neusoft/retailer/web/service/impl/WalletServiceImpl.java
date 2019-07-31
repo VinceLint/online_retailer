@@ -1,6 +1,8 @@
 package cn.neusoft.retailer.web.service.impl;
 
+import cn.neusoft.retailer.web.mapper.TransactionRecordMapper;
 import cn.neusoft.retailer.web.mapper.WalletMapper;
+import cn.neusoft.retailer.web.pojo.TransactionRecord;
 import cn.neusoft.retailer.web.pojo.Wallet;
 import cn.neusoft.retailer.web.service.WalletService;
 import org.json.JSONArray;
@@ -8,6 +10,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +22,8 @@ import java.util.List;
 public class WalletServiceImpl implements WalletService {
     @Autowired
     private WalletMapper walletMapper;
+    @Autowired
+    private TransactionRecordMapper transactionRecordMapper;
     @Override
     public int deleteByPrimaryKey(Integer walId) {
         int i=walletMapper.deleteByPrimaryKey(walId);
@@ -91,9 +96,36 @@ public class WalletServiceImpl implements WalletService {
         int i=walletMapper.updateByPrimaryKey(oldWallet);
         System.out.println("修改结果"+i);
 
+        //插入交易流水信息
+        TransactionRecord transactionRecord = new TransactionRecord();
+        transactionRecord.setTraRecStatus(0);
+        transactionRecord.setTraRecBalance(oldWallet.getWalBalance());
+        Date date = new Date();
+        transactionRecord.setTraRecDate(date);
+        transactionRecord.setTraRecSum(money);
+        transactionRecord.setTraRecWalId(id);
+        if(sign==-1){
+            transactionRecord.setTraRecType(0);
+            System.out.println("记录提现"+i);
+        }else if(sign==1){
+            transactionRecord.setTraRecType(1);
+            System.out.println("记录充值"+i);
+        }
+        int j=0;
+        try {
+             j = transactionRecordMapper.insert(transactionRecord);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         if(i>0){
-            System.out.println("修改成功");
-            return 7;
+            if(j>0){
+                System.out.println("修改成功");
+                return 7;
+            }else{
+                System.out.println("记录失败");
+                return 4;
+            }
+
         }else{
             System.out.println("修改错误");
             return 2;

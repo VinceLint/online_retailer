@@ -283,11 +283,11 @@
                                     this.visible1=false;
                                     this.isEdit=false;
                                     if(this.form.sign==1){
-                                        this.$alert('<strong>充值成功</strong>', '感谢', {
+                                        this.$alert('<strong>充值成功,请等待管理员审核</strong>', '感谢', {
                                             dangerouslyUseHTMLString: true
                                         });
                                     }else{
-                                        this.$alert('<strong>提现成功</strong>', '感谢', {
+                                        this.$alert('<strong>提现成功，请等待管理员审核</strong>', '感谢', {
                                             dangerouslyUseHTMLString: true
                                         });
                                     }
@@ -296,6 +296,10 @@
 
                                 }else if(date.result=="passError"){
                                     this.$alert('<strong>密码错误</strong>', '好像出了点问题', {
+                                        dangerouslyUseHTMLString: true
+                                    });
+                                }else if(date.result=="recordError") {
+                                    this.$alert('<strong>记录失败</strong>', '好像出了点问题', {
                                         dangerouslyUseHTMLString: true
                                     });
                                 }else if(date.result=="unenough") {
@@ -335,7 +339,7 @@
                 },
                 handlejump() {
                     //跳转页面
-                    window.location="http://127.0.0.1:8080/online_retailer_war_exploded/html/brand-transation.html";
+                    window.location="http://127.0.0.1:8080/online_retailer_war_exploded/html/bvo-transation.html";
                 },
                 init() {
                     var that=this;
