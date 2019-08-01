@@ -6,7 +6,7 @@
     <title></title>
     <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
 </head>
-<script src="js/jquery-1.9.1.js"></script>
+<script src="../js/jquery-1.9.1.js"></script>
 
 <body>
 <div id="app">
@@ -147,7 +147,7 @@
                 $.ajax({
                     type: 'POST',
                     dataType: "json",
-                    url: "http://localhost:8090/online_retailer//initDictionary",
+                    url: "http://localhost:8080/online_retailer//initDictionary",
                     success: function (res) {
                         $.each(res, function (i, obj) {
                             this.pageSum++
@@ -215,7 +215,7 @@
                     this.dataForUpdate.push(this.form)
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8090/online_retailer//updateDictionary",
+                        url: "http://localhost:8080/online_retailer//updateDictionary",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(this.dataForUpdate),
                         dataType: "json",
@@ -244,7 +244,7 @@
                     var dcvalue = this.form.cvalue
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8090/online_retailer//insertDictionary",
+                        url: "http://localhost:8080/online_retailer//insertDictionary",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(this.form),
                         dataType: "json",
@@ -290,7 +290,7 @@
             handleDel() {
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8090/online_retailer//deleteDictionary",
+                    url: "http://localhost:8080/online_retailer//deleteDictionary",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(this.dataForDel),
                     dataType: "json",

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!--
 /**
  * @author 胡献涛
@@ -8,87 +8,122 @@
 -->
 <html lang="en">
 <head>
+    <title>品牌商-订单管理</title>　　
+    <!-- http://localhost:8080/online_retailer/html/brand-orderlist.html -->
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <script src="../js/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>　　
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--  Vue  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--  Axios  -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- fontawesome -->
+    <script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>
+
+    <style>
+        #main-content{
+            padding-left: 12.5%;
+        }
+        .search{
+            width:30%;
+        }
+
+        .goods-header {
+            overflow: hidden;
+        }
+
+        .goods-header-left {
+            width: 30%;
+            float: left;
+        }
+
+        .goods-header-right {
+            width: 60%;
+            float: left;
+            padding: 30px;
+        }
+
+        .goods-header-left img {
+            width: 100%;
+        }
+    </style>
+
 </head>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/ace.min.css">
-<link rel="stylesheet" href="../css/ace-skins.min.css">
-<link rel="stylesheet" href="../css/ace-responsive.min.css">
-<style>
-    body, html {
-        width: 100%;
-        height: 100%;
-        background: #fff;
-    }
 
-    .info div {
-        float: right;
-    }
+<body class="bg-light">
 
-</style>
-<body>
 
-<div id="main-content" class="clearfix">
-    <div id="page-content" class="clearfix">
+<div id="main-content" class="container-fluid">
+    <div id="page-content" class="container-fluid">
 
-        <div class="page-header position-relative">
+        <div class="page-header">
             <h1 style="color: #2679b5;">品牌商
-                <small><i class="icon-double-angle-right"></i> 订单管理</small>
+                <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 订单管理</small>
             </h1>
         </div>
-        <form class="form-search">
-            商品标题：
-            <input type="text" class="input-medium search-query">
-            <button onclick="return false;" class="btn btn-purple btn-small">查找 <i
-                    class="icon-search icon-on-right"></i></button>
-        </form>
+        <hr class="my-4">
+        <div class="search">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="商品标题" aria-label="good title" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">查找<i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
 
-        <div class="tabbable">
-            <ul class="nav nav-tabs" id="myTab">
-                <li class="active"><a data-toggle="tab" href="#AwaitingPayment"> 待支付</a></li>
-                <li class=""><a data-toggle="tab" href="#AwaitingShipment"> 待发货</a></li>
-                <li class=""><a data-toggle="tab" href="#shipped">已发货</a></li>
-                <li class=""><a data-toggle="tab" href="#complete">已完成</a></li>
-                <li class=""><a data-toggle="tab" href="#canceled">已取消</a></li>
+        <div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="AwaitingPayment-tab" data-toggle="tab"  href="#AwaitingPayment" role="tab" aria-controls="AwaitingPayment" aria-selected="true"> 待支付</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="AwaitingShipment-tab" data-toggle="tab" href="#AwaitingShipment" role="tab" aria-controls="AwaitingPayment" aria-selected="false"> 待发货</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="shipped-tab" data-toggle="tab" href="#shipped" role="tab" aria-controls="shipped" aria-selected="false">已发货</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="complete-tab" data-toggle="tab" href="#complete" role="tab" aria-controls="complete" aria-selected="false">已完成</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="canceled-tab" data-toggle="tab" href="#canceled" role="tab" aria-controls="canceled" aria-selected="false">已取消</a>
+                </li>
             </ul>
             <div class="tab-content">
 
                 <!-- 待支付订单 -->
-                <div id="AwaitingPayment" class="tab-pane active">
+                <div id="AwaitingPayment" class="tab-pane fade show active" role="tabpanel" aria-labelledby="AwaitingPayment-tab">
                     <p>
                     <table id="table_bug_report1" class="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead class="thead-light">
                         <tr>
-                            <th class="center">
-                                <label><input type="checkbox" class="ace-checkbox-2"><span class="lbl"></span></label>
-                            </th>
                             <th>商品标题</th>
                             <th>价格</th>
                             <th class="hidden-480">数量</th>
-                            <th>sku</th>
+                            <th>商品ID</th>
                             <th class="hidden-480">订单编号</th>
                             <th class="hidden-480">订单创建时间</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td class="center">
-                                <label><input type="checkbox" class="input"><span class="lbl"></span></label>
-                            </td>
-                            <td><a href="bvo-goodsdetail.html">max.com</a></td>
-                            <td>$60</td>
-                            <td class="hidden-480">4</td>
-                            <td class="">GM100320</td>
-                            <td class="hidden-480">75684894</td>
-                            <td>
-                                2017-23-02 19:00:20
-                            </td>
+                        <tr v-for="v in orders" v-if="v.order_status==awaitingPayment">
 
+                            <td><button @click="order=v" type="button" class="btn btn-link" data-toggle="modal" data-target="#goodsModal">{{v.goods_title}}</button></td>                            <td>${{v.goods_price}}</td>
+                            <td class="hidden-480">{{v.order_amount}}</td>
+                            <td class="">{{v.goods_id}}</td>
+                            <td class="hidden-480">{{v.order_id}}</td>
+                            <td>
+                                {{v.order_cre_time | formatDatetime}}
+                            </td>
                         </tr>
 
                         </tbody>
@@ -97,40 +132,36 @@
                 </div>
 
                 <!-- 待发货订单 -->
-                <div id="AwaitingShipment" class="tab-pane">
+                <div id="AwaitingShipment" class="tab-pane fade" role="tabpanel" aria-labelledby="AwaitingShipment-tab">
                     <p>
                     <table id="table_bug_report2" class="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead class="thead-light">
                         <tr>
-                            <th class="center">
-                                <label><input type="checkbox" class="ace-checkbox-2"><span class="lbl"></span></label>
-                            </th>
                             <th>商品标题</th>
                             <th>价格</th>
                             <th class="hidden-480">数量</th>
-                            <th>sku</th>
+                            <th>商品ID</th>
                             <th class="hidden-480">订单编号</th>
-                            <th class="hidden-480">订单创建时间</th>
+                            <th class="hidden-480">订单支付时间</th>
+                            <th>运送方式</th>
 
                             <th>操作</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td class="center">
-                                <label><input type="checkbox" class="input"><span class="lbl"></span></label>
-                            </td>
-                            <td><a href="bvo-goodsdetail.html">best.com</a></td>
-                            <td>$75</td>
-                            <td class="hidden-480">6,500</td>
-                            <td class="">Apr 03</td>
-                            <td class="hidden-480">75684894</td>
-                            <td>
+                        <tr v-for="v in orders" v-if="v.order_status==awaitingShipment">
 
-                            </td>
+                            <td><button @click="order=v" type="button" class="btn btn-link" data-toggle="modal" data-target="#goodsModal">{{v.goods_title}}</button></td>                            <td>${{v.goods_price}}</td>
+                            <td class="hidden-480">{{v.order_amount}}</td>
+                            <td class="">{{v.goods_id}}</td>
+                            <td class="hidden-480">{{v.order_id}}</td>
                             <td>
-                                <button class="btn btn-minier btn-purple send-out">发货</button>
+                                {{v.order_pay_time | formatDatetime}}
+                            </td>
+                            <td>{{v.trans_way}}</td>
+                            <td>
+                                <button type="button" class="btn btn-info" @click="transfer(v.order_id)">发货</button>
                             </td>
                         </tr>
 
@@ -140,20 +171,17 @@
                 </div>
 
                 <!-- 已发货订单 -->
-                <div id="shipped" class="tab-pane">
+                <div id="shipped" class="tab-pane fade" role="tabpanel" aria-labelledby="shipped-tab">
                     <p>
                     <table id="table_bug_report3" class="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead class="thead-light">
                         <tr>
-                            <th class="center">
-                                <label><input type="checkbox" class="ace-checkbox-2"><span class="lbl"></span></label>
-                            </th>
                             <th>商品标题</th>
                             <th>价格</th>
                             <th class="hidden-480">数量</th>
-                            <th>sku</th>
+                            <th>商品ID</th>
                             <th>订单编号</th>
-                            <th class="hidden-480">订单创建时间</th>
+                            <th class="hidden-480">发货时间</th>
                             <th class="hidden-480">物流跟踪号</th>
                             <th>操作</th>
                         </tr>
@@ -161,21 +189,19 @@
 
                         <tbody>
 
-                        <tr>
-                            <td class="center">
-                                <label><input type="checkbox" class="input"><span class="lbl"></span></label>
-                            </td>
-                            <td><a href="bvo-goodsdetail.html">ace.com</a></td>
-                            <td>$45</td>
-                            <td class="hidden-480">2</td>
-                            <td>GM100320</td>
+                        <tr v-for="(v,k) in orders" v-if="v.order_status==shipped">
+                            <td><button @click="order=v" type="button" class="btn btn-link" data-toggle="modal" data-target="#goodsModal">{{v.goods_title}}</button></td>
+                            <td>${{v.goods_price}}</td>
+                            <td class="hidden-480">{{v.order_amount}}</td>
+                            <td>{{v.goods_id}}</td>
                             <td>
-                                52223566
+                                {{v.order_id}}
                             </td>
-                            <td>Feb 12</td>
-                            <td><a href="brand-ordertracking.html">46578990890</a></td>
+                            <td>{{v.order_send_time | formatDatetime}}</td>
+                            <td><button type="button" class="btn btn-link" @click="brandOrderTracking(v.order_log_id)">{{v.order_log_id}}</button></td>
                             <td>
-                                <button class="btn btn-minier btn-yellow cancel">取消</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#completeModal" @click="selKey=k">完成</button>
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmModal" @click="selKey=k">取消</button>
                             </td>
                         </tr>
 
@@ -183,20 +209,19 @@
                     </table>
                     </p>
                 </div>
-                <div id="complete" class="tab-pane">
+
+                <!-- 已完成 -->
+                <div id="complete" class="tab-pane fade" role="tabpanel" aria-labelledby="complete-tab">
                     <p>
                     <table id="table_bug_report4" class="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead class="thead-light">
                         <tr>
-                            <th class="center">
-                                <label><input type="checkbox" class="ace-checkbox-2"><span class="lbl"></span></label>
-                            </th>
                             <th>商品标题</th>
                             <th>价格</th>
                             <th class="hidden-480">数量</th>
-                            <th>sku</th>
+                            <th>商品ID</th>
                             <th>订单编号</th>
-                            <th class="hidden-480">订单创建时间</th>
+                            <th class="hidden-480">订单完成时间</th>
                             <th class="hidden-480">物流跟踪号</th>
 
                         </tr>
@@ -204,18 +229,15 @@
 
                         <tbody>
 
-                        <tr>
-                            <td class="center">
-                                <label><input type="checkbox" class="input"><span class="lbl"></span></label>
-                            </td>
-                            <td><a href="bvo-goodsdetail.html">ace.com</a></td>
-                            <td>$45</td>
-                            <td class="hidden-480">3</td>
-                            <td>GM100320</td>
-                            <td>896777676</td>
-                            <td class="hidden-phone">Feb 12</td>
-                            <td class="hidden-480"><a href="brand-ordertracking.html">46578990890</a></td>
+                        <tr v-for="v in orders" v-if="v.order_status==complete">
 
+                            <td><button @click="order=v" type="button" class="btn btn-link" data-toggle="modal" data-target="#goodsModal">{{v.goods_title}}</button></td>
+                            <td>${{v.goods_price}}</td>
+                            <td class="hidden-480">{{v.order_amount}}</td>
+                            <td>{{v.goods_id}}</td>
+                            <td>{{v.order_id}}</td>
+                            <td class="hidden-phone">{{v.order_complete_time | formatDatetime}}</td>
+                            <td class="hidden-480"><button type="button" class="btn btn-link" @click="brandOrderTracking(v.order_log_id)">{{v.order_log_id}}</button></td>
 
                         </tr>
 
@@ -223,36 +245,32 @@
                     </table>
                     </p>
                 </div>
-                <div id="canceled" class="tab-pane">
+
+                <!-- 已取消 -->
+                <div id="canceled" class="tab-pane fade" role="tabpanel" aria-labelledby="canceled-tab">
                     <p>
                     <table id="table_bug_report5" class="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead class="thead-light">
                         <tr>
-                            <th class="center">
-                                <label><input type="checkbox" class="ace-checkbox-2"><span class="lbl"></span></label>
-                            </th>
                             <th>商品标题</th>
                             <th>价格</th>
                             <th class="hidden-480">数量</th>
-                            <th>sku</th>
+                            <th>商品ID</th>
                             <th>订单编号</th>
-                            <th class="hidden-480">订单创建时间</th>
+                            <th class="hidden-480">订单取消时间</th>
 
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td class="center">
-                                <label><input type="checkbox" class="input"><span class="lbl"></span></label>
-                            </td>
-                            <td><a href="bvo-goodsdetail.html">base.com</a></td>
-                            <td>$35</td>
-                            <td class="hidden-480">2,595</td>
-                            <td class="hidden-phone">Feb 18</td>
-                            <td class="hidden-480">75684894</td>
+                        <tr v-for="v in orders" v-if="v.order_status==canceled">
+                            <td><button @click="order=v" type="button" class="btn btn-link" data-toggle="modal" data-target="#goodsModal">{{v.goods_title}}</button></td>
+                            <td>${{v.goods_price}}</td>
+                            <td class="hidden-480">{{v.order_amount}}</td>
+                            <td class="hidden-phone">{{v.goods_id}}</td>
+                            <td class="hidden-480">{{v.order_id}}</td>
                             <td>
-
+                                {{v.order_cancel_time | formatDatetime}}
                             </td>
 
                         </tr>
@@ -264,61 +282,248 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <!--商品信息展示-->
+    <div class="modal fade" id="goodsModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">商品详细信息</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="goods-header">
+                        <div class="goods-header-left">
+                            <img :src="'..'+order.goods_pic" alt=""/>
+                        </div>
+
+                        <div class="goods-header-right">
+                            <p>{{order.goods_title}}</p>
+                            <p class="red">${{order.goods_price}}</p>
+                            <p>商品ID：{{order.goods_id}}</p>
+                            <p>品牌：{{order.brand_name}}</p>
+                            <p>库存：{{order.goods_amount}}</p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item"><a class="nav-link active"  data-toggle="tab" href="#ebay"> 商品描述</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="ebay" class="tab-pane fade show active">{{order.goods_describe}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- completeModal-->
+    <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="completeModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="completeModalTitle">确定设置订单状态为已完成吗？</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>确定设置订单状态为<span class="badge badge-info">已完成</span>吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="completeOrder(orders[selKey].order_id)">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 取消订单确认框Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalTitle">确定取消订单吗？</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>确定取消订单吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#validate-payment-password">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 输入支付密码Modal -->
+    <div class="modal fade" id="validate-payment-password" tabindex="-1" role="dialog" aria-labelledby="validate-payment-password-ModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validate-payment-password-ModalTitle">请输入支付密码</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="payment-password" class="col-form-label">请输入支付密码</label>
+                    <input type="password" class="form-control" id="payment-password" v-model="paymentPassword">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" @click="cancelOrder(orders[selKey].order_id,paymentPassword)">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 取消结果Modal -->
+    <div class="modal fade" id="cancelResModal" tabindex="-1" role="dialog" aria-labelledby="cancelResModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelResModalTitle">操作结果</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{cancelMsg}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
-
-
-<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootbox.min.js"></script>
+</body>
 
 
 <script>
-    var ax=axios.create({baseURL:'http://localhost:8080/online_retailer'})
+    var ax=axios.create({baseURL:'http://localhost:8080/online_retailer/brandOrder'});
 
     var app=new Vue({
         el:'#main-content',
         data:{
-            orders:[]
+            orders:[],
+            order:'',//被选中的订单
+            selKey:'',//被选中的订单编号
+            //订单状态常量
+            awaitingPayment:0,
+            awaitingShipment:1,
+            shipped:2,
+            complete:3,
+            canceled:4,
+
+            paymentPassword:'',
+            cancelRes:false,//取消订单结果
+            cancelMsg:''
         },
         methods:{
-            getOrders:function(){
+            getOrders:function(){//获取订单信息
                 var that=this;
                 ax.get('/getOrders')
                     .then(function(response){
-                        console.log(response.data);
-                    }).catch(function(error){
+                        that.orders=response.data;
+                        // console.log(response.data);
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+            },
+            completeOrder:function(order_id){//完成订单
+                var that=this;
+                ax.post("/completeOrder",{orderId:order_id})
+                    .then(function(response){
+                        if(response.data){
+                            that.orders[that.selKey].order_status=that.complete;
+                            that.orders[that.selKey].order_complete_time=new Date();
+                        }
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+            },
+            cancelOrder:function(order_id,paymentPassword){//取消订单
+                var that=this;
+                ax.post('/cancelOrder',{orderId:order_id,paymentPassword:paymentPassword})
+                    .then(function(response){
+                        that.cancelRes=response.data.res;
+                        that.cancelMsg=response.data.msg;
+                        if(that.cancelRes){
+                            that.orders[that.selKey].order_status=that.canceled;
+                            that.orders[that.selKey].order_cancel_time=new Date();
+                        }
+                        $('#cancelResModal').modal('show');
+                        // console.log(response.data);
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+            },
+            transfer:function(order_id){//保存订单ID到Session，然后跳转到发货页面
+                var that=this;
+                ax.post('/saveOrderId',{orderId:order_id})
+                    .then(function(response){
+                        if(response.data){
+                            window.location.href="brand-order-transfer.html";
+                        }
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+            },
+            brandOrderTracking:function (order_log_id) {
+                var that=this;
+                ax.post('/saveOrderLogId',{orderLogId:order_log_id})
+                    .then(function(response){
+                        if(response.data){
+                            window.location.href="brand-ordertracking.html";
+                        }
+                    })
+                    .catch(function(error){
                         console.log(error);
                     })
             }
         },
-        mounted:function(){
+        filters: {//过滤器
+            formatDatetime: function (value) {//把时间戳转换为标准时间格式
+                var date = new Date(value);
+                var y = date.getFullYear();
+                var MM = date.getMonth() + 1;
+                MM = MM < 10 ? ('0' + MM) : MM;
+                var d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                var h = date.getHours();
+                h = h < 10 ? ('0' + h) : h;
+                var m = date.getMinutes();
+                m = m < 10 ? ('0' + m) : m;
+                var s = date.getSeconds();
+                s = s < 10 ? ('0' + s) : s;
+                return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;
+            }
+        },
+        mounted:function(){//加载页面后执行的方法
             this.getOrders();
         }
     });
 
-
-    $(function () {
-
-        $('.ace-checkbox-2').each(function () {
-            $('.ace-checkbox-2').change(function () {
-                if ($(this).prop('checked')) {
-                    $(this).parents('.tab-pane').find('.input').prop('checked', true);
-                } else {
-                    $(this).parents('.tab-pane').find('.input').prop('checked', false);
-                }
-            })
-
-        })
-
-        $('.send-out').click(function () {
-            bootbox.alert("已发货!");
-        })
-        $('.cancel').click(function () {
-            bootbox.alert("订单已取消!");
-        })
-
-    })
-
 </script>
-</body>
 </html>
