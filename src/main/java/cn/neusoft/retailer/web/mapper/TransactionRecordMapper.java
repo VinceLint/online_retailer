@@ -4,11 +4,11 @@ import cn.neusoft.retailer.web.pojo.TransactionRecord;
 import java.util.List;
 
 public interface TransactionRecordMapper {
-    int deleteByPrimaryKey(String traRecId);
+    int deleteByPrimaryKey(Integer traRecId);
 
     int insert(TransactionRecord record);
 
-    TransactionRecord selectByPrimaryKey(String traRecId);
+    TransactionRecord selectByPrimaryKey(Integer traRecId);
 
     List<TransactionRecord> selectAll();
 

@@ -17,7 +17,7 @@ public class Goods {
 
     private Integer goodsStatus;
 
-    private Float goodsLenght;
+    private Float goodsLength;
 
     private Float goodsWidth;
 
@@ -91,12 +91,12 @@ public class Goods {
         this.goodsStatus = goodsStatus;
     }
 
-    public Float getGoodsLenght() {
-        return goodsLenght;
+    public Float getGoodsLength() {
+        return goodsLength;
     }
 
-    public void setGoodsLenght(Float goodsLenght) {
-        this.goodsLenght = goodsLenght;
+    public void setGoodsLength(Float goodsLenght) {
+        this.goodsLength = goodsLenght;
     }
 
     public Float getGoodsWidth() {

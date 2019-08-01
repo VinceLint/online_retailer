@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.ParameterMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.Parameter" >
+    <id column="par_id" property="parId" jdbcType="VARCHAR" />
+    <result column="par_value" property="parValue" jdbcType="INTEGER" />
+    <result column="par_describe" property="parDescribe" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPage" parameterType="Integer" resultMap="BaseResultMap">
+    select * from parameter limit ${(pageNum - 1)*7},7
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from parameter
+    where par_id = #{parId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Parameter" >
+    insert into parameter (par_id, par_value, par_describe
+      )
+    values (#{parId,jdbcType=VARCHAR}, #{parValue,jdbcType=INTEGER}, #{parDescribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Parameter" >
+    update parameter
+    set par_value = #{parValue,jdbcType=INTEGER},
+      par_describe = #{parDescribe,jdbcType=VARCHAR}
+    where par_id = #{parId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select par_id, par_value, par_describe
+    from parameter
+    where par_id = #{parId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select par_id, par_value, par_describe
+    from parameter
+  </select>
+</mapper>

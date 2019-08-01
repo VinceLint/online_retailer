@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.WalletMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.Wallet" >
+    <id column="wal_id" property="walId" jdbcType="INTEGER" />
+    <result column="wal_type" property="walType" jdbcType="INTEGER" />
+    <result column="wal_password" property="walPassword" jdbcType="VARCHAR" />
+    <result column="wal_balance" property="walBalance" jdbcType="REAL" />
+    <result column="wal_pay_id" property="walPayId" jdbcType="VARCHAR" />
+    <result column="wal_email" property="walEmail" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wallet
+    where wal_id = #{walId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Wallet" >
+    insert into wallet (wal_id, wal_type, wal_password, 
+      wal_balance, wal_pay_id, wal_email
+      )
+    values (#{walId,jdbcType=INTEGER}, #{walType,jdbcType=INTEGER}, #{walPassword,jdbcType=VARCHAR}, 
+      #{walBalance,jdbcType=REAL}, #{walPayId,jdbcType=VARCHAR}, #{walEmail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Wallet" >
+    update wallet
+    set wal_type = #{walType,jdbcType=INTEGER},
+      wal_password = #{walPassword,jdbcType=VARCHAR},
+      wal_balance = #{walBalance,jdbcType=REAL},
+      wal_pay_id = #{walPayId,jdbcType=VARCHAR},
+      wal_email = #{walEmail,jdbcType=VARCHAR}
+    where wal_id = #{walId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select wal_id, wal_type, wal_password, wal_balance, wal_pay_id, wal_email
+    from wallet
+    where wal_id = #{walId,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" >
+    select wal_id, wal_type, wal_password, wal_balance, wal_pay_id, wal_email
+    from wallet
+  </select>
+
+</mapper>

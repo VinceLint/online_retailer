@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords"
+          content="Gadget Sign Up Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design"/>
+
+    <!-- Meta tags -->
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!--stylesheets-->
+    <link href="css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//style sheet end here-->
+    <!--    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">-->
+    <!--    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">-->
+</head>
+<body>
+<h1 class="welcome">欢迎</h1>
+<div class="w3layouts-two-grids">
+    <div class="mid-class">
+        <div class="txt-left-side">
+            <h2> 注册 </h2>
+            <form action="" method="post">
+                <div class="form-left-to-w3l">
+                    <span class="fa fa-user-o" aria-hidden="true"></span>
+                    <input id="userName" placeholder="请输入用户名 (格式为汉字、字母和数字的组合)" required="" type="text"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l ">
+                    <span aria-hidden="true" class="fa fa-lock"></span>
+                    <input id="userPassword" placeholder="请输入密码 (格式为6-16位字母与数字的组合)" required="" type="password"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l">
+                    <span aria-hidden="true" class="fa fa-envelope-o"></span>
+                    <input id="userMail" placeholder="请输入邮箱地址 (格式为XX@XX.)" required="" type="email"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-to-w3l">
+                    <span class="fa fa-phone" aria-hidden="true"></span>
+                    <input id="userPhone" placeholder="请输入手机号码 (格式为11位纯数字)" required="" type="text"/>
+                    <div class="clear"></div>
+                </div>
+                <div class="left-side-forget">
+                    <input class="checked" name="mvo_ornot" type="checkbox">
+                    <span class="mvo">品牌商? </span>
+                </div>
+                <div class="mvo_info">
+                    <div class="form-left-to-w3l">
+                        <span aria-hidden="true" class="fa fa-share"></span>
+                        <input id="mvoUrl" placeholder="证书地址" required="" type="text"/>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-left-to-w3l" id="form-left-to-w3m">
+                        <span style="font-size: 12px">认证类型</span>
+                        <select id="mvoType">
+                            <option value="0">百货/超市</option>
+                            <option value="1">休闲娱乐</option>
+                            <option value="2">服装</option>
+                            <option value="3">食品</option>
+                            <option value="4">家具/家电</option>
+                            <option value="5">生活服务</option>
+                            <option value="6">化妆品</option>
+                            <option value="7">珠宝</option>
+                            <option value="8">其他</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="btnn">
+                    <button id="signup" type="submit">注册</button>
+                </div>
+            </form>
+            <div class="w3layouts_more-buttn">
+                <h3>已有账号..?
+                    <a href="login.html">登录
+                    </a>
+                </h3>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script>
+    var path = "http://localhost:8080/online_retailer";
+    $(function () {
+        var userPrivilege = 0;
+        $("input[name='mvo_ornot']").on("click", function () {
+            if ($(this).prop("checked")) {
+                $(".mvo_info").css("display", "block");
+                $(".main-two-w3ls").css("padding-bottom", "20px");
+                userPrivilege = 1;
+            } else {
+                $(".mvo_info").css("display", "none");
+                $(".main-two-w3ls").css("padding-bottom", "0px");
+                userPrivilege = 0;
+            }
+        });
+        $("#signup").on("click", function () {
+            if (!$("input[name='mvo_ornot']").is(":checked")) {
+                if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "") {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: path + "/user/register",
+                        dataType: "json",
+                        data: JSON.stringify({
+                            "userName": $("#userName").val(),
+                            "userMail": $("#userMail").val(),
+                            "userPhone": $("#userPhone").val(),
+                            "userPassword": $("#userPassword").val(),
+                            "userPrivilege": userPrivilege
+                        }),
+                        async: false,
+                        success: function (data) {
+                            if (data.SUCCESS) {
+                                alert(data.SUCCESS);
+                                window.location.href = (path + "/login.html");
+                            } else if (data.INVALID_USERNAME) {
+                                alert(data.INVALID_USERNAME);
+                                $("#userName").val("");
+                            } else if (data.INVALID_PASSWD) {
+                                alert(data.INVALID_PASSWD);
+                                $("#userPassword").val("");
+                                $("#checkPassword").val("");
+                            } else if (data.INVALID_EMAIL) {
+                                alert(data.INVALID_EMAIL);
+                                $("#userMail").val("");
+                            } else if (data.INVALID_PHONE) {
+                                alert(data.INVALID_PHONE);
+                                $("#userPhone").val("");
+                            } else {
+                                console.log("ERROR: " + data.ERROR);
+                            }
+                        },
+                        error: function (result) {
+                            console.log("ERROR: " + result);
+                        }
+                    });
+                }
+            } else {
+                if ($("#userName").val() != "" && $("#userPhone").val() != "" && $("#userMail").val() != "" && $("#userPassword").val() != "" && $("#mvoUrl").val() != "") {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: path + "/user/register",
+                        dataType: "json",
+                        data: JSON.stringify({
+                            "userName": $("#userName").val(),
+                            "userMail": $("#userMail").val(),
+                            "userPhone": $("#userPhone").val(),
+                            "userPassword": $("#userPassword").val(),
+                            "mvoUrl": $("#mvoUrl").val(),
+                            "mvoType": parseInt($("#mvoType option:selected").val()),
+                            "userPrivilege": userPrivilege
+                        }),
+                        async: false,
+                        success: function (data) {
+                            if (data.SUCCESS) {
+                                alert(data.SUCCESS);
+                                window.location.href = (path + "/login.html");
+                            } else if (data.INVALID_USERNAME) {
+                                alert(data.INVALID_USERNAME);
+                                $("#userName").val("");
+                            } else if (data.INVALID_PASSWD) {
+                                alert(data.INVALID_PASSWD);
+                                $("#userPassword").val("");
+                                $("#checkPassword").val("");
+                            } else if (data.INVALID_EMAIL) {
+                                alert(data.INVALID_EMAIL);
+                                $("#userMail").val("");
+                            } else if (data.INVALID_PHONE) {
+                                alert(data.INVALID_PHONE);
+                                $("#userPhone").val("");
+                            } else if (data.INVALID_URL) {
+                                alert(data.INVALID_URL);
+                                $("#mvoUrl").val("");
+                            } else {
+                                console.log("ERROR: " + data.ERROR);
+                            }
+                        },
+                        error: function (result) {
+                            console.log("ERROR: " + result);
+                        }
+                    });
+                }
+            }
+        })
+    })
+</script>
+</body>
+
+</html>

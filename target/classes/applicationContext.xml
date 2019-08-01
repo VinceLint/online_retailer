@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           https://www.springframework.org/schema/context/spring-context.xsd
+
+
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
+    <!--Redis配置-->
+    <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
+    <!--邮件配置-->
+    <context:property-placeholder location="classpath:mail.properties" ignore-unresolvable="true"/>
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+    </bean>
+
+    <!--配置sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- redis连接池 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"></property>
+        <property name="maxTotal" value="${redis.maxTotal}"></property>
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"></property>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"></property>
+    </bean>
+
+    <!-- jedis连接工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"></property>
+        <property name="port" value="${redis.port}"></property>
+        <property name="timeout" value="${redis.timeout}"></property>
+        <property name="poolConfig" ref="poolConfig"></property>
+    </bean>
+
+    <!--redis redisTemplate -->
+    <bean id="jedisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"></property>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+    <bean id="stringRedisSerializer"
+          class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+    <bean id="jackson2JsonRedisSerializer"
+          class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+    <bean id="jdkSerializationRedisSerializer"
+          class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+
+    <!--配置邮件接口-->
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.smtp.host}"/>
+        <property name="username" value="${mail.smtp.username}"/>
+        <property name="password" value="${mail.smtp.password}"/>
+        <property name="defaultEncoding" value="${mail.smtp.defaultEncoding}"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+                <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--Spring注解扫描-->
+    <context:annotation-config/>
+
+    <!--<aop:aspectj-autoproxy/>-->
+    <!--Spring组件扫描-->
+    <context:component-scan base-package="cn.neusoft.retailer.web"/>
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--开启事务注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 不需要一个个地注册你的所有映射器。
+     你可以让 MyBatis-Spring 对类路径进行扫描来发现它们。
+     通过使用逗号或分号分隔，你可以设置多个包
+     会自动注入 SqlSessionFactory-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+    <!--<property name="basePackage" value="cn.neusoft.retailer.web.mapper" />-->
+
+    <!--&lt;!&ndash; 如果使用多个数据源，使用sqlSessionFactoryBeanName属性指定SqlSessionFactory&ndash;&gt;-->
+    <!--<property name="sqlSessionFactoryBeanName"  value="sqlSessionFactory" />-->
+    <!--</bean>-->
+
+    <!--接口mapper-->
+    <bean id="brandMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.BrandMapper"></property>
+    </bean>
+    <bean id="dictionaryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.DictionaryMapper"></property>
+    </bean>
+    <bean id="dropshipMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.DropshipMapper"></property>
+    </bean>
+    <bean id="goodsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.GoodsMapper"></property>
+    </bean>
+    <bean id="logisticsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.LogisticsMapper"></property>
+    </bean>
+    <bean id="logisticsNodeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.LogisticsNodeMapper"></property>
+    </bean>
+    <bean id="menuMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.MenuMapper"></property>
+    </bean>
+    <bean id="orderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.OrderMapper"></property>
+    </bean>
+    <bean id="parameterMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.ParameterMapper"></property>
+    </bean>
+    <bean id="storeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.StoreMapper"></property>
+    </bean>
+    <bean id="transactionRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.TransactionRecordMapper"></property>
+    </bean>
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.UserMapper"></property>
+    </bean>
+    <bean id="userWishlistMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.UserWishlistMapper"></property>
+    </bean>
+    <bean id="walletMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.WalletMapper"></property>
+    </bean>
+    <bean id="wishDetailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="cn.neusoft.retailer.web.mapper.WishDetailMapper"></property>
+    </bean>
+
+    <bean id="RedisClient" class="cn.neusoft.retailer.web.tools.RedisClient"/>
+
+    <!-- Kaptcha组件配置 -->
+    <bean id="kaptchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <!-- 验证码宽度 -->
+                        <prop key="kaptcha.image.width">80</prop>
+                        <!-- 验证码高度 -->
+                        <prop key="kaptcha.image.height">25</prop>
+                        <!-- 生成验证码内容范围 -->
+                        <prop key="kaptcha.textproducer.char.string">0123456789AKWUEHPMRX</prop>
+                        <!-- 验证码个数 -->
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                        <!-- 是否有边框 -->
+                        <prop key="kaptcha.border">no</prop>
+                        <!-- 边框颜色 -->
+                        <prop key="kaptcha.border.color">105,179,90</prop>
+                        <!-- 边框厚度 -->
+                        <prop key="kaptcha.border.thickness">1</prop>
+                        <!-- 验证码字体颜色 -->
+                        <prop key="kaptcha.textproducer.font.color">0,0,0</prop>
+                        <!-- 验证码字体大小 -->
+                        <prop key="kaptcha.textproducer.font.size">15</prop>
+                        <!-- 验证码所属字体样式 -->
+                        <prop key="kaptcha.textproducer.font.names">Courier</prop>
+                        <!-- 干扰实现类 -->
+                        <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+                        <!-- 验证码文本字符间距 -->
+                        <prop key="kaptcha.textproducer.char.space">8</prop>
+                        <!-- 图片样式 :阴影-->
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
+                        <!-- 背景实现类-->
+                        <prop key="kaptcha.background.impl">com.google.code.kaptcha.impl.DefaultBackground</prop>
+                        <!-- 背景颜色渐变,开始颜色 -->
+                        <prop key="kaptcha.background.clear.from">255,255,255</prop>
+                        <!-- 背景颜色渐变,结束颜色 -->
+                        <prop key="kaptcha.background.clear.to">255,255,255</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+
+    <!--这个注解是必要的，图片上传必要-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="104857600"/>
+        <property name="maxInMemorySize" value="4096"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+</beans>

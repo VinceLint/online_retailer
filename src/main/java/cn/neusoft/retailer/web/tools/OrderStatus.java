@@ -6,5 +6,5 @@ package cn.neusoft.retailer.web.tools;
  * @date 2019/7/31 10:14
  */
 public enum OrderStatus {
-    待支付,代发货,已发货,已完成,已取消
+    待支付,待发货,已发货,已完成,已取消
 }
