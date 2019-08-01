@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ace.min.css">
+        <link rel="stylesheet" href="css/ace-skins.min.css">
+        <link rel="stylesheet" href="css/ace-responsive.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+
+<body>
+ <script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="//unpkg.com/element-ui@2.11.0/lib/index.js"></script>
+<div id="app">
+	<div id="page-content" class="clearfix" style="margin-top: 45px;">
+             <div class="page-header position-relative">
+              <h1 style="color: #2679b5;">借卖方<small><i class="el-icon-d-arrow-right"></i>心愿单</small></h1>
+            </div>
+<template>
+  <el-table
+    :data="tableData"
+    stripe
+    height="450"
+    style="width: 100%">
+    <el-table-column
+      label="商品Id"
+      prop="goodsId">
+    </el-table-column>
+    <el-table-column
+      label="商品图片"
+      >
+      <template slot-scope="scope">
+        <span style="margin-left: 10px"><img :src="scope.row.goodsPic"></span>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="商品信息">
+       <template slot-scope="scope">
+      
+                   
+                    <div class="">
+                    <p>{{scope.row.goodsTitle}}</p>
+                    <span class="red">${{scope.row.goodsPrice}}</span>
+                    <p>商品类别：{{scope.row.goodsType}}</p>
+                    
+                    </div>
+                    
+                    </template>
+    </el-table-column>
+    <el-table-column
+      align="right" label="心愿单商品操作">
+     
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row, scope.row.name)">查看详情</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+</div>
+</body>
+
+<style>
+ @import url("//unpkg.com/element-ui@2.11.0/lib/theme-chalk/index.css");
+
+</style>
+
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+	
+  var Main = {
+    data() {
+      return {
+        tableData: [{
+          goodsId: '001',
+          goodsPic: 'pig',
+          goodsTitle: '一头猪',
+          goodsPrice: '150',
+          goodsAmount:'50',
+          goodsType:'宠物',
+          goodsDescrible:'一头猪',
+          goodsStatus:'A',
+          brandId:'001'
+        }, {
+          goodsId: '001',
+          goodsPic: 'pig',
+          goodsTitle: '一头猪',
+          goodsPrice: '150',
+           goodsAmount:'50',
+          goodsType:'宠物',
+          goodsDescrible:'一头猪',
+          goodsStatus:'A',
+          brandId:'001'
+        }, {
+          goodsId: '001',
+          goodsPic: 'pig',
+         goodsTitle: '一头猪',
+          goodsPrice: '150',
+           goodsAmount:'50',
+          goodsType:'宠物',
+          goodsDescrible:'一头猪',
+          goodsStatus:'A',
+          brandId:'001'
+        }, {
+          goodsId: '001',
+          goodsPic: 'pig',
+         goodsTitle: '一头猪',
+          goodsPrice: '150',
+           goodsAmount:'50',
+          goodsType:'宠物',
+          goodsDescrible:'一头猪',
+          goodsStatus:'A',
+          brandId:'001'
+        }],
+        search: ''
+      }
+    },
+    methods: {
+      handleEdit(index, row, name) {
+        console.log(index, row, name);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
+    },
+  }
+var Ctor = Vue.extend(Main)
+new Ctor().$mount('#app')
+</script>
+	
+</html>
