@@ -83,10 +83,10 @@ public class Test {
         User user = new User();
         //获取枚举类的value的两种方法
         //1.通过枚举值
-        System.out.println("'MvoType.其他'的枚举值为: "+MvoType.其他);
+        System.out.println("'MvoType.其他'的枚举值为: "+MvoType.其他); //其他
         //2.通过枚举数组下标,默认从0开始
-        System.out.println("MvoType第8个枚举值为: "+MvoType.values()[8]);
+        System.out.println("MvoType第8个枚举值为: "+MvoType.values()[8]);  //其他
         //获取枚举值对应的code值(下标值),默认从0开始
-        System.out.println("MvoType的枚举值'其他'对应的code值为: "+MvoType.其他.ordinal());
+        System.out.println("MvoType的枚举值'其他'对应的code值为: "+MvoType.其他.ordinal()); //8
     }
 }
