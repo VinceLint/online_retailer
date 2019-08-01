@@ -13,4 +13,6 @@ public interface LogisticsNodeMapper {
     List<LogisticsNode> selectAll();
 
     int updateByPrimaryKey(LogisticsNode record);
+
+    List<LogisticsNode> selectByLogId(String logId);
 }

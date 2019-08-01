@@ -1,16 +1,21 @@
 package cn.neusoft.retailer.web;
 
 import cn.neusoft.retailer.web.mapper.BrandMapper;
+import cn.neusoft.retailer.web.mapper.DictionaryMapper;
 import cn.neusoft.retailer.web.mapper.UserMapper;
+import cn.neusoft.retailer.web.pojo.Order;
 import cn.neusoft.retailer.web.pojo.User;
+import cn.neusoft.retailer.web.service.BrandOrderService;
 import cn.neusoft.retailer.web.service.BrandService;
-import cn.neusoft.retailer.web.service.OrderService;
+import cn.neusoft.retailer.web.service.DictionaryService;
 import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.MvoType;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  * @author 林跃涛
@@ -23,7 +28,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 public class Test {
     @Autowired
-    private OrderService orderService;
+    private BrandOrderService brandOrderService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -32,6 +37,11 @@ public class Test {
     private BrandService brandService;
     @Autowired
     private BrandMapper brandMapper;
+    @Autowired
+    private DictionaryService dictionaryService;
+    @Autowired
+    private DictionaryMapper dictionaryMapper;
+
     /**
      *@描述
      *@参数
@@ -46,7 +56,7 @@ public class Test {
         user.setUserId(123);
         System.out.println(brandService.selectCountBrand(123));
         System.out.println(brandMapper.selectByPage(123, 0, 5));
-        brandService.deleteByPrimaryKey(562);
+//        brandService.deleteByPrimaryKey(562);
 //        for (int i = 0; i < 20; i ++){
 //            Brand brand = new Brand();
 //            brand.setBrandId(i+2000);
@@ -65,7 +75,7 @@ public class Test {
      */
     @org.junit.Test
     public void testOrderService() {
-        orderService.selectByBrandUserId(1).forEach(map -> {
+        brandOrderService.selectByBrandUserId(1).forEach(map -> {
             System.out.println(map);
         });
     }
@@ -83,10 +93,21 @@ public class Test {
         User user = new User();
         //获取枚举类的value的两种方法
         //1.通过枚举值
-        System.out.println("'MvoType.其他'的枚举值为: "+MvoType.其他);
+        System.out.println("'MvoType.其他'的枚举值为: "+MvoType.其他); //其他
         //2.通过枚举数组下标,默认从0开始
-        System.out.println("MvoType第8个枚举值为: "+MvoType.values()[8]);
+        System.out.println("MvoType第8个枚举值为: "+MvoType.values()[8]);  //其他
         //获取枚举值对应的code值(下标值),默认从0开始
-        System.out.println("MvoType的枚举值'其他'对应的code值为: "+MvoType.其他.ordinal());
+        System.out.println("MvoType的枚举值'其他'对应的code值为: "+MvoType.其他.ordinal()); //8
+    }
+
+
+    @org.junit.Test
+    public void testMysql(){
+//        List<Dictionary> dictionarys= dictionaryMapper.selectByType("USER_PRIVILEGE");
+//        System.out.println(dictionarys);
+        Order order=new Order();
+        brandOrderService.insert(order);
+        List<Order> orders=brandOrderService.selectAll();
+        System.out.println(orders.get(0).getOrderId());
     }
 }

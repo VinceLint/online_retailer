@@ -33,4 +33,8 @@
     select log_node_id, log_id, log_node_name, log_arr_time
     from logistics_node
   </select>
+
+  <select id="selectByLogId" resultMap="BaseResultMap">
+    select * from logistics_node where log_id=#{logId} order by log_arr_time desc
+  </select>
 </mapper>

@@ -17,7 +17,9 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
+
     List<Order> selectByProperty(@Param("propertyName") String propertyName, @Param("value")Object value);
 
     List<Map<String,Object>> selectByBrandUserId(int brandUserId);
+
 }
