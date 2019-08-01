@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+</head>
+<script src="../js/jquery-3.4.1.js"></script>
+<body>
+<div id="app">
+    <el-table :data="tableData" @selection-change="handleSelectionChange" style="width: 100%">
+        <el-table-column type="selection">
+        </el-table-column>
+        <el-table-column label="参数主键" prop="parameterKey" width="400">
+        </el-table-column>
+        <el-table-column label="参数值" prop="parameterValue" width="180">
+        </el-table-column>
+        <el-table-column label="参数说明" prop="parameterDescribe" width="400">
+        </el-table-column>
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <el-button @click="handleEdit(scope.$index,true)" icon="el-icon-setting" type="primary"></el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-button @click="handleEdit(0,false)" icon="el-icon-edit" type="primary"></el-button>
+    <el-button @click="handleDel()" icon="el-icon-delete" type="primary"></el-button>
+    <div class="update">
+        <el-dialog :visible.sync="dialogVisible" title="参数列表">
+            <el-form :model="form" label-width="80px" ref="form">
+                <el-form-item :rules="[
+      						{ required: true, message: '参数主键不能为空'},
+      						{ max: 20, message: '参数主键不超过20个字符'}
+    					]" label="参数主键" prop="parameterKey">
+                    <el-input :readonly="readOnly" placeholder="请输入参数主键,不大于20个字符" v-model="form.parameterKey"></el-input>
+                </el-form-item>
+                <el-form-item :rules="[
+      						{ required: true, message: '参数值不能为空'},
+      						{ type: 'number', message: '输入数字'}
+    					]" label="参数值" prop="parameterValue">
+                    <el-input placeholder="请输入参数值(整数)" type="number" v-model.number="form.parameterValue"></el-input>
+                </el-form-item>
+                <el-form-item :rules="[
+      						{ required: true, message: '参数说明不能为空'},
+      						{ max: 30, message: '参数说明不超过30个字符'}
+    					]" label="参数说明" prop="parameterDescribe">
+                    <el-input placeholder="请输入参数说明,不大于30个字符" v-model="form.parameterDescribe"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button @click="dialogVisible = false">取 消</el-button>
+                    <el-button @click="onSubmit" type="primary">确 定</el-button>
+                </el-form-item>
+                </el-from>
+        </el-dialog>
+        <el-pagination :current-page="1" :page-size="7" :total="pageSum" @current-change="handleCurrentChange"
+                       id="page" layout=" prev, pager, next, jumper">
+        </el-pagination>
+    </div>
+</div>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                tableData: [],
+                dialogVisible: false,
+                isEdit: false,
+                selectedRow: 0,
+                readOnly: false,
+                form: {
+                    parameterKey: '',
+                    parameterValue: 0,
+                    parameterDescribe: ''
+                },
+                updateData: {
+                    parameterKey: '',
+                    parameterValue: 0,
+                    parameterDescribe: ''
+                },
+                dataForDel: [],
+                //存储页数
+                pageSum: 0,
+                //存储当前页号
+                pageNum: 1
+            }
+        },
+        //初始化数据流
+        created() {
+            this.init()
+            this.loadData(this.pageNum)
+        },
+        methods: {
+            handleCurrentChange(val) {
+                this.pageNum = val;
+                this.loadData(this.pageNum)
+            },
+            init(){
+                var pageSum = 1;
+                $.ajax({
+                    type: 'POST',
+                    url: "http://localhost:8090/online_retailer//initParameter",
+                    async:false,
+                    success: function (res) {
+                        pageSum = parseInt(res.pageSum);
+                    }.bind(this),
+                    error: function () {
+                        alert("初始化数据失败");
+                    }
+                });
+                this.pageSum = pageSum;
+            },
+            loadData(pageNum) {
+                this.tableData = []
+                var p = {"pa": this.pageNum}
+                $.ajax({
+                    type: 'POST',
+                    url: "http://localhost:8090/online_retailer//loadParameter",
+                    data: JSON.stringify(p),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (res) {
+                        $.each(res, function (i, obj) {
+                            this.tableData.push({
+                                parameterKey: obj.parId,
+                                parameterValue: obj.parValue,
+                                parameterDescribe: obj.parDescribe
+                            }) //循环遍历，拼接
+                        }.bind(this));
+                    }.bind(this),
+                    error: function () {
+                        alert("加载数据失败");
+                    }
+                });
+            },
+            //选中checkbox后的对象数组传给即将删除的
+            handleSelectionChange(val) {
+                if (val.length != 0) {
+                    this.dataForDel = val;
+                    console.log(this.dataForDel)
+                }
+            },
+            handleEdit(row, isEdit) {
+                //修改
+                if (isEdit) {
+                    this.form.parameterKey = this.tableData[row].parameterKey;
+                    this.form.parameterValue = this.tableData[row].parameterValue;
+                    this.form.parameterDescribe = this.tableData[row].parameterDescribe;
+                    this.selectedRow = row;
+                    this.readOnly = true;
+                }
+                //新增
+                else {
+                    this.form.parameterKey = "";
+                    this.form.parameterValue = "";
+                    this.form.parameterDescribe = "";
+                    this.readOnly = false;
+                }
+                this.isEdit = isEdit;
+                this.dialogVisible = true;
+            },
+            //新增或者修改的提交
+            onSubmit() {
+                //更新提交
+                if (this.isEdit) {
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8090/online_retailer//updateParameter",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(this.form),
+                        dataType: "json",
+                        success: function (data) {
+                            //成功信息
+                            console.log("success")
+                            if (data.result == "SUCCESS") {
+                                this.init()
+                                this.loadData(this.pageNum)
+                                alert("修改成功!")
+                            } else {
+                                alert("修改失败")
+                            }
+                        }.bind(this),
+                        error: function (message) {
+                            //失败信息
+                            console.log("error")
+                        }
+                    });
+                }
+                //新增提交
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8090/online_retailer//insertParameter",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(this.form),
+                        dataType: "json",
+                        success: function (data) {
+                            //成功信息
+                            console.log("success")
+                            if (data.result == "SUCCESS") {
+                                this.init()
+                                this.loadData(this.pageNum)
+                                alert("插入成功!")
+                            } else {
+                                alert("插入失败")
+                            }
+                        }.bind(this),
+                        error: function (message) {
+                            //失败信息
+                            console.log("error")
+                        }
+                    });
+                }
+                this.dialogVisible = false;
+            },
+            handleDel() {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8090/online_retailer//deleteParameter",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(this.dataForDel),
+                    dataType: "json",
+                    success: function (data) {
+                        //成功信息
+                        console.log("success")
+                        if (data.result == "SUCCESS") {
+                            this.init()
+                            if(this.pageSum%7==0&&this.pageNum>this.pageSum/7){
+                                this.loadData(--this.pageNum)
+                            }
+                            else this.loadData(this.pageNum)
+                            alert("删除成功!")
+                        } else {
+                            alert("删除失败")
+                        }
+                    }.bind(this),
+                    error: function (message) {
+                        //失败信息
+                        console.log("error")
+                    }
+                });
+            }
+        },
+        watch: {
+            tableData(newVal) {
+                console.log(newVal)
+            },
+            pageNum(newVal) {
+                console.log(newVal)
+            },
+            pageSum(newVal) {
+                console.log(newVal)
+            },
+            form(newVal) {
+                console.log(newVal)
+            }
+        },
+        computed: {
+            newPageSum() {
+                return this.pageSum
+            }
+        }
+    })
+</script>
+</body>
+</html>

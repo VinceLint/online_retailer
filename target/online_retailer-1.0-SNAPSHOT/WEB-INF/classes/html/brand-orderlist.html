@@ -298,7 +298,7 @@
                 <div class="modal-body">
                     <div class="goods-header">
                         <div class="goods-header-left">
-                            <img :src="goods_pic" alt=""/>
+                            <img :src="'..'+order.goods_pic" alt=""/>
                         </div>
 
                         <div class="goods-header-right">
@@ -501,14 +501,6 @@
                     .catch(function(error){
                         console.log(error);
                     })
-            }
-        },
-        computed:{
-            goods_pic:function(){//商品图片
-                if(this.order.goods_pic!=null&&this.order.goods_pic!==''){
-                    return "../image/"+this.order.goods_pic;
-                }
-                return this.order.goods_pic;
             }
         },
         filters: {//过滤器

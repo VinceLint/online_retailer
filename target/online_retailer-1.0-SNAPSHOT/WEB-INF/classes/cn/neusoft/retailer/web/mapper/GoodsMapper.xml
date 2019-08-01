@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.neusoft.retailer.web.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.Goods">
+    <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="goods_title" jdbcType="VARCHAR" property="goodsTitle" />
+    <result column="goods_pic" jdbcType="VARCHAR" property="goodsPic" />
+    <result column="goods_price" jdbcType="REAL" property="goodsPrice" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="goods_amount" jdbcType="INTEGER" property="goodsAmount" />
+    <result column="goods_class" jdbcType="INTEGER" property="goodsClass" />
+    <result column="goods_status" jdbcType="INTEGER" property="goodsStatus" />
+    <result column="goods_length" jdbcType="REAL" property="goodsLength" />
+    <result column="goods_width" jdbcType="REAL" property="goodsWidth" />
+    <result column="goods_height" jdbcType="REAL" property="goodsHeight" />
+    <result column="goods_weight" jdbcType="REAL" property="goodsWeight" />
+    <result column="goods_describe" jdbcType="LONGVARCHAR" property="goodsDescribe" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Goods">
+    insert into goods (goods_id, goods_title, goods_pic,
+      goods_price, brand_id, goods_amount,
+      goods_class, goods_status, goods_length,
+      goods_width, goods_height, goods_weight,
+      goods_describe)
+    values (#{goodsId,jdbcType=INTEGER}, #{goodsTitle,jdbcType=VARCHAR}, #{goodsPic,jdbcType=VARCHAR},
+      #{goodsPrice,jdbcType=REAL}, #{brandId,jdbcType=INTEGER}, #{goodsAmount,jdbcType=INTEGER},
+      #{goodsClass,jdbcType=INTEGER}, #{goodsStatus,jdbcType=INTEGER}, #{goodsLength,jdbcType=REAL},
+      #{goodsWidth,jdbcType=REAL}, #{goodsHeight,jdbcType=REAL}, #{goodsWeight,jdbcType=REAL},
+      #{goodsDescribe,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Goods">
+    update goods
+    set goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      goods_pic = #{goodsPic,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=REAL},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      goods_amount = #{goodsAmount,jdbcType=INTEGER},
+      goods_class = #{goodsClass,jdbcType=INTEGER},
+      goods_status = #{goodsStatus,jdbcType=INTEGER},
+      goods_length = #{goodsLength,jdbcType=REAL},
+      goods_width = #{goodsWidth,jdbcType=REAL},
+      goods_height = #{goodsHeight,jdbcType=REAL},
+      goods_weight = #{goodsWeight,jdbcType=REAL},
+      goods_describe = #{goodsDescribe,jdbcType=LONGVARCHAR}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select goods_id, goods_title, goods_pic, goods_price, brand_id, goods_amount, goods_class,
+    goods_status, goods_length, goods_width, goods_height, goods_weight, goods_describe
+    from goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select goods_id, goods_title, goods_pic, goods_price, brand_id, goods_amount, goods_class,
+    goods_status, goods_length, goods_width, goods_height, goods_weight, goods_describe
+    from goods
+  </select>
+</mapper>
