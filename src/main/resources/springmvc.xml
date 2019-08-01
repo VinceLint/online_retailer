@@ -33,6 +33,12 @@
             <!--            <mvc:exclude-mapping path="/user/login"/>-->
             <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"></bean>
         </mvc:interceptor>
+
+        <!-- 拦截BrandOrderController -->
+        <mvc:interceptor>
+            <mvc:mapping path="/brandOrder/**"/>
+            <bean class="cn.neusoft.retailer.web.interceptor.BrandOrderManageInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <!--这个注解是必要的，图片上传必要-->

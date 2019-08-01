@@ -3,8 +3,8 @@ package cn.neusoft.retailer.web;
 import cn.neusoft.retailer.web.mapper.BrandMapper;
 import cn.neusoft.retailer.web.mapper.UserMapper;
 import cn.neusoft.retailer.web.pojo.User;
+import cn.neusoft.retailer.web.service.BrandOrderService;
 import cn.neusoft.retailer.web.service.BrandService;
-import cn.neusoft.retailer.web.service.OrderService;
 import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.MvoType;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 public class Test {
     @Autowired
-    private OrderService orderService;
+    private BrandOrderService brandOrderService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -65,7 +65,7 @@ public class Test {
      */
     @org.junit.Test
     public void testOrderService() {
-        orderService.selectByBrandUserId(1).forEach(map -> {
+        brandOrderService.selectByBrandUserId(1).forEach(map -> {
             System.out.println(map);
         });
     }

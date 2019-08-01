@@ -24,11 +24,11 @@
     <result column="trans_way" property="transWay" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order
+    delete from `order`
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Order" >
-    insert into order (order_id, goods_id, order_amount, 
+    insert into `order` (order_id, goods_id, order_amount,
       order_status, order_cre_time, order_pay_time, 
       order_send_time, order_cancel_time, order_complete_time, 
       order_log_id, deliver_name, deliver_address, 
@@ -44,7 +44,7 @@
       #{transFare,jdbcType=REAL}, #{transWay,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Order" >
-    update order
+    update `order`
     set goods_id = #{goodsId,jdbcType=INTEGER},
       order_amount = #{orderAmount,jdbcType=INTEGER},
       order_status = #{orderStatus,jdbcType=INTEGER},
@@ -71,7 +71,7 @@
     order_send_time, order_cancel_time, order_complete_time, order_log_id, deliver_name, 
     deliver_address, deliver_phone, bs_id, receiver_name, receiver_address, receiver_phone, 
     receiver_code, trans_fare, trans_way
-    from order
+    from `order`
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
@@ -81,6 +81,7 @@
     receiver_code, trans_fare, trans_way
     from `order`
   </select>
+
 
 
   <select id="selectByProperty" resultMap="BaseResultMap">
