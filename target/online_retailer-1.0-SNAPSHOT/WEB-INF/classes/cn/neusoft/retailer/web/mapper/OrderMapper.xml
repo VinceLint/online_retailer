@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.retailer.web.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.Order" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="order_amount" property="orderAmount" jdbcType="INTEGER" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="order_cre_time" property="orderCreTime" jdbcType="TIMESTAMP" />
+    <result column="order_pay_time" property="orderPayTime" jdbcType="TIMESTAMP" />
+    <result column="order_send_time" property="orderSendTime" jdbcType="TIMESTAMP" />
+    <result column="order_cancel_time" property="orderCancelTime" jdbcType="TIMESTAMP" />
+    <result column="order_complete_time" property="orderCompleteTime" jdbcType="TIMESTAMP" />
+    <result column="order_log_id" property="orderLogId" jdbcType="VARCHAR" />
+    <result column="deliver_name" property="deliverName" jdbcType="VARCHAR" />
+    <result column="deliver_address" property="deliverAddress" jdbcType="VARCHAR" />
+    <result column="deliver_phone" property="deliverPhone" jdbcType="VARCHAR" />
+    <result column="bs_id" property="bsId" jdbcType="INTEGER" />
+    <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+    <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
+    <result column="receiver_phone" property="receiverPhone" jdbcType="VARCHAR" />
+    <result column="receiver_code" property="receiverCode" jdbcType="VARCHAR" />
+    <result column="trans_fare" property="transFare" jdbcType="REAL" />
+    <result column="trans_way" property="transWay" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Order" >
+    insert into order (order_id, goods_id, order_amount, 
+      order_status, order_cre_time, order_pay_time, 
+      order_send_time, order_cancel_time, order_complete_time, 
+      order_log_id, deliver_name, deliver_address, 
+      deliver_phone, bs_id, receiver_name, 
+      receiver_address, receiver_phone, receiver_code, 
+      trans_fare, trans_way)
+    values (#{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{orderAmount,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=INTEGER}, #{orderCreTime,jdbcType=TIMESTAMP}, #{orderPayTime,jdbcType=TIMESTAMP}, 
+      #{orderSendTime,jdbcType=TIMESTAMP}, #{orderCancelTime,jdbcType=TIMESTAMP}, #{orderCompleteTime,jdbcType=TIMESTAMP}, 
+      #{orderLogId,jdbcType=VARCHAR}, #{deliverName,jdbcType=VARCHAR}, #{deliverAddress,jdbcType=VARCHAR}, 
+      #{deliverPhone,jdbcType=VARCHAR}, #{bsId,jdbcType=INTEGER}, #{receiverName,jdbcType=VARCHAR}, 
+      #{receiverAddress,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, #{receiverCode,jdbcType=VARCHAR}, 
+      #{transFare,jdbcType=REAL}, #{transWay,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Order" >
+    update order
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      order_amount = #{orderAmount,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      order_cre_time = #{orderCreTime,jdbcType=TIMESTAMP},
+      order_pay_time = #{orderPayTime,jdbcType=TIMESTAMP},
+      order_send_time = #{orderSendTime,jdbcType=TIMESTAMP},
+      order_cancel_time = #{orderCancelTime,jdbcType=TIMESTAMP},
+      order_complete_time = #{orderCompleteTime,jdbcType=TIMESTAMP},
+      order_log_id = #{orderLogId,jdbcType=VARCHAR},
+      deliver_name = #{deliverName,jdbcType=VARCHAR},
+      deliver_address = #{deliverAddress,jdbcType=VARCHAR},
+      deliver_phone = #{deliverPhone,jdbcType=VARCHAR},
+      bs_id = #{bsId,jdbcType=INTEGER},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      receiver_code = #{receiverCode,jdbcType=VARCHAR},
+      trans_fare = #{transFare,jdbcType=REAL},
+      trans_way = #{transWay,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select order_id, goods_id, order_amount, order_status, order_cre_time, order_pay_time, 
+    order_send_time, order_cancel_time, order_complete_time, order_log_id, deliver_name, 
+    deliver_address, deliver_phone, bs_id, receiver_name, receiver_address, receiver_phone, 
+    receiver_code, trans_fare, trans_way
+    from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select order_id, goods_id, order_amount, order_status, order_cre_time, order_pay_time, 
+    order_send_time, order_cancel_time, order_complete_time, order_log_id, deliver_name, 
+    deliver_address, deliver_phone, bs_id, receiver_name, receiver_address, receiver_phone, 
+    receiver_code, trans_fare, trans_way
+    from `order`
+  </select>
+
+
+  <select id="selectByProperty" resultMap="BaseResultMap">
+    select * from `order` where ${propertyName}=#{value}
+  </select>
+  <select id="selectByBrandUserId" resultType="java.util.Map">
+    select * from `order`,goods,brand where `order`.goods_id=goods.goods_id and goods.brand_id=brand.brand_id and brand.brand_mer_id=#{brandUserId};
+  </select>
+</mapper>
