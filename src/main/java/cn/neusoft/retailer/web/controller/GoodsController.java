@@ -145,4 +145,5 @@ public class GoodsController {
         goodsService.updateStatus2ByPrimaryKey(goodsId);
         return "insert";
     }
+
 }
