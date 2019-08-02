@@ -1,13 +1,7 @@
 package cn.neusoft.retailer.web.controller;
 
-import cn.neusoft.retailer.web.pojo.Dropship;
-import cn.neusoft.retailer.web.pojo.Logistics;
-import cn.neusoft.retailer.web.pojo.LogisticsNode;
-import cn.neusoft.retailer.web.pojo.Order;
-import cn.neusoft.retailer.web.service.BrandOrderDropshipService;
-import cn.neusoft.retailer.web.service.BrandOrderLogisticsNodeService;
-import cn.neusoft.retailer.web.service.BrandOrderLogisticsService;
-import cn.neusoft.retailer.web.service.BrandOrderService;
+import cn.neusoft.retailer.web.pojo.*;
+import cn.neusoft.retailer.web.service.*;
 import cn.neusoft.retailer.web.tools.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,19 +31,27 @@ public class OrderAndLogCreatorController {
     private BrandOrderLogisticsService brandOrderLogisticsService ;
     @Autowired
     private BrandOrderLogisticsNodeService brandOrderLogisticsNodeService;
+    @Autowired
+    private GoodsService goodsService;
 
     /**
      * 创建订单信息
      * @param param 借卖关系ID
+     * @return 0 成功 ，1 失败 ，2 失败且库存不足
      */
     @PostMapping("/createOrder")
     @ResponseBody
-    private boolean createOrder(@RequestBody Map<String,Object> param){
+    private int createOrder(@RequestBody Map<String,Object> param){
         Integer dropshipId=(Integer) param.get("dropshipId") ;
         Dropship dropship=brandOrderDropshipService.selectByPrimaryKey(dropshipId);
-        if(dropship==null) return false;
+        if(dropship==null) return 1;
         Integer goodsId=dropship.getGoodsId();
-        Integer orderAmount=(int)(Math.random()*100);
+
+        Goods goods=goodsService.selectByPrimaryKey(goodsId);
+        int goodsAmount=goods.getGoodsAmount();
+        if(goodsAmount==0) return 2;//库存不足
+
+        Integer orderAmount=(int)(Math.random()*goodsAmount+1);
         Integer bsId=dropship.getBvoId();
 
         Order order=new Order();
@@ -58,7 +60,13 @@ public class OrderAndLogCreatorController {
         order.setOrderStatus(OrderStatus.待支付.ordinal());
         order.setOrderCreTime(new Date());
         order.setBsId(bsId);
-        return brandOrderService.insert(order);
+        boolean success=brandOrderService.insert(order);
+        if(success) {
+            goods.setGoodsAmount(goodsAmount-orderAmount);//减掉相应库存
+            goodsService.updateByPrimaryKey(goods);
+            return 0;
+        }
+        else return 1;
     }
 
     /**

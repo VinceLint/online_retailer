@@ -69,10 +69,12 @@
                 var self=this;
                 ax.post("/createOrder",{dropshipId:parseInt(self.dropshipId)})
                     .then(function(res){
-                        if(res.data){
+                        if(res.data===0){
                             alert('创建成功');
-                        }else{
+                        }else if(res.data===1){
                             alert('创建失败');
+                        }else{
+                            alert('库存不足');
                         }
                     })
                     .catch(function(error){

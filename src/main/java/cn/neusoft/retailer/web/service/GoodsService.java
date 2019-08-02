@@ -25,4 +25,7 @@ public interface GoodsService {
     public List<Goods> selectByBrandId(int brandId);
 
     public void savePic(int goodsId, String goodsPic);
+
+    Goods selectByPrimaryKey(Integer goodsId);
+    boolean updateByPrimaryKey(Goods record);
 }

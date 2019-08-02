@@ -96,4 +96,14 @@ public class GoodsServiceImpl implements GoodsService {
     public void savePic(int goodsId, String goodsPic) {
         goodsMapper.updatePicByPrimaryKey(goodsId, goodsPic);
     }
+
+    @Override
+    public Goods selectByPrimaryKey(Integer goodsId) {
+        return goodsMapper.selectByPrimaryKey(goodsId);
+    }
+
+    @Override
+    public boolean updateByPrimaryKey(Goods record){
+        return goodsMapper.updateByPrimaryKey(record)>0;
+    }
 }
