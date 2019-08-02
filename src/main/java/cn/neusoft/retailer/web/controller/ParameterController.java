@@ -6,10 +6,7 @@ import net.sf.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +18,12 @@ import java.util.Map;
  * @date 2019/7/29 15:15
  */
 @Controller
+@RequestMapping("/parameter")
 public class ParameterController {
     @Autowired
     private ParameterService parameterService;
 
-    @RequestMapping(value = "/initParameter", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/initParameter", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> init() throws Exception{
         Map<String,Object> map = new HashMap<>();
@@ -34,7 +32,7 @@ public class ParameterController {
         return map;
     }
 
-    @RequestMapping(value = "/loadParameter", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/loadParameter", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public JSONArray loadData(@RequestBody String json) throws Exception{
         JSONObject jsonObject = new JSONObject(json); // 首先把字符串转成 JSONObject  对象
@@ -44,7 +42,7 @@ public class ParameterController {
         return jsonarray;
     }
 
-    @RequestMapping(value = "/updateParameter", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/updateParameter", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> updateData(@RequestBody String json) throws Exception{
         Map<String, Object> map = new HashMap<>();
@@ -55,7 +53,7 @@ public class ParameterController {
         return map;
     }
 
-    @RequestMapping(value = "/insertParameter", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/insertParameter", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> insertData(@RequestBody String json) throws Exception{
         System.out.println(json);
@@ -68,7 +66,7 @@ public class ParameterController {
         return map;
     }
 
-    @RequestMapping(value = "/deleteParameter", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/deleteParameter", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> deleteData(@RequestBody String json) throws Exception{
         System.out.println(json);
@@ -79,9 +77,5 @@ public class ParameterController {
             map.put("result","SUCCESS");
         }else map.put("result","ERROR");
         return map;
-    }
-    @RequestMapping("/toParameter")
-    public String  toPar(){
-        return "html/parameter.html";
     }
 }
