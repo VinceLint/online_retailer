@@ -1,9 +1,4 @@
-package cn.neusoft.retailer.web.tools;
-/**
- * @author 胡献涛
- * @date 2019/8/1 23:30
- * @version 1.0
- */
+package cn.neusoft.retailer.web.controller;
 
 import cn.neusoft.retailer.web.pojo.Dropship;
 import cn.neusoft.retailer.web.pojo.Logistics;
@@ -13,70 +8,46 @@ import cn.neusoft.retailer.web.service.BrandOrderDropshipService;
 import cn.neusoft.retailer.web.service.BrandOrderLogisticsNodeService;
 import cn.neusoft.retailer.web.service.BrandOrderLogisticsService;
 import cn.neusoft.retailer.web.service.BrandOrderService;
-import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import cn.neusoft.retailer.web.tools.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-public class OrderAndLogCreator extends Application {
-    private static ApplicationContext context;
+/**
+ * @author 胡献涛
+ * @version 1.0
+ * @date 2019/8/2 20:19
+ */
+
+@Controller
+@RequestMapping("/createOrderAndLog")
+public class OrderAndLogCreatorController {
     @Autowired
     private BrandOrderDropshipService brandOrderDropshipService;
     @Autowired
     private BrandOrderService brandOrderService;
     @Autowired
-    private BrandOrderLogisticsService brandOrderLogisticsService;
+    private BrandOrderLogisticsService brandOrderLogisticsService ;
     @Autowired
     private BrandOrderLogisticsNodeService brandOrderLogisticsNodeService;
 
-    public static void main(String[] args) {
-        OrderAndLogCreator.context=new ClassPathXmlApplicationContext("applicationContext.xml");
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        VBox vbox=new VBox();
-
-        Label orderLabel=new Label("借卖关系ID：");
-        TextField orderTextField=new TextField();
-        orderTextField.setMaxWidth(200);
-        Button orderButton=new Button("创建订单信息");
-        orderButton.setOnAction(e->createOrder(Integer.parseInt(orderTextField.getText())));
-
-        Label logLabel=new Label("订单ID：");
-        TextField logisticsTextField=new TextField();
-        logisticsTextField.setMaxWidth(200);
-        Button logisticsButton=new Button("创建物流信息");
-        logisticsButton.setOnAction(e->createLogistics(Integer.parseInt(logisticsTextField.getText())));
-
-        vbox.getChildren().addAll(orderLabel,orderTextField,orderButton,logLabel,logisticsTextField,logisticsButton);
-        vbox.setAlignment(Pos.CENTER);
-        vbox.setSpacing(10);
-
-        Scene scene=new Scene(vbox,400,300);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("自动创建订单和生成物流信息");
-        primaryStage.show();
-    }
-
     /**
      * 创建订单信息
-     * @param dropshipId 借卖关系ID
+     * @param param 借卖关系ID
      */
-    private void createOrder(Integer dropshipId){
+    @PostMapping("/createOrder")
+    @ResponseBody
+    private boolean createOrder(@RequestBody Map<String,Object> param){
+        Integer dropshipId=(Integer) param.get("dropshipId") ;
         Dropship dropship=brandOrderDropshipService.selectByPrimaryKey(dropshipId);
-        if(dropship==null) return;
+        if(dropship==null) return false;
         Integer goodsId=dropship.getGoodsId();
         Integer orderAmount=(int)(Math.random()*100);
         Integer bsId=dropship.getBvoId();
@@ -87,14 +58,17 @@ public class OrderAndLogCreator extends Application {
         order.setOrderStatus(OrderStatus.待支付.ordinal());
         order.setOrderCreTime(new Date());
         order.setBsId(bsId);
-        brandOrderService.insert(order);
+        return brandOrderService.insert(order);
     }
 
     /**
      * 创建物流信息
-     * @param orderId 订单编号
+     * @param param 订单编号
      */
-    private void createLogistics(int orderId){
+    @PostMapping("/createLogistics")
+    @ResponseBody
+    private boolean createLogistics(@RequestBody Map<String,Object> param){
+        int orderId=(int)param.get("orderId");
         long time=new Date().getTime();
         int timeOffset=0;
 
@@ -102,7 +76,7 @@ public class OrderAndLogCreator extends Application {
         String logId=order.getOrderLogId();
         String[] comNames={"顺丰快递","韵达快递","中通快递","圆通快递","申通快递","百世快递","德邦快递"};
         Logistics log=brandOrderLogisticsService.selectByPrimaryKey(logId);
-        if(log==null) return;
+        if(log==null) return false;
         log.setLogComName(comNames[(int)(Math.random()*comNames.length)]);
         log.setLogCouName("张三丰");
         log.setLogCouPhone("15815546689");
@@ -150,5 +124,6 @@ public class OrderAndLogCreator extends Application {
             logisticsNodeEnd.setLogArrTime(new Date(time+timeOffset));
             brandOrderLogisticsNodeService.insert(logisticsNodeEnd);
         }
+        return true;
     }
 }

@@ -31,7 +31,7 @@
             <mvc:mapping path="/n"/>
 
             <!--            <mvc:exclude-mapping path="/user/login"/>-->
-            <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"></bean>
+            <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"/>
         </mvc:interceptor>
 
         <!-- 拦截品牌商的请求 -->
@@ -48,6 +48,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/dictionary/**"/>
             <mvc:mapping path="/parameter/**"/>
+            <mvc:mapping path="/createOrderAndLog/**"/>
             <bean class="cn.neusoft.retailer.web.interceptor.AdminInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
