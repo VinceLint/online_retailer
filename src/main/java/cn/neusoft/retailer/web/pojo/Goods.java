@@ -15,6 +15,8 @@ public class Goods {
 
     private Integer goodsClass;
 
+    private String goodsDescribe;
+
     private Integer goodsStatus;
 
     private Float goodsLength;
@@ -25,7 +27,47 @@ public class Goods {
 
     private Float goodsWeight;
 
-    private String goodsDescribe;
+    public Float getGoodsLength() {
+        return goodsLength;
+    }
+
+    public void setGoodsLength(Float goodsLength) {
+        this.goodsLength = goodsLength;
+    }
+
+    public Float getGoodsWidth() {
+        return goodsWidth;
+    }
+
+    public void setGoodsWidth(Float goodsWidth) {
+        this.goodsWidth = goodsWidth;
+    }
+
+    public Float getGoodsHeight() {
+        return goodsHeight;
+    }
+
+    public void setGoodsHeight(Float goodsHeight) {
+        this.goodsHeight = goodsHeight;
+    }
+
+    public Float getGoodsWeight() {
+        return goodsWeight;
+    }
+
+    public void setGoodsWeight(Float goodsWeight) {
+        this.goodsWeight = goodsWeight;
+    }
+
+
+    public Integer getGoodsStatus() {
+        return goodsStatus;
+    }
+
+    public void setGoodsStatus(Integer goodsStatus) {
+        this.goodsStatus = goodsStatus;
+    }
+
 
     public Integer getGoodsId() {
         return goodsId;
@@ -81,46 +123,6 @@ public class Goods {
 
     public void setGoodsClass(Integer goodsClass) {
         this.goodsClass = goodsClass;
-    }
-
-    public Integer getGoodsStatus() {
-        return goodsStatus;
-    }
-
-    public void setGoodsStatus(Integer goodsStatus) {
-        this.goodsStatus = goodsStatus;
-    }
-
-    public Float getGoodsLength() {
-        return goodsLength;
-    }
-
-    public void setGoodsLength(Float goodsLenght) {
-        this.goodsLength = goodsLenght;
-    }
-
-    public Float getGoodsWidth() {
-        return goodsWidth;
-    }
-
-    public void setGoodsWidth(Float goodsWidth) {
-        this.goodsWidth = goodsWidth;
-    }
-
-    public Float getGoodsHeight() {
-        return goodsHeight;
-    }
-
-    public void setGoodsHeight(Float goodsHeight) {
-        this.goodsHeight = goodsHeight;
-    }
-
-    public Float getGoodsWeight() {
-        return goodsWeight;
-    }
-
-    public void setGoodsWeight(Float goodsWeight) {
-        this.goodsWeight = goodsWeight;
     }
 
     public String getGoodsDescribe() {
