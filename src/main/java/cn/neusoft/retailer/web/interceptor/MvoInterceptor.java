@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
  * @version 1.0
  * @date 2019/7/30 21:04
  */
-public class BrandOrderManageInterceptor implements HandlerInterceptor {
+public class MvoInterceptor implements HandlerInterceptor {
 
     /**
-     * @描述 品牌商订单管理拦截器，拦截所有关于品牌商订单管理的请求，判断用户访问权限
+     * @描述 品牌商请求拦截器，拦截所有关于品牌商订单管理的请求，判断用户访问权限
      * @参数
      * @返回值 是否继续执行请求
      * @创建人 胡献涛
