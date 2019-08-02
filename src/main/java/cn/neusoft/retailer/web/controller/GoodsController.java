@@ -23,24 +23,15 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @RequestMapping("/test")
-    public String test() {
-        return "result";
-    }
-
-    @RequestMapping("/pic")
-    public String pic() {
-        return "pic";
-    }
-
     @RequestMapping("/insert")
     public String insert() {
         return "insert";
     }
 
-    @RequestMapping("/search")
+    @RequestMapping("/searchGoods")
     @ResponseBody
     public List<Goods> search() {
+        System.out.println(goodsService.selectAll());
         return goodsService.selectAll();
     }
 

@@ -5,7 +5,7 @@
   Time: 14:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>insert</title>
@@ -16,6 +16,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/easyui-lang-zh_CN.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/uimaker/dialog.css">
+
+
 
 </head>
 
@@ -69,7 +71,7 @@
                             success: function () {
                                 alert("修改成功");
                                 $('#dialog2').dialog('close');
-                                window.location.reload();
+                                window.location.href = "${pageContext.request.contextPath}/insert";
                             }
 
                         });
@@ -143,7 +145,7 @@
             textField: 'label',
             data: [{
                 label: "家用电器",
-                value: 1
+                value: 0
             }, {
                 label: "日用品",
                 value: 2
@@ -161,7 +163,7 @@
             textField: 'label',
             data: [{
                 label: "家用电器",
-                value: 1
+                value: 0
             }, {
                 label: "日用品",
                 value: 2
@@ -174,7 +176,7 @@
         });
 
         $('#dg').datagrid({
-            url: "${pageContext.request.contextPath}/search",
+            url: "${pageContext.request.contextPath}/searchGoods",
             columns: [[
                 {field: 'goodsId', title: '商品sku码', width: 100, align: 'center'},
                 {field: 'goodsTitle', title: '商品标题', width: 100, align: 'center'},
@@ -187,7 +189,7 @@
                     width: 100,
                     align: 'center',
                     formatter: function (value, row, index) {
-                        if (row.goodsClass == 1) {
+                        if (row.goodsClass == 0) {
                             return "家用电器";
                         } else if (row.goodsClass == 2) {
                             return "日用品";
@@ -249,16 +251,19 @@
     function putin(goodsId) {
         console.log(goodsId);
         window.location.href = "${pageContext.request.contextPath}/putin/" + goodsId;
+        alert("入仓成功");
     }
 
     function onshelves(goodsId) {
         console.log(goodsId);
         window.location.href = "${pageContext.request.contextPath}/onshelves/" + goodsId;
+        alert("上架成功");
     }
 
     function offshelves(goodsId) {
         console.log(goodsId);
         window.location.href = "${pageContext.request.contextPath}/offshelves/" + goodsId;
+        alert("下架成功");
     }
 
     $.extend($.fn.validatebox.defaults.rules,{

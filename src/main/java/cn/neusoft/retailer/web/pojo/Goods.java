@@ -132,4 +132,23 @@ public class Goods {
     public void setGoodsDescribe(String goodsDescribe) {
         this.goodsDescribe = goodsDescribe == null ? null : goodsDescribe.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "goodsId=" + goodsId +
+                ", goodsTitle='" + goodsTitle + '\'' +
+                ", goodsPic='" + goodsPic + '\'' +
+                ", goodsPrice=" + goodsPrice +
+                ", brandId=" + brandId +
+                ", goodsAmount=" + goodsAmount +
+                ", goodsClass=" + goodsClass +
+                ", goodsDescribe='" + goodsDescribe + '\'' +
+                ", goodsStatus=" + goodsStatus +
+                ", goodsLength=" + goodsLength +
+                ", goodsWidth=" + goodsWidth +
+                ", goodsHeight=" + goodsHeight +
+                ", goodsWeight=" + goodsWeight +
+                '}';
+    }
 }
