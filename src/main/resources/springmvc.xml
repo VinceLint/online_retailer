@@ -39,6 +39,17 @@
             <mvc:mapping path="/brandOrder/**"/>
             <bean class="cn.neusoft.retailer.web.interceptor.BrandOrderManageInterceptor"/>
         </mvc:interceptor>
+        <!--拦截借卖方的请求-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/BvoInfo/**"/>-->
+            <!--<bean class="cn.neusoft.retailer.web.interceptor.BvoInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+        <!--拦截系统管理员的请求-->
+        <mvc:interceptor>
+            <mvc:mapping path="/dictionary/**"/>
+            <mvc:mapping path="/parameter/**"/>
+            <bean class="cn.neusoft.retailer.web.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <!--这个注解是必要的，图片上传必要-->
