@@ -4,19 +4,18 @@ import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.*;
 import com.google.code.kaptcha.Constants;
+import net.sf.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
@@ -383,4 +382,68 @@ public class UserController {
         return result;
     }
 
+
+    /**
+     * 增删查改的controller
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/initUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public JSONArray init() throws Exception{
+//        List<Dictionary> dictionaryList = dictionaryService.selectAll();
+        List<User> userList=userService.selectAll();
+        JSONArray jsonarray = JSONArray.fromObject(userList);
+        return jsonarray;
+    }
+
+
+    @RequestMapping(value = "/insertUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String,Object> insert(@RequestBody String json) throws Exception{
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        JSONObject jsonObject = new JSONObject(json); // 首先把字符串转成 JSONObject  对象
+
+//        判断是否插入成功
+        if(userService.insert(jsonObject)){
+            resultMap.put("result","SUCCESS");
+        }else{
+            resultMap.put("result","Error");
+        }
+        return resultMap;
+    }
+
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String,Object> update(@RequestBody String json) throws Exception{
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        org.json.JSONArray jsonArray = new org.json.JSONArray(json);// 首先把字符串转成 JSONArray  对象
+        System.out.println(jsonArray);
+//        判断是否插入成功
+        if(userService.update(jsonArray)){
+            resultMap.put("result","SUCCESS");
+        }else{
+            resultMap.put("result","Error");
+        }
+        return resultMap;
+    }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String,Object> delete(@RequestBody String json) throws Exception{
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        org.json.JSONArray jsonArray = new org.json.JSONArray(json);
+        //返回结果
+        if(userService.deleteByDetail(jsonArray)){
+            resultMap.put("result","SUCCESS");
+        }else{
+            resultMap.put("result","Error");
+        }
+        return resultMap;
+    }
+
+    @RequestMapping("/toUser")
+    public String  toDic(){
+        return "html/adminRole-Manager.html";
+    }
 }

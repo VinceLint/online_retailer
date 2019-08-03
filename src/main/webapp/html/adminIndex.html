@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>GMC主页面</title>
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<script src="../layui/layui.js"></script>
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script>
+			layui.use('carousel', function() {
+				var carousel = layui.carousel;
+				//建造实例
+				carousel.render({
+					elem: '#test1',
+					width: '100%',
+					arrow: 'hover'
+				});
+			});
+		</script>
+		<script>
+			layui.use('element', function() {
+				var element = layui.element;
+			});
+		</script>
+		<script type="text/javascript">
+			
+		</script>
+		<script>
+			$('#LoginState').onchange(function () {
+                var list = {};
+                //
+                $.ajax({
+                    //请求方式
+                    type : "GET",
+                    //请求的媒体类型
+                    contentType: "application/json;charset=UTF-8",
+                    //请求地址
+                    url : "http://localhost:8080/online_retailer/init",
+                    //数据，json字符串
+                    data : JSON.stringify(list),
+                    //请求成功
+                    success : function(result) {
+                        console.log(result);
+                    },
+                    //请求失败，包含具体的错误信息
+                    error : function(e){
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
+            })
+		</script>
+
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			#Navigation {
+				width: 100%;
+				height: 20%;
+				left: 0px;
+				top: 0px;
+			}
+
+			#operation {
+				width: 100%;
+				height: 80%;
+				top: 20%;
+				left: 0px;
+			}
+
+			#menu {
+				float: left;
+				width: 15%;
+				height: 100%;
+				left: 0%;
+				top: 0%;
+			}
+
+			#frame {
+				float: left;
+				width: 85%;
+				height: 100%;
+				top: 0%;
+				left: 15%;
+			}
+
+			#otherBar {
+				width: 100%;
+				height: 100%;
+			}
+
+			#leftmenubar {
+				width: 100%;
+				height: 100%;
+			}
+
+			#topmenubar {
+				width: 100%;
+				height: 50%;
+			}
+
+			#systemTitle {
+				width: 100%;
+				height: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<!--导航栏-->
+		<div id="Navigation">
+			<img src="../img/GMC.png" id="systemTitle">
+			<ul class="layui-nav" id="topmenubar">
+				<li class="layui-nav-item"><a href="">最新活动</a></li>
+				<li class="layui-nav-item layui-this"><a href="">产品</a></li>
+				<li class="layui-nav-item"><a href="">大数据</a></li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">解决方案</a>
+					<dl class="layui-nav-child">
+						<!-- 二级菜单 -->
+						<dd><a href="">移动模块</a></dd>
+						<dd><a href="">后台模版</a></dd>
+						<dd><a href="">电商平台</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item"><a href="">社区</a></li>
+
+				<li class="layui-nav-item">
+					<a href="">控制台<span class="layui-badge">9</span></a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="">个人中心<span class="layui-badge-dot"></span></a>
+				</li>
+				<li class="layui-nav-item">
+					<a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img" id="LoginState">未登录</a>
+					<dl class="layui-nav-child">
+						<dd><a href="javascript:;">登陆</a></dd>
+						<dd><a href="javascript:;">注册</a></dd>
+						<dd><a href="javascript:;">关于GMC</a></dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+
+		<!--为四种角色分配功能，监听当前登陆对象这个标签，初始化为无登陆状态，-->
+		<!--然后监听角色的改变，如果改变就从数据库中读取功能分配功能-->
+		<div id="operation">
+			<!--菜单栏-->
+			<div id="menu">
+				<ul class="layui-nav layui-nav-tree" lay-filter="test" id="leftmenubar">
+					<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+					<li class="layui-nav-item layui-nav-itemed" id="BVO">
+						<a href="javascript:;">借卖方菜单列表</a>
+						
+						<dl class="layui-nav-child" id="BVOItem">
+							<dd><a href="javascript:;">已有功能</a></dd>
+							<dd><a href="javascript:;">已有功能</a></dd>
+							<dd><a href="">修改</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item" id="MVO">
+						<a href="javascript:;">品牌商菜单列表</a>
+						<!-- 用AJAX把数据库中品牌商权限的功能列出来 -->
+						<dl class="layui-nav-child" id="MVOItem">
+							<dd><a href=""></a></dd>
+							<dd><a href=""></a></dd>
+							<dd><a href=""></a></dd>
+							<dd><a href="">修改</a></dd>
+						</dl>
+					</li>
+
+					<!-- 跳转角色查询页面 -->
+					<li class="layui-nav-item"><a href="" id="BVORoleRef">借卖方角色</a></li>
+					<li class="layui-nav-item"><a href="" id="MVORoleRef">品牌商角色</a></li>
+				</ul>
+			</div>
+
+			<!--轮播-->
+			<div id="frame">
+				<iframe src="looplook.html" id="otherBar"></iframe>
+			</div>
+		</div>
+	</body>
+</html>

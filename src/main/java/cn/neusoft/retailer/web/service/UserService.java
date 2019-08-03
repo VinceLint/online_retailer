@@ -1,6 +1,8 @@
 package cn.neusoft.retailer.web.service;
 
 import cn.neusoft.retailer.web.pojo.User;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -20,4 +22,7 @@ public interface UserService {
     boolean updateByName(User user);
     boolean deleteByPrimaryKey(Integer userId);
 
+    boolean insert(JSONObject jsonObject);
+    boolean update(JSONArray jsonArray);
+    boolean deleteByDetail(JSONArray jsonArray);
 }

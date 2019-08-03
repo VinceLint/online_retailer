@@ -1,5 +1,7 @@
 package cn.neusoft.retailer.web.pojo;
 
+import java.util.Objects;
+
 public class Menu {
     private Integer menuId;
 
@@ -39,5 +41,41 @@ public class Menu {
 
     public void setMenuPrivilege(Integer menuPrivilege) {
         this.menuPrivilege = menuPrivilege;
+    }
+
+    public Menu(Integer menuId, String menuName, String menuUrl, Integer menuPrivilege) {
+        this.menuId = menuId;
+        this.menuName = menuName;
+        this.menuUrl = menuUrl;
+        this.menuPrivilege = menuPrivilege;
+    }
+
+    public Menu() {
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "menuId=" + menuId +
+                ", menuName='" + menuName + '\'' +
+                ", menuUrl='" + menuUrl + '\'' +
+                ", menuPrivilege=" + menuPrivilege +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Menu)) return false;
+        Menu menu = (Menu) o;
+        return Objects.equals(getMenuId(), menu.getMenuId()) &&
+                Objects.equals(getMenuName(), menu.getMenuName()) &&
+                Objects.equals(getMenuUrl(), menu.getMenuUrl()) &&
+                Objects.equals(getMenuPrivilege(), menu.getMenuPrivilege());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMenuId(), getMenuName(), getMenuUrl(), getMenuPrivilege());
     }
 }
