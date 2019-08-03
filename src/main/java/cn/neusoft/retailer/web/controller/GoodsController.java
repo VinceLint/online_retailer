@@ -27,6 +27,7 @@ public class GoodsController {
 
     @RequestMapping("/insert")
     public String insert() {
+        /*return "testPic";*/
         return "insert";
     }
 
