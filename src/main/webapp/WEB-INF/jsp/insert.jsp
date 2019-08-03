@@ -35,12 +35,12 @@
                     icons_Cls: 'icon-save',
                     handler: function () {
                         $('#myform').form('submit', {
-                            url: "${pageContext.request.contextPath}/queryInsert"
+                            url: "${pageContext.request.contextPath}/Goods/queryInsert"
                         });
                         alert("保存成功");
                         $('#dialog').dialog('close');
                         /*window.location.reload();*/
-                        window.location.href = "${pageContext.request.contextPath}/insert";
+                        window.location.href = "${pageContext.request.contextPath}/Goods/insert";
                     }
                 },
                 {
@@ -64,14 +64,14 @@
                     handler: function () {
                         var rowData = $('#dg').datagrid('getSelected');
                         $('#myform2').form('submit', {
-                            url: "${pageContext.request.contextPath}/queryUpdate",
+                            url: "${pageContext.request.contextPath}/Goods/queryUpdate",
                             onSubmit: function (param) {
                                 param.goodsId = rowData.goodsId;
                             },
                             success: function () {
                                 alert("修改成功");
                                 $('#dialog2').dialog('close');
-                                window.location.href = "${pageContext.request.contextPath}/insert";
+                                window.location.href = "${pageContext.request.contextPath}/Goods/insert";
                             }
 
                         });
@@ -132,7 +132,7 @@
             } else {
                 var msg = "您确认要删除这条商品信息吗？"
                 if (confirm(msg) == true) {
-                    window.location.href = '${pageContext.request.contextPath}/queryDelete/' + rowData.goodsId;
+                    window.location.href = '${pageContext.request.contextPath}/Goods/queryDelete/' + rowData.goodsId;
                 } else {
                     window.location.reload();
                 }
@@ -176,7 +176,7 @@
         });
 
         $('#dg').datagrid({
-            url: "${pageContext.request.contextPath}/searchGoods",
+            url: "${pageContext.request.contextPath}/Goods/searchGoods",
             columns: [[
                 {field: 'goodsId', title: '商品sku码', width: 100, align: 'center'},
                 {field: 'goodsTitle', title: '商品标题', width: 100, align: 'center'},
@@ -250,19 +250,19 @@
 
     function putin(goodsId) {
         console.log(goodsId);
-        window.location.href = "${pageContext.request.contextPath}/putin/" + goodsId;
+        window.location.href = "${pageContext.request.contextPath}/Goods/putin/" + goodsId;
         alert("入仓成功");
     }
 
     function onshelves(goodsId) {
         console.log(goodsId);
-        window.location.href = "${pageContext.request.contextPath}/onshelves/" + goodsId;
+        window.location.href = "${pageContext.request.contextPath}/Goods/onshelves/" + goodsId;
         alert("上架成功");
     }
 
     function offshelves(goodsId) {
         console.log(goodsId);
-        window.location.href = "${pageContext.request.contextPath}/offshelves/" + goodsId;
+        window.location.href = "${pageContext.request.contextPath}/Goods/offshelves/" + goodsId;
         alert("下架成功");
     }
 
@@ -288,7 +288,7 @@
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" id="add">添加</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" id="edit">编辑</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" id="del">删除</a>
-    <a href="${pageContext.request.contextPath}/insert" class="easyui-linkbutton"
+    <a href="${pageContext.request.contextPath}/Goods/insert" class="easyui-linkbutton"
        data-options="iconCls:'icon-reload',plain:true" id="rel">刷新</a>
 </div>
 

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@RequestMapping("/Goods")
 public class GoodsController {
 
     @Autowired
@@ -69,7 +70,8 @@ public class GoodsController {
             //确认最终的路径  /文件夹/文件名
             String fileName = id + substring;
             uploadPath = new File(uploadPath + "/" + fileName);
-            System.out.println(uploadPath + "/" + fileName);
+            System.out.println(uploadPath);
+            System.out.println(fileName);
 
             //开始上传
             file.transferTo(uploadPath);

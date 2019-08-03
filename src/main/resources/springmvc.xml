@@ -37,6 +37,7 @@
         <!-- 拦截品牌商的请求 -->
         <mvc:interceptor>
             <mvc:mapping path="/brandOrder/**"/>
+            <mvc:mapping path="/Goods/**"/>
             <bean class="cn.neusoft.retailer.web.interceptor.MvoInterceptor"/>
         </mvc:interceptor>
         <!--拦截借卖方的请求-->
