@@ -9,7 +9,7 @@ public class Goods {
 
     private Float goodsPrice;
 
-    private Integer brandId;
+    private int brandId;
 
     private Integer goodsAmount;
 

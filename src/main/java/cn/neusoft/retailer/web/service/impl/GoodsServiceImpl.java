@@ -17,8 +17,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public void save(String title, int id, double price, int amount, int clazz, String describe, double length,
-                     double width, double height, double weight) {
-        System.out.println("save service in");
+                     double width, double height, double weight, int brandId) {
 
         Goods goods = new Goods();
         goods.setGoodsId(id);
@@ -26,13 +25,15 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setGoodsPrice((float)price);
         goods.setGoodsAmount(amount);
         goods.setGoodsClass(clazz);
-        goods.setBrandId(1);
+        goods.setBrandId(brandId);
         goods.setGoodsDescribe(describe);
         goods.setGoodsStatus(0);
         goods.setGoodsLength((float)length);
         goods.setGoodsWidth((float)width);
         goods.setGoodsHeight((float)height);
         goods.setGoodsWeight((float)weight);
+
+        System.out.println("Service已创建Goods对象: " + goods);
 
         goodsMapper.insert(goods);
 
@@ -50,7 +51,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public void updateByGoodsId(int goodsId, String title, double price, int amount, int clazz, String describe, double length,
-                                double width, double height, double weight) {
+                                double width, double height, double weight, int brandId) {
         System.out.println("service in");
 
         /*System.out.println(title + " " + goodsId + " " + price + " " + amount + " " + clazz);*/
@@ -61,10 +62,9 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setGoodsPrice((float)price);
         goods.setGoodsAmount(amount);
         goods.setGoodsClass(clazz);
-        goods.setBrandId(1);
-        goods.setGoodsStatus(1);
         goods.setGoodsDescribe(describe);
         goods.setGoodsLength((float)length);
+        goods.setBrandId(brandId);
         goods.setGoodsWidth((float)width);
         goods.setGoodsHeight((float)height);
         goods.setGoodsWeight((float)weight);
