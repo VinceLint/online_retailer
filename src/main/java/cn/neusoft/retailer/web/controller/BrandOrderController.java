@@ -6,10 +6,7 @@ package cn.neusoft.retailer.web.controller;
  * @date 2019/7/23 13:30
  */
 
-import cn.neusoft.retailer.web.pojo.Logistics;
-import cn.neusoft.retailer.web.pojo.LogisticsNode;
-import cn.neusoft.retailer.web.pojo.Order;
-import cn.neusoft.retailer.web.pojo.User;
+import cn.neusoft.retailer.web.pojo.*;
 import cn.neusoft.retailer.web.service.BrandOrderLogisticsNodeService;
 import cn.neusoft.retailer.web.service.BrandOrderLogisticsService;
 import cn.neusoft.retailer.web.service.BrandOrderService;
