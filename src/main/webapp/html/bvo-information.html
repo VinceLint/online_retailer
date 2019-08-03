@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<script src="../js/jquery-1.9.1.js"></script>
+<style>
+    #tips {
+        color: cornflowerblue;
+        opacity: 0.5;
+    }
+
+    #navigation {
+        font-size: xx-large;
+        font: "微软雅黑";
+        color: blue;
+        opacity: 0.5;
+    }
+
+    #username {
+        font-size: large;
+        position: relative;
+        left: 25px;
+        top: 5px;
+        butt
+    }
+    el-progress{
+        width: 20px;
+        height: 5px;
+    }
+</style>
+
+<body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<div id="app">
+    <div>
+        <span id="navigation">借卖方</span>
+        <span style="font:'微软雅黑' ;font-size: x-large; opacity: 0.3;">>>我的信息</span>
+    </div>
+    <center>
+        <div id="username">Username : {{form.username}}</div>
+        <br />
+        <el-form ref="form" :model="form" label-width="70px">
+            <div id="tips">
+                Name:
+            </div>
+            <el-form-item prop="name" :rules="[
+      						{ required: true, message: '名字不能为空'},
+      						{ max: 20, message: '名字不超过20个字符'}
+    					]" style="width:220px">
+                <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <div id="tips">
+                Email:
+            </div>
+            <el-form-item prop="email" :rules="[
+      						{ required: true, message: '邮箱不能为空'},
+      						{ max: 30, message: '邮箱不超过30个字符'},
+      						{ pattern: /^\w+@[a-z0-9]+\.[a-z]{2,4}$/, message: '邮箱格式为:xxx@xx.xxx'}
+    					]" style="width:220px">
+                <el-input v-model="form.email"></el-input>
+            </el-form-item>
+            <div id="tips">
+                Phone:
+            </div>
+            <el-form-item prop="phone" :rules="[
+      						{ required: true, message: '电话不能为空'},
+      						{ max: 20, message: '电话不超过20个字符'}
+    					]" style="width:220px">
+                <el-input v-model="form.phone"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit">Save</el-button>
+                <el-button type="primary" @click="myStores">My Stores
+                </el-button>
+            </el-form-item>
+        </el-form>
+    </center>
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                user: {
+                    username: '',
+                    name: '',
+                    email: '',
+                    phone: ''
+                },
+                form: {
+                    username: '',
+                    name: '',
+                    email: '',
+                    phone: ''
+                }
+            }
+        },
+        methods: {
+            init() {
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: "http://localhost:8080/online_retailer/BvoInfo/initBvoInfo",
+                    success: function(res) {
+                        this.form.username = res.userName
+                        this.form.name = res.mvoEngName
+                        this.form.email = res.userMail
+                        this.form.phone = res.userPhone
+                        console.log(this.form)
+                    }.bind(this),
+                    error: function() {
+                        alert("初始化数据失败");
+                    }
+                });
+                console.log(this.form)
+            },
+            onSubmit() {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/online_retailer/BvoInfo/updateBvoInfo",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(this.form),
+                    dataType: "json",
+                    success: function(data) {
+                        //成功信息
+                        console.log("success")
+                        if(data.result == "SUCCESS") {
+                            this.init()
+                            alert("修改成功!")
+                        } else {
+                            alert("修改失败")
+                        }
+
+                    }.bind(this),
+                    error: function(message) {
+                        //失败信息
+                        console.log("error")
+                    }.bind(this)
+                });
+            },
+            myStores(){
+               window.location="http://localhost:8080/online_retailer/html/bvo-store.html"
+            },
+            getUsername() {
+                return this.username
+            }
+        },
+        created() {
+            this.init()
+        }
+    })
+</script>
+</body>
+
+</html>

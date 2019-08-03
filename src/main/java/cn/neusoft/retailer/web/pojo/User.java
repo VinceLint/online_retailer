@@ -13,6 +13,13 @@ public class User implements Serializable {
     private String userPhone;
     private String userName;
 
+    public User(Integer userId, String name, String email, String phone) {
+        this.userId = userId;
+        this.mvoEngName = name;
+        this.userMail = email;
+        this.userPhone = phone;
+    }
+
     public String getUserName() {
         return userName;
     }

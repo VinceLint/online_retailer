@@ -13,6 +13,18 @@ public class Store {
 
     private String nwsAuthToken;
 
+    public Store() {
+    }
+
+    public Store(Integer storeId, String storeName, Integer storeType, Integer storeOwn, String marketplaceId, String nwsAuthToken) {
+        this.storeId = storeId;
+        this.storeName = storeName;
+        this.storeType = storeType;
+        this.storeOwn = storeOwn;
+        this.marketplaceId = marketplaceId;
+        this.nwsAuthToken = nwsAuthToken;
+    }
+
     public Integer getStoreId() {
         return storeId;
     }

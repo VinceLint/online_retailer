@@ -40,10 +40,11 @@
             <bean class="cn.neusoft.retailer.web.interceptor.BrandOrderManageInterceptor"/>
         </mvc:interceptor>
         <!--拦截借卖方的请求-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/BvoInfo/**"/>-->
-            <!--<bean class="cn.neusoft.retailer.web.interceptor.BvoInterceptor"/>-->
-        <!--</mvc:interceptor>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/BvoInfo/**"/>
+            <mvc:mapping path="/BvoStore/**"/>
+            <bean class="cn.neusoft.retailer.web.interceptor.BvoInterceptor"/>
+        </mvc:interceptor>
         <!--拦截系统管理员的请求-->
         <mvc:interceptor>
             <mvc:mapping path="/dictionary/**"/>
