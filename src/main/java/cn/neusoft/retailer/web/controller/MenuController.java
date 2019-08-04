@@ -22,16 +22,18 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/menu")
 public class MenuController {
 
     @Autowired
     private MenuService menuService;
+
     @RequestMapping(value = "/initMenu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public JSONArray init() throws Exception{
-        List<Menu> MenuList=menuService.selectAll();
-        JSONArray jsonarray = JSONArray.fromObject(MenuList);
+        List<Menu> menuList=menuService.selectAll();
+//        System.out.println("已执行");
+        JSONArray jsonarray = JSONArray.fromObject(menuList);
         return jsonarray;
     }
 
@@ -57,7 +59,6 @@ public class MenuController {
         Map<String,Object> resultMap = new HashMap<String, Object>();
         org.json.JSONArray jsonArray = new org.json.JSONArray(json);// 首先把字符串转成 JSONArray  对象
         System.out.println(jsonArray);
-//        判断是否插入成功
         if(menuService.update(jsonArray)){
             resultMap.put("result","SUCCESS");
         }else{
