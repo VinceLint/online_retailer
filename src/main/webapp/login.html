@@ -91,7 +91,7 @@
         //登录校验
         $("#login_in").on("click", function () {
             if ($("#kaptcha").val() != "" && $("#userName").val() != "" && $("#userPassword").val() != "") {
-                var info = {
+                     var info = {
                     "userName": $("#userName").val(),
                     "userPassword": $("#userPassword").val(),
                     "code": $("input[name='kaptcha']").val(),

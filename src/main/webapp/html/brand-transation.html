@@ -1,5 +1,10 @@
 
 <!DOCTYPE html>
+<!--/**-->
+<!--* @author 庄志宏-->
+<!--* @version 1.0-->
+<!--* @date 2019/7/23 21:44-->
+<!--*/-->
 <html>
 <head>
     <meta charset="UTF-8">
@@ -42,6 +47,15 @@
             <el-table-column
                     label="账号"
                     prop="tid">
+            </el-table-column>
+            <el-table-column
+                    label="用户名"
+                    prop="tusername">
+            </el-table-column>
+
+            <el-table-column
+                    label="交易流水号"
+                    prop="traid">
             </el-table-column>
 
             <el-table-column
@@ -103,10 +117,12 @@
                 </el-form-item>
 
 
-                <el-form-item lable=图片"" prop="choosefile">
+                <el-form-item lable="请上传水单" prop="choosefile">
+                    如通过，请上传水单
                         <el-upload
+
                                 ref="upload"
-                                action="${pageContext.request.contextPath}/upload"
+                                action="http://localhost:8080/online_retailer/upload"
                                 name="picture"
                                 list-type="picture-card"
                                 :limit="1"
@@ -117,11 +133,10 @@
                                 :on-success="handleSuccess"
                                 :on-remove="handleRemove">
                             <i class="el-icon-plus"></i>
+                            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过2Mb</div>
+
                         </el-upload>
 
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
 
                 </el-form-item>
 
@@ -169,31 +184,42 @@
             // 弹窗内容
             var validateReason = (rule, value, callback) => {
 
-                if (this.ruleForm.resource !== '通过'&&this.ruleForm.desc==="") {
+                if (this.ruleForm.resource === '不通过'&&this.ruleForm.desc==="") {
                     callback(new Error('请输入原因'));
                     this.isEdit=false;
                     callback();
 
+                }else if (this.ruleForm.resource === '不通过'&&this.ruleForm.desc!==""){
+                    this.isEdit=true;
                 }
             };
             var validatefile =(rule,value,callback)=>{
                 if (this.ruleForm.resource === '通过'&&this.ruleForm.fsrc==="") {
                     callback(new Error('请上传文件'));
+                    console.log(this.ruleForm.fsrc)
                     this.isEdit=false;
                     callback();
 
+                }else if (this.ruleForm.resource === '通过'&&this.ruleForm.fsrc!==""){
+                    this.isEdit=true;
                 }
             };
 
 
 
             return {
-                visible: true,
+                visible: false,
                 isEdit:false,
                 labelPosition:'top',
                 chooseId:'',
                 row:'',
-
+                Form:{
+                    tid:'',
+                    traid:'',
+                    tsum:'',
+                    ttype:'',
+                    tmoney:''
+                },
                 dateForUpdate:[],
                 search: '',
                 dateNotUpdate:{
@@ -229,7 +255,7 @@
                 dialogImageUrl: '',
                 dialogVisible: false,
                 //图片列表（用于在上传组件中回显图片）
-                fileList: [{name: '', url: ''}],
+                fileList: [],
 
                 rules: {
 
@@ -249,15 +275,56 @@
             handleReviewed(index, row) {
                 console.log(index, row);
                 this.row = index;
+                this.Form.tid=row.tid;
+                this.Form.traid=row.traid;
+                this.Form.tsum=row.tnum;
+                this.Form.ttype=row.ttype;
+                this.Form.tmoney=row.tbal;
                 this.dateForUpdate = [];
-                this.dateForUpdate.push(this.ruleForm);
-                console.log(this.ruleForm, this.dateForUpdate);
+                this.dateForUpdate.push(this.Form);
+                console.log(this.Form, this.dateForUpdate);
 
+                // $.ajax({
+                //     type: "POST",
+                //     url: "http://127.0.0.1:8080/online_retailer_war_exploded/upload",
+                //     contentType: "application/json;charset:utf-8",
+                //     data: JSON.stringify(this.Form),
+                //     dataType: "json",
+                //     success: function (date) {
+                //         console.log(date)
+                //     }.bind(this),
+                //     error:function (message) {
+                //         console.log(message)
+                //         console.log("error")
+                //     }
+                // })
             },
             //表单提交
             submitForm(formName) {
-                console.log(this.ruleForm, this.dateForUpdate,this.fileList);
-
+                // if(this.ruleForm.resource!==''){this.isEdit=true;}
+                console.log(this.row,this.isEdit,this.ruleForm);
+                if(this.isEdit) {
+                    this.dateForUpdate.push(this.ruleForm);
+                    console.log(this.ruleForm, this.dateForUpdate,this.fileList);
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8080/online_retailer/ReviewForm",
+                        contentType: "application/json;charset:utf-8",
+                        data: JSON.stringify(this.dateForUpdate),
+                        dataType: "json",
+                        success: function (date) {
+                            console.log(date)
+                            this.visible=false;
+                            alert("审核成功")
+                            window.location.reload();
+                            this.isEdit=false;
+                        }.bind(this),
+                        error:function (message) {
+                            console.log(message)
+                            console.log("error")
+                        }
+                    })
+                }
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         alert('submit!');
@@ -270,110 +337,26 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
-
-            // 弹窗内容
-            submitForm111(formName) {
-
-                var did = this.form.id;
-                var dbal = this.form.bal;
-                var updateDate = {
-                    id: did,
-                    bal: dbal
-                }
-
-                if (this.isEdit) {
-                    this.dateForUpdate.push(this.ruleForm);
-                    console.log(updateDate, this.row)
-
-                    // var id=this.form.id;
-                    // var bal=this.form.bal;
-                    // var pass=this.form.pass;
-                    updateDate.bal += this.ruleForm.money * this.form.sign;
-                    $.ajax({
-                        type: "POST",
-                        url: "http://127.0.0.1:8080/online_retailer_war_exploded/EditWal",
-                        contentType: "application/json; charset:utf-8",
-                        data: JSON.stringify(this.dateForUpdate),
-                        dataType: "json",
-                        success: function (date) {
-                            console.log(date.result)
-                            if (date.result == "success") {
-
-                                //手动刷新
-                                // window.location.reload();
-                                this.$set(this.tableData3, this.row, updateDate);
-                                this.visible = false;
-                                this.visible1 = false;
-                                this.isEdit = false;
-                                if (this.form.sign == 1) {
-                                    this.$alert('<strong>充值成功,请等待管理员审核</strong>', '感谢', {
-                                        dangerouslyUseHTMLString: true
-                                    });
-                                } else {
-                                    this.$alert('<strong>提现成功，请等待管理员审核</strong>', '感谢', {
-                                        dangerouslyUseHTMLString: true
-                                    });
-                                }
-
-
-                            } else if (date.result == "passError") {
-                                this.$alert('<strong>密码错误</strong>', '好像出了点问题', {
-                                    dangerouslyUseHTMLString: true
-                                });
-                            } else if (date.result == "recordError") {
-                                this.$alert('<strong>记录失败</strong>', '好像出了点问题', {
-                                    dangerouslyUseHTMLString: true
-                                });
-                            } else if (date.result == "unenough") {
-                                this.$alert('<strong>余额不足</strong>', '好像出了点问题', {
-                                    dangerouslyUseHTMLString: true
-                                });
-                            } else {
-                                this.$alert('<strong>网络繁忙</strong>', '好像出了点问题', {
-                                    dangerouslyUseHTMLString: true
-                                });
-                            }
-                        }.bind(this),
-                        error: function (message) {
-                            console.log(message)
-                            console.log("error")
-                        }
-
-                    })
-
-
-                } else {
-                    this.$alert('<strong>两次密码要相同哦</strong>', '提示', {
-                        dangerouslyUseHTMLString: true
-                    });
-                }
-                this.$refs[formName].validate((valid) => {
-                    if (!valid) {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-
-            },
-
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
                 this.tableData=[]
                 $.ajax({
                     type:"get",
-                    url:"http://127.0.0.1:8080/online_retailer_war_exploded/changeTransationList/"+val,
+                    url:"http://localhost:8080/online_retailer/changeAllTransationList/"+val,
                     dataType:"json",
                     success:function(data){
 
                         $.each(data, function (i, obj) {
-                            if(i!=data.length-1) {
+                            if(i!=data.length-1&&obj.traRecStatus==0) {
                                 this.tableData.push({
                                     tid: obj.traRecWalId,
+                                    traid:obj.traRecId,
                                     tnum: obj.traRecSum,
                                     ttype: this.ztype[obj.traRecType],
                                     tstatus: this.zstatus[obj.traRecStatus],
                                     tbal: obj.traRecBalance,
                                     ttime: obj.traRecDateStr,
+                                    tusername:obj.traRecUserName,
                                 })
                             }
                         }.bind(this))
@@ -385,54 +368,57 @@
 
                 })
             }
+            ,
+            beforeUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isGIF = file.type === 'image/gif';
+                const isPNG = file.type === 'image/png';
+                const isBMP = file.type === 'image/bmp';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG && !isGIF && !isPNG && !isBMP) {
+                    this.$message.error('上传图片必须是JPG/GIF/PNG/BMP 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传图片大小不能超过 2MB!');
+                }
+                return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
+            },
+            //文件上传成功的钩子函数
+            handleSuccess(res, file) {
+                this.$message({
+                    type: 'info',
+                    message: '图片上传成功',
+                    duration: 6000
+                });
+                if (file.response.success) {
+                    this.ruleForm.fsrc = file.response.message; //将返回的文件储存路径赋值picture字段
+                }
+            },
+            //删除文件之前的钩子函数
+            handleRemove(file, fileList) {
+                this.$message({
+                    type: 'info',
+                    message: '已删除原有图片',
+                    duration: 6000
+                });
+            },
+            //点击列表中已上传的文件事的钩子函数
+            handlePreview(file) {
+            },
+            //上传的文件个数超出设定时触发的函数
+            onExceed(files, fileList) {
+                this.$message({
+                    type: 'info',
+                    message: '最多只能上传一个图片',
+                    duration: 6000
+                });
+            },
         },
-        //文件上传成功的钩子函数
-        handleSuccess(res, file) {
-            this.$message({
-                type: 'info',
-                message: '图片上传成功',
-                duration: 6000
-            });
-            if (file.response.success) {
-                this.editor.picture = file.response.message; //将返回的文件储存路径赋值picture字段
-            }
-        },
-        //删除文件之前的钩子函数
-        handleRemove(file, fileList) {
-            this.$message({
-                type: 'info',
-                message: '已删除原有图片',
-                duration: 6000
-            });
-        },
-        //点击列表中已上传的文件事的钩子函数
-        handlePreview(file) {
-        },
-        //上传的文件个数超出设定时触发的函数
-        onExceed(files, fileList) {
-            this.$message({
-                type: 'info',
-                message: '最多只能上传一个图片',
-                duration: 6000
-            });
-        },
+
         //文件上传前的前的钩子函数
         //参数是上传的文件，若返回false，或返回Primary且被reject，则停止上传
-        beforeUpload(file) {
-            const isJPG = file.type === 'image/jpeg';
-            const isGIF = file.type === 'image/gif';
-            const isPNG = file.type === 'image/png';
-            const isBMP = file.type === 'image/bmp';
-            const isLt2M = file.size / 1024 / 1024 < 2;
 
-            if (!isJPG && !isGIF && !isPNG && !isBMP) {
-                this.$message.error('上传图片必须是JPG/GIF/PNG/BMP 格式!');
-            }
-            if (!isLt2M) {
-                this.$message.error('上传图片大小不能超过 2MB!');
-            }
-            return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
-        },
 
         mounted:function(){
             this. handleCurrentChange(1);

@@ -1,6 +1,7 @@
 package cn.neusoft.retailer.web.controller;
 
 import cn.neusoft.retailer.web.pojo.TransactionRecord;
+import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.TransationService;
 import cn.neusoft.retailer.web.tools.Result;
 import net.sf.json.JSONArray;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -45,16 +47,74 @@ public class TransationController {
         return jsonArray;
     }
 
-    @RequestMapping(value = "changeTransationList/{page}",method = RequestMethod.GET)
+    @RequestMapping(value = "changeTransationList/{page}")
     @ResponseBody
-    public JSONArray changeList(@PathVariable("page") String page){
+    public JSONArray changeList(@PathVariable("page") String page,HttpServletRequest request){
 
         System.out.println("page"+page);
+        User user=new User();
+
+                HttpSession session=request.getSession();
+        System.out.println(session);
+         user = (User) session.getAttribute("user");
+
+        //模拟session
+
+//        user.setUserId(165108101);
+//        user.setUserPassword("1177447a3e0364e44506716fca1659cd");
+//        user.setUserName("zhihong");
+//        user.setUserMail("893168374@qq.com");
+//        user.setUserPhone("13437814328");
+//        user.setUserPrivilege(0);
+
+        Integer id=user.getUserId();
+        Integer ty=user.getUserPrivilege();
         int p=Integer.valueOf(page);
         p-=1;
 
-        JSONArray jsonArray= transationService.getAll(p);
 
+        JSONArray jsonArray= null;
+        try {
+            jsonArray = transationService.getAll(p,id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        jsonArray.add(ty);
+        return jsonArray;
+    }
+
+    @RequestMapping(value = "changeAllTransationList/{page}")
+    @ResponseBody
+    public JSONArray changeAllList(@PathVariable("page") String page,HttpServletRequest request){
+
+        System.out.println("page"+page);
+//        User user=new User();
+
+//        HttpSession session=request.getSession();
+//        System.out.println("流水单"+session);
+//         user = (User) session.getAttribute("user");
+
+        //模拟session
+
+//        user.setUserId(165108101);
+//        user.setUserPassword("1177447a3e0364e44506716fca1659cd");
+//        user.setUserName("zhihong");
+//        user.setUserMail("893168374@qq.com");
+//        user.setUserPhone("13437814328");
+//        user.setUserPrivilege(0);
+
+//        Integer id=user.getUserId();
+//        Integer ty=user.getUserPrivilege();
+        int p=Integer.valueOf(page);
+        p-=1;
+
+
+        JSONArray jsonArray= null;
+        try {
+            jsonArray = transationService.getAll(p);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return jsonArray;
     }
 
@@ -62,7 +122,16 @@ public class TransationController {
     public String toBrand(){return "html/brand-transation.html";}
 
     @RequestMapping("/upload")
+    @ResponseBody
     public Result upload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) {
+
+
+//        org.json.JSONArray jsonArray = new org.json.JSONArray(json);
+//        System.out.println(jsonArray);
+//        JSONObject oldJSONObject = jsonArray.getJSONObject(0);
+//        int id= oldJSONObject.getInt("tid");
+//        String ttype=oldJSONObject.getString("ttype");
+//        System.out.println("id+type"+id+ttype);
 
         //获取文件在服务器的储存位置
         String path = request.getSession().getServletContext().getRealPath("/upload");
@@ -87,7 +156,7 @@ public class TransationController {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String date = sdf.format(d);
-        String fileName = date + name + "." + type;
+        String fileName = date +name+ "." + type;
         System.out.println("新文件名称：" + fileName);
 
         //在指定路径下创建一个文件
@@ -104,5 +173,19 @@ public class TransationController {
             e.printStackTrace();
             return new Result(false, "上传失败");
         }
+    }
+
+    @RequestMapping(value = "/ReviewForm",method= RequestMethod.POST,produces="application/json; charset:UTF-8")
+    @ResponseBody
+    public Result Review(@RequestBody String json){
+        try{
+            org.json.JSONArray jsonArray = new org.json.JSONArray(json);
+            System.out.println(jsonArray);
+            Result result = transationService.review(jsonArray);
+            return result;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

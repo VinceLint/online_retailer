@@ -8,6 +8,15 @@ public class TransactionRecord {
     private Date traRecDate;
 
     private String traRecDateStr;
+    private  String traRecUserName;
+
+    public String getTraRecUserName() {
+        return traRecUserName;
+    }
+
+    public void setTraRecUserName(String traRecUserName) {
+        this.traRecUserName = traRecUserName;
+    }
 
     public String getTraRecDateStr() {
         return traRecDateStr;

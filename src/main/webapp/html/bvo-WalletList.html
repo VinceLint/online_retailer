@@ -1,9 +1,14 @@
 
 <!DOCTYPE html>
-<html>
+<!--/**-->
+<!--* @author 庄志宏-->
+<!--* @version 1.0-->
+<!--* @date 2019/7/23 21:44-->
+<!--*/-->
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>借卖方账户余额</title>
+    <title>账户余额</title>
 
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -16,13 +21,6 @@
         position:absolute;
     }
 </style>
-<body>
-<div class="page-header position-relative">
-    <h1 style="color: #2679b5;">借卖方 <small><i class="el-icon-d-arrow-right"></i> 账户余额</small></h1>
-    <hr><br>
-
-</div>
-
 <!-- import CSS -->
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <!-- import Vue before Element -->
@@ -30,7 +28,16 @@
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
+<body>
 <div id="app">
+
+<div class="page-header position-relative">
+    <h1 style="color: #2679b5;">				{{who}}<small><i class="el-icon-d-arrow-right"></i> 账户余额</small></h1>
+    <hr><br>
+
+</div>
+
+
 
 
     <div id="table3">
@@ -115,10 +122,35 @@
 
             </el-form>
         </el-dialog>
+<!--修改密码-->
+        <el-dialog :visible.sync="visible2" title="修改密码">
+
+            <el-form :model="changeForm" status-icon :rules="changerules" ref="changeForm" label-width="100px" class="demo-ruleForm">
+                <el-form-item label="旧密码" prop="oldpw">
+                    <el-input type="password" v-model="changeForm.oldpw"></el-input>
+                </el-form-item>
+
+                <el-form-item label="新密码" prop="newpw">
+                    <el-input type="password" v-model="changeForm.newpw" autocomplete="off"></el-input>
+                </el-form-item>
+
+                <el-form-item label="确认密码" prop="newpw2">
+                    <el-input type="password" v-model="changeForm.newpw2" autocomplete="off"></el-input>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button type="primary" @click="submitChange('changeForm')">提交</el-button>
+                    <el-button @click="resetForm('changeForm')">重置</el-button>
+                </el-form-item>
+
+            </el-form>
+        </el-dialog>
         <br>
 
-
+        <template>
         <el-button type="primary" class='btn-3' @click="handlejump()" >交易流水</el-button>
+        <el-button type="primary" class='btn-3' style="margin-left: 150px" @click="changePw(), visible2 = true" >修改密码</el-button>
+        </template>
     </div>
 </div>
 
@@ -127,7 +159,7 @@
 
 
     var vm1=new Vue({
-        el: '#table3',
+        el: '#app',
         data: function () {
             // 弹窗内容
 
@@ -167,11 +199,43 @@
                     callback();
                 }
             };
+            var validateOldPw = (rule,value,callback)=>{
+                if(value===''){
+                    callback(new Error('请输入旧密码'));
+
+                }else{
+                    callback();
+                }
+            };
+            var validateNewPw = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入新密码'));
+                } else
+                 {
+                    if (this.changeForm.newpw !== '') {
+                        this.$refs.changeForm.validateField('newpw2');
+                    }
+                    callback();
+                }
+            };
+            var validateNewPw2 = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请再次输入密码'));
+                } else if (value !== this.changeForm.newpw) {
+                    console.log(this.changeForm.newpw)
+                    callback(new Error('两次输入密码不一致!'));
+                } else {
+                    this.ischange=true;
+                    callback();
+                }
+            };
 
             return {
                 visible: false,
                 visible1: false,
+                visible2: false,
                 isEdit:false,
+                ischange:false,
                 chooseId:'',
                 row:'',
                 form:{
@@ -186,6 +250,8 @@
                     bal:'',
                     pass:'',
                 },
+                who:'',
+                tableData3:[],
                 dateNotUpdate:{
                     id:'',
                     bal:'',
@@ -196,6 +262,12 @@
                     checkPass: '',
                     money: ''
                 },
+                changeForm:{
+                    oldpw:'',
+                    newpw:'',
+                    newpw2:'',
+                },
+                ztype:["借卖方","品牌商","管理员"],
                 // 弹窗内容
                 rules: {
                     pass: [
@@ -207,6 +279,12 @@
                     money: [
                         { validator: checkMoney, trigger: 'blur' }
                     ]
+                },
+                // //修改密码
+                changerules:{
+                    oldpw:[{validator:validateOldPw,trigger:'blur'}],
+                    newpw:[{validator:validateNewPw,trigger:'blur'}],
+                    newpw2:[{validator:validateNewPw2,trigger:'blur'}],
                 }
             }
         },
@@ -229,6 +307,14 @@
                 console.log(row.bal);
 
             },
+            changePw(formName){
+                this.dateForUpdate=[];
+                this.form.id=this.tableData3[0].id;
+                this.form.bal=this.tableData3[0].bal;
+                this.dateForUpdate.push(this.form);
+                console.log(this.dateForUpdate);
+
+            },
             handleWithDraw(index, row) {
                 console.log(index, row);
                 this.form.id=row.id;
@@ -239,6 +325,61 @@
                 this.dateForUpdate.push(this.form);
                 console.log(this.form,this.dateForUpdate);
 
+            },
+            submitChange(formName){
+                if(this.ischange){
+                this.dateForUpdate.push(this.changeForm);
+                console.log(this.changeForm);
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8080/online_retailer/EditPassword",
+                    contentType:"application/json; charset:utf-8",
+                    data:JSON.stringify(this.dateForUpdate),
+                    dataType: "json",
+                    success:function(date){
+                        console.log(date)
+                        if(date.success){
+
+                            //手动刷新
+                            // window.location.reload();
+                            this.visible = false;
+                            this.visible2=false;
+                            this.ischange=false;
+                                this.$alert('<strong>密码修改成功</strong>', '通知', {
+                                    dangerouslyUseHTMLString: true
+                                });
+
+
+
+
+                        }else if(date.message=="password_format"){
+                            this.$alert('<strong>请输入6位密码</strong>', '密码格式错误', {
+                                dangerouslyUseHTMLString: true
+                            });
+                        }else if(date.message=="password_error"){
+                            this.$alert('<strong>密码错误</strong>', '好像出了点问题', {
+                                dangerouslyUseHTMLString: true
+                            });
+                        }else  {
+                            this.$alert('<strong>网络繁忙</strong>', '好像出了点问题', {
+                                dangerouslyUseHTMLString: true
+                            });
+                        }
+
+
+                    }.bind(this),
+                    error:function (message) {
+                        console.log(message)
+                        console.log("error")
+                    }})}
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        console.log('submit!');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
             // 弹窗内容
             submitForm(formName) {
@@ -260,7 +401,7 @@
                     updateDate.bal+=this.ruleForm.money*this.form.sign;
                     $.ajax({
                         type:"POST",
-                        url:"http://127.0.0.1:8080/online_retailer_war_exploded/EditWal",
+                        url:"http://localhost:8080/online_retailer/EditWal",
                         contentType:"application/json; charset:utf-8",
                         data:JSON.stringify(this.dateForUpdate),
                         dataType: "json",
@@ -327,11 +468,12 @@
 
             },
             resetForm(formName) {
+                // this.ruleForm=[];
                 this.$refs[formName].resetFields();
             },
             handlejump() {
                 //跳转页面
-                window.location="http://127.0.0.1:8080/online_retailer_war_exploded/toTransation";
+                window.location="http://localhost:8080/online_retailer/toTransation";
             },
             init() {
                 var that=this;
@@ -339,15 +481,19 @@
 
                 $.ajax({
                     type: "post",
-                    url: "http://127.0.0.1:8080/online_retailer_war_exploded/toWalList",
+                    url: "http://localhost:8080/online_retailer/toWalList",
+                    contentType: "application/json; charset=utf-8",
+                    xhrFields: {withCredentials: true},
                     dataType: "json",
                     success: function (r) {
                         $.each(r,function(i,obj){
                             this.tableData3.push({
                                 id:obj.walId,
-                                bal:obj.walBalance
+                                bal:obj.walBalance,
+                                ty:this.ztype[obj.walType]
                             })
                         }.bind(this))
+                        this.who=this.tableData3[0].ty;
                         console.log(r);
                         // for (var i = 0; i < r.length; i++) {//循环显示标题
                         //
