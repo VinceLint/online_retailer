@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<script src="../js/jquery-1.9.1.js"></script>
+<style>
+    #title {
+        font-size: xx-large;
+    }
+
+    #amazon {
+        height: 250px;
+    }
+
+    #ebay {
+        height: 250px;
+    }
+
+    #btn {
+        float: right;
+        margin-top: 20px;
+    }
+</style>
+
+<body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<div id="app">
+    <div id="title">我的店铺</div>
+    <div id="amazon">
+        <el-scrollbar style="height: 100%;width: auto;">
+            <el-table :data="amazonData" border style="width: 100%;position: relative; overflow: auto;">
+                <el-table-column prop="store" label="amazon">
+                </el-table-column>
+            </el-table>
+        </el-scrollbar>
+    </div>
+    </br>
+    <div id="ebay">
+        <el-scrollbar style="height: 100%;width: auto;">
+            <el-table :data="ebayData" border style="width: 100%;position: relative; overflow: auto;">
+                <el-table-column prop="store" label="ebay">
+                </el-table-column>
+            </el-table>
+        </el-scrollbar>
+    </div>
+    <div id="btn">
+        <el-button type="primary" @click="addStore">添加网店</el-button>
+    </div>
+    <el-dialog :visible.sync="dialogVisible" title="网店信息">
+        <el-form :model="form" label-width="80px" ref="form">
+            <el-form-item :rules="[
+      						{ required: true, message: '网店名称不能为空'},
+      						{ max: 20, message: '网店名称不超过20个字符'}
+    					]" label="网店名称" prop="storeName">
+                <el-input placeholder="请输入网店名称,不大于20个字符" v-model="form.storeName"></el-input>
+            </el-form-item>
+            <el-form-item :rules="[
+      						{ required: true, message: '网店邮编不能为空'},
+      						{ max: 10, message: '网店邮编不超过10个字符'}
+    					]" label="网店邮编" prop="marketplace">
+                <el-input placeholder="请输入网店邮编" v-model="form.marketplace"></el-input>
+            </el-form-item>
+            <el-form-item :rules="[
+      						{ required: true, message: 'nws身份验证令牌不能为空'},
+      						{ max: 10, message: 'nws身份验证令牌不超过10个字符'}
+    					]" label="nws" prop="nws">
+                <el-input placeholder="请输入nws身份验证令牌" v-model="form.nws"></el-input>
+            </el-form-item>
+            <el-form-item label="网店类型" prop="type">
+                <el-select v-model="form.type" placeholder="请选择" @change="$forceUpdate()">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item>
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button @click="onSubmit" type="primary">确 定</el-button>
+            </el-form-item>
+            </el-from>
+    </el-dialog>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                amazonData: [],
+                ebayData: [],
+                dialogVisible: false,
+                form: {
+                    storeName: '',
+                    marketplace: '',
+                    nws: '',
+                    type: 0
+                },
+                options: [{
+                    value: 0,
+                    label: 'amazon'
+                }, {
+                    value: 1,
+                    label: 'ebay'
+                }]
+            }
+        },
+        methods: {
+            addStore() {
+                this.dialogVisible = true;
+            },
+            init() {
+                this.amazonData = []
+                this.ebayData = []
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: "http://localhost:8080/online_retailer/BvoStore/loadMyStore",
+                    success: function(res) {
+                        $.each(res, function(i, obj) {
+                            if(obj.storeType == 0) {
+                                this.amazonData.push({
+                                    store: obj.storeName
+                                }) //循环遍历，拼接
+                            } else {
+                                this.ebayData.push({
+                                    store: obj.storeName
+                                }) //循环遍历，拼接
+                            }
+
+                        }.bind(this));
+                    }.bind(this),
+                    error: function() {
+                        alert("初始化数据失败");
+                    }
+                });
+            },
+            onSubmit() {
+                console.log(this.form.type)
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/online_retailer/BvoStore/addStore",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(this.form),
+                    dataType: "json",
+                    success: function(data) {
+                        //成功信息
+                        console.log("success")
+                        if(data.result == "SUCCESS") {
+                            this.init()
+                            alert("添加成功!")
+                        } else {
+                            alert("添加失败")
+                        }
+                    }.bind(this),
+                    error: function(message) {
+                        //失败信息
+                        console.log("error")
+                    }
+                });
+                this.dialogVisible = false
+            }
+        },
+        created() {
+            this.init()
+        },
+        watch: {
+            form(newVal) {
+                console.log(newVal)
+            }
+        }
+
+    })
+</script>
+</body>
+
+</html>

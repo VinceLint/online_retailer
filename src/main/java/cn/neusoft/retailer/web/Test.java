@@ -105,8 +105,8 @@ public class Test {
     public void testMysql(){
 //        List<Dictionary> dictionarys= dictionaryMapper.selectByType("USER_PRIVILEGE");
 //        System.out.println(dictionarys);
-        Order order=new Order();
-        brandOrderService.insert(order);
+//        Order order=new Order();
+//        brandOrderService.insert(order);
         List<Order> orders=brandOrderService.selectAll();
         System.out.println(orders.get(0).getOrderId());
     }

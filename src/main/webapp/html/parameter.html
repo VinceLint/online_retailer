@@ -6,7 +6,7 @@
     <title></title>
     <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
 </head>
-<script src="../js/jquery-3.4.1.js"></script>
+<script src="../js/jquery-1.9.1.js"></script>
 <body>
 <div id="app">
     <el-table :data="tableData" @selection-change="handleSelectionChange" style="width: 100%">
@@ -103,7 +103,7 @@
                 var pageSum = 1;
                 $.ajax({
                     type: 'POST',
-                    url: "http://localhost:8090/online_retailer//initParameter",
+                    url: "http://localhost:8080/online_retailer/parameter/initParameter",
                     async:false,
                     success: function (res) {
                         pageSum = parseInt(res.pageSum);
@@ -119,7 +119,7 @@
                 var p = {"pa": this.pageNum}
                 $.ajax({
                     type: 'POST',
-                    url: "http://localhost:8090/online_retailer//loadParameter",
+                    url: "http://localhost:8080/online_retailer/parameter/loadParameter",
                     data: JSON.stringify(p),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -169,7 +169,7 @@
                 if (this.isEdit) {
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8090/online_retailer//updateParameter",
+                        url: "http://localhost:8080/online_retailer/parameter/updateParameter",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(this.form),
                         dataType: "json",
@@ -194,7 +194,7 @@
                 else {
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8090/online_retailer//insertParameter",
+                        url: "http://localhost:8080/online_retailer/parameter/insertParameter",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(this.form),
                         dataType: "json",
@@ -220,7 +220,7 @@
             handleDel() {
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8090/online_retailer//deleteParameter",
+                    url: "http://localhost:8080/online_retailer/parameter/deleteParameter",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(this.dataForDel),
                     dataType: "json",

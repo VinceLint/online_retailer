@@ -31,13 +31,27 @@
             <mvc:mapping path="/n"/>
 
             <!--            <mvc:exclude-mapping path="/user/login"/>-->
-            <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"></bean>
+            <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"/>
         </mvc:interceptor>
 
-        <!-- 拦截BrandOrderController -->
+        <!-- 拦截品牌商的请求 -->
         <mvc:interceptor>
             <mvc:mapping path="/brandOrder/**"/>
-            <bean class="cn.neusoft.retailer.web.interceptor.BrandOrderManageInterceptor"/>
+            <mvc:mapping path="/Goods/**"/>
+            <bean class="cn.neusoft.retailer.web.interceptor.MvoInterceptor"/>
+        </mvc:interceptor>
+        <!--拦截借卖方的请求-->
+        <mvc:interceptor>
+            <mvc:mapping path="/BvoInfo/**"/>
+            <mvc:mapping path="/BvoStore/**"/>
+            <bean class="cn.neusoft.retailer.web.interceptor.BvoInterceptor"/>
+        </mvc:interceptor>
+        <!--拦截系统管理员的请求-->
+        <mvc:interceptor>
+            <mvc:mapping path="/dictionary/**"/>
+            <mvc:mapping path="/parameter/**"/>
+            <mvc:mapping path="/createOrderAndLog/**"/>
+            <bean class="cn.neusoft.retailer.web.interceptor.AdminInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

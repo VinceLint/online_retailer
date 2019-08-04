@@ -6,10 +6,7 @@ package cn.neusoft.retailer.web.service.impl;
  */
 
 import cn.neusoft.retailer.web.mapper.*;
-import cn.neusoft.retailer.web.pojo.Order;
-import cn.neusoft.retailer.web.pojo.TransactionRecord;
-import cn.neusoft.retailer.web.pojo.User;
-import cn.neusoft.retailer.web.pojo.Wallet;
+import cn.neusoft.retailer.web.pojo.*;
 import cn.neusoft.retailer.web.service.BrandOrderService;
 import cn.neusoft.retailer.web.tools.OrderStatus;
 import cn.neusoft.retailer.web.tools.TraRecStatus;
@@ -89,7 +86,7 @@ public class BrandOrderServiceImpl implements BrandOrderService {
     }
 
     /**
-     * @描述 取消订单，退款
+     * @描述 取消订单，退款,退回库存
      * @参数 session
      * @返回值 是否成功
      * @创建人 胡献涛
@@ -103,6 +100,11 @@ public class BrandOrderServiceImpl implements BrandOrderService {
         order.setOrderStatus(OrderStatus.已取消.ordinal());
         order.setOrderCancelTime(new Date());
         if(orderMapper.updateByPrimaryKey(order)<=0) return false;
+
+        //退回库存
+        Goods goods=goodsMapper.selectByPrimaryKey(order.getGoodsId());
+        goods.setGoodsAmount(goods.getGoodsAmount()+order.getOrderAmount());
+        goodsMapper.updateByPrimaryKey(goods);
         //退款:从品牌商退款到借卖方，改两方余额、添加两方的交易流水
         Integer brandWalId=brandUser.getUserWalId();
         Integer bvoWalId=userMapper.selectByPrimaryKey(order.getBsId()).getUserWalId();

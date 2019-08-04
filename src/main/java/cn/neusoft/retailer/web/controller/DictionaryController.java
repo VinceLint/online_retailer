@@ -6,10 +6,7 @@ import net.sf.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +18,12 @@ import java.util.Map;
  * @date 2019/7/24 10:40
  */
 @Controller
+@RequestMapping("/dictionary")
 public class DictionaryController {
     @Autowired
     private DictionaryService dictionaryService;
 
-    @RequestMapping(value = "/initDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/initDictionary", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public JSONArray init() throws Exception{
         List<Dictionary> dictionaryList = dictionaryService.selectAll();
@@ -33,7 +31,7 @@ public class DictionaryController {
         return jsonarray;
     }
 
-    @RequestMapping(value = "/insertDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/insertDictionary", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String,Object> insert(@RequestBody String json) throws Exception{
         Map<String,Object> resultMap = new HashMap<String, Object>();
@@ -47,7 +45,7 @@ public class DictionaryController {
         return resultMap;
     }
 
-    @RequestMapping(value = "/updateDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/updateDictionary", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String,Object> update(@RequestBody String json) throws Exception{
         Map<String,Object> resultMap = new HashMap<String, Object>();
@@ -62,7 +60,7 @@ public class DictionaryController {
         return resultMap;
     }
 
-    @RequestMapping(value = "/deleteDictionary", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/deleteDictionary", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String,Object> delete(@RequestBody String json) throws Exception{
         Map<String,Object> resultMap = new HashMap<String, Object>();
@@ -75,10 +73,4 @@ public class DictionaryController {
         }
         return resultMap;
     }
-
-    @RequestMapping("/toDictionary")
-    public String  toDic(){
-        return "html/dictionary.html";
-    }
-
 }

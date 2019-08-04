@@ -9,6 +9,9 @@
     <result column="marketplace_id" jdbcType="VARCHAR" property="marketplaceId" />
     <result column="nws_auth_token" jdbcType="VARCHAR" property="nwsAuthToken" />
   </resultMap>
+  <select id="selectAllById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from store where store_own = #{userId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from store
     where store_id = #{storeId,jdbcType=INTEGER}
