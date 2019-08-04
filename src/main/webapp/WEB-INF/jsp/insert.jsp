@@ -18,7 +18,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/uimaker/dialog.css">
 
 
-
 </head>
 
 <script>
@@ -144,14 +143,29 @@
             valueField: 'value',
             textField: 'label',
             data: [{
-                label: "家用电器",
+                label: "服装衣物",
                 value: 0
             }, {
-                label: "日用品",
+                label: "背包鞋靴",
+                value: 1
+            }, {
+                label: "数码家电",
                 value: 2
             }, {
-                label: "数码产品",
+                label: "儿童玩具",
                 value: 3
+            }, {
+                label: "美妆保健",
+                value: 4
+            }, {
+                label: "眼镜手表",
+                value: 5
+            }, {
+                label: "家具建材",
+                value: 6
+            }, {
+                label: "游戏动漫",
+                value: 7
             }],
             width: 160,
             panelHeight: 'auto'
@@ -162,14 +176,29 @@
             valueField: 'value',
             textField: 'label',
             data: [{
-                label: "家用电器",
+                label: "服装衣物",
                 value: 0
             }, {
-                label: "日用品",
+                label: "背包鞋靴",
+                value: 1
+            }, {
+                label: "数码家电",
                 value: 2
             }, {
-                label: "数码产品",
+                label: "儿童玩具",
                 value: 3
+            }, {
+                label: "美妆保健",
+                value: 4
+            }, {
+                label: "眼镜手表",
+                value: 5
+            }, {
+                label: "家具建材",
+                value: 6
+            }, {
+                label: "游戏动漫",
+                value: 7
             }],
             width: 160,
             panelHeight: 'auto'
@@ -190,11 +219,21 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         if (row.goodsClass == 0) {
-                            return "家用电器";
+                            return "服装衣物";
+                        } else if (row.goodsClass == 1) {
+                            return "背包鞋靴";
                         } else if (row.goodsClass == 2) {
-                            return "日用品";
+                            return "数码家电";
                         } else if (row.goodsClass == 3) {
-                            return "数码产品";
+                            return "儿童玩具";
+                        } else if (row.goodsClass == 4) {
+                            return "美妆保健";
+                        } else if (row.goodsClass == 5) {
+                            return "眼镜手表";
+                        } else if (row.goodsClass == 6) {
+                            return "家具建材";
+                        } else if (row.goodsClass == 7) {
+                            return "游戏动漫";
                         }
                     }
                 },
@@ -266,16 +305,18 @@
         alert("下架成功");
     }
 
-    $.extend($.fn.validatebox.defaults.rules,{
-        numberCheckSub : {
-            validator : function(value) {
-                return /^[0-9]+$/.test(value);},
-            message : "只能输入数字"
+    $.extend($.fn.validatebox.defaults.rules, {
+        numberCheckSub: {
+            validator: function (value) {
+                return /^[0-9]+$/.test(value);
+            },
+            message: "只能输入数字"
         },
-        stringCheckSub : {
-            validator : function(value) {
-                return /^[a-zA-Z0-9\u4E00-\u9FA5]+$/.test(value);},
-            message : "只能包括中文字、英文字母、数字"
+        stringCheckSub: {
+            validator: function (value) {
+                return /^[a-zA-Z0-9\u4E00-\u9FA5]+$/.test(value);
+            },
+            message: "只能包括中文字、英文字母、数字"
         }
     })
 

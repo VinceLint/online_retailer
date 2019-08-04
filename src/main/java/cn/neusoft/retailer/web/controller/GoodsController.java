@@ -167,4 +167,10 @@ public class GoodsController {
         return "insert";
     }
 
+    @RequestMapping("/searchByTitle")
+    public String searchByTitle(String goodsTitle) {
+
+        return "insert";
+    }
+
 }
