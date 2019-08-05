@@ -27,7 +27,7 @@
         $('#dialog').dialog({
             title: "新增商品",
             width: 700,
-            height: 620,
+            height: 650,
             buttons: [
                 {
                     text: "保存",
@@ -55,7 +55,7 @@
         $('#dialog2').dialog({
             title: "编辑商品",
             width: 700,
-            height: 600,
+            height: 620,
             buttons: [
                 {
                     text: "保存",
@@ -118,7 +118,8 @@
                     length: rowData.goodsLength,
                     width: rowData.goodsWidth,
                     height: rowData.goodsHeight,
-                    weight: rowData.goodsWeight
+                    weight: rowData.goodsWeight,
+                    brandId: rowData.brandId
 
                 });
             }
@@ -348,6 +349,11 @@
                            data-options="required:true, validType:'numberCheckSub'"></td>
             </tr>
             <tr>
+                <td>品牌id：</td>
+                <td><input type="text" name="brandId" style="width:400px;" class="easyui-validatebox"
+                           data-options="required:true, validType:'numberCheckSub'"></td>
+            </tr>
+            <tr>
                 <td>商品价格：</td>
                 <td><input type="text" name="price" style="width:200px;" class="easyui-validatebox"
                            data-options="required:true">&nbsp;元
@@ -410,6 +416,11 @@
                 <td>商品标题：</td>
                 <td><input type="text" name="title" style="width:400px;" class="easyui-validatebox"
                            data-options="required:true"></td>
+            </tr>
+            <tr>
+                <td>品牌id：</td>
+                <td><input type="text" name="brandId" style="width:400px;" class="easyui-validatebox"
+                           data-options="required:true, validType:'numberCheckSub'"></td>
             </tr>
             <tr>
                 <td>商品价格：</td>

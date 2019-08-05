@@ -47,13 +47,9 @@ public class GoodsController {
     }
 
     @RequestMapping("/queryInsert")
-    public String queryInsert(HttpServletRequest request, String title, int id, double price, int amount, int clazz,
+    public String queryInsert(HttpServletRequest request, String title, int id, int brandId, double price, int amount, int clazz,
                               String describe, double length, double width, double height, double weight,
                               @RequestParam CommonsMultipartFile file, HttpSession session) throws IOException {
-
-        //获取品牌商ID
-        Integer brandUserId= ((User)session.getAttribute("user")).getUserId();
-        System.out.println("已获取品牌商ID: " + brandUserId);
 
         //处理中文乱码问题
         request.setCharacterEncoding("UTF-8");
@@ -61,7 +57,7 @@ public class GoodsController {
         System.out.println(title + " " + id + " " + price + " " + amount + " " + clazz +
                 " " + describe + " " + length + " " + width + " " + height + " " + weight);
         //将数据添加到goods表
-        goodsService.save(title, id, price, amount, clazz, describe, length, width, height, weight, brandUserId);
+        goodsService.save(title, id, price, amount, clazz, describe, length, width, height, weight, brandId);
 
         System.out.println(file.getContentType());
         System.out.println(file.getOriginalFilename()); //文件名
@@ -99,20 +95,17 @@ public class GoodsController {
     }
 
     @RequestMapping("/queryUpdate")
-    public String queryUpdate(HttpServletRequest request, int goodsId, String title, double price, int amount, int clazz,
+    public String queryUpdate(HttpServletRequest request, int goodsId, String title, int brandId, double price, int amount, int clazz,
                               String describe, double length, double width, double height, double weight,
                               @RequestParam CommonsMultipartFile file, HttpSession session) throws IOException {
         //处理中文乱码问题
         request.setCharacterEncoding("UTF-8");
 
-        //获取品牌商ID
-        Integer brandUserId= ((User)session.getAttribute("user")).getUserId();
-
         //显示从前端表单获取到的数据
         System.out.println(title + " " + goodsId + " " + price + " " + amount + " " + clazz +
                 " " + describe + " " + length + " " + width + " " + height + " " + weight);
         goodsService.updateByGoodsId(goodsId, title, price, amount, clazz, describe, length, width,
-                height, weight, brandUserId);
+                height, weight, brandId);
 
         //获取文件名后缀
         int index = file.getOriginalFilename().lastIndexOf(".");
