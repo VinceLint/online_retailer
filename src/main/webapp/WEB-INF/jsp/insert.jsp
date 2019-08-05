@@ -27,7 +27,7 @@
         $('#dialog').dialog({
             title: "新增商品",
             width: 700,
-            height: 620,
+            height: 650,
             buttons: [
                 {
                     text: "保存",
@@ -55,7 +55,7 @@
         $('#dialog2').dialog({
             title: "编辑商品",
             width: 700,
-            height: 600,
+            height: 620,
             buttons: [
                 {
                     text: "保存",
