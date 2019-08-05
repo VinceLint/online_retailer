@@ -510,11 +510,36 @@
                         console.log(error.status);
                     }
                 });
+            },
+            //判断有无钱包
+            handleChangePage() {
+                this.tableData=[]
+                $.ajax({
+                    type:"get",
+                    url:"http://localhost:8080/online_retailer/changePage",
+                    dataType:"json",
+                    success:function(data){
+                        if(data.success){
+                            console.log("you have wal!")
+                        }
+                        else{
+                            window.location="http://localhost:8080/online_retailer/html/WalSignUp.html";
+                        }
+                        console.log(data);
+
+                    }.bind(this)
+
+                })
             }
         },
 
+        // created(){
+        //
+        // },
 
         mounted:function(){
+            this.handleChangePage();
+
             this.init();
         }
 

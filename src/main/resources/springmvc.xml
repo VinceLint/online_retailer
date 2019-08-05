@@ -38,12 +38,16 @@
         <mvc:interceptor>
             <mvc:mapping path="/brandOrder/**"/>
             <mvc:mapping path="/Goods/**"/>
+<!--            <mvc:mapping path="/toAddWal"/>-->
+<!--            <mvc:mapping path="/bvo-transation"/>-->
             <bean class="cn.neusoft.retailer.web.interceptor.MvoInterceptor"/>
         </mvc:interceptor>
         <!--拦截借卖方的请求-->
         <mvc:interceptor>
             <mvc:mapping path="/BvoInfo/**"/>
             <mvc:mapping path="/BvoStore/**"/>
+<!--            <mvc:mapping path="/toAddWal"/>-->
+<!--            <mvc:mapping path="/bvo-transation"/>-->
             <bean class="cn.neusoft.retailer.web.interceptor.BvoInterceptor"/>
         </mvc:interceptor>
         <!--拦截系统管理员的请求-->
@@ -51,7 +55,15 @@
             <mvc:mapping path="/dictionary/**"/>
             <mvc:mapping path="/parameter/**"/>
             <mvc:mapping path="/createOrderAndLog/**"/>
+            <mvc:mapping path="/ReviewForm"/>
             <bean class="cn.neusoft.retailer.web.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+        <!-- 管理员不能进入的请求 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/toSignWal2"/>
+            <!--                        <mvc:mapping path="/html/WalSignUp.html"/>-->
+<!--            <mvc:mapping path="/bvo-transation"/>-->
+            <bean class="cn.neusoft.retailer.web.interceptor.WalletInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

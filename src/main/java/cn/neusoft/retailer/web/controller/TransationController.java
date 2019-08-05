@@ -3,6 +3,7 @@ package cn.neusoft.retailer.web.controller;
 import cn.neusoft.retailer.web.pojo.TransactionRecord;
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.TransationService;
+import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.Result;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ import java.util.List;
 public class TransationController {
     @Autowired
     private TransationService transationService;
-
+    @Autowired
+    private UserService userService;
     @RequestMapping("/toTransation")
     public String toTra(){
         return "html/bvo-transation.html";
@@ -83,6 +85,38 @@ public class TransationController {
         return jsonArray;
     }
 
+    @RequestMapping(value = "changePage")
+    @ResponseBody
+    public Result changepage(HttpServletRequest request){
+
+        User user=new User();
+
+        HttpSession session=request.getSession();
+        System.out.println(session);
+        user = (User) session.getAttribute("user");
+
+        User user2= new User();
+        try{
+            user2=userService.selectByPrimaryKey(user.getUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //模拟session
+
+//        user.setUserId(165108101);
+//        user.setUserPassword("1177447a3e0364e44506716fca1659cd");
+//        user.setUserName("zhihong");
+//        user.setUserMail("893168374@qq.com");
+//        user.setUserPhone("13437814328");
+//        user.setUserPrivilege(0);
+
+        System.out.println(user.toString());
+        if(user2.getUserWalId()==null){
+            return new Result(false,"nowal");}else{
+            return new Result(true,"havewal");
+        }
+    }
+
     @RequestMapping(value = "changeAllTransationList/{page}")
     @ResponseBody
     public JSONArray changeAllList(@PathVariable("page") String page,HttpServletRequest request){
@@ -135,6 +169,8 @@ public class TransationController {
 
         //获取文件在服务器的储存位置
         String path = request.getSession().getServletContext().getRealPath("/upload");
+//        String path = "/upload";
+
         File filePath = new File(path);
         System.out.println("文件的保存路径：" + path);
         if (!filePath.exists() && !filePath.isDirectory()) {
@@ -166,6 +202,7 @@ public class TransationController {
         try {
             picture.transferTo(targetFile);
             System.out.println("上传成功");
+            System.out.println("路径"+targetFile.getPath());
             //将文件在服务器的存储路径返回
             return new Result(true,"/upload/" + fileName);
         } catch (IOException e) {

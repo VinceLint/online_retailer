@@ -81,6 +81,27 @@
                 prop="tstatus">
 
             </el-table-column>
+
+            <el-table-column
+
+                    align="right">
+                <template slot="header" slot-scope="scope">
+                    <p>流水单</p>
+                </template>
+                <template slot-scope="scope">
+
+                    <div class="demo-image__preview">
+                        <el-image
+                                style="width: 100px; height: 100px"
+                                :src="tableData[scope.$index].picurl">
+                            <div slot="error" class="image-slot">
+                                <i class="el-icon-picture-outline"></i>
+                            </div>
+                        </el-image>
+                    </div>
+
+                </template>
+            </el-table-column>
         </el-table>
 
         </template>
@@ -127,6 +148,7 @@
                 wtype:["借卖方","品牌商","管理员"],
                 currentPage4: 1,
                 pageTotal:0,
+                picurl: 'upload/20190802153556wallet.jpg',
             }
         },
         methods: {
@@ -174,6 +196,7 @@
                                         tstatus: this.zstatus[obj.traRecStatus],
                                         tbal: obj.traRecBalance,
                                         ttime: obj.traRecDateStr,
+                                        picurl:".."+obj.traRecExchangememo,
                                     })
                                 }
                             }.bind(this))
@@ -185,9 +208,35 @@
                     }.bind(this)
 
                 })
+            },
+            //判断有无钱包
+            handleChangePage() {
+                this.tableData=[]
+                $.ajax({
+                    type:"get",
+                    url:"http://localhost:8080/online_retailer/changePage",
+                    dataType:"json",
+                    success:function(data){
+                        if(data.success){
+                            console.log("you have wal!")
+                        }
+                        else{
+                            window.location="http://localhost:8080/online_retailer/html/WalSignUp.html";
+                        }
+                            console.log(data);
+
+                    }.bind(this)
+
+                })
             }
+
         },
+        // created(){
+            // this.handleChangePage();
+        // },
         mounted:function(){
+            this.handleChangePage();
+
             this. handleCurrentChange(1);
         }
 

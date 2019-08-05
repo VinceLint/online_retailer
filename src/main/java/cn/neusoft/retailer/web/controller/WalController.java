@@ -40,8 +40,8 @@ public class WalController {
 // System.out.println(user.toString());
         return "html/bvo-WalletList.html";}
 
-    @RequestMapping(value="/toAddWal")
-    public String toAdd(HttpServletRequest request){
+    @RequestMapping(value="/tobAddWal")
+    public String tobAdd(HttpServletRequest request){
         User user=new User();
         //模拟session
 //        user.setUserId(1);
@@ -56,6 +56,23 @@ public class WalController {
         if(user.getUserWalId()==null){
         return "html/WalSignUp.html";}else{
          return "html/bvo-WalletList.html"   ;
+        }}
+    @RequestMapping(value="/topAddWal")
+    public String topAdd(HttpServletRequest request){
+        User user=new User();
+        //模拟session
+//        user.setUserId(1);
+//        user.setUserName("zhihong");
+//        user.setUserPrivilege(0);
+        HttpSession session=request.getSession();
+        System.out.println("注册跳转session"+session);
+        user = (User) session.getAttribute("user");
+
+
+        System.out.println(user.toString());
+        if(user.getUserWalId()==null){
+            return "html/WalSignUp.html";}else{
+            return "html/bvo-WalletList.html"   ;
         }}
 
     @RequestMapping(value = "/toSignWal2")
@@ -73,6 +90,12 @@ public class WalController {
         HttpSession session=request.getSession();
         System.out.println("注册session"+session);
          user = (User) session.getAttribute("user");
+         User user2= new User();
+         try{
+             user2=userService.selectByPrimaryKey(user.getUserId());
+         }catch (Exception e){
+             e.printStackTrace();
+         }
         //校验密码
         if (password.length()!=6) {
             result.put("INVALID_PASSWD", "Password Is Invalid");
@@ -104,7 +127,7 @@ public class WalController {
             return result;
         }
         //创建钱包
-        user.setUserWalId(user.getUserId());
+        user2.setUserWalId(user.getUserId());
         Wallet wallet = new Wallet();
         wallet.setWalId(user.getUserId());
         //TODO 输入权限
@@ -115,7 +138,7 @@ public class WalController {
         System.out.println(wallet.toString());
         try{
             walletService.insert(wallet);
-            userService.updateByPrimaryKey(user);
+            userService.updateByPrimaryKey(user2);
         }catch (Exception e){
             e.printStackTrace();
             result.put("ERROR_change",e.getMessage());
@@ -156,6 +179,13 @@ public class WalController {
 
         HttpSession session=request.getSession();
         User user = (User) session.getAttribute("user");
+        User user2= new User();
+        try{
+            user2=userService.selectByPrimaryKey(user.getUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        user=user2;
         System.out.println("余额用户"+user.toString());
 //        User user=new User();
         //模拟session
