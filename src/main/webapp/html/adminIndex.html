@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!--一个是合并相同功能-->
+<!--一个是跳转页面-->
 <head>
     <meta charset="UTF-8">
     <title>GMC主页面</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
-    <script src="../js/jquery-3.4.1.js"></script>
+    <script src="../js/jquery-1.9.1.js"></script>
     <script src="../layui/layui.js"></script>
     <script>
         layui.use('carousel', function () {
@@ -22,117 +25,155 @@
             var element = layui.element;
         });
     </script>
-    <script type="text/javascript">
 
-    </script>
     <script>
-        // $(function () {
-        //     $("#Navigation").onclick=function getArray() {
-        //         var noLogin = {};
-        //         var Bvo={};
-        //         var Mvo={};
-        //         var admin={};
-        //
-        //         $.ajax({
-        //             type: 'POST',
-        //             dataType: "json",
-        //             contentType: "application/json",
-        //             url: "http://localhost:8080/menu/initMenu",
-        // 			data:{},
-        //             success:function(data) {
-        //                 var result=data.data;
-        //                 alert("已执行");
-        //                 //按照当前值来过滤菜单，
-        //                 $.each(result,function (index,menuItem) {
-        //                     if (menuItem.menuPrivilege=="1"){
-        //                         admin.push(menuItem);
-        //                     } else if (menuItem.menuPrivilege=="2") {
-        //                         Bvo.push(menuItem);
-        //                     }else if (menuItem.menuPrivilege=="3"){
-        //                         Mvo.push(menuItem);
-        //                     } else{
-        //                         noLogin.push(menuItem);
-        //                     }
-        //                 })
-        //                 console.log(noLogin);
-        //                 console.log(Mvo);
-        //                 console.log(Bvo);
-        //                 console.log(admin);
-        //                 console.log(result);
-        //                 //重新组装页面
-        //             },
-        //             error : function(e){
-        //                 alert("已执行");
-        //                 console.log(e.status);
-        //                 console.log(e.responseText);
-        //             }
-        //         });
-        //     };
-        // })
-        /**
-         * 初始化菜单
-         */
-        $(function () {
-            $.ajax({
-                type: 'POST',
-                dataType: "json",
-                contentType: "application/json",
-                url: "http://localhost:8080/menu/initMenu",
-                data: {},
-                success: function (data) {
-
-                    //菜单分类
-                    var noLogin = new Array();
-                    var Bvo = new Array();;
-                    var Mvo = new Array();;
-                    var admin = new Array();;
-                    for (i in data){
-                        if (data[i].menuPrivilege=="1"){
-                            admin.push(data[i]);
-                        } else if (data[i].menuPrivilege == "2") {
-                            Bvo.push(data[i]);
-                        } else if (data[i].menuPrivilege == "3") {
-                            Mvo.push(data[i]);
-                        } else {
-                            noLogin.push(data[i]);
+        // 获取当前获取登陆对象
+        function getCurrentUser() {
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/json;charset=UTF-8",
+                    url: "http://localhost:8080/user/getCurrentUser",
+                    data: {},
+                    success: function (data) {
+                        var privilege=data.userPrivilege;
+                        console.log(privilege);
+                        if(privilege=='1'){
+                            setLoginState('未登陆');
+                        }else if(privilege=='2'){
+                            setLoginState('管理员');
+                        }else if(privilege=='3'){
+                            setLoginState('借卖商');
+                        }else{
+                            setLoginState('品牌商');
                         }
+                    },
+                    error: function (e) {
+                        alert("当前角色登录出错,请重新登陆");
                     }
-
-                    //按照当前登录状态获取初始化菜单
-                    var stateId=document.getElementById("stateId").innerText;
-                    //console.log(stateId);
-                    if(stateId=='未登陆'){
-                        setMenu(noLogin);
-                    }else if(stateId=='品牌商'){
-                        setMenu(Mvo);
-                    }else if(stateId=='借卖商'){
-                        setMenu(Bvo);
-                    }else{
-                        setMenu(admin);
-                    }
-                },
-                error: function (e) {
-                    alert("菜单刷新出错，请重新登陆");
-                }
+                });
             });
-        });
+        }
+    </script>
+
+    <script>
+        //初始化菜单
+        function initMenu() {
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/json",
+                    url: "http://localhost:8080/menu/initMenu",
+                    data: {},
+                    success: function (data) {
+                        //菜单分类
+
+                        var noLogin = new Array();
+                        var Bvo = new Array();
+                        var Mvo = new Array();
+                        var admin = new Array();
+                        for (i in data) {
+                            if (data[i].menuPrivilege == "2") {
+                                admin.push(data[i]);
+                            } else if (data[i].menuPrivilege == "3") {
+                                Bvo.push(data[i]);
+                            } else if (data[i].menuPrivilege == "4") {
+                                Mvo.push(data[i]);
+                            } else {
+                                noLogin.push(data[i]);
+                            }
+                        }
+
+                        //按照当前登录状态获取初始化菜单
+                        var stateId = document.getElementById("stateId").innerText;
+                        //console.log(stateId);
+                        if (stateId == '未登陆') {
+                            setMenu(noLogin);
+                        } else if (stateId == '品牌商') {
+                            setMenu(Mvo);
+                        } else if (stateId == '借卖商') {
+                            setMenu(Bvo);
+                        } else {
+                            setMenu(admin);
+                        }
+                    },
+                    error: function (e) {
+                        alert("菜单刷新出错，请重新登陆");
+                    }
+                });
+            });
+        }
+
+
+        function setClickEvent(){
+            $("#leftmenubar").delegate("a","click",function () {
+                var url=$(this).href;
+                changeMainFrame(url);
+            })
+        }
 
         // 能够根据传递的数组组装页面
         function setMenu(a) {
             var htmlElem = document.getElementById('leftmenubar');
-            for (var i in a) {
-                var $addHtml = $("<li class='layui-nav-item'><span>" + a[i].menuPrivilege + "</span></li>");
+            for (var i=0;i<a.length ;i++) {
+                //console.log(a[i].menuUrl+a[i].menuChildrenItem+a[i].menuName);
+                //组装一个模块节点
+                var html='';
+                html+="<li class='layui-nav-item'><a href='looplook.html' onclick='return false;'>"+a[i].menuName+"</a><dl class='layui-nav-child'>";
+                //组装一个功能节点
+                html+="<dd><a href='"+a[i].menuUrl+"' onclick='return false;'>"+a[i].menuChildrenItem+"</a></dd>";
+
+                //console.log(a[i].menuName);
+                //把后面相同父功能的子功能都加入html
+                while(a[i+1]!=null&&(a[i].menuName==a[i+1].menuName)){
+                    ++i;
+                    html+="<dd><a href='"+a[i].menuUrl+"' onclick='return false;'>"+a[i].menuChildrenItem+"</a></dd>";
+                }
+                html+="</dl></li>";
+                var $addHtml=$(html);
                 $("#leftmenubar").append($addHtml);
             }
         }
 
+
+        //设置主内联框架
         function changeMainFrame(url) {
-            $("#otherBar").src = url;
+            document.getElementById('otherBar').src = url;
+        }
+
+        function setLoginState(state) {
+            document.getElementById("stateId").innerText = state;
         }
 
 
-    </script>
+        function outLogin() {
+            changeMainFrame("../login.html");
+            setLoginState('未登陆');
+        }
 
+        function register() {
+            document.getElementById('otherBar').src = "../register.html"
+        }
+
+        function login() {
+            document.getElementById('otherBar').src = "../login.html"
+            setLoginState();
+        }
+
+    </script>
+    <script>
+        $(function () {
+            //getCurrentUser();
+            setLoginState('品牌商');
+            initMenu();
+            $("#leftmenubar").delegate("a","click",function () {
+                var url=this.href;
+                changeMainFrame(url);
+            })
+        });
+    </script>
     <style>
         * {
             margin: 0px;
@@ -219,7 +260,7 @@
             <a href="">控制台<span class="layui-badge">9</span></a>
         </li>
         <li class="layui-nav-item">
-            <a href="../login.html">未登录<span class="layui-badge-dot"></span></a>
+            <a href="../login.html" id="RoleCenter">未登录<span class="layui-badge-dot"></span></a>
         </li>
         <li class="layui-nav-item">
             <a><img src="//t.cn/RCzsdCq" class="layui-nav-img">
@@ -228,6 +269,7 @@
             <dl class="layui-nav-child">
                 <dd><a href="../login.html">登陆</a></dd>
                 <dd><a href="../register.html">注册</a></dd>
+                <dd><a href="../login.html">退出</a></dd>
                 <dd><a href="https://baike.baidu.com/item/借卖">关于GMC</a></dd>
             </dl>
         </li>
@@ -240,8 +282,16 @@
     <div id="menu">
         <ul class="layui-nav layui-nav-tree" lay-filter="test" id="leftmenubar">
             <li class="layui-nav-item " id="menuItem">
-                <span>菜单列表</span>
+                <a href="javascript:;">菜单列表</a>
             </li>
+            <!--<li class="layui-nav-item">-->
+            <!--<dl class="layui-nav-child">-->
+            <!--<dd><a href="javascript:;">选项1</a></dd>-->
+            <!--<dd><a href="javascript:;">选项2</a></dd>-->
+            <!--<dd><a href="javascript:;">跳转</a></dd>-->
+            <!--</dl>-->
+
+            <!--</li>-->
         </ul>
     </div>
 

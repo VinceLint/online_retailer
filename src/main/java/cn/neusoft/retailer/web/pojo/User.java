@@ -12,8 +12,20 @@ public class User implements Serializable {
     private String userMail;
 
     private String userPhone;
+
     private String userName;
 
+    private Integer userWalId;
+
+    private Integer userPrivilege;
+
+    private Integer mvoType;
+
+    private String mvoUrl;
+
+    private String mvoEngName;
+
+    private String mvoIntroduction;
     public User(Integer userId, String name, String email, String phone) {
         this.userId = userId;
         this.mvoEngName = name;
@@ -29,17 +41,7 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    private Integer userWalId;
 
-    private Integer userPrivilege;
-
-    private Integer mvoType;
-
-    private String mvoUrl;
-
-    private String mvoEngName;
-
-    private String mvoIntroduction;
 
     public Integer getUserId() {
         return userId;

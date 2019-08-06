@@ -5,10 +5,7 @@ import cn.neusoft.retailer.web.mapper.DictionaryMapper;
 import cn.neusoft.retailer.web.mapper.UserMapper;
 import cn.neusoft.retailer.web.pojo.Order;
 import cn.neusoft.retailer.web.pojo.User;
-import cn.neusoft.retailer.web.service.BrandOrderService;
-import cn.neusoft.retailer.web.service.BrandService;
-import cn.neusoft.retailer.web.service.DictionaryService;
-import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.service.*;
 import cn.neusoft.retailer.web.tools.MvoType;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,5 +106,13 @@ public class Test {
 //        brandOrderService.insert(order);
         List<Order> orders=brandOrderService.selectAll();
         System.out.println(orders.get(0).getOrderId());
+    }
+
+    @Autowired
+    private MenuService menuService;
+    @org.junit.Test
+    public void testMenu(){
+
+        System.out.println(menuService.selectAll());
     }
 }

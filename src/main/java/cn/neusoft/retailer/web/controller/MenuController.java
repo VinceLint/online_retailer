@@ -32,10 +32,12 @@ public class MenuController {
     @ResponseBody
     public JSONArray init() throws Exception{
         List<Menu> menuList=menuService.selectAll();
+       // System.out.println(menuList);
 //        System.out.println("已执行");
         JSONArray jsonarray = JSONArray.fromObject(menuList);
         return jsonarray;
     }
+
 
 
     @RequestMapping(value = "/insertMenu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

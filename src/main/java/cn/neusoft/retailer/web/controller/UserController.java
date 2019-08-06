@@ -4,6 +4,8 @@ import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.UserService;
 import cn.neusoft.retailer.web.tools.*;
 import com.google.code.kaptcha.Constants;
+import com.mysql.cj.Session;
+import com.sun.javafx.collections.MappingChange;
 import net.sf.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +43,7 @@ public class UserController {
     /**
      * @描述: 用户注册
      * @参数: [user]
-     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @返回值: java.util.Map<java.lang.String               ,                               java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/30
      */
@@ -115,7 +118,7 @@ public class UserController {
     /**
      * @描述: 验证token
      * @参数: [flag, request]
-     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @返回值: java.util.Map<java.lang.String               ,                               java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/30
      */
@@ -165,7 +168,7 @@ public class UserController {
     /**
      * @描述: 登陆校验
      * @参数: [json, flag, request, response]
-     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @返回值: java.util.Map<java.lang.String               ,                               java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/30
      */
@@ -256,7 +259,7 @@ public class UserController {
     /**
      * @描述: 忘记密码
      * @参数: [json, request]
-     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @返回值: java.util.Map<java.lang.String               ,                               java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/30
      */
@@ -300,7 +303,7 @@ public class UserController {
     /**
      * @描述: 重置密码
      * @参数: [json]
-     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @返回值: java.util.Map<java.lang.String               ,                               java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/30
      */
@@ -347,7 +350,7 @@ public class UserController {
     /**
      * @描述: 若非"记住我"方式登录的用户,Session结束便清楚Token
      * @参数: [request]
-     * @返回值: java.util.Map<java.lang.String, java.lang.String>
+     * @返回值: java.util.Map<java.lang.String               ,                               java.lang.String>
      * @创建人: 罗圣荣
      * @创建时间: 2019/7/30
      */
@@ -382,68 +385,79 @@ public class UserController {
         return result;
     }
 
-
     /**
      * 增删查改的controller
+     *
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/initUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public JSONArray init() throws Exception{
+    public JSONArray init() throws Exception {
 //        List<Dictionary> dictionaryList = dictionaryService.selectAll();
-        List<User> userList=userService.selectAll();
+        List<User> userList = userService.selectAll();
         JSONArray jsonarray = JSONArray.fromObject(userList);
         return jsonarray;
     }
 
-
     @RequestMapping(value = "/insertUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String,Object> insert(@RequestBody String json) throws Exception{
-        Map<String,Object> resultMap = new HashMap<String, Object>();
+    public Map<String, Object> insert(@RequestBody String json) throws Exception {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         JSONObject jsonObject = new JSONObject(json); // 首先把字符串转成 JSONObject  对象
 
 //        判断是否插入成功
-        if(userService.insert(jsonObject)){
-            resultMap.put("result","SUCCESS");
-        }else{
-            resultMap.put("result","Error");
+        if (userService.insert(jsonObject)) {
+            resultMap.put("result", "SUCCESS");
+        } else {
+            resultMap.put("result", "Error");
         }
         return resultMap;
     }
 
     @RequestMapping(value = "/updateUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String,Object> update(@RequestBody String json) throws Exception{
-        Map<String,Object> resultMap = new HashMap<String, Object>();
+    public Map<String, Object> update(@RequestBody String json) throws Exception {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         org.json.JSONArray jsonArray = new org.json.JSONArray(json);// 首先把字符串转成 JSONArray  对象
         System.out.println(jsonArray);
-//        判断是否插入成功
-        if(userService.update(jsonArray)){
-            resultMap.put("result","SUCCESS");
-        }else{
-            resultMap.put("result","Error");
+        if (userService.update(jsonArray)) {
+            resultMap.put("result", "SUCCESS");
+        } else {
+            resultMap.put("result", "Error");
         }
         return resultMap;
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String,Object> delete(@RequestBody String json) throws Exception{
-        Map<String,Object> resultMap = new HashMap<String, Object>();
+    public Map<String, Object> delete(@RequestBody String json) throws Exception {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         org.json.JSONArray jsonArray = new org.json.JSONArray(json);
         //返回结果
-        if(userService.deleteByDetail(jsonArray)){
-            resultMap.put("result","SUCCESS");
-        }else{
-            resultMap.put("result","Error");
+        if (userService.deleteByDetail(jsonArray)) {
+            resultMap.put("result", "SUCCESS");
+        } else {
+            resultMap.put("result", "Error");
         }
         return resultMap;
     }
 
+    @RequestMapping(value = "/getCurrentUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public User getCurrentUser(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        System.out.println(session);
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setUserPrivilege(1);
+        }
+        return user;
+    }
+
     @RequestMapping("/toUser")
-    public String  toDic(){
+    public String toDic() {
         return "html/adminRole-Manager.html";
     }
 }
