@@ -9,7 +9,7 @@
          version="3.1">
     <display-name>Archetype Created Web Application</display-name>
     <welcome-file-list>
-        <welcome-file>login.html</welcome-file>
+        <welcome-file>/html/login.html</welcome-file>
     </welcome-file-list>
 
     <listener>

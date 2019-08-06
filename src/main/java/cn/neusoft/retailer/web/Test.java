@@ -3,7 +3,6 @@ package cn.neusoft.retailer.web;
 import cn.neusoft.retailer.web.mapper.BrandMapper;
 import cn.neusoft.retailer.web.mapper.DictionaryMapper;
 import cn.neusoft.retailer.web.mapper.UserMapper;
-import cn.neusoft.retailer.web.pojo.Order;
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.BrandOrderService;
 import cn.neusoft.retailer.web.service.BrandService;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
