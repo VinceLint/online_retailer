@@ -206,15 +206,17 @@ public class UserController {
 
         //校验验证码
         String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        System.out.println(code);
         String in_code = (String) data.get("code");
+        System.out.println(in_code);
         if (!code.toLowerCase().equals(in_code.toLowerCase())) {
             result.put("INVALID_CODE", "Code Is Invalid");
             return result;
         }
 
         String token;
-//        token = TokenCreation.createToken("127.0.0.1");
-        token = TokenCreation.createToken(request.getRemoteAddr());
+        token = TokenCreation.createToken("127.0.0.1");
+//        token = TokenCreation.createToken(request.getRemoteAddr());
 
         user.setUserPassword(null);
         session.setAttribute("user", user);

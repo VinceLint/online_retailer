@@ -120,8 +120,6 @@ public class CompanyInfoController {
         try {
             User user = (User) request.getSession().getAttribute("user");
             Map<String, Object> hashMap = new HashMap<>();
-            user = userService.selectByPrimaryKey(123);
-            user.setUserPrivilege(2);
             List<String> mvoType = new LinkedList<>();
             List<User> userList = new LinkedList<>();
             HashMap<String, Object> hashMap1 = null;

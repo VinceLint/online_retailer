@@ -9,12 +9,18 @@ import cn.neusoft.retailer.web.service.BrandOrderService;
 import cn.neusoft.retailer.web.service.BrandService;
 import cn.neusoft.retailer.web.service.DictionaryService;
 import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.tools.FtpUtils;
 import cn.neusoft.retailer.web.tools.MvoType;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -109,5 +115,19 @@ public class Test {
 //        brandOrderService.insert(order);
         List<Order> orders=brandOrderService.selectAll();
         System.out.println(orders.get(0).getOrderId());
+    }
+
+    @org.junit.Test
+    public void testFtp2() throws Exception{
+        String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
+        FtpUtils ftpUtils = new FtpUtils();
+        System.out.println(ftpUtils.uploadFile("/usr/local/nginx/html","做一道菜啊.jpg",str));
+    }
+
+    @org.junit.Test
+    public void testFtp3() throws Exception{
+        String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
+        FtpUtils ftpUtils = new FtpUtils();
+        System.out.println(ftpUtils.uploadFile("/","做一道菜1.jpg",str));
     }
 }

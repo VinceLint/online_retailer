@@ -26,4 +26,9 @@ public interface GoodsMapper {
     List<Goods> selectByBrandId(Integer brandId);
 
     int updatePicByPrimaryKey(@Param("goodsId") Integer goodsId, @Param("goodsPic") String goodsPic);
+
+    List<Goods> selectByGoodsStatus(String goodsStatus);
+
+    List<Goods> selectByGoodsTitle(String goodsTitle);
+
 }

@@ -3,57 +3,134 @@
 /**
  * @author 郑宗伟
  * @version 1.0
- * @date 2019/7/25 15:38
+ * @date 2019/8/3 20:05
  */
 -->
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/ace.min.css">
-    <link rel="stylesheet" href="../css/ace-skins.min.css">
-    <link rel="stylesheet" href="../css/ace-responsive.min.css">
-  <style>
-    body,html{
-      width: 100%;
-      height: 100%;
-      background: #fff;
-    }
+<head>
+    <!-- http://localhost:8080/online_retailer/html/bvo-ordertracking.html -->
+    <title>借卖方-订单管理-物流跟踪</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  </style>
-    <body>
-<div id="main-content" class="clearfix">
-<div id="page-content" class="clearfix">
-    <div class="page-header position-relative">
-              <h1 style="color: #2679b5;">借卖方<small><i class="icon-double-angle-right"></i> 物流跟踪</small></h1>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--  Vue  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--  Axios  -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- fontawesome -->
+    <script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>
+
+    <style>
+        #header{
+            padding-left: 12.5%;
+        }
+        #tracking{
+            margin-top: 5%;
+        }
+        .list-group-item{
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app" class="container-fluid">
+
+    <div class="page-header" id="header">
+        <h1 style="color: #2679b5;">借卖方
+            <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 订单管理</small>
+            <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 物流跟踪</small>
+        </h1>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='bvo-orderlist.html'">返回</button>
+    </div>
+
+    <div class="container" id="page-body">
+        <div class="row justify-content-md-center">
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item">快递公司：{{log.logComName}}</li>
+                <li class="list-group-item">快递员：{{log.logCouName}}</li>
+                <li class="list-group-item">快递员电话：{{log.logCouPhone}}</li>
+            </ul>
+        </div>
+
+        <div class="row justify-content-md-center" id="tracking">
+
+            <div class="col-6">
+                <ul class="list-group">
+                    <div v-for="(v,k) in logNode">
+                        <li v-if="k==0" class="list-group-item list-group-item-success">
+                            <i class="fa fa-truck fa-lg" aria-hidden="true"></i>
+                            <small>{{v.logArrTime|formatDatetime}}</small> {{v.logNodeName}}
+                        </li>
+                        <li v-else class="list-group-item list-group-item-secondary">
+                            <i class="fa fa-truck fa-lg" aria-hidden="true"></i>
+                            <small>{{v.logArrTime|formatDatetime}}</small> {{v.logNodeName}}
+                        </li>
+                        <div v-if="k!=logNode.length-1" class="row justify-content-md-center">
+                            <i class="fa fa-angle-double-up fa-2x" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </ul>
             </div>
 
+        </div>
+    </div>
 
+</div>
+</body>
 
-          <div id="fuelux-wizard" class="row-fluid">
-            <ul class="wizard-steps">
-            <li data-target="#step1"  style="min-width: 25%; max-width: 25%;"><span class="step">1</span> <span class="title">已出库</span>
-            <span class="title">2017-07-13 09：00:00</span></li>
-            <li data-target="#step2" style="min-width: 25%; max-width: 25%;"><span class="step">2</span> <span class="title"> 发往广州</span> <span class="title">2017-07-14 1：00:00</span></li>
-            <li data-target="#step3" style="min-width: 25%; max-width: 25%;"><span class="step">3</span> <span class="title">到棠下村</span> <span class="title">2017-07-13 09：00:00</span></li>
-            <li data-target="#step4" class="active" style="min-width: 25%; max-width: 25%;"><span class="step">4</span> <span class="title">正在派送</span> <span class="title">2017-07-15 22：10:00</span></li>
-            </ul>
-          </div>
+<script>
+    var ax=axios.create({baseURL:'http://localhost:8080/online_retailer/bvoOrder'});
 
-        </div></div>
+    var app=new Vue({
+        el:"#app",
+        data:{
+            log:'',//物流信息
+            logNode:''//物流节点信息
+        },
+        methods:{
+            bvoOrderTracking:function(){
+                var that=this;
+                ax.post('/bvoOrderTracking')
+                    .then(function(response){
+                        that.log=response.data.logistics;
+                        that.logNode=response.data.logisticsNodes;
+                        // console.log(response.data);
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+            }
+        },
+        mounted:function(){
+            this.bvoOrderTracking();
+        },
+        filters: {//过滤器
+            formatDatetime: function (value) {//把时间戳转换为标准时间格式
+                var date = new Date(value);
+                var y = date.getFullYear();
+                var MM = date.getMonth() + 1;
+                MM = MM < 10 ? ('0' + MM) : MM;
+                var d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                var h = date.getHours();
+                h = h < 10 ? ('0' + h) : h;
+                var m = date.getMinutes();
+                m = m < 10 ? ('0' + m) : m;
+                var s = date.getSeconds();
+                s = s < 10 ? ('0' + s) : s;
+                return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;
+            }
+        }
+    })
+</script>
 
-    <script src="../js/jquery-1.9.1.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script>
-      $(function(){
-
-})
-
-
-
-    </script>
-    </body>
 </html>

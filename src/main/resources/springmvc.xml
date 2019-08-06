@@ -54,6 +54,21 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <!--kua yu-->
+    <mvc:cors>
+
+        <!--<mvc:mapping path="/**"-->
+                     <!--allowed-origins="localhost:8090"-->
+                     <!--allowed-methods="GET, POST"-->
+                     <!--allowed-headers="*"-->
+                     <!--exposed-headers="*" allow-credentials="true"-->
+                     <!--max-age="123" />-->
+
+        <mvc:mapping path="/**"
+                     allowed-origins="http://localhost:8090" />
+
+    </mvc:cors>
+
     <!--这个注解是必要的，图片上传必要-->
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

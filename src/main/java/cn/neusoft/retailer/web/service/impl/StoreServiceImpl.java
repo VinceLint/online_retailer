@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 林跃涛
@@ -47,5 +48,15 @@ public class StoreServiceImpl implements StoreService {
                 jsonObject.getString("nws"));
         if (storeMapper.insert(store)==1) return true;
         return false;
+    }
+
+    //zhuang
+    @Override
+    public  List<Store> selectByBvoIdAndType(Map<String,Object> map) {
+        return storeMapper.selectByBvoIdAndType(map);
+    }
+    @Override
+    public List<Store> selectByBvoId(Integer bvoId) {
+        return storeMapper.selectByBvoId(bvoId);
     }
 }

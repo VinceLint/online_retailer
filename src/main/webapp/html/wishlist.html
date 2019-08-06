@@ -1,0 +1,198 @@
+
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>借卖方心愿单</title>
+
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>　　
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- import CSS -->
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--  Vue  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--  Axios  -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- fontawesome  <script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>-->
+
+    <script src="//unpkg.com/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.11.0/lib/index.js"></script>
+
+    <!-- fontawesome -->
+    <script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>
+
+    <!-- 引入样式 -->
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <!-- 引入组件库 -->
+
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+
+</head>
+<style>
+    #main-content{margin-left:170px;margin-right:170px;margin-top:0;min-height:100%;padding:0}
+</style>
+
+<body>
+ <script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="//unpkg.com/element-ui@2.11.0/lib/index.js"></script>
+<div id="app">
+    <div id="main-content" class="">
+	<div id="" class="" style="margin-top: 45px;">
+        <div class="page-header">
+            <h1 style="color: #2679b5;">品牌商
+                <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>心愿单</small>
+            </h1>
+        </div>
+<template>
+  <el-table
+    :data="tableData[1].filter(data => !search|| (data.goodsTitle.includes(search)))"
+    stripe
+    height="500"
+    style="width: 100%">
+    <el-table-column
+      label="商品Id"
+      prop="goodsId">
+    </el-table-column>
+    <el-table-column
+      label="商品图片"
+      >
+      <template slot-scope="scope">
+        <span style="margin-left: 10px"><el-image
+                style="width: 120px; height: 120px "
+                :src="scope.row.goodsPic"
+        ></el-image></span>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="商品信息">
+       <template slot-scope="scope">
+      
+                   
+                    <div class="">
+                    <p>{{scope.row.goodsTitle}}</p>
+                    <span class="" style="color: red">${{scope.row.goodsPrice}}</span>
+                        <div v-if="scope.row.goodsClass==0"><p >商品类别：服装衣物</p></div>
+                        <div v-if="scope.row.goodsClass==1"><p >商品类别：背包鞋靴</p></div>
+                        <div v-if="scope.row.goodsClass==2"><p >商品类别：数码家电</p></div>
+                        <div v-if="scope.row.goodsClass==3"><p >商品类别：儿童玩具</p></div>
+                        <div v-if="scope.row.goodsClass==4"><p >商品类别：美妆保健</p></div>
+                        <div v-if="scope.row.goodsClass==5"><p >商品类别：眼镜手表</p></div>
+                        <div v-if="scope.row.goodsClass==6"><p >商品类别：家具建材</p></div>
+                        <div v-if="scope.row.goodsClass==7"><p >商品类别：游戏动漫</p></div>
+                    
+                    </div>
+                    
+                    </template>
+    </el-table-column>
+    <el-table-column
+      align="right" label="心愿单商品操作">
+        <template slot="header" slot-scope="scope">
+            <el-input
+                    v-model="search"
+                    size="mini"
+                    placeholder="输入关键字搜索"/>
+        </template>
+     
+      <template slot-scope="scope">
+        <el-button icon="el-icon-search" circle
+          size="mini"
+          @click="handleEdit(scope.row.goodsId)">详情</el-button>
+        <el-button  type="danger" icon="el-icon-delete" circle
+          size="mini"
+          type="danger"
+          @click="handleDelete(tableData[0][scope.$index].wishDetailId)">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+</div>
+</div>
+</div>
+</body>
+
+<style>
+ @import url("//unpkg.com/element-ui@2.11.0/lib/theme-chalk/index.css");
+
+</style>
+
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+
+    var ax = axios.create({baseURL: 'http://localhost:8080/online_retailer/'})
+    var app = new Vue({
+        el: "#app",
+        data: {
+            tableData:[],
+            search: ''
+        },
+        methods: {
+
+            handleDelete:function(wishDetailId) {
+                console.log(wishDetailId);
+                var self = this;
+                ax.post('/wishdetail/getwishDetailId', {wishDetailId: parseInt(wishDetailId)})
+                    .then(function (response) {
+                        console.log(response.data);
+                        if (response.data) {
+
+                            window.location.href = "/online_retailer/wishdetail/delete"
+
+                        }
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+            handleEdit:function(goodsId) {
+                console.log(goodsId);
+                var self = this;
+                ax.post('/wishdetail/getgoodsid', {goodsId: parseInt(goodsId)})
+                    .then(function (response) {
+                        console.log(response.data);
+                        if (response.data) {
+                            window.location.href = "/online_retailer/html/goodsdetail.html"
+                        }
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+
+            }
+        },
+        mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
+            var self = this
+            ax.post("/wishdetail/showWishDetailjsp").then(function(response) {
+                /*self.tableData= response.data; //此时还是字符串
+                console.log(self.tableData);*/
+                self.tableData = [];
+                for(var i in response.data){
+                    self.tableData.push(response.data[i]);
+                }
+                console.log(self.tableData);
+            })
+        }
+    })
+</script>
+	
+</html>

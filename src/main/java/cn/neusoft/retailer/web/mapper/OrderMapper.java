@@ -22,4 +22,5 @@ public interface OrderMapper {
 
     List<Map<String,Object>> selectByBrandUserId(int brandUserId);
 
+    List<Map<String, Object>> selectByBvoUserId(int bvoUserId);
 }

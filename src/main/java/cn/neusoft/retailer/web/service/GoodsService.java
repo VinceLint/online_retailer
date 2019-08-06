@@ -28,4 +28,9 @@ public interface GoodsService {
 
     Goods selectByPrimaryKey(Integer goodsId);
     boolean updateByPrimaryKey(Goods record);
+
+    //zhuang
+    List<Goods> selectByGoodsStatus(String goodsStatus);
+
+    List<Goods> selectByGoodsTitle(String goodsTitle);
 }

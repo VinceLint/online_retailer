@@ -106,4 +106,15 @@ public class GoodsServiceImpl implements GoodsService {
     public boolean updateByPrimaryKey(Goods record){
         return goodsMapper.updateByPrimaryKey(record)>0;
     }
+
+    @Override
+    public List<Goods> selectByGoodsStatus(String goodsStatus) {
+        return goodsMapper.selectByGoodsStatus(goodsStatus);
+    }
+
+    @Override
+    public List<Goods> selectByGoodsTitle(String goodsTitle) {
+        return goodsMapper.selectByGoodsTitle(goodsTitle);
+    }
+
 }

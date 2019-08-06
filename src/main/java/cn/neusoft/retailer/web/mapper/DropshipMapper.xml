@@ -13,13 +13,11 @@
     delete from dropship
     where dropship_id = #{dropshipId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Dropship">
-    insert into dropship (dropship_id, bvo_id, goods_id, 
-      goods_num, store_id, upc
-      )
-    values (#{dropshipId,jdbcType=INTEGER}, #{bvoId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
-      #{goodsNum,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{upc,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Dropship" >
+    insert into dropship (dropship_id, bvo_id, goods_id,
+     goods_num, store_id,upc)
+    values (null , #{bvoId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER},
+      #{goodsNum,jdbcType=INTEGER},#{storeId,jdbcType=INTEGER}, #{upc,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Dropship">
     update dropship
@@ -38,5 +36,13 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select dropship_id, bvo_id, goods_id, goods_num, store_id, upc
     from dropship
+  </select>
+  <select id="selectByBvoId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select dropship.*
+    from dropship
+    where bvo_id = #{bvoId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByBvoIdAndGoodsId" resultMap="BaseResultMap" parameterType="map" >
+    select * from   dropship  where bvo_id = #{bvoId,jdbcType=INTEGER}  and goods_id = #{goodsId,jdbcType=INTEGER}
   </select>
 </mapper>
