@@ -63,6 +63,8 @@ public class Test {
 //            brand.setBrandMerId(123);
 //            brandService.insert(brand);
 //        }
+
+        System.out.println(userService.selectAll());
     }
 
     /**

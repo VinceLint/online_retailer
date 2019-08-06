@@ -21,4 +21,6 @@ public interface UserMapper {
 
     User selectByEngName(String userName);
 
+    boolean updateByPrimaryKey_NoPassword(User record);
+
 }

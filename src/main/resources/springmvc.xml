@@ -46,7 +46,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/BvoInfo/**"/>
             <mvc:mapping path="/BvoStore/**"/>
-<!--            <mvc:mapping path="/toAddWal"/>-->
+            <!--            <mvc:mapping path="/toAddWal"/>-->
 <!--            <mvc:mapping path="/bvo-transation"/>-->
             <bean class="cn.neusoft.retailer.web.interceptor.BvoInterceptor"/>
         </mvc:interceptor>
@@ -64,6 +64,13 @@
             <!--                        <mvc:mapping path="/html/WalSignUp.html"/>-->
 <!--            <mvc:mapping path="/bvo-transation"/>-->
             <bean class="cn.neusoft.retailer.web.interceptor.WalletInterceptor"/>
+        </mvc:interceptor>
+
+        <!-- 管理员和品牌商权限 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/Company/**"/>
+            <mvc:mapping path="/Brand/**"/>
+            <bean class="cn.neusoft.retailer.web.interceptor.CompanyIntercepter"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

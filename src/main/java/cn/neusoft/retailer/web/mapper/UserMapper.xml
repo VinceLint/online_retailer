@@ -42,6 +42,18 @@
       mvo_introduction = #{mvoIntroduction,jdbcType=LONGVARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateByPrimaryKey_NoPassword" parameterType="cn.neusoft.retailer.web.pojo.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+        user_mail = #{userMail,jdbcType=VARCHAR},
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+        mvo_type = #{mvoType,jdbcType=INTEGER},
+        mvo_url = #{mvoUrl,jdbcType=VARCHAR},
+        mvo_eng_name = #{mvoEngName,jdbcType=VARCHAR},
+        mvo_introduction = #{mvoIntroduction,jdbcType=LONGVARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
     <update id="updateByName" parameterType="cn.neusoft.retailer.web.pojo.User">
     update user
     set user_password = #{userPassword,jdbcType=VARCHAR},

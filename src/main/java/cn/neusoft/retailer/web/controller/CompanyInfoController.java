@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/Company")
 public class CompanyInfoController {
     @Autowired
     private UserService userService;
@@ -61,8 +62,6 @@ public class CompanyInfoController {
     @RequestMapping(value = "company")
     @ResponseBody
     public ModelAndView update(User user) throws UnsupportedEncodingException {
-
-
         //中文乱码
         user.setUserName(new java.lang.String(user.getUserName().getBytes("ISO-8859-1"), "UTF-8"));
 
@@ -70,20 +69,22 @@ public class CompanyInfoController {
         //确定跳转页面
         ModelAndView modelAndView = new ModelAndView("user-company");
 
-
+        /*需求需要，取消限制*/
         //已通过前台校验，后台校验开始
         //判断是否汉字
-        if (user.getUserName() == null || !MyString.ifChinese(user.getUserName())) {
-            modelAndView.addObject("errorInfoChineseName", new java.lang.String("不是中文名或名字为空"));
-            modelAndView.setViewName("user-company");
-            return modelAndView;
-        }
-        //判断是否英文
-        if (user.getMvoEngName() == null || !MyString.ifEnglish(user.getMvoEngName())) {
-            modelAndView.addObject("errorInfoEnglishName", new java.lang.String("不是英文名或名字为空"));
-            modelAndView.setViewName("user-company");
-            return modelAndView;
-        }
+//        if (user.getUserName() == null || !MyString.ifChinese(user.getUserName())) {
+//            modelAndView.addObject("errorInfoChineseName", new java.lang.String("不是中文名或名字为空"));
+//            modelAndView.setViewName("user-company");
+//            return modelAndView;
+//        }
+//        //判断是否英文
+//        if (user.getMvoEngName() == null || !MyString.ifEnglish(user.getMvoEngName())) {
+//            modelAndView.addObject("errorInfoEnglishName", new java.lang.String("不是英文名或名字为空"));
+//            modelAndView.setViewName("user-company");
+//            return modelAndView;
+//        }
+        /*需求需要，取消限制*/
+
         //判断电话号码
         if (user.getUserPhone() == null || user.getUserPhone().length() > 11 || !MyString.ifNumber(user.getUserPhone())) {
             modelAndView.addObject("errorInfoTelephone", new java.lang.String("电话号码不全为数字或超过11位"));
@@ -103,7 +104,7 @@ public class CompanyInfoController {
         //上诉过程校验完毕，用service类写入数据库，返回结果
         //这里只更新中文名，英文名，电话，邮箱，简介公司类型，品牌商认证，其他不归我管
         //补全密码用户名做测试
-        if (userService.updateByPrimaryKey(user)) {
+        if (userService.updateByPrimaryKey_NoPassword(user)) {
             modelAndView.addObject("msg", new Messages(1, "修改成功！", "ok"));
         } else {
             modelAndView.addObject("msg", new Messages(0, "修改失败！", "remove"));
@@ -119,9 +120,8 @@ public class CompanyInfoController {
         //登录者权限获得
         try {
             User user = (User) request.getSession().getAttribute("user");
+            System.out.println(user);
             Map<String, Object> hashMap = new HashMap<>();
-            user = userService.selectByPrimaryKey(123);
-            user.setUserPrivilege(2);
             List<String> mvoType = new LinkedList<>();
             List<User> userList = new LinkedList<>();
             HashMap<String, Object> hashMap1 = null;
@@ -140,7 +140,7 @@ public class CompanyInfoController {
                 }
             }
             //判断是否是管理员 管理员只能修改品牌商的东西
-            if (user.getUserPrivilege() == 2) {
+            else if (user.getUserPrivilege() == 2) {
                 //管理员的品牌商分页操作，不想写了
                 hashMap1 = new HashMap<>();
                 List<Brand> brandList = new LinkedList<>();
