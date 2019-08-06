@@ -1,43 +1,24 @@
 package cn.neusoft.retailer.web.controller;
 
 
-
 import cn.neusoft.retailer.web.pojo.User;
-
 import cn.neusoft.retailer.web.service.UserService;
-
 import cn.neusoft.retailer.web.tools.*;
-
 import com.google.code.kaptcha.Constants;
-
 import org.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.web.bind.annotation.RequestBody;
-
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
 import javax.servlet.http.Cookie;
-
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
-
 import java.util.HashMap;
-
 import java.util.Map;
-
 
 
 //@RunWith(SpringJUnit4ClassRunner.class)
@@ -45,17 +26,11 @@ import java.util.Map;
 //@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
 
-
 /**
-
  * @author 罗圣荣
-
  * @version 1.0
-
  * @date 2019/7/23 15:52
-
  */
-
 
 
 @Controller
@@ -65,11 +40,9 @@ import java.util.Map;
 public class UserController {
 
 
-
     @Autowired
 
     private UserService userService;
-
 
 
     @Autowired
@@ -77,19 +50,12 @@ public class UserController {
     private RedisClient redisClient;
 
 
-
     /**
-
      * @描述: 用户注册
-
      * @参数: [user]
-
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
-
      * @创建人: 罗圣荣
-
      * @创建时间: 2019/7/30
-
      */
 
     @RequestMapping(value = "/register")
@@ -99,9 +65,7 @@ public class UserController {
     public Map<String, String> register(@RequestBody User user) {
 
 
-
         Map<String, String> result = new HashMap<>();
-
 
 
         String userName = user.getUserName();
@@ -119,12 +83,11 @@ public class UserController {
         Integer userPrivilege = user.getUserPrivilege();
 
 
-
         //判断用户名是否重复
 
         if (userName == null || !MyString.isName(userName)) {
 
-            result.put("INVALID_USERNAME", "用户名格式不正确！");
+            result.put("INVALID_USERNAME", "用户名格式为汉字、字母和数字的任意组合！");
 
             return result;
 
@@ -137,41 +100,37 @@ public class UserController {
         }
 
 
-
         //判断是否符合密码格式
 
         if (userPassword == null || !MyString.isPassword(userPassword)) {
 
-            result.put("INVALID_PASSWD", "密码格式不正确！");
+            result.put("INVALID_PASSWD", "密码格式为6-16位字母与数字的组合！");
 
             return result;
 
         }
-
 
 
         //判断是否符合email格式
 
         if (userMail == null || !MyString.isEmail(userMail)) {
 
-            result.put("INVALID_EMAIL", "邮箱格式不正确！");
+            result.put("INVALID_EMAIL", "邮箱格式为XX@XX.XX！");
 
             return result;
 
         }
-
 
 
         //判断是否符合电话号码格式
 
         if (userPhone == null || userPhone.length() != 11 || !MyString.ifNumber(userPhone)) {
 
-            result.put("INVALID_PHONE", "手机号码格式不正确！");
+            result.put("INVALID_PHONE", "手机号码格式为11位纯数字！");
 
             return result;
 
         }
-
 
 
         //判断是否符合url格式
@@ -189,9 +148,7 @@ public class UserController {
         }
 
 
-
         user.setUserId(UniqueID.getGuid());
-
 
 
         //加密保存用户密码
@@ -199,7 +156,6 @@ public class UserController {
         String ciphertext = MD5.encrypt(userPassword);
 
         user.setUserPassword(ciphertext);
-
 
 
         try {
@@ -217,29 +173,20 @@ public class UserController {
         }
 
 
-
         result.put("SUCCESS", "注册成功");
 
         return result;
 
 
-
     }
 
 
-
     /**
-
      * @描述: 验证token
-
      * @参数: [flag, request]
-
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
-
      * @创建人: 罗圣荣
-
      * @创建时间: 2019/7/30
-
      */
 
     @RequestMapping(value = "/tokenVilidation/{flag}")
@@ -249,7 +196,6 @@ public class UserController {
     public Map<String, String> vilidateToken(@PathVariable("flag") Boolean flag, HttpServletRequest request) {
 
 
-
         Map<String, String> result = new HashMap<>();
 
         String cookie = request.getHeader("Cookie");
@@ -257,9 +203,7 @@ public class UserController {
         User user = null;
 
 
-
         if (cookie.contains("token")) {
-
 
 
             String[] cookieInfo = cookie.split(";");
@@ -279,7 +223,6 @@ public class UserController {
             String[] tokenInfo = tokenMessage.split("=");
 
             String token = tokenInfo[1];
-
 
 
             try {
@@ -327,19 +270,12 @@ public class UserController {
     }
 
 
-
     /**
-
      * @描述: 登陆校验
-
      * @参数: [json, flag, request, response]
-
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
-
      * @创建人: 罗圣荣
-
      * @创建时间: 2019/7/30
-
      */
 
     @RequestMapping(value = "/loginValidation/{flag}")
@@ -349,7 +285,6 @@ public class UserController {
     public Map<String, String> login(@RequestBody String json, @PathVariable("flag") Boolean flag, HttpServletRequest request, HttpServletResponse response) {
 
 
-
         Map<String, String> result = new HashMap<>();
 
         JSONObject data = new JSONObject(json);
@@ -357,11 +292,9 @@ public class UserController {
         String userName = (String) data.get("userName");
 
 
-
         HttpSession session = request.getSession();
 
         session.setAttribute("flag", flag);
-
 
 
         //校验用户信息
@@ -390,6 +323,12 @@ public class UserController {
 
         }
 
+        if (flag && !data.get("preUserName").equals(userName)) {
+
+            result.put("INVALID_PASSWD", "Password Is Invalid");
+
+            return result;
+        }
 
 
         //校验密码
@@ -409,7 +348,6 @@ public class UserController {
         }
 
 
-
         //校验验证码
 
         String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
@@ -424,21 +362,15 @@ public class UserController {
 
         }
 
-
-
         String token;
 
 //        token = TokenCreation.createToken("127.0.0.1");
 
         token = TokenCreation.createToken(request.getRemoteAddr());
 
-
-
         user.setUserPassword(null);
 
         session.setAttribute("user", user);
-
-
 
         //根据"记住我"的值选择Token存放时间
 
@@ -488,7 +420,16 @@ public class UserController {
 
         cookie.setHttpOnly(true);
 
-        cookie.setMaxAge(999 * 24 * 60 * 60);
+        if (data.get("remember-me").equals(true)) {
+
+            cookie.setMaxAge(999 * 24 * 60 * 60);
+
+        } else {
+
+            cookie.setMaxAge(-1);
+
+        }
+
 
         try {
 
@@ -503,25 +444,17 @@ public class UserController {
         }
 
 
-
         return result;
 
     }
 
 
-
     /**
-
      * @描述: 忘记密码
-
      * @参数: [json, request]
-
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
-
      * @创建人: 罗圣荣
-
      * @创建时间: 2019/7/30
-
      */
 
     @RequestMapping(value = "/forgetPasswd")
@@ -531,7 +464,6 @@ public class UserController {
     public Map<String, String> forgetPasswd(@RequestBody String json, HttpServletRequest request) {
 
 
-
         Map<String, String> result = new HashMap<>();
 
         JSONObject data = new JSONObject(json);
@@ -539,9 +471,7 @@ public class UserController {
         String userName = (String) data.get("userName");
 
 
-
         HttpSession session = request.getSession();
-
 
 
         //校验用户信息
@@ -571,7 +501,6 @@ public class UserController {
         }
 
 
-
         //校验验证码
 
         String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
@@ -587,7 +516,6 @@ public class UserController {
         }
 
 
-
         request.getSession().setAttribute("userName", userName);
 
         result.put("SUCCESS", userName);
@@ -597,19 +525,12 @@ public class UserController {
     }
 
 
-
     /**
-
      * @描述: 重置密码
-
      * @参数: [json]
-
      * @返回值: java.util.Map<java.lang.String, java.lang.String>
-
      * @创建人: 罗圣荣
-
      * @创建时间: 2019/7/30
-
      */
 
     @RequestMapping(value = "/resetPasswd")
@@ -619,9 +540,7 @@ public class UserController {
     public Map<String, String> resetPasswd(@RequestBody String json) {
 
 
-
         Map<String, String> result = new HashMap<>();
-
 
 
         JSONObject data = new JSONObject(json);
@@ -629,7 +548,6 @@ public class UserController {
         String userName = (String) data.get("userName");
 
         String newPasswd = (String) data.get("newPassword");
-
 
 
         User user = null;
@@ -647,7 +565,6 @@ public class UserController {
         }
 
 
-
         //判断新密码是否符合密码格式
 
         if (newPasswd == null || !MyString.isPassword(newPasswd)) {
@@ -659,13 +576,11 @@ public class UserController {
         }
 
 
-
         //加密保存用户密码
 
         String ciphertext = MD5.encrypt(newPasswd);
 
         user.setUserPassword(ciphertext);
-
 
 
         try {
@@ -683,35 +598,17 @@ public class UserController {
         }
 
 
-
         result.put("SUCCESS", "重置密码成功");
 
         return result;
 
     }
 
-
-
-    /**
-
-     * @描述: 若非"记住我"方式登录的用户,Session结束便清楚Token
-
-     * @参数: [request]
-
-     * @返回值: java.util.Map<java.lang.String, java.lang.String>
-
-     * @创建人: 罗圣荣
-
-     * @创建时间: 2019/7/30
-
-     */
-
-    @RequestMapping(value = "/clearToken")
+    @RequestMapping(value = "/clearTokenAnyway")
 
     @ResponseBody
 
-    public Map<String, String> clearToken(HttpServletRequest request) {
-
+    public Map<String, String> clearTokenAnyway(HttpServletRequest request) {
 
 
         Map<String, String> result = new HashMap<>();
@@ -734,17 +631,11 @@ public class UserController {
 
         }
 
-        String[] tokenInfo = tokenMessage.split("=");
+        if (tokenMessage != null) {
 
-        String token = tokenInfo[1];
+            String[] tokenInfo = tokenMessage.split("=");
 
-
-
-        Boolean flag = (Boolean) request.getSession(false).getAttribute("flag");
-
-
-
-        if (!flag) {
+            String token = tokenInfo[1];
 
             if (redisClient.remove(token)) {
 
@@ -756,16 +647,12 @@ public class UserController {
 
             }
 
+            result.put("MESSAGE", "Remember-me User");
+
         }
-
-
-
-        result.put("MESSAGE", "Remember-me User");
 
         return result;
 
     }
-
-
 
 }

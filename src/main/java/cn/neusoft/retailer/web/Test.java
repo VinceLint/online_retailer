@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:applicationContext.xml","classpath*:springmvc.xml"})
+@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
 
 public class Test {
     @Autowired
@@ -42,12 +42,12 @@ public class Test {
     private DictionaryMapper dictionaryMapper;
 
     /**
-     *@描述
-     *@参数
-     *@返回值
-     *@创建人
-     *@创建时间 2019/7/22 12:35
-     *@修改人和其它信息
+     * @描述
+     * @参数
+     * @返回值
+     * @创建人
+     * @创建时间 2019/7/22 12:35
+     * @修改人和其它信息
      */
     @org.junit.Test
     public void test() {
@@ -67,12 +67,12 @@ public class Test {
     }
 
     /**
-     *@描述 测试OrderService
-     *@参数
-     *@返回值
-     *@创建人 胡献涛
-     *@创建时间 2019/7/24 21:35
-     *@修改人和其它信息
+     * @描述 测试OrderService
+     * @参数
+     * @返回值
+     * @创建人 胡献涛
+     * @创建时间 2019/7/24 21:35
+     * @修改人和其它信息
      */
     @org.junit.Test
     public void testOrderService() {
@@ -82,28 +82,28 @@ public class Test {
     }
 
     /**
-     *@描述  测试枚举类
-     *@参数
-     *@返回值
-     *@创建人  林跃涛
-     *@创建时间  2019/7/31 10:19
-     *@修改人和其它信息
+     * @描述 测试枚举类
+     * @参数
+     * @返回值
+     * @创建人 林跃涛
+     * @创建时间 2019/7/31 10:19
+     * @修改人和其它信息
      */
     @org.junit.Test
     public void testEnum() {
         User user = new User();
         //获取枚举类的value的两种方法
         //1.通过枚举值
-        System.out.println("'MvoType.其他'的枚举值为: "+MvoType.其他); //其他
+        System.out.println("'MvoType.其他'的枚举值为: " + MvoType.其他); //其他
         //2.通过枚举数组下标,默认从0开始
-        System.out.println("MvoType第8个枚举值为: "+MvoType.values()[8]);  //其他
+        System.out.println("MvoType第8个枚举值为: " + MvoType.values()[8]);  //其他
         //获取枚举值对应的code值(下标值),默认从0开始
-        System.out.println("MvoType的枚举值'其他'对应的code值为: "+MvoType.其他.ordinal()); //8
+        System.out.println("MvoType的枚举值'其他'对应的code值为: " + MvoType.其他.ordinal()); //8
     }
 
 
     @org.junit.Test
-    public void testMysql(){
+    public void testMysql() {
 //        List<Dictionary> dictionarys= dictionaryMapper.selectByType("USER_PRIVILEGE");
 //        System.out.println(dictionarys);
 //        Order order=new Order();
@@ -112,6 +112,17 @@ public class Test {
         System.out.println(orders.get(0).getOrderId());*/
         String string = UUID.randomUUID().toString();
         System.out.println(string);
+    }
+
+    @org.junit.Test
+    public void testSQL() {
+        User user = null;
+        try {
+            user = userService.selectByName("zhihong6");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(user);
     }
 
 

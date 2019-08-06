@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-left-to-w3l ">
                     <input name="kaptcha" placeholder="请输入验证码" required="" type="text"/>
-                    <img id="kaptchaImage" src="./kaptcha/getKaptchaImage.do"/>
+                    <img id="kaptchaImage" src="../kaptcha/getKaptchaImage.do"/>
                     <a href="#" οnclick="changeCode()"></a>
                     <div class="clear"></div>
                 </div>
@@ -42,6 +42,10 @@
                     <button id="next" type="submit">下一步</button>
                 </div>
             </form>
+            <div class="w3layouts_more-buttn">
+                <a href="../login.html">返回首页
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -50,7 +54,7 @@
     var path = "http://localhost:8080/online_retailer";
     $(function () {
         $('#kaptchaImage').click(function () {//生成验证码
-            $(this).hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+            $(this).hide().attr('src', '../kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
         });
     });
     //信息校验
@@ -74,12 +78,12 @@
                         alert(data.INVALID_USERNAME);
                         $("#userName").val("");
                         $("input[name='kaptcha']").val("");
-                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+                        $('#kaptchaImage').hide().attr('src', '../kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
                     } else {
                         alert(data.INVALID_CODE);
                         $("#userName").val("");
                         $("input[name='kaptcha']").val("");
-                        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+                        $('#kaptchaImage').hide().attr('src', '../kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
                     }
                 },
                 error: function (result) {
@@ -89,9 +93,8 @@
             return false;
         }
     });
-
     function changeCode() {
-        $('#kaptchaImage').hide().attr('src', './kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
+        $('#kaptchaImage').hide().attr('src', '../kaptcha/getKaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
     };
 </script>
 </body>
