@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author 林跃涛
@@ -109,7 +110,11 @@ public class Test {
 //        System.out.println(dictionarys);
 //        Order order=new Order();
 //        brandOrderService.insert(order);
-        List<Order> orders=brandOrderService.selectAll();
-        System.out.println(orders.get(0).getOrderId());
+        /*List<Order> orders=brandOrderService.selectAll();
+        System.out.println(orders.get(0).getOrderId());*/
+        String string = UUID.randomUUID().toString();
+        System.out.println(string);
     }
+
+
 }

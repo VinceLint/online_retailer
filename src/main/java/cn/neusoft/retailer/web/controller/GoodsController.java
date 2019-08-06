@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/Goods")
@@ -47,12 +48,15 @@ public class GoodsController {
     }
 
     @RequestMapping("/queryInsert")
-    public String queryInsert(HttpServletRequest request, String title, int id, int brandId, double price, int amount, int clazz,
+    public String queryInsert(HttpServletRequest request, String title, int brandId, double price, int amount, int clazz,
                               String describe, double length, double width, double height, double weight,
                               @RequestParam CommonsMultipartFile file, HttpSession session) throws IOException {
 
         //处理中文乱码问题
         request.setCharacterEncoding("UTF-8");
+
+        Integer id = null;
+
         //显示从前端表单获取到的数据
         System.out.println(title + " " + id + " " + price + " " + amount + " " + clazz +
                 " " + describe + " " + length + " " + width + " " + height + " " + weight);
@@ -79,7 +83,7 @@ public class GoodsController {
             System.out.println("There is not any pics");
         } else {
             //确认最终的路径  /文件夹/文件名
-            String fileName = id + substring;
+            String fileName = UUID.randomUUID().toString();
             uploadPath = new File(uploadPath + "/" + fileName);
             System.out.println(uploadPath);
             System.out.println(fileName);
@@ -157,12 +161,6 @@ public class GoodsController {
     public String offshelves(@PathVariable int goodsId) {
         System.out.println(goodsId);
         goodsService.updateStatus2ByPrimaryKey(goodsId);
-        return "insert";
-    }
-
-    @RequestMapping("/searchByTitle")
-    public String searchByTitle(String goodsTitle) {
-
         return "insert";
     }
 

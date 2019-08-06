@@ -16,7 +16,7 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
 
     @Override
-    public void save(String title, int id, double price, int amount, int clazz, String describe, double length,
+    public void save(String title, Integer id, double price, int amount, int clazz, String describe, double length,
                      double width, double height, double weight, int brandId) {
 
         Goods goods = new Goods();
@@ -106,4 +106,5 @@ public class GoodsServiceImpl implements GoodsService {
     public boolean updateByPrimaryKey(Goods record){
         return goodsMapper.updateByPrimaryKey(record)>0;
     }
+
 }

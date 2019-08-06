@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GoodsService {
 
-    public void save(String title, int id, double price, int amount, int clazz, String describe, double length,
+    public void save(String title, Integer id, double price, int amount, int clazz, String describe, double length,
                      double width, double height, double weight, int brandId);
 
     public List<Goods> selectAll();

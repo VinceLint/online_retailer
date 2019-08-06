@@ -344,11 +344,6 @@
                            data-options="required:true, validType:'stringCheckSub'"></td>
             </tr>
             <tr>
-                <td>商品sku码：</td>
-                <td><input type="text" name="id" style="width:400px;" class="easyui-validatebox"
-                           data-options="required:true, validType:'numberCheckSub'"></td>
-            </tr>
-            <tr>
                 <td>品牌id：</td>
                 <td><input type="text" name="brandId" style="width:400px;" class="easyui-validatebox"
                            data-options="required:true, validType:'numberCheckSub'"></td>
