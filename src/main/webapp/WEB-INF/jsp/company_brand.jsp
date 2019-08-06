@@ -54,10 +54,10 @@
 <input id="brandMerId" value="" type="text" style="display: none">
 
 <%--搜索跳转表单--%>
-<form style="displa:none;" action="http://localhost:8080/online_retailer/brandSearch" id="searchTransfor"></form>
+<form style="displa:none;" action="http://localhost:8080/online_retailer/Brand/brandSearch" id="searchTransfor"></form>
 
 <%--表单提交post实现修改--%>
-<form style="display: none" action="http://localhost:8080/online_retailer/defaultUser" type="post" id="update">
+<form style="display: none" action="http://localhost:8080/online_retailer/Company/defaultUser" type="post" id="update">
 </form>
 
 <%--修改--%>
@@ -72,7 +72,7 @@
             <div class="modal-body">
                 <div class="input-group">
                     <%--主要修改代码区--%>
-                    <form method="post" action="http://localhost:8080/online_retailer/companyUpdate"
+                    <form method="post" action="http://localhost:8080/online_retailer/Company/companyUpdate"
                           enctype="multipart/form-data" id="formUpload">
                         <div class="form-group">
                             <label style="font-size: 15px;font-weight:bold"><span
@@ -158,7 +158,7 @@
     function addBrand() {
         console.log($("#brandMerId").val())
         $(".modal-title").html("添加品牌信息")
-        $("#formUpload").attr("action", "http://localhost:8080/online_retailer/companyAdd/" + $("#brandMerId").val())
+        $("#formUpload").attr("action", "http://localhost:8080/online_retailer/Company/companyAdd/" + $("#brandMerId").val())
         $("#updateInfo").modal()
 
         //    需要上传三个值：brandMerId,brandName,picture
@@ -167,7 +167,7 @@
 
     //管理员修改品牌商信息
     function adminUpdate(userId) {
-        $("#update").attr("action", "http://localhost:8080/online_retailer/defaultUser/" + userId)
+        $("#update").attr("action", "http://localhost:8080/online_retailer/Company/defaultUser/" + userId)
         $("#update").submit()
 
     }
@@ -175,7 +175,7 @@
     function deleteBrand(brandId) {
         if (confirm("确定要删除吗？")) {
             $.ajax({
-                url: "http://localhost:8080/online_retailer/companyDelete/" + brandId,
+                url: "http://localhost:8080/online_retailer/Company/companyDelete/" + brandId,
                 async: false,
                 type: "post",
                 dataType: "json",
@@ -226,7 +226,7 @@
         var brands = null;
         var mvoTypes = null;
         $.ajax({
-            url: "http://localhost:8080/online_retailer/companyInfo/" + pageNow,
+            url: "http://localhost:8080/online_retailer/Company/companyInfo/" + pageNow,
             async: false,
             type: "post",
             dataType: "json",

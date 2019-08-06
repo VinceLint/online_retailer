@@ -66,6 +66,7 @@
     </div>
 </div>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     var path = "http://localhost:8080/online_retailer";
     var flag = false;
@@ -91,7 +92,7 @@
         //登录校验
         $("#login_in").on("click", function () {
             if ($("#kaptcha").val() != "" && $("#userName").val() != "" && $("#userPassword").val() != "") {
-                var info = {
+                     var info = {
                     "userName": $("#userName").val(),
                     "userPassword": $("#userPassword").val(),
                     "code": $("input[name='kaptcha']").val(),

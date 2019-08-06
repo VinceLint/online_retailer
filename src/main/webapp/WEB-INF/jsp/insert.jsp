@@ -18,7 +18,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/uimaker/dialog.css">
 
 
-
 </head>
 
 <script>
@@ -28,19 +27,19 @@
         $('#dialog').dialog({
             title: "新增商品",
             width: 700,
-            height: 620,
+            height: 650,
             buttons: [
                 {
                     text: "保存",
                     icons_Cls: 'icon-save',
                     handler: function () {
                         $('#myform').form('submit', {
-                            url: "${pageContext.request.contextPath}/queryInsert"
+                            url: "${pageContext.request.contextPath}/Goods/queryInsert"
                         });
                         alert("保存成功");
                         $('#dialog').dialog('close');
                         /*window.location.reload();*/
-                        window.location.href = "${pageContext.request.contextPath}/insert";
+                        window.location.href = "${pageContext.request.contextPath}/Goods/insert";
                     }
                 },
                 {
@@ -56,7 +55,7 @@
         $('#dialog2').dialog({
             title: "编辑商品",
             width: 700,
-            height: 600,
+            height: 620,
             buttons: [
                 {
                     text: "保存",
@@ -64,14 +63,14 @@
                     handler: function () {
                         var rowData = $('#dg').datagrid('getSelected');
                         $('#myform2').form('submit', {
-                            url: "${pageContext.request.contextPath}/queryUpdate",
+                            url: "${pageContext.request.contextPath}/Goods/queryUpdate",
                             onSubmit: function (param) {
                                 param.goodsId = rowData.goodsId;
                             },
                             success: function () {
                                 alert("修改成功");
                                 $('#dialog2').dialog('close');
-                                window.location.href = "${pageContext.request.contextPath}/insert";
+                                window.location.href = "${pageContext.request.contextPath}/Goods/insert";
                             }
 
                         });
@@ -119,7 +118,8 @@
                     length: rowData.goodsLength,
                     width: rowData.goodsWidth,
                     height: rowData.goodsHeight,
-                    weight: rowData.goodsWeight
+                    weight: rowData.goodsWeight,
+                    brandId: rowData.brandId
 
                 });
             }
@@ -132,7 +132,7 @@
             } else {
                 var msg = "您确认要删除这条商品信息吗？"
                 if (confirm(msg) == true) {
-                    window.location.href = '${pageContext.request.contextPath}/queryDelete/' + rowData.goodsId;
+                    window.location.href = '${pageContext.request.contextPath}/Goods/queryDelete/' + rowData.goodsId;
                 } else {
                     window.location.reload();
                 }
@@ -144,14 +144,29 @@
             valueField: 'value',
             textField: 'label',
             data: [{
-                label: "家用电器",
+                label: "服装衣物",
                 value: 0
             }, {
-                label: "日用品",
+                label: "背包鞋靴",
+                value: 1
+            }, {
+                label: "数码家电",
                 value: 2
             }, {
-                label: "数码产品",
+                label: "儿童玩具",
                 value: 3
+            }, {
+                label: "美妆保健",
+                value: 4
+            }, {
+                label: "眼镜手表",
+                value: 5
+            }, {
+                label: "家具建材",
+                value: 6
+            }, {
+                label: "游戏动漫",
+                value: 7
             }],
             width: 160,
             panelHeight: 'auto'
@@ -162,21 +177,36 @@
             valueField: 'value',
             textField: 'label',
             data: [{
-                label: "家用电器",
+                label: "服装衣物",
                 value: 0
             }, {
-                label: "日用品",
+                label: "背包鞋靴",
+                value: 1
+            }, {
+                label: "数码家电",
                 value: 2
             }, {
-                label: "数码产品",
+                label: "儿童玩具",
                 value: 3
+            }, {
+                label: "美妆保健",
+                value: 4
+            }, {
+                label: "眼镜手表",
+                value: 5
+            }, {
+                label: "家具建材",
+                value: 6
+            }, {
+                label: "游戏动漫",
+                value: 7
             }],
             width: 160,
             panelHeight: 'auto'
         });
 
         $('#dg').datagrid({
-            url: "${pageContext.request.contextPath}/searchGoods",
+            url: "${pageContext.request.contextPath}/Goods/searchGoods",
             columns: [[
                 {field: 'goodsId', title: '商品sku码', width: 100, align: 'center'},
                 {field: 'goodsTitle', title: '商品标题', width: 100, align: 'center'},
@@ -190,11 +220,21 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         if (row.goodsClass == 0) {
-                            return "家用电器";
+                            return "服装衣物";
+                        } else if (row.goodsClass == 1) {
+                            return "背包鞋靴";
                         } else if (row.goodsClass == 2) {
-                            return "日用品";
+                            return "数码家电";
                         } else if (row.goodsClass == 3) {
-                            return "数码产品";
+                            return "儿童玩具";
+                        } else if (row.goodsClass == 4) {
+                            return "美妆保健";
+                        } else if (row.goodsClass == 5) {
+                            return "眼镜手表";
+                        } else if (row.goodsClass == 6) {
+                            return "家具建材";
+                        } else if (row.goodsClass == 7) {
+                            return "游戏动漫";
                         }
                     }
                 },
@@ -250,32 +290,34 @@
 
     function putin(goodsId) {
         console.log(goodsId);
-        window.location.href = "${pageContext.request.contextPath}/putin/" + goodsId;
+        window.location.href = "${pageContext.request.contextPath}/Goods/putin/" + goodsId;
         alert("入仓成功");
     }
 
     function onshelves(goodsId) {
         console.log(goodsId);
-        window.location.href = "${pageContext.request.contextPath}/onshelves/" + goodsId;
+        window.location.href = "${pageContext.request.contextPath}/Goods/onshelves/" + goodsId;
         alert("上架成功");
     }
 
     function offshelves(goodsId) {
         console.log(goodsId);
-        window.location.href = "${pageContext.request.contextPath}/offshelves/" + goodsId;
+        window.location.href = "${pageContext.request.contextPath}/Goods/offshelves/" + goodsId;
         alert("下架成功");
     }
 
-    $.extend($.fn.validatebox.defaults.rules,{
-        numberCheckSub : {
-            validator : function(value) {
-                return /^[0-9]+$/.test(value);},
-            message : "只能输入数字"
+    $.extend($.fn.validatebox.defaults.rules, {
+        numberCheckSub: {
+            validator: function (value) {
+                return /^[0-9]+$/.test(value);
+            },
+            message: "只能输入数字"
         },
-        stringCheckSub : {
-            validator : function(value) {
-                return /^[a-zA-Z0-9\u4E00-\u9FA5]+$/.test(value);},
-            message : "只能包括中文字、英文字母、数字"
+        stringCheckSub: {
+            validator: function (value) {
+                return /^[a-zA-Z0-9\u4E00-\u9FA5]+$/.test(value);
+            },
+            message: "只能包括中文字、英文字母、数字"
         }
     })
 
@@ -288,7 +330,7 @@
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" id="add">添加</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" id="edit">编辑</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" id="del">删除</a>
-    <a href="${pageContext.request.contextPath}/insert" class="easyui-linkbutton"
+    <a href="${pageContext.request.contextPath}/Goods/insert" class="easyui-linkbutton"
        data-options="iconCls:'icon-reload',plain:true" id="rel">刷新</a>
 </div>
 
@@ -302,8 +344,8 @@
                            data-options="required:true, validType:'stringCheckSub'"></td>
             </tr>
             <tr>
-                <td>商品sku码：</td>
-                <td><input type="text" name="id" style="width:400px;" class="easyui-validatebox"
+                <td>品牌id：</td>
+                <td><input type="text" name="brandId" style="width:400px;" class="easyui-validatebox"
                            data-options="required:true, validType:'numberCheckSub'"></td>
             </tr>
             <tr>
@@ -369,6 +411,11 @@
                 <td>商品标题：</td>
                 <td><input type="text" name="title" style="width:400px;" class="easyui-validatebox"
                            data-options="required:true"></td>
+            </tr>
+            <tr>
+                <td>品牌id：</td>
+                <td><input type="text" name="brandId" style="width:400px;" class="easyui-validatebox"
+                           data-options="required:true, validType:'numberCheckSub'"></td>
             </tr>
             <tr>
                 <td>商品价格：</td>

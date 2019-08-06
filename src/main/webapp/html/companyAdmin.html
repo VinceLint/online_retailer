@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>品牌商管理</title>
+</head>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous">
+
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous">
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<style>
+    .form-control {
+        width: 30%;
+    }
+</style>
+<body>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="CompanyName">公司名称 Company Name</label>
+            <input width="50%" type="text" class="form-control" id="CompanyName" placeholder="Company Name">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Telephone">公司电话 Telephone Number</label>
+            <input type="text" class="form-control" id="Telephone" placeholder="Telephone Number">
+        </div>
+        <br>
+
+        <div class="form-group-lg">
+            <label for="Location">公司地址 Location</label>
+            <textarea id="Location" class="form-control" placeholder="Location" rows="5"></textarea>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="exampleInputFile">选择商标Logo</label>
+            <input type="file" id="exampleInputFile">
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+</body>
+</html>

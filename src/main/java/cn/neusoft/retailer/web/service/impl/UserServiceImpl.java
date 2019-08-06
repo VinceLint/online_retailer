@@ -59,4 +59,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.deleteByPrimaryKey(userId) != 0;
     }
 
+    @Override
+    public boolean updateByPrimaryKey_NoPassword(User user) {
+        return userMapper.updateByPrimaryKey_NoPassword(user);
+    }
+
 }

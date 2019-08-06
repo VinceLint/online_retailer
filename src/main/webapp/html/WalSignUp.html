@@ -1,5 +1,10 @@
 
 <html>
+<!--/**-->
+<!--* @author 庄志宏-->
+<!--* @version 1.0-->
+<!--* @date 2019/7/23 21:44-->
+<!--*/-->
 <head>
     <title> 钱包注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,8 +12,8 @@
     <meta name="keywords" content="Official Signup Form Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- fonts -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet" charset="utf-8">
-    <link href="//fonts.googleapis.com/css?family=Monoton" rel="stylesheet" charset="utf-8">
+<!--    <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet" charset="utf-8">-->
+<!--    <link href="http://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" charset="utf-8">-->
     <!-- /fonts -->
 
 </head>
@@ -19,7 +24,7 @@
         <h2 class="agileits1">钱包</h2>
         <center>
             <div id='one'>
-                <img id='two' src="image/wallet.jpg" class='play'>
+                <img id='two' src="../image/wallet.jpg" class='play'>
 
             </div>
 
@@ -27,9 +32,11 @@
         <p class="agileits2">用于充值、提现、支付以及收款</p>
     </div>
     <div class="content-agile2">
-        <form action="http://127.0.0.1:8080/online_retailer_war_exploded/toSignWal" method="post">
+        <form action="" method="post">
             <div class="form-control w3layouts">
-                <input type="text" id="firstname" name="walId" placeholder="ID" title="Please enter your First Name" required="">
+
+                <input type="text" id="firstname" name="Name" placeholder="请输入您的用户名" title="Please enter your First Name" required="">
+
             </div>
 
             <div class="form-control w3layouts">
@@ -37,15 +44,17 @@
             </div>
 
             <div class="form-control agileinfo">
-                <input type="password" class="lock" name="walPassword" placeholder="Password" id="password1" required="">
+                <input type="password" class="lock" name="walPassword" placeholder="请输入6位数字密码" id="password1" required="">
             </div>
 
             <div class="form-control agileinfo">
-                <input type="password" class="lock" name="confirm-password" placeholder="Confirm Password" id="password2" required="">
+                <input type="password" class="lock" name="confirm-password" placeholder="请再次输入密码" id="password2" required="">
             </div>
 
-            <input type="submit" class="register" value="立即注册">
+            <input id="sign_up" type="submit" class="register" value="立即注册">
         </form>
+        <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+
         <script type="text/javascript">
             window.onload = function () {
                 document.getElementById("password1").onchange = validatePassword;
@@ -61,16 +70,89 @@
                 //empty string means no validation error
             }
         </script>
+        <script>
+            var path = "http://localhost:8080/online_retailer";
+
+            var flag = true;
+            $(function () {
+                // 登录页面加载时后台获取Cookies信息，并进行token校验
+                // $.ajax({
+                //     contentType: "application/json; charset=utf-8",
+                //     url: path + "/user/tokenVilidation/" + flag,
+                //     success: function (data) {
+                //         if (data.SUCCESS) {
+                //             console.log(data.SUCCESS);
+                //             $("#firstname").val(data.userName);
+                //             flag = true;
+                //         } else {
+                //             console.log(data.ERROR);
+                //         }
+                //     },
+                //     error: function (result) {
+                //         console.log("ERROR: " + result);
+                //     }
+                // });
+                //注册校验
+                $("#sign_up").on("click", function () {
+                    if ($("#email").val() != "" && $("#password1").val() != "" && $("#password2").val() != "") {
+                        var info = {
+                            "userName": $("#firstname").val(),
+                            "userPassword": $("#password1").val(),
+                            "email":$("#email").val(),
+                        };
+                        console.log(info);
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "http://localhost:8080/online_retailer/toSignWal2",
+                            dataType: "json",
+                            data: JSON.stringify(info),
+                            async: false,
+                            success: function (data) {
+                                if (data.SUCCESS) {
+                                    console.log("Sign Successed!");
+                                    alert("钱包注册成功！");
+                                    window.location.href = "http://localhost:8080/online_retailer/html/bvo-WalletList.html";
+                                } else if (data.ERROR) {
+                                    console.log(data.ERROR);
+                                    alert("用户名不正确！");
+                                    $("#firstname").val("");
+                                  } else if (data.ERROR_MAIL) {
+                                    console.log(data.ERROR_MAIL);
+                                    alert("注册邮箱不正确！");
+                                    $("#email").val("");
+                                }else if (data.INVALID_PASSWD) {
+                                    console.log(data.INVALID_PASSWD);
+                                    alert("密码格式不正确！");
+                                    $("#password1").val("");
+                                }else if (data.ERROR_change) {
+                                    console.log(data.ERROR_change);
+                                    alert("数据库修改失败！");
+                                }
+                            },
+                            error: function (result) {
+                                console.log("ERROR: " + result);
+                            }
+                        });
+                        return false;
+                    }
+                });
+
+            });
+
+
+
+        </script>
         <ul class="social-agileinfo wthree2">
             <li><a href="#"><i class="fa fa-chevron-circle-left ">返回</i></a></li>
         </ul>
     </div>
     <div class="clear"></div>
 </div>
-<p class="copyright w3l">© 2017 Official Signup Form. All Rights Reserved | Design by <a href="#" target="_blank">庄志宏</a></p>
+<p class="copyright w3l">© 2019 Official Signup Form. All Rights Reserved | Design by <a href="#" target="_blank">庄志宏</a></p>
 </body>
 <!-- css -->
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/WalStyle.css" rel='stylesheet' type='text/css' media="all"  />
+<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../css/WalStyle.css" rel='stylesheet' type='text/css' media="all"  />
 <!-- /css -->
 </html>

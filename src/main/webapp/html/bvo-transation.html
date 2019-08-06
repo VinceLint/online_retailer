@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--/**-->
+<!--* @author 庄志宏-->
+<!--* @version 1.0-->
+<!--* @date 2019/7/23 21:44-->
+<!--*/-->
 <html>
 <head>
     <meta charset="UTF-8">
@@ -16,12 +21,6 @@
     }
 </style>
 <body>
-<div class="page-header position-relative">
-    <h1 style="color: #2679b5;">借卖方 <small><i class="el-icon-d-arrow-right"></i> 交易流水</small></h1>
-    <hr><br>
-
-</div>
-
 <!-- import CSS -->
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <!-- import Vue before Element -->
@@ -29,7 +28,14 @@
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
+
 <div id="app">
+<div class="page-header position-relative">
+    <h1 style="color: #2679b5;">{{who}} <small><i class="el-icon-d-arrow-right"></i> 交易流水</small></h1>
+    <hr><br>
+
+</div>
+
 
 <!--    <el-input-->
 <!--            v-model="search"-->
@@ -75,6 +81,27 @@
                 prop="tstatus">
 
             </el-table-column>
+
+            <el-table-column
+
+                    align="right">
+                <template slot="header" slot-scope="scope">
+                    <p>流水单</p>
+                </template>
+                <template slot-scope="scope">
+
+                    <div class="demo-image__preview">
+                        <el-image
+                                style="width: 100px; height: 100px"
+                                :src="tableData[scope.$index].picurl">
+                            <div slot="error" class="image-slot">
+                                <i class="el-icon-picture-outline"></i>
+                            </div>
+                        </el-image>
+                    </div>
+
+                </template>
+            </el-table-column>
         </el-table>
 
         </template>
@@ -114,11 +141,14 @@
                 },
                 search: '',
                 tableData :[],
+                who:'',
                 ztype:["提现","充值","消费","收入"],
                 zstatus:["待审核","审核通过","审核未通过"],
 
+                wtype:["借卖方","品牌商","管理员"],
                 currentPage4: 1,
                 pageTotal:0,
+                picurl: 'upload/20190802153556wallet.jpg',
             }
         },
         methods: {
@@ -128,7 +158,7 @@
 
                 $.ajax({
                     type: "post",
-                    url: "http://127.0.0.1:8080/online_retailer_war_exploded/toTransationList",
+                    url: "http://localhost:8080/online_retailer/toTransationList",
                     dataType: "json",
                     success: function (r) {
                         $.each(r,function(i,obj){
@@ -153,12 +183,12 @@
                 this.tableData=[]
                 $.ajax({
                     type:"get",
-                    url:"http://127.0.0.1:8080/online_retailer_war_exploded/changeTransationList/"+val,
+                    url:"http://localhost:8080/online_retailer/changeTransationList/"+val,
                     dataType:"json",
                     success:function(data){
 
                             $.each(data, function (i, obj) {
-                                if(i!=data.length-1) {
+                                if(i!=data.length-2&&i!=data.length-1) {
                                     this.tableData.push({
                                         tid: obj.traRecId,
                                         tnum: obj.traRecSum,
@@ -166,19 +196,47 @@
                                         tstatus: this.zstatus[obj.traRecStatus],
                                         tbal: obj.traRecBalance,
                                         ttime: obj.traRecDateStr,
+                                        picurl:".."+obj.traRecExchangememo,
                                     })
                                 }
                             }.bind(this))
 
-                        this.pageTotal=data[data.length-1],
+                        this.pageTotal=data[data.length-2],
+                            this.who=this.wtype[data[data.length-1]],
                         console.log(data);
 
                     }.bind(this)
 
                 })
+            },
+            //判断有无钱包
+            handleChangePage() {
+                this.tableData=[]
+                $.ajax({
+                    type:"get",
+                    url:"http://localhost:8080/online_retailer/changePage",
+                    dataType:"json",
+                    success:function(data){
+                        if(data.success){
+                            console.log("you have wal!")
+                        }
+                        else{
+                            window.location="http://localhost:8080/online_retailer/html/WalSignUp.html";
+                        }
+                            console.log(data);
+
+                    }.bind(this)
+
+                })
             }
+
         },
+        // created(){
+            // this.handleChangePage();
+        // },
         mounted:function(){
+            this.handleChangePage();
+
             this. handleCurrentChange(1);
         }
 

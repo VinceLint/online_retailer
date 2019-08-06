@@ -20,4 +20,6 @@ public interface UserService {
     boolean updateByName(User user);
     boolean deleteByPrimaryKey(Integer userId);
 
+    boolean updateByPrimaryKey_NoPassword(User user);
+
 }

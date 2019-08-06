@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author 林跃涛
@@ -113,8 +114,10 @@ public class Test {
 //        System.out.println(dictionarys);
 //        Order order=new Order();
 //        brandOrderService.insert(order);
-        List<Order> orders=brandOrderService.selectAll();
-        System.out.println(orders.get(0).getOrderId());
+        /*List<Order> orders=brandOrderService.selectAll();
+        System.out.println(orders.get(0).getOrderId());*/
+        String string = UUID.randomUUID().toString();
+        System.out.println(string);
     }
 
     @org.junit.Test

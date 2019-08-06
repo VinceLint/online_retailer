@@ -1,6 +1,7 @@
 package cn.neusoft.retailer.web.service;
 
 import cn.neusoft.retailer.web.pojo.TransactionRecord;
+import cn.neusoft.retailer.web.tools.Result;
 import net.sf.json.JSONArray;
 
 import java.util.List;
@@ -19,8 +20,11 @@ public interface TransationService {
 
     List<TransactionRecord> selectAll();
 
+    JSONArray getAll(int p,int id);
+
     JSONArray getAll(int p);
 
-
     int updateByPrimaryKey(TransactionRecord record);
+
+    Result review(org.json.JSONArray json);
 }
