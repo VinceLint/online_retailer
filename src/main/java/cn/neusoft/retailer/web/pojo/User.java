@@ -2,6 +2,7 @@ package cn.neusoft.retailer.web.pojo;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Serializable {
     private Integer userId;
@@ -11,8 +12,20 @@ public class User implements Serializable {
     private String userMail;
 
     private String userPhone;
+
     private String userName;
 
+    private Integer userWalId;
+
+    private Integer userPrivilege;
+
+    private Integer mvoType;
+
+    private String mvoUrl;
+
+    private String mvoEngName;
+
+    private String mvoIntroduction;
     public User(Integer userId, String name, String email, String phone) {
         this.userId = userId;
         this.mvoEngName = name;
@@ -28,17 +41,7 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    private Integer userWalId;
 
-    private Integer userPrivilege;
-
-    private Integer mvoType;
-
-    private String mvoUrl;
-
-    private String mvoEngName;
-
-    private String mvoIntroduction;
 
     public Integer getUserId() {
         return userId;
@@ -46,6 +49,20 @@ public class User implements Serializable {
 
     public User() {
 
+    }
+
+    public User(Integer userId, String userPassword, String userMail, String userPhone, String userName, Integer userWalId, Integer userPrivilege, Integer mvoType, String mvoUrl, String mvoEngName, String mvoIntroduction) {
+        this.userId = userId;
+        this.userPassword = userPassword;
+        this.userMail = userMail;
+        this.userPhone = userPhone;
+        this.userName = userName;
+        this.userWalId = userWalId;
+        this.userPrivilege = userPrivilege;
+        this.mvoType = mvoType;
+        this.mvoUrl = mvoUrl;
+        this.mvoEngName = mvoEngName;
+        this.mvoIntroduction = mvoIntroduction;
     }
 
     public void setUserId(Integer userId) {
@@ -122,6 +139,29 @@ public class User implements Serializable {
 
     public void setMvoIntroduction(String mvoIntroduction) {
         this.mvoIntroduction = mvoIntroduction == null ? null : mvoIntroduction.trim();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userId, user.userId) &&
+                Objects.equals(userPassword, user.userPassword) &&
+                Objects.equals(userMail, user.userMail) &&
+                Objects.equals(userPhone, user.userPhone) &&
+                Objects.equals(userName, user.userName) &&
+                Objects.equals(userWalId, user.userWalId) &&
+                Objects.equals(userPrivilege, user.userPrivilege) &&
+                Objects.equals(mvoType, user.mvoType) &&
+                Objects.equals(mvoUrl, user.mvoUrl) &&
+                Objects.equals(mvoEngName, user.mvoEngName) &&
+                Objects.equals(mvoIntroduction, user.mvoIntroduction);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, userPassword, userMail, userPhone, userName, userWalId, userPrivilege, mvoType, mvoUrl, mvoEngName, mvoIntroduction);
     }
 
     @Override

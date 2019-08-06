@@ -11,57 +11,61 @@
 <body>
 <div id="app">
     <el-table :data="dataForShow" @selection-change="handleSelectionChange" style="width: 100%">
-        <el-table-column type="selection">
-        </el-table-column>
-        <el-table-column label="字典类型" prop="type" width="180">
-        </el-table-column>
-        <el-table-column label="用途描述" prop="describe" width="180">
-        </el-table-column>
-        <el-table-column label="编码" prop="code">
-        </el-table-column>
-        <el-table-column label="编码值" prop="cvalue">
-        </el-table-column>
+        <el-table-column type="selection"></el-table-column>
+
+        <el-table-column label="菜单号" prop="id" width="100"></el-table-column>
+        <el-table-column label="菜单名称" prop="name" width="100"></el-table-column>
+        <el-table-column label="菜单链接" prop="url" width="100"></el-table-column>
+        <el-table-column label="菜单权限" prop="privilege" width="100"></el-table-column>
+
         <el-table-column label="操作">
             <template slot-scope="scope">
                 <el-button @click="handleEdit(scope.$index,true)" icon="el-icon-setting" type="primary"></el-button>
             </template>
         </el-table-column>
+
     </el-table>
     <el-button @click="handleEdit(0,false)" icon="el-icon-edit" type="primary"></el-button>
     <el-button @click="handleDel()" icon="el-icon-delete" type="primary"></el-button>
     <div class="update">
-        <el-dialog :visible.sync="dialogVisible" title="数据字典">
+        <el-dialog :visible.sync="dialogVisible" title="菜单列表">
             <el-form :model="form" label-width="80px" ref="form">
-                <el-form-item :rules="[
-      						{ required: true, message: '字典类型不能为空'},
-      						{ max: 20, message: '字典类型不超过20个字符'}
-    					]" label="字典类型" prop="type">
-                    <el-input placeholder="请输入字典类型,不大于20个字符" v-model="form.type"></el-input>
-                </el-form-item>
-                <el-form-item :rules="[
-      						{ required: true, message: '数据描述不能为空'},
-      						{ max: 20, message: '数据描述不超过20个字符'}
-    					]" label="用途描述" prop="describe">
-                    <el-input placeholder="请输入数据描述,不大于20个字符" v-model="form.describe"></el-input>
-                </el-form-item>
-                <el-form-item :rules="[
-      						{ required: true, message: '编码不能为空'},
-      						{ type: 'number', message: '输入数字'}
-    					]" label="编码" prop="code">
 
-                    <el-input placeholder="请输入编码,0-9" type="number" v-model.number="form.code"></el-input>
-                </el-form-item>
                 <el-form-item :rules="[
-      						{ required: true, message: '编码值不能为空'},
-      						{ max: 10, message: '编码值不超过10个字符'}
-    					]" label="编码值" prop="cvalue">
-                    <el-input placeholder="请输入编码值,不大于10个字符" v-model="form.cvalue"></el-input>
+      						{ required: true, message: '菜单号不能为空'},
+      						{ max: 20, message: '菜单号不超过20个字符'}
+    					]" label="菜单号" prop="id">
+                    <el-input placeholder="请输入账号,不大于20个字符" v-model="form.id"></el-input>
                 </el-form-item>
+
+                <el-form-item :rules="[
+      						{ required: true, message: '用户菜单名称不能为空'},
+      						{ max: 20, message: '用户菜单名称不超过20个字符'}
+    					]" label="用户菜单名称" prop="name">
+                    <el-input placeholder="请输入用户菜单名称,不大于20个字符" v-model="form.name"></el-input>
+                </el-form-item>
+
+
+                <el-form-item :rules="[
+      						{ required: true, message: '名称不能为空'},
+      						{ max: 20, message: '名称不超过20个字符'}
+    					]" label="菜单链接" prop="url">
+                    <el-input placeholder="请输入名称,不大于20个字符" v-model="form.name"></el-input>
+                </el-form-item>
+
+                <el-form-item :rules="[
+      						{ required: true, message: '用户菜单权限不能为空'},
+      						{ max: 20, message: '用户菜单权限不超过20个字符'}
+    					]" label="菜单权限" prop="privilege">
+                    <el-input placeholder="请输入用户菜单权限,不大于20个字符" v-model="form.privilege"></el-input>
+                </el-form-item>
+
                 <el-form-item>
                     <el-button @click="dialogVisible = false">取 消</el-button>
                     <el-button @click="onSubmit" type="primary">确 定</el-button>
                 </el-form-item>
-                </el-form>
+
+            </el-form>
         </el-dialog>
         <el-pagination :current-page="1" :page-size="7" :total="pageSum" @current-change="handleCurrentChange"
                        id="page" layout=" prev, pager, next, jumper">
@@ -83,10 +87,10 @@
                 isEdit: false,
                 selectedRow: 0,
                 form: {
-                    type: '',
-                    describe: '',
-                    code: 0,
-                    cvalue: ''
+                    id: 0,
+                    name: '',
+                    url: '',
+                    privilege: 0
                 },
                 //更新数据需要旧和新的数据,因为type不是唯一的
                 dataForUpdate: [],
@@ -99,10 +103,10 @@
                 //每一页展示的内容
                 dataForShow: [],
                 dataNotUpdate: {
-                    type: '',
-                    describe: '',
-                    code: 0,
-                    cvalue: ''
+                    id: 0,
+                    name: '',
+                    url: '',
+                    privilege: 0
                 }
             }
         },
@@ -131,10 +135,10 @@
                             this.$set(this.dataForShow, i, this.tableData[(this.pageNum - 1) * 7 + i])
                         } else {
                             this.$set(this.dataForShow, i, {
-                                type: ' ',
-                                describe: ' ',
-                                code: ' ',
-                                cvalue: ' '
+                                id: 0,
+                                name: '',
+                                url: '',
+                                privilege: 0,
                             })
                         }
                     }
@@ -147,15 +151,15 @@
                 $.ajax({
                     type: 'POST',
                     dataType: "json",
-                    url: "http://localhost:8080/online_retailer/dictionary/initDictionary",
+                    url: "http://localhost:8080/menu/initMenu",
                     success: function (res) {
                         $.each(res, function (i, obj) {
                             this.pageSum++
                             this.tableData.push({
-                                type: obj.dicType,
-                                describe: obj.dicDiscribe,
-                                code: obj.dicCode,
-                                cvalue: obj.dicValue
+                                id: obj.menuId,
+                                name: obj.menuName,
+                                url: obj.menuUrl,
+                                privilege: obj.menuPrivilege
                             }) //循环遍历，拼接
                         }.bind(this));
                         this.showDetail(this.pageNum)
@@ -176,24 +180,29 @@
             handleEdit(row, isEdit) {
                 //修改
                 if (isEdit) {
-                    this.form.type = this.dataForShow[row].type;
-                    this.form.describe = this.dataForShow[row].describe;
-                    this.form.code = this.dataForShow[row].code;
-                    this.form.cvalue = this.dataForShow[row].cvalue;
-                    this.dataNotUpdate.type = this.dataForShow[row].type;
-                    this.dataNotUpdate.describe = this.dataForShow[row].describe;
-                    this.dataNotUpdate.code = this.dataForShow[row].code;
-                    this.dataNotUpdate.cvalue = this.dataForShow[row].cvalue;
+                    this.form.id = this.dataForShow[row].id
+                    this.form.name = this.dataForShow[row].name
+                    this.form.url = this.dataForShow[row].url
+                    this.form.privilege = this.dataForShow[row].privilege
+
+
+                    this.dataNotUpdate.id = this.dataForShow[row].id
+                    this.dataNotUpdate.name = this.dataForShow[row].name
+                    this.dataNotUpdate.url = this.dataForShow[row].url
+                    this.dataNotUpdate.privilege = this.dataForShow[row].privilege
+
                     this.isEdit = isEdit;
                     this.selectedRow = row;
                     this.dataForUpdate.push(this.dataNotUpdate)
                 }
                 //新增
                 else {
-                    this.form.type = '';
-                    this.form.describe = '';
-                    this.form.code = '';
-                    this.form.cvalue = '';
+                    this.form.id = 0
+                    this.form.name = ''
+                    this.form.url = ''
+                    this.form.privilege = 0
+
+
                     this.isEdit = isEdit;
                 }
                 this.dialogVisible = true;
@@ -202,20 +211,22 @@
             onSubmit() {
                 //更新提交
                 if (this.isEdit) {
-                    var dtype = this.form.type
-                    var ddescribe = this.form.describe
-                    var dcode = this.form.code
-                    var dcvalue = this.form.cvalue
+                    var i = this.form.id
+                    var p = this.form.name
+                    var n = this.form.url
+                    var m = this.form.privilege
+
+
                     var updatedData = {
-                        type: dtype,
-                        describe: ddescribe,
-                        code: dcode,
-                        cvalue: dcvalue
+                        id: i,
+                        name: p,
+                        url: n,
+                        privilege: m
                     }
                     this.dataForUpdate.push(this.form)
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/online_retailer/dictionary/updateDictionary",
+                        url: "http://localhost:8080/menu/updateMenu",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(this.dataForUpdate),
                         dataType: "json",
@@ -238,13 +249,14 @@
                 }
                 //新增提交
                 else {
-                    var dtype = this.form.type
-                    var ddescribe = this.form.describe
-                    var dcode = this.form.code
-                    var dcvalue = this.form.cvalue
+                    var i = this.form.id
+                    var p = this.form.name
+                    var n = this.form.url
+                    var m = this.form.privilege
+
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/online_retailer/dictionary/insertDictionary",
+                        url: "http://localhost:8080/menu/insertMenu",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(this.form),
                         dataType: "json",
@@ -253,16 +265,18 @@
                             console.log("success")
                             if (data.result == "SUCCESS") {
                                 this.tableData.push({
-                                    type: dtype,
-                                    describe: ddescribe,
-                                    code: dcode,
-                                    cvalue: dcvalue
+                                    id: i,
+                                    name: p,
+                                    url: n,
+                                    privilege: m
+
                                 })
                                 this.$set(this.dataForShow, (this.pageSum + 1) % 7, {
-                                    type: dtype,
-                                    describe: ddescribe,
-                                    code: dcode,
-                                    cvalue: dcvalue
+                                    id: i,
+                                    name: p,
+                                    url: n,
+                                    privilege: m
+
                                 })
                                 this.init()
                                 alert("插入成功!")
@@ -290,7 +304,7 @@
             handleDel() {
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/online_retailer/dictionary/deleteDictionary",
+                    url: "http://localhost:8080/menu/deleteMenu",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(this.dataForDel),
                     dataType: "json",
