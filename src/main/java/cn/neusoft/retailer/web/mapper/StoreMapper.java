@@ -4,6 +4,7 @@ import cn.neusoft.retailer.web.pojo.Store;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StoreMapper {
     int deleteByPrimaryKey(Integer storeId);
@@ -17,4 +18,8 @@ public interface StoreMapper {
     int updateByPrimaryKey(Store record);
 
     List<Store> selectAllById(@Param("userId") Integer userId);
+
+    List<Store> selectByBvoIdAndType(Map<String,Object> map);
+
+    List<Store> selectByBvoId(Integer bvoId);
 }

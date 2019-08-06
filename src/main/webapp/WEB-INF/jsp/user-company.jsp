@@ -34,13 +34,13 @@
             $("#EnglishName").val();
         var telephone = $("#Telephone").val();
         if (chinese == null || chinese == "") {
-            $("#errorChineseName").html("公司中文名不能为空");
+            $("#errorChineseName").html("公司名不能为空");
             return false;
         } else {
             $("#errorChineseName").html("");
         }
         if (english == null || english == "") {
-            $("#errorEnglishName").html("公司英文名不能为空");
+            $("#errorEnglishName").html("公司别名不能为空");
             return false;
         } else {
             $("#errorEnglishName").html("");
@@ -92,13 +92,13 @@
 </div>
 
 <div class="container">
-    <form action="http://localhost:8080/online_retailer/company" method="post" onsubmit="return checkform()">
-        <div class="form-group">
-            <label>公司中文名称 Company Name（品牌商ID：${user.userId}）</label> <span><font color="red"
+    <form action="http://localhost:8080/online_retailer/Company/company" method="post" onsubmit="return checkform()">
+        <div class="form-group" style="display: none">
+            <label>公司账号（品牌商ID：${user.userId}）</label> <span><font color="red"
                                                                                  id="errorChineseName">${errorInfoChineseName }</font></span>
 
             <input type="text" id="ChineseName" class="form-control" name="userName" placeholder="Company Name"
-                   value="${user.userName}"/>
+                   value="${user.userName}" readonly/>
 
             <input type="text" id="userId" class="form-control" name="userId"
                    value="${user.userId}" style="display: none"/>
@@ -106,7 +106,7 @@
         </div>
         <br>
         <div class="form-group">
-            <label>公司英文名称 English Name</label> <span><font color="red"
+            <label>公司名称 Company Name</label> <span><font color="red"
                                                            id="errorEnglishName">${errorInfoEnglishName }</font></span>
 
             <input type="text" id="EnglishName" class="form-control" name="mvoEngName" placeholder="Company Name"

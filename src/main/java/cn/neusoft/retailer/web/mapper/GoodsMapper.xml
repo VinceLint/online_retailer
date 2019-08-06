@@ -44,7 +44,6 @@
       brand_id = #{brandId,jdbcType=INTEGER},
       goods_amount = #{goodsAmount,jdbcType=INTEGER},
       goods_class = #{goodsClass,jdbcType=INTEGER},
-      goods_status = goods_status,
       goods_describe = #{goodsDescribe,jdbcType=LONGVARCHAR},
       goods_length = #{goodsLength,jdbcType=REAL},
       goods_width = #{goodsWidth,jdbcType=REAL},
@@ -75,11 +74,23 @@
   <select id="selectByBrandId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select goods_id, goods_title, goods_price, brand_id, goods_amount, goods_class, goods_status,
     goods_describe, goods_length, goods_width, goods_height, goods_weight
-    from goods where brand_id = #{brand_id}
+    from goods where brand_id in (select brand_id from brand where brand_mer_id = #{brand_id,jdbcType=INTEGER})
   </select>
   <update id="updatePicByPrimaryKey">
     update goods
     set goods_pic = #{goodsPic,jdbcType=VARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
+  <select id="selectByGoodsStatus" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select goods_id, goods_title, goods_pic, goods_price, brand_id, goods_amount, goods_class,
+    goods_describe, goods_status
+    from goods
+    where goods_status = #{goodsStatus,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByGoodsTitle" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select goods_id, goods_title, goods_pic, goods_price, brand_id, goods_amount, goods_class,
+    goods_describe, goods_status
+    from goods
+    where goods_title = #{goodsTitle,jdbcType=VARCHAR}
+  </select>
 </mapper>

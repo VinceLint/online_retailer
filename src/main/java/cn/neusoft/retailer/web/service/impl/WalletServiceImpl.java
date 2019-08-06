@@ -38,8 +38,8 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public Wallet selectByPrimaryKey(Integer walId) {
-       Wallet wallet = walletMapper.selectByPrimaryKey(walId);
-        return null;
+        Wallet wallet = walletMapper.selectByPrimaryKey(walId);
+        return wallet;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class WalletServiceImpl implements WalletService {
         }
         int j=0;
         try {
-             j = transactionRecordMapper.insert(transactionRecord);
+            j = transactionRecordMapper.insert(transactionRecord);
         }catch(Exception e){
             e.printStackTrace();
         }

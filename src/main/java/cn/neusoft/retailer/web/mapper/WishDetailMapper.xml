@@ -15,7 +15,7 @@
   <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.WishDetail" >
     insert into wish_detail (wish_detail_id, wish_list_id, wish_goods_id, 
       wish_goods_amount, wish_goods_status)
-    values (#{wishDetailId,jdbcType=INTEGER}, #{wishListId,jdbcType=INTEGER}, #{wishGoodsId,jdbcType=INTEGER}, 
+    values (NULL , #{wishListId,jdbcType=INTEGER}, #{wishGoodsId,jdbcType=INTEGER},
       #{wishGoodsAmount,jdbcType=INTEGER}, #{wishGoodsStatus,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.WishDetail" >
@@ -31,8 +31,24 @@
     from wish_detail
     where wish_detail_id = #{wishDetailId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByWishListId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select wish_detail_id, wish_list_id, wish_goods_id, wish_goods_amount, wish_goods_status
+    from wish_detail
+    where wish_list_id = #{wishListId,jdbcType=INTEGER}
+    <!--  <if test="s   tart!=null and count!=null">
+        limit #{start},#{count}
+      </if>-->
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap" >
     select wish_detail_id, wish_list_id, wish_goods_id, wish_goods_amount, wish_goods_status
     from wish_detail
   </select>
+  <select id="total" resultType="int" parameterType="java.lang.Integer" >
+    select count(*) from wish_detail where wish_list_id = #{wishListId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByWishListIdAndGoodsId" resultMap="BaseResultMap" parameterType="map" >
+    select wish_detail_id, wish_list_id, wish_goods_id, wish_goods_amount, wish_goods_status from   wish_detail  where wish_list_id = #{wishListId,jdbcType=INTEGER}  and wish_goods_id = #{wishGoodsId,jdbcType=INTEGER}
+</select>
 </mapper>

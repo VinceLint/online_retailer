@@ -18,6 +18,7 @@ import java.util.List;
  * @date 2019-07-27 13:16
  */
 @Controller
+@RequestMapping("Brand")
 public class BrandController {
 
     @Autowired

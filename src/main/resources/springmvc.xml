@@ -15,7 +15,7 @@
     <!--解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <!--前缀 -->
+        <!-- 前缀 -->
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <!-- 后缀 -->
         <property name="suffix" value=".jsp"/>
@@ -28,21 +28,28 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <!-- 拦截所有mvc控制器 -->
-            <mvc:mapping path="/n"/>
+            <mvc:mapping path="/**"/>
 
-            <!--            <mvc:exclude-mapping path="/user/login"/>-->
+            <mvc:exclude-mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/kaptcha/**"/>
+            <mvc:exclude-mapping path="/mail/**"/>
             <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"/>
         </mvc:interceptor>
 
         <!-- 拦截品牌商的请求 -->
         <mvc:interceptor>
             <mvc:mapping path="/brandOrder/**"/>
+            <mvc:mapping path="/Goods/**"/>
+<!--            <mvc:mapping path="/toAddWal"/>-->
+<!--            <mvc:mapping path="/bvo-transation"/>-->
             <bean class="cn.neusoft.retailer.web.interceptor.MvoInterceptor"/>
         </mvc:interceptor>
         <!--拦截借卖方的请求-->
         <mvc:interceptor>
             <mvc:mapping path="/BvoInfo/**"/>
             <mvc:mapping path="/BvoStore/**"/>
+            <!--            <mvc:mapping path="/toAddWal"/>-->
+<!--            <mvc:mapping path="/bvo-transation"/>-->
             <bean class="cn.neusoft.retailer.web.interceptor.BvoInterceptor"/>
         </mvc:interceptor>
         <!--拦截系统管理员的请求-->
@@ -50,9 +57,39 @@
             <mvc:mapping path="/dictionary/**"/>
             <mvc:mapping path="/parameter/**"/>
             <mvc:mapping path="/createOrderAndLog/**"/>
+            <mvc:mapping path="/ReviewForm"/>
             <bean class="cn.neusoft.retailer.web.interceptor.AdminInterceptor"/>
         </mvc:interceptor>
+        <!-- 管理员不能进入的请求 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/toSignWal2"/>
+            <!--                        <mvc:mapping path="/html/WalSignUp.html"/>-->
+<!--            <mvc:mapping path="/bvo-transation"/>-->
+            <bean class="cn.neusoft.retailer.web.interceptor.WalletInterceptor"/>
+        </mvc:interceptor>
+
+        <!-- 管理员和品牌商权限 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/Company/**"/>
+            <mvc:mapping path="/Brand/**"/>
+            <bean class="cn.neusoft.retailer.web.interceptor.CompanyIntercepter"/>
+        </mvc:interceptor>
     </mvc:interceptors>
+
+    <!--kua yu-->
+    <mvc:cors>
+
+        <!--<mvc:mapping path="/**"-->
+                     <!--allowed-origins="localhost:8090"-->
+                     <!--allowed-methods="GET, POST"-->
+                     <!--allowed-headers="*"-->
+                     <!--exposed-headers="*" allow-credentials="true"-->
+                     <!--max-age="123" />-->
+
+        <mvc:mapping path="/**"
+                     allowed-origins="http://localhost:8090" />
+
+    </mvc:cors>
 
     <!--这个注解是必要的，图片上传必要-->
     <bean id="multipartResolver"

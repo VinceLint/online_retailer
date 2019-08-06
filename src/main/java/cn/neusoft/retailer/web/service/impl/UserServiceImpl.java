@@ -144,4 +144,9 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
+    @Override
+    public boolean updateByPrimaryKey_NoPassword(User user) {
+        return userMapper.updateByPrimaryKey_NoPassword(user);
+    }
+
 }

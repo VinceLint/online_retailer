@@ -25,4 +25,6 @@ public interface UserService {
     boolean insert(JSONObject jsonObject);
     boolean update(JSONArray jsonArray);
     boolean deleteByDetail(JSONArray jsonArray);
+    boolean updateByPrimaryKey_NoPassword(User user);
+
 }

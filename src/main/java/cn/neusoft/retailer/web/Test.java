@@ -3,16 +3,25 @@ package cn.neusoft.retailer.web;
 import cn.neusoft.retailer.web.mapper.BrandMapper;
 import cn.neusoft.retailer.web.mapper.DictionaryMapper;
 import cn.neusoft.retailer.web.mapper.UserMapper;
-import cn.neusoft.retailer.web.pojo.Order;
 import cn.neusoft.retailer.web.pojo.User;
-import cn.neusoft.retailer.web.service.*;
+import cn.neusoft.retailer.web.service.BrandOrderService;
+import cn.neusoft.retailer.web.service.BrandService;
+import cn.neusoft.retailer.web.service.DictionaryService;
+import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.tools.FtpUtils;
 import cn.neusoft.retailer.web.tools.MvoType;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author 林跃涛
@@ -78,41 +87,49 @@ public class Test {
     }
 
     /**
-     *@描述  测试枚举类
-     *@参数
-     *@返回值
-     *@创建人  林跃涛
-     *@创建时间  2019/7/31 10:19
-     *@修改人和其它信息
+     * @描述 测试枚举类
+     * @参数
+     * @返回值
+     * @创建人 林跃涛
+     * @创建时间 2019/7/31 10:19
+     * @修改人和其它信息
      */
     @org.junit.Test
     public void testEnum() {
         User user = new User();
         //获取枚举类的value的两种方法
         //1.通过枚举值
-        System.out.println("'MvoType.其他'的枚举值为: "+MvoType.其他); //其他
+        System.out.println("'MvoType.其他'的枚举值为: " + MvoType.其他); //其他
         //2.通过枚举数组下标,默认从0开始
-        System.out.println("MvoType第8个枚举值为: "+MvoType.values()[8]);  //其他
+        System.out.println("MvoType第8个枚举值为: " + MvoType.values()[8]);  //其他
         //获取枚举值对应的code值(下标值),默认从0开始
-        System.out.println("MvoType的枚举值'其他'对应的code值为: "+MvoType.其他.ordinal()); //8
+        System.out.println("MvoType的枚举值'其他'对应的code值为: " + MvoType.其他.ordinal()); //8
     }
 
 
     @org.junit.Test
-    public void testMysql(){
+    public void testMysql() {
 //        List<Dictionary> dictionarys= dictionaryMapper.selectByType("USER_PRIVILEGE");
 //        System.out.println(dictionarys);
 //        Order order=new Order();
 //        brandOrderService.insert(order);
-        List<Order> orders=brandOrderService.selectAll();
-        System.out.println(orders.get(0).getOrderId());
+        /*List<Order> orders=brandOrderService.selectAll();
+        System.out.println(orders.get(0).getOrderId());*/
+        String string = UUID.randomUUID().toString();
+        System.out.println(string);
     }
 
-    @Autowired
-    private MenuService menuService;
     @org.junit.Test
-    public void testMenu(){
+    public void testFtp2() throws Exception{
+        String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
+        FtpUtils ftpUtils = new FtpUtils();
+        System.out.println(ftpUtils.uploadFile("/usr/local/nginx/html","做一道菜啊.jpg",str));
+    }
 
-        System.out.println(menuService.selectAll());
+    @org.junit.Test
+    public void testFtp3() throws Exception{
+        String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
+        FtpUtils ftpUtils = new FtpUtils();
+        System.out.println(ftpUtils.uploadFile("/","做一道菜1.jpg",str));
     }
 }

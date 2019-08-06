@@ -10,6 +10,8 @@ public interface UserWishlistMapper {
 
     UserWishlist selectByPrimaryKey(Integer wishlistId);
 
+    UserWishlist selectByBvoId(Integer bvoId);
+
     List<UserWishlist> selectAll();
 
     int updateByPrimaryKey(UserWishlist record);

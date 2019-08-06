@@ -90,4 +90,7 @@
   <select id="selectByBrandUserId" resultType="java.util.Map">
     select * from `order`,goods,brand where `order`.goods_id=goods.goods_id and goods.brand_id=brand.brand_id and brand.brand_mer_id=#{brandUserId};
   </select>
+  <select id="selectByBvoUserId" resultType="java.util.Map">
+    select * from `order`,goods,brand,wallet,`user` where `order`.goods_id=goods.goods_id and goods.brand_id=brand.brand_id and wallet.wal_id=`user`.user_wal_id  and `user`.user_id=`order`.bs_id and `order`.bs_id=#{bvoUserId} ;
+  </select>
 </mapper>

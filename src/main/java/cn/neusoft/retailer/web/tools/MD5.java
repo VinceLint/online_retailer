@@ -29,6 +29,6 @@ public class MD5 {
 
     @Test
     public void test() {
-        System.out.println(MD5.encrypt("admin"));
+        System.out.println(MD5.encrypt("a123456"));
     }
 }

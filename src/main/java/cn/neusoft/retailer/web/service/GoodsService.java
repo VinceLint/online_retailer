@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface GoodsService {
 
-    public void save(String title, int id, double price, int amount, int clazz, String describe, double length,
-                     double width, double height, double weight);
+    public void save(String title, Integer id, double price, int amount, int clazz, String describe, double length,
+                     double width, double height, double weight, int brandId);
 
     public List<Goods> selectAll();
 
     public void deleteByGoodsId(int goodsId);
 
     public void updateByGoodsId(int goodsId, String title, double price, int amount, int clazz, String describe, double length,
-                                double width, double height, double weight);
+                                double width, double height, double weight, int brandId);
 
     public void updateStatus0ByPrimaryKey(int goodsId);
 
@@ -27,5 +27,11 @@ public interface GoodsService {
     public void savePic(int goodsId, String goodsPic);
 
     Goods selectByPrimaryKey(Integer goodsId);
+
     boolean updateByPrimaryKey(Goods record);
+
+    //zhuang
+    List<Goods> selectByGoodsStatus(String goodsStatus);
+
+    List<Goods> selectByGoodsTitle(String goodsTitle);
 }
