@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!--一个是合并相同功能-->
 <!--一个是跳转页面-->
 <head>
     <meta charset="UTF-8">
@@ -37,15 +36,15 @@
                     url: "http://localhost:8080/user/getCurrentUser",
                     data: {},
                     success: function (data) {
-                        var privilege=data.userPrivilege;
+                        var privilege = data.userPrivilege;
                         console.log(privilege);
-                        if(privilege=='1'){
+                        if (privilege == '1') {
                             setLoginState('未登陆');
-                        }else if(privilege=='2'){
+                        } else if (privilege == '2') {
                             setLoginState('管理员');
-                        }else if(privilege=='3'){
+                        } else if (privilege == '3') {
                             setLoginState('借卖商');
-                        }else{
+                        } else {
                             setLoginState('品牌商');
                         }
                     },
@@ -107,9 +106,9 @@
         }
 
 
-        function setClickEvent(){
-            $("#leftmenubar").delegate("a","click",function () {
-                var url=$(this).href;
+        function setClickEvent() {
+            $("#leftmenubar").delegate("a", "click", function () {
+                var url = $(this).href;
                 changeMainFrame(url);
             })
         }
@@ -117,22 +116,22 @@
         // 能够根据传递的数组组装页面
         function setMenu(a) {
             var htmlElem = document.getElementById('leftmenubar');
-            for (var i=0;i<a.length ;i++) {
+            for (var i = 0; i < a.length; i++) {
                 //console.log(a[i].menuUrl+a[i].menuChildrenItem+a[i].menuName);
                 //组装一个模块节点
-                var html='';
-                html+="<li class='layui-nav-item'><a href='looplook.html' onclick='return false;'>"+a[i].menuName+"</a><dl class='layui-nav-child'>";
+                var html = '';
+                html += "<li class='layui-nav-item'><a href='hotProduct.html' onclick='return false;'>" + a[i].menuName + "</a><dl class='layui-nav-child'>";
                 //组装一个功能节点
-                html+="<dd><a href='"+a[i].menuUrl+"' onclick='return false;'>"+a[i].menuChildrenItem+"</a></dd>";
+                html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'>" + a[i].menuChildrenItem + "</a></dd>";
 
                 //console.log(a[i].menuName);
                 //把后面相同父功能的子功能都加入html
-                while(a[i+1]!=null&&(a[i].menuName==a[i+1].menuName)){
+                while (a[i + 1] != null && (a[i].menuName == a[i + 1].menuName)) {
                     ++i;
-                    html+="<dd><a href='"+a[i].menuUrl+"' onclick='return false;'>"+a[i].menuChildrenItem+"</a></dd>";
+                    html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'>" + a[i].menuChildrenItem + "</a></dd>";
                 }
-                html+="</dl></li>";
-                var $addHtml=$(html);
+                html += "</dl></li>";
+                var $addHtml = $(html);
                 $("#leftmenubar").append($addHtml);
             }
         }
@@ -165,11 +164,11 @@
     </script>
     <script>
         $(function () {
-            //getCurrentUser();
-            setLoginState('品牌商');
+            getCurrentUser();
+            //setLoginState('品牌商');
             initMenu();
-            $("#leftmenubar").delegate("a","click",function () {
-                var url=this.href;
+            $("#leftmenubar").delegate("a", "click", function () {
+                var url = this.href;
                 changeMainFrame(url);
             })
         });
@@ -228,41 +227,50 @@
 
         #topmenubar {
             width: 100%;
-            height: 50%;
+            height: 100%;
         }
 
         #systemTitle {
             width: 100%;
             height: 50%;
         }
+
+        #setRighti {
+            margin-right: 30px;
+        }
+
+        #setRightj {
+            margin-right: 30px;
+
+        }
     </style>
 </head>
 <body>
 <!--导航栏-->
 <div id="Navigation">
-    <img src="../img/GMC.png" id="systemTitle">
+    <!--<img src="../img/GMC.png" id="systemTitle">-->
     <ul class="layui-nav" id="topmenubar">
-        <li class="layui-nav-item"><a href="https://jupage.taobao.com/wow/tttj/act/index">最新活动</a></li>
-        <li class="layui-nav-item layui-this">爆款产品</li>
-        <li class="layui-nav-item"><a href=""></a></li>
-        <li class="layui-nav-item">
-            <a href="http://www.sdongpo.com/groupbuy">其他团购</a>
-            <dl class="layui-nav-child">
-                <!-- 二级菜单 -->
-                <dd><a href="https://github.com/tianxiaode/qTemplate-ExtJS">移动模块</a></dd>
-                <dd><a href="https://github.com/ColorlibHQ/AdminLTE">后台模版</a></dd>
-                <dd><a href="https://www.suning.com/">苏宁</a></dd>
-            </dl>
-        </li>
-        <li class="layui-nav-item"><a href="https://index.bbs.taobao.com/home.html">社区</a></li>
+        <!--<li class="layui-nav-item"><a href="https://jupage.taobao.com/wow/tttj/act/index">最新活动</a></li>-->
+        <!--<li class="layui-nav-item layui-this">爆款产品</li>-->
+        <!--<li class="layui-nav-item"><a href=""></a></li>-->
+        <!--<li class="layui-nav-item">-->
+        <!--<a href="http://www.sdongpo.com/groupbuy">其他团购</a>-->
+        <!--<dl class="layui-nav-child">-->
+        <!--&lt;!&ndash; 二级菜单 &ndash;&gt;-->
+        <!--<dd><a href="https://github.com/tianxiaode/qTemplate-ExtJS">移动模块</a></dd>-->
+        <!--<dd><a href="https://github.com/ColorlibHQ/AdminLTE">后台模版</a></dd>-->
+        <!--<dd><a href="https://www.suning.com/">苏宁</a></dd>-->
+        <!--</dl>-->
+        <!--</li>-->
+        <!--<li class="layui-nav-item"><a href="https://index.bbs.taobao.com/home.html">社区</a></li>-->
 
-        <li class="layui-nav-item">
-            <a href="">控制台<span class="layui-badge">9</span></a>
-        </li>
-        <li class="layui-nav-item">
+        <!--<li class="layui-nav-item">-->
+        <!--<a href="">控制台<span class="layui-badge">9</span></a>-->
+        <!--</li>-->
+        <li class="layui-nav-item" id="setRighti">
             <a href="../login.html" id="RoleCenter">未登录<span class="layui-badge-dot"></span></a>
         </li>
-        <li class="layui-nav-item">
+        <li class="layui-nav-item" id="setRightj">
             <a><img src="//t.cn/RCzsdCq" class="layui-nav-img">
                 <span id="stateId">品牌商</span>
             </a>
