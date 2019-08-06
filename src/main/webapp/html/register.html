@@ -9,10 +9,10 @@
 
     <!-- Meta tags -->
     <!-- font-awesome icons -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
     <!-- //font-awesome icons -->
     <!--stylesheets-->
-    <link href="css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="../css/style.css" rel='stylesheet' type='text/css' media="all">
     <!--//style sheet end here-->
     <!--    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">-->
     <!--    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">-->
@@ -26,7 +26,7 @@
             <form action="" method="post">
                 <div class="form-left-to-w3l">
                     <span class="fa fa-user-o" aria-hidden="true"></span>
-                    <input id="userName" placeholder="请输入用户名 (格式为汉字、字母和数字的组合)" required="" type="text"/>
+                    <input id="userName" placeholder="请输入用户名 (格式为汉字、字母和数字的任意组合)" required="" type="text"/>
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-left-to-w3l">
                     <span aria-hidden="true" class="fa fa-envelope-o"></span>
-                    <input id="userMail" placeholder="请输入邮箱地址 (格式为XX@XX.)" required="" type="email"/>
+                    <input id="userMail" placeholder="请输入邮箱地址 (格式为XX@XX.XX)" required="" type="email"/>
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l">
@@ -76,7 +76,7 @@
             </form>
             <div class="w3layouts_more-buttn">
                 <h3>已有账号..?
-                    <a href="login.html">登录
+                    <a href="../login.html">登录
                     </a>
                 </h3>
             </div>
@@ -84,7 +84,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     var path = "http://localhost:8080/online_retailer";
@@ -163,7 +163,7 @@
                         success: function (data) {
                             if (data.SUCCESS) {
                                 alert(data.SUCCESS);
-                                window.location.href = (path + "/login.html");
+                                window.location.href = (path + "/html/login.html");
                             } else if (data.INVALID_USERNAME) {
                                 alert(data.INVALID_USERNAME);
                                 $("#userName").val("");

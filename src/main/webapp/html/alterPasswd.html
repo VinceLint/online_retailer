@@ -10,10 +10,10 @@
 
     <!-- Meta tags -->
     <!-- font-awesome icons -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
     <!-- //font-awesome icons -->
     <!--stylesheets-->
-    <link href="css/style.css" media="all" rel='stylesheet' type='text/css'>
+    <link href="../css/style.css" media="all" rel='stylesheet' type='text/css'>
     <!--//style sheet end here-->
     <!--    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">-->
     <!--    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">-->
@@ -28,12 +28,12 @@
             <form action="" method="post">
                 <div class="form-left-to-w3l ">
                     <span aria-hidden="true" class="fa fa-lock"></span>
-                    <input id="userPassword" placeholder="请输入新密码" required="" type="password"/>
+                    <input id="userPassword" placeholder="请输入新密码 (格式为6-16位字母与数字的组合)" required="" type="password"/>
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l ">
                     <span aria-hidden="true" class="fa fa-lock"></span>
-                    <input id="checkPassword" placeholder="请再次输入新密码" required="" type="password"/>
+                    <input id="checkPassword" placeholder="请再次输入新密码 (格式为6-16位字母与数字的组合)" required="" type="password"/>
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-to-w3l">
@@ -45,11 +45,15 @@
                     <button id="confirm" type="submit">确认</button>
                 </div>
             </form>
+            <div class="w3layouts_more-buttn">
+                <a href="../login.html">返回首页
+                </a>
+            </div>
         </div>
     </div>
 </div>
-<script src="js/jquery-3.4.1.js" type="text/javascript"></script>
-<script src="js/jquery.params.js" type="text/javascript"></script>
+<script src="../js/jquery-3.4.1.js" type="text/javascript"></script>
+<script src="../js/jquery.params.js" type="text/javascript"></script>
 <script>
     var path = "http://localhost:8080/online_retailer";
     var userName = $.query.get("name");
@@ -97,6 +101,7 @@
                             success: function (data) {
                                 if (data.SUCCESS) {
                                     alert(data.SUCCESS);
+                                    clearCookie();
                                     window.location.href = (path + "/login.html");
                                 } else if (data.INVALID_PASSWD) {
                                     alert(data.INVALID_PASSWD);
@@ -115,8 +120,19 @@
                 }
             }
         );
-    })
-    ;
+    });
+    function clearCookie() {
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            url: path + "/user/clearTokenAnyway",
+            success: function (data) {
+                console.log(data.MESSAGE);
+            },
+            error: function (result) {
+                console.log("ERROR: " + result);
+            }
+        })
+    }
 </script>
 </body>
 

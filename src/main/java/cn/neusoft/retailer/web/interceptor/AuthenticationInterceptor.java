@@ -48,7 +48,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             if (user != null) {
                 return true;
             } else {
-                response.sendRedirect(request.getContextPath() + "/login");
                 return false;
             }
         } else {
