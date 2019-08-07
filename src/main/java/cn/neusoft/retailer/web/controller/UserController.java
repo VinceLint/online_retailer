@@ -372,7 +372,11 @@ public class UserController {
 
             try {
 
+                System.out.println(token);
+
                 redisClient.set(token, user, 7 * 24 * 60 * 60);
+
+                System.out.println("iamdone");
 
             } catch (Exception e) {
 
