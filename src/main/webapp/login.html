@@ -70,8 +70,16 @@
 <script>
     var path = "http://localhost:8080/online_retailer";
     var flag = false;
-    var preUserName;
+    var flag2 = false;
     $(function () {
+        $("#userName").focus(function(){
+            if(flag2){
+                $("#userName").val("");
+                $("#userPassword").val("");
+                $("input[name='remember-me']").prop("checked", false);
+                flag2 = false;
+            }
+        });
         // 登录页面加载时后台获取Cookies信息，并进行token校验
         $.ajax({
             contentType: "application/json; charset=utf-8",
@@ -83,7 +91,7 @@
                     $("#userPassword").val(data.userPassword);
                     $("input[name='remember-me']").prop("checked", true);
                     flag = true;
-                    preUserName = data.userName;
+                    flag2 = true;
                 } else {
                     console.log(data.ERROR);
                 }
@@ -96,7 +104,6 @@
         $("#login_in").on("click", function () {
             if ($("#userName").val() != "" && $("#userPassword").val() != "" && $("input[name='kaptcha']").val() != "") {
                 var info = {
-                    "preUserName": preUserName,
                     "userName": $("#userName").val(),
                     "userPassword": $("#userPassword").val(),
                     "code": $("input[name='kaptcha']").val(),
@@ -112,7 +119,7 @@
                     success: function (data) {
                         if (data.SUCCESS) {
                             console.log("Login Successed!");
-                            window.location.href = path + "/html/brand-orderlist.html";
+                            window.location.href = path + "/html/adminIndex.html";
                         } else if (data.INVALID_USERNAME) {
                             console.log(data.INVALID_USERNAME);
                             alert("密码不正确！");

@@ -35,6 +35,7 @@ public class MenuController {
        // System.out.println(menuList);
 //        System.out.println("已执行");
         JSONArray jsonarray = JSONArray.fromObject(menuList);
+        System.out.println(jsonarray);
         return jsonarray;
     }
 
