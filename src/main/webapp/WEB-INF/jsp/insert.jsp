@@ -237,7 +237,15 @@
                             return "<font color='#6495ed'>上架中</font>";
                         }
                     }
-                },
+                },/*{
+                    field: 'goodsPic',
+                    title: '商品主图',
+                    width: 100,
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return "<img src='${pageContext.request.contextPath}/goods_images/27.jpg'>";
+                    }
+                },*/
                 {
                     field: '_operator',
                     title: '操作',
