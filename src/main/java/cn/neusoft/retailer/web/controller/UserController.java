@@ -291,7 +291,6 @@ public class UserController {
 
         String userName = (String) data.get("userName");
 
-
         HttpSession session = request.getSession();
 
         session.setAttribute("flag", flag);
@@ -322,14 +321,6 @@ public class UserController {
             return result;
 
         }
-
-        if (flag && !data.get("preUserName").equals(userName)) {
-
-            result.put("INVALID_PASSWD", "Password Is Invalid");
-
-            return result;
-        }
-
 
         //校验密码
 
@@ -367,6 +358,8 @@ public class UserController {
 //        token = TokenCreation.createToken("127.0.0.1");
 
         token = TokenCreation.createToken(request.getRemoteAddr());
+
+//        System.out.println(token);
 
         user.setUserPassword(null);
 

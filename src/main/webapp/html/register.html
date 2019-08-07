@@ -163,7 +163,7 @@
                         success: function (data) {
                             if (data.SUCCESS) {
                                 alert(data.SUCCESS);
-                                window.location.href = (path + "/html/login.html");
+                                window.location.href = (path + "/login.html");
                             } else if (data.INVALID_USERNAME) {
                                 alert(data.INVALID_USERNAME);
                                 $("#userName").val("");
@@ -189,6 +189,7 @@
                         }
                     });
                 }
+                return false;
             }
         })
     })
