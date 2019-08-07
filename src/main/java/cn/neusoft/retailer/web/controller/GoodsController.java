@@ -29,6 +29,7 @@ public class GoodsController {
     @RequestMapping("/insert")
     public String insert() {
         /*return "testPic";*/
+        System.out.println("return");
         return "insert";
     }
 
@@ -60,8 +61,6 @@ public class GoodsController {
         //显示从前端表单获取到的数据
         System.out.println(title + " " + id + " " + price + " " + amount + " " + clazz +
                 " " + describe + " " + length + " " + width + " " + height + " " + weight);
-        //将数据添加到goods表
-        goodsService.save(title, id, price, amount, clazz, describe, length, width, height, weight, brandId);
 
         System.out.println(file.getContentType());
         System.out.println(file.getOriginalFilename()); //文件名
@@ -83,7 +82,7 @@ public class GoodsController {
             System.out.println("There is not any pics");
         } else {
             //确认最终的路径  /文件夹/文件名
-            String fileName = UUID.randomUUID().toString();
+            String fileName = UUID.randomUUID().toString() + substring;
             uploadPath = new File(uploadPath + "/" + fileName);
             System.out.println(uploadPath);
             System.out.println(fileName);
@@ -91,7 +90,9 @@ public class GoodsController {
             //开始上传
             file.transferTo(uploadPath);
 
-            goodsService.savePic(id,fileName);
+            //将数据添加到goods表
+            goodsService.save(title, id, price, amount, clazz, describe, length, width, height, weight, brandId, fileName);
+
         }
 
 
@@ -108,8 +109,6 @@ public class GoodsController {
         //显示从前端表单获取到的数据
         System.out.println(title + " " + goodsId + " " + price + " " + amount + " " + clazz +
                 " " + describe + " " + length + " " + width + " " + height + " " + weight);
-        goodsService.updateByGoodsId(goodsId, title, price, amount, clazz, describe, length, width,
-                height, weight, brandId);
 
         //获取文件名后缀
         int index = file.getOriginalFilename().lastIndexOf(".");
@@ -125,14 +124,18 @@ public class GoodsController {
             System.out.println("There is not any pics");
         } else {
             //确认最终的路径  /文件夹/文件名
-            String fileName = goodsId + substring;
+            //确认最终的路径  /文件夹/文件名
+            String fileName = UUID.randomUUID().toString() + substring;
             uploadPath = new File(uploadPath + "/" + fileName);
-            System.out.println(uploadPath + "/" + fileName);
+            System.out.println(uploadPath);
+            System.out.println(fileName);
 
-            file.transferTo(uploadPath);
-
-            goodsService.savePic(goodsId,fileName);
+            goodsService.updateByGoodsId(goodsId, title, price, amount, clazz, describe, length, width,
+                    height, weight, brandId, fileName);
         }
+
+
+
         return "insert";
     }
 
