@@ -151,7 +151,7 @@
                 $.ajax({
                     type: 'POST',
                     dataType: "json",
-                    url: "http://localhost:8080/menu/initMenu",
+                    url: "http://localhost:8080/online_retailer/menu/initMenu",
                     success: function (res) {
                         $.each(res, function (i, obj) {
                             this.pageSum++
@@ -226,7 +226,7 @@
                     this.dataForUpdate.push(this.form)
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/menu/updateMenu",
+                        url: "http://localhost:8080/online_retailer/menu/updateMenu",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(this.dataForUpdate),
                         dataType: "json",
@@ -256,7 +256,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/menu/insertMenu",
+                        url: "http://localhost:8080/online_retailer/menu/insertMenu",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(this.form),
                         dataType: "json",
@@ -304,7 +304,7 @@
             handleDel() {
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/menu/deleteMenu",
+                    url: "http://localhost:8080/online_retailer/menu/deleteMenu",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(this.dataForDel),
                     dataType: "json",

@@ -639,8 +639,6 @@ public class UserController {
 
             }
 
-            result.put("MESSAGE", "Remember-me User");
-
         }
 
         return result;
