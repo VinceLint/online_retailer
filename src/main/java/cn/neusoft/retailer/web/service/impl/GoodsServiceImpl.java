@@ -17,7 +17,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public void save(String title, Integer id, double price, int amount, int clazz, String describe, double length,
-                     double width, double height, double weight, int brandId) {
+                     double width, double height, double weight, int brandId, String fileName) {
 
         Goods goods = new Goods();
         goods.setGoodsId(id);
@@ -32,6 +32,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setGoodsWidth((float)width);
         goods.setGoodsHeight((float)height);
         goods.setGoodsWeight((float)weight);
+        goods.setGoodsPic(fileName);
 
         goodsMapper.insert(goods);
 
@@ -49,7 +50,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public void updateByGoodsId(int goodsId, String title, double price, int amount, int clazz, String describe, double length,
-                                double width, double height, double weight, int brandId) {
+                                double width, double height, double weight, int brandId, String fileName) {
         System.out.println("service in");
 
         /*System.out.println(title + " " + goodsId + " " + price + " " + amount + " " + clazz);*/
@@ -66,6 +67,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setGoodsWidth((float)width);
         goods.setGoodsHeight((float)height);
         goods.setGoodsWeight((float)weight);
+        goods.setGoodsPic(fileName);
 
         goodsMapper.updateByPrimaryKey(goods);
     }
