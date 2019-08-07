@@ -72,9 +72,9 @@
         <hr class="my-4">
         <div class="search">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="商品标题" aria-label="good title" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" placeholder="商品标题" aria-label="good title" aria-describedby="basic-addon2" v-model="searchText">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">查找<i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary" type="button" @click="search">查找<i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>
@@ -359,6 +359,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <p>取消订单将会退款到借卖方账户</p>
                     <p>确定取消订单吗？</p>
                 </div>
                 <div class="modal-footer">
@@ -422,7 +423,9 @@
     var app=new Vue({
         el:'#main-content',
         data:{
-            orders:[],
+            orders:[],//要显示的品牌商订单信息
+            searchText:'',//搜索框的文本值
+            ordersCopy:[],//保存orders的副本，用于搜索后还原orders
             order:'',//被选中的订单
             selKey:'',//被选中的订单编号
             //订单状态常量
@@ -447,6 +450,16 @@
                     .catch(function(error){
                         console.log(error);
                     })
+            },
+            search:function(){//点击搜索按钮，搜索商品
+                if(this.searchText!==''){//搜索
+                    this.orders=[];
+                    for(var i=0;i<this.ordersCopy.length;i++){
+                        if(this.ordersCopy[i].goods_title.indexOf(this.searchText)!==-1){
+                            this.orders.push(this.ordersCopy[i]);
+                        }
+                    }
+                }
             },
             completeOrder:function(order_id){//完成订单
                 var that=this;
@@ -503,6 +516,16 @@
                     })
             }
         },
+        watch:{
+            searchText:function(newVal,oldVal){//监听搜索框，若发生改变则保存orders副本或者重置搜索结果
+                if(newVal!==''&&oldVal===''){//保存orders副本
+                    this.ordersCopy=this.orders;
+                }
+                if(newVal===''){//重置搜索结果
+                    this.orders=this.ordersCopy;
+                }
+            }
+        },
         computed:{
             goods_pic:function(){//商品图片
                 if(this.order.goods_pic!=null&&this.order.goods_pic!==''){
@@ -532,5 +555,6 @@
             this.getOrders();
         }
     });
+
 </script>
 </html>
