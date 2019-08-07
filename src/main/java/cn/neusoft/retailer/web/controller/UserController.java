@@ -188,11 +188,11 @@ public class UserController {
      * @创建时间: 2019/7/30
      */
 
-    @RequestMapping(value = "/tokenVilidation/{flag}")
+    @RequestMapping(value = "/tokenVilidation")
 
     @ResponseBody
 
-    public Map<String, String> vilidateToken(@PathVariable("flag") Boolean flag, HttpServletRequest request) {
+    public Map<String, String> vilidateToken(HttpServletRequest request) {
 
 
         Map<String, String> result = new HashMap<>();
@@ -200,7 +200,6 @@ public class UserController {
         String cookie = request.getHeader("Cookie");
 
         User user = null;
-
 
         if (cookie.contains("token")) {
 
@@ -223,12 +222,9 @@ public class UserController {
 
             String token = tokenInfo[1];
 
-
             try {
 
-                //user = redisClient.findAndUpdate(token, "127.0.0.1", flag);
-
-                user = redisClient.findAndUpdate(token, request.getRemoteAddr(), flag);
+                user = redisClient.findAndUpdate(token, request.getRemoteAddr(), true);
 
             } catch (Exception e) {
 
@@ -292,8 +288,7 @@ public class UserController {
 
         HttpSession session = request.getSession();
 
-        session.setAttribute("flag", flag);
-
+        Boolean rememberme = (Boolean) data.get("remember-me");
 
         //校验用户信息
 
@@ -337,7 +332,6 @@ public class UserController {
 
         }
 
-
         //校验验证码
 
         String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
@@ -358,26 +352,21 @@ public class UserController {
 
         token = TokenCreation.createToken(request.getRemoteAddr());
 
-//        System.out.println(token);
-
         user.setUserPassword(null);
 
         session.setAttribute("user", user);
+
+        session.setAttribute("flag", rememberme);
 
         //根据"记住我"的值选择Token存放时间
 
         Cookie cookie;
 
-        if (data.get("remember-me").equals(true)) {
+        if (rememberme) {
 
             try {
 
-                System.out.println(token);
-
-                redisClient.set(token, user, 7 * 24 * 60 * 60);
-
-                System.out.println("iamdone");
-
+                redisClient.Set(token, user, 7 * 24 * 60 * 60);
             } catch (Exception e) {
 
                 e.printStackTrace();
@@ -416,7 +405,7 @@ public class UserController {
 
         cookie.setHttpOnly(true);
 
-        if (data.get("remember-me").equals(true)) {
+        if (rememberme) {
 
             cookie.setMaxAge(999 * 24 * 60 * 60);
 
