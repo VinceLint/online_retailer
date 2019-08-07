@@ -42,6 +42,13 @@ public class CompanyInfoController {
 
     //    登录之后进入的第一个控制器，判断当前用户是商家函数用户，商家直接显示公司信息
     //    用户不关我事
+
+
+    @RequestMapping(value = "show_page")
+    public String show(){
+        return "company_brand";
+    }
+
     @RequestMapping(value = "login_show")
     public ModelAndView login_show(HttpServletRequest request, HttpServletResponse response) {
         //获得登录者信息

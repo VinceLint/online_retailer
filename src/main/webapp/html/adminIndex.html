@@ -33,7 +33,7 @@
                     type: 'POST',
                     dataType: "json",
                     contentType: "application/json;charset=UTF-8",
-                    url: "http://localhost:8080/user/getCurrentUser",
+                    url: "http://localhost:8080/online_retailer/user/getCurrentUser",
                     data: {},
                     success: function (data) {
                         var privilege = data.userPrivilege;
@@ -64,7 +64,7 @@
                     type: 'POST',
                     dataType: "json",
                     contentType: "application/json",
-                    url: "http://localhost:8080/menu/initMenu",
+                    url: "http://localhost:8080/online_retailer/menu/initMenu",
                     data: {},
                     success: function (data) {
                         //菜单分类
@@ -180,6 +180,28 @@
             })
         });
     </script>
+    <script>
+        function exit() {
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                contentType: "application/json",
+                url: "http://localhost:8080/online_retailer/user/clearTokenAnyway",
+                data: {},
+                success: function (data) {
+                    if(data.MESSAGE==="FAILED"){
+                        console.log("清除cookie失败");
+                    }else{
+                        // alert("清除cookie成功");
+                    }
+                    window.location.href="../login.html"
+                },
+                error: function (e) {
+                    alert("菜单刷新出错，请重新登陆");
+                }
+            });
+        }
+    </script>
     <style>
         * {
             margin: 0px;
@@ -194,14 +216,14 @@
 
         #Navigation {
             width: 100%;
-            height: 20%;
+            height: 10%;
             left: 0px;
             top: 0px;
         }
 
         #operation {
             width: 100%;
-            height: 80%;
+            height: 90%;
             top: 20%;
             left: 0px;
         }
@@ -229,7 +251,7 @@
 
         #leftmenubar {
             width: auto;
-            height: auto;
+            height: 100%;
         }
 
         #topmenubar {
@@ -237,6 +259,9 @@
             height: 100%;
         }
 
+        #topmenubar{
+
+        }
         #systemTitle {
             width: 100%;
             height: 50%;
@@ -274,9 +299,9 @@
         <!--<li class="layui-nav-item">-->
         <!--<a href="">控制台<span class="layui-badge">9</span></a>-->
         <!--</li>-->
-        <li class="layui-nav-item" id="setRighti">
-            <a href="../login.html" id="RoleCenter">未登录<span class="layui-badge-dot"></span></a>
-        </li>
+        <!--<li class="layui-nav-item" id="setRighti">-->
+            <!--<a href="../login.html" id="RoleCenter">未登录<span class="layui-badge-dot"></span></a>-->
+        <!--</li>-->
         <li class="layui-nav-item" id="setRightj">
             <a><img src="//t.cn/RCzsdCq" class="layui-nav-img">
                 <span id="stateId">品牌商</span>
@@ -284,7 +309,8 @@
             <dl class="layui-nav-child">
                 <dd><a href="../login.html">登陆</a></dd>
                 <dd><a href="../register.html">注册</a></dd>
-                <dd><a href="../login.html">退出</a></dd>
+                <!--href="../login.html"-->
+                <dd><a href="#" onclick="exit()">退出</a></dd>
                 <dd><a href="https://baike.baidu.com/item/借卖">关于GMC</a></dd>
             </dl>
         </li>
