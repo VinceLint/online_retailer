@@ -1,0 +1,148 @@
+
+<html lang="en">
+<meta charset="UTF-8">
+<title>选择网店</title>
+
+<!-- import CSS -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>　　
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--  Vue  -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--  Axios  -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="//unpkg.com/element-ui@2.11.0/lib/index.js"></script>
+
+<!-- fontawesome -->
+<script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>
+<!-- 引入样式 -->
+
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+<!-- 引入组件库 -->
+
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+
+
+
+<style type="text/css">
+    body,html{
+        width: 100%;
+        height: 100%;
+        background: #fff;
+    }
+
+
+    #main-content{margin-left:170px;margin-right:170px;margin-top:0;min-height:100%;padding:0}
+</style>
+</head>
+
+<body>
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="//unpkg.com/element-ui@2.11.0/lib/index.js"></script>
+<div id="app">
+    <div id="main-content" class="">
+        <div id="" class="">
+            <div class="page-header">
+                <h1 style="color: #2679b5;">品牌商
+                    <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 商店选择</small>
+                </h1>
+            </div>
+    <el-form ref="form" :model="re" label-width="80px">
+        <el-form-item label="商品名称">
+            <el-input v-model="re.form[2]" style="width: 520px; height: 50px"></el-input>
+        </el-form-item>
+
+
+
+        <el-form-item label="旗下网店">
+                <el-checkbox-group  v-model="re.choose">
+
+                    <el-checkbox class="info" v-for="(item,index) in re.form[0] " :key="index"  :label="re.form[0][index].storeId">Amazon：{{re.form[0][index].storeName}}</el-checkbox>
+                   <p></p>
+                    <el-checkbox class="info2" v-for="(item,index) in re.form[1] " :key="'info2'+index"  :label="re.form[1][index].storeId">eBay：{{re.form[1][index].storeName}}</el-checkbox>
+                    <!-- <el-checkbox label="001" name="type">{{form.type[0]}}</el-checkbox>
+             <el-checkbox label="002" name="type">{{form.type[1]}}</el-checkbox>
+             <el-checkbox label="003" name="type">{{form.type[2]}}</el-checkbox>
+             <el-checkbox label="004" name="type">{{form.type[3]}}</el-checkbox>-->
+
+                </el-checkbox-group>
+        </el-form-item>
+
+        <el-button type="primary" @click="onSubmit(re.choose)">立即发布</el-button>
+        <el-button>取消</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+    </div>
+</div>
+
+</body>
+
+
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    var ax = axios.create({baseURL: 'http://localhost:8080/online_retailer/'})
+    var app;
+    app = new Vue({
+        el: "#app",
+        data: {
+            re:{form:[],
+
+                choose: []}
+
+
+        },
+        methods: {
+            onSubmit:function(choose){
+                console.log(choose)
+                var self = this;
+                ax.post('/dropship/onsellgooods', {choose:choose})
+                    .then(function (response) {
+                        console.log(response.data);
+                        if (response.data) {
+
+                            alert("成功发布")
+                            window.location.href = "/online_retailer/html/goodslist.html"
+
+                        }
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            }
+        },
+        mounted: function () { //mounted　表示这个 Vue 对象加载成功了
+            console.log("ok");
+            var self = this
+            ax.post("/dropship/dropshipgoods").then(function(response) {
+                /*self.tableData= response.data; //此时还是字符串
+                console.log(self.tableData);*/
+                self.re.form = [];
+                for(var i in response.data){
+                    self.re.form.push(response.data[i]);
+                }
+                console.log(self.re.form);
+            })
+        }
+    });
+</script>
+</html>

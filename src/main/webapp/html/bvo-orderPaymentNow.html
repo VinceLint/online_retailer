@@ -1,0 +1,210 @@
+<!doctype html>
+<!--
+/**
+ * @author 胡献涛
+ * @version 1.0
+ * @date 2019/7/29 11:05
+ */
+-->
+<html lang="en">
+<head>
+    <!-- http://localhost:8080/online_retailer/html/bvo-orderPaymentNow.html -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>借卖方-订单管理-支付</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--  Vue  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--  Axios  -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- fontawesome -->
+    <script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>
+
+    <style>
+        form{
+            padding-top: 5%;
+            padding-left: 30%;
+            padding-right: 30%;
+        }
+        #header{
+            padding-left: 12.5%;
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="app" class="container-fluid">
+    <div class="page-header" id="header">
+        <h1 style="color: #2679b5;">借卖方
+            <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>订单管理</small>
+            <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>填写支付信息</small>
+        </h1>
+    </div>
+
+    <div>
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="receiver_name">收货方姓名</span>
+                </div>
+                <input type="text" class="form-control" describedby="receiver_name" v-model="log_info.receiver_name">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="receiver_address">收货方地址</span>
+                </div>
+                <input type="text" class="form-control" describedby="receiver_address" v-model="log_info.receiver_address">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="receiver_phone">收货方电话</span>
+                </div>
+                <input type="text" class="form-control" describedby="receiver_phone" v-model="log_info.receiver_phone">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="receiver_code">收货方邮政编码</span>
+                </div>
+                <input type="text" class="form-control" describedby="receiver_code" v-model="log_info.receiver_code">
+            </div>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal"  @click="formConfirm">确认</button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal"  @click="back">返回</button>
+        </form>
+    </div>
+
+
+    <!-- 确认框Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalTitle">支付</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="control-group">
+                        <h5>您应支付的总金额:<span class="red">$</span></h5>
+                    </div>
+                    <div class="control-group">
+                        <div>
+                            <input name="form-field-radio" type="radio"
+                                   style="opacity: 1;position: inherit"><img src="../image/gmc.png" alt="" style="padding-left: 20px"> My Wallet
+                            <p></p>
+                            <div class="blue" style="font-size: 15px;">账户余额:$</div>
+                            <p></p>
+                        </div>
+                    </div>
+                    <label for="payment-password" class="col-form-label">请输入支付密码：</label>
+                    <input type="password" class="form-control" id="payment-password" v-model="log_info.paymentPassword">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="pay">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 操作结果Modal -->
+    <div class="modal fade" id="resModal" tabindex="-1" role="dialog" aria-labelledby="resModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resModalTitle">操作结果</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p v-if="res.res===true">支付成功</p>
+                    <p v-else>支付失败,请重试</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button v-if="res.res===true" type="button" class="btn btn-primary" @click="back">返回</button>
+                    <button v-else type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script>
+    var ax=axios.create({baseURL:'http://localhost:8080/online_retailer/bvoPayment'});
+
+    var app=new Vue({
+        el:'#app',
+        data:{
+            log_info:{//物流信息
+                order_id:'',
+                receiver_name:'',
+                receiver_address:'',
+                receiver_phone:'',
+                receiver_code:'',
+                paymentPassword:''
+            },
+            res:false//操作结果
+        },
+        methods:{
+            pay:function(){//支付
+                var that=this;
+                ax.post("/payOrder",that.log_info)
+                    .then(function(response){
+                        that.res=response.data;
+                        $('#resModal').modal('show');
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    });
+            },
+            getSessionParam:function(){//获取保存在Session的参数
+                var that=this;
+                ax.get("/getLogInfo")
+                    .then(function(response){
+                        that.log_info.order_id=response.data.orderId;
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    });
+            },
+            formConfirm:function(){//表单验证
+                // if(this.log_info.log_id==null||this.log_info.log_id===''){
+                //     alert("请输入正确的物流单号");
+                // }else if(this.log_info.deliver_name==null||this.log_info.deliver_name===''){
+                //     alert("请输入正确的发送方姓名");
+                // }else if(this.log_info.deliver_address==null||this.log_info.deliver_address===''){
+                //     alert("请输入正确的发送方地址");
+                // }else if(this.log_info.deliver_phone==null||
+                //     (!(/^1[3456789]\d{9}$/.test(this.log_info.deliver_phone))
+                //         &&!(/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(this.log_info.deliver_phone)))){
+                //     alert("请输入正确的发送方手机或电话号码");
+                // }else{
+                //     $('#confirmModal').modal('show');
+                // }
+                $('#confirmModal').modal('show');
+            },
+            back:function(){//返回订单管理主页面
+                window.location.href="bvo-orderlist.html";
+            }
+        },
+        mounted:function(){
+            this.getSessionParam();
+        }
+    });
+</script>
+</html>

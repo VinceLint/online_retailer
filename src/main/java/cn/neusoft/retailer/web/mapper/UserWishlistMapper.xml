@@ -23,6 +23,11 @@
     from user_wishlist
     where wishlist_id = #{wishlistId,jdbcType=INTEGER}
   </select>
+  <select id="selectByBvoId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select wishlist_id, bvo_id
+    from user_wishlist
+    where bvo_id = #{bvoId,jdbcType=INTEGER}
+  </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select wishlist_id, bvo_id
     from user_wishlist

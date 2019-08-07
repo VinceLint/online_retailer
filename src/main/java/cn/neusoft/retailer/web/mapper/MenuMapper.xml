@@ -6,31 +6,34 @@
     <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
     <result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
     <result column="menu_privilege" property="menuPrivilege" jdbcType="INTEGER" />
+    <result column="menu_children_item" property="menuChildrenItem" jdbcType="VARCHAR" />
   </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from menu
     where menu_id = #{menuId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.neusoft.retailer.web.pojo.Menu" >
     insert into menu (menu_id, menu_name, menu_url, 
-      menu_privilege)
+      menu_privilege,menu_children_item)
     values (#{menuId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, 
-      #{menuPrivilege,jdbcType=INTEGER})
+      #{menuPrivilege,jdbcType=INTEGER},#{menuChildrenItem,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="cn.neusoft.retailer.web.pojo.Menu" >
     update menu
     set menu_name = #{menuName,jdbcType=VARCHAR},
       menu_url = #{menuUrl,jdbcType=VARCHAR},
       menu_privilege = #{menuPrivilege,jdbcType=INTEGER}
+      menu_children_item== #{menuChildrenItem,jdbcType=VARCHAR}
     where menu_id = #{menuId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select menu_id, menu_name, menu_url, menu_privilege
+    select menu_id, menu_name, menu_url, menu_privilege,menu_children_item
     from menu
     where menu_id = #{menuId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select menu_id, menu_name, menu_url, menu_privilege
+    select menu_id, menu_name, menu_url, menu_privilege,menu_children_item
     from menu
   </select>
 </mapper>

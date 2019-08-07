@@ -42,4 +42,14 @@
     select store_id, store_name, store_type, store_own, marketplace_id, nws_auth_token
     from store
   </select>
+  <select id="selectByBvoIdAndType" resultMap="BaseResultMap" parameterType="map" >
+    select store_id, store_name, store_type, store_own, marketplace_id, nws_auth_token
+    from store
+    where store_own = #{bvoId,jdbcType=INTEGER}  and store_type = #{storeType,jdbcType=INTEGER}
+  </select>
+  <select id="selectByBvoId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select store_id, store_name, store_type, store_own, marketplace_id, nws_auth_token
+    from store
+    where store_own = #{storeOwn,jdbcType=INTEGER}
+  </select>
 </mapper>

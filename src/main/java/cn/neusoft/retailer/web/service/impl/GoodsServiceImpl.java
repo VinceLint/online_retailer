@@ -17,7 +17,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public void save(String title, Integer id, double price, int amount, int clazz, String describe, double length,
-                     double width, double height, double weight, int brandId) {
+                     double width, double height, double weight, int brandId, String fileName) {
 
         Goods goods = new Goods();
         goods.setGoodsId(id);
@@ -32,8 +32,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setGoodsWidth((float)width);
         goods.setGoodsHeight((float)height);
         goods.setGoodsWeight((float)weight);
-
-        System.out.println("Service已创建Goods对象: " + goods);
+        goods.setGoodsPic(fileName);
 
         goodsMapper.insert(goods);
 
@@ -51,7 +50,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public void updateByGoodsId(int goodsId, String title, double price, int amount, int clazz, String describe, double length,
-                                double width, double height, double weight, int brandId) {
+                                double width, double height, double weight, int brandId, String fileName) {
         System.out.println("service in");
 
         /*System.out.println(title + " " + goodsId + " " + price + " " + amount + " " + clazz);*/
@@ -68,6 +67,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setGoodsWidth((float)width);
         goods.setGoodsHeight((float)height);
         goods.setGoodsWeight((float)weight);
+        goods.setGoodsPic(fileName);
 
         goodsMapper.updateByPrimaryKey(goods);
     }
@@ -105,6 +105,16 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public boolean updateByPrimaryKey(Goods record){
         return goodsMapper.updateByPrimaryKey(record)>0;
+    }
+
+    @Override
+    public List<Goods> selectByGoodsStatus(String goodsStatus) {
+        return goodsMapper.selectByGoodsStatus(goodsStatus);
+    }
+
+    @Override
+    public List<Goods> selectByGoodsTitle(String goodsTitle) {
+        return goodsMapper.selectByGoodsTitle(goodsTitle);
     }
 
 }

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--一个是跳转页面-->
+<head>
+    <meta charset="UTF-8">
+    <title>GMC主页面</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../js/jquery-1.9.1.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script>
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test1',
+                width: '100%',
+                arrow: 'hover'
+            });
+        });
+    </script>
+    <script>
+        layui.use('element', function () {
+            var element = layui.element;
+        });
+    </script>
+
+    <script>
+        // 获取当前获取登陆对象
+        function getCurrentUser() {
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/json;charset=UTF-8",
+                    url: "http://localhost:8080/user/getCurrentUser",
+                    data: {},
+                    success: function (data) {
+                        var privilege = data.userPrivilege;
+                        console.log(privilege);
+                        if (privilege == '3') {
+                            setLoginState('未登陆');
+                        } else if (privilege == '2') {
+                            setLoginState('管理员');
+                        } else if (privilege == '0') {
+                            setLoginState('借卖商');
+                        } else {
+                            setLoginState('品牌商');
+                        }
+                    },
+                    error: function (e) {
+                        alert("当前角色登录出错,请重新登陆");
+                    }
+                });
+            });
+        }
+    </script>
+
+    <script>
+        //初始化菜单
+        function initMenu() {
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/json",
+                    url: "http://localhost:8080/menu/initMenu",
+                    data: {},
+                    success: function (data) {
+                        //菜单分类
+
+                        var noLogin = new Array();
+                        var Bvo = new Array();
+                        var Mvo = new Array();
+                        var admin = new Array();
+                        for (i in data) {
+                            if (data[i].menuPrivilege == "2") {
+                                admin.push(data[i]);
+                            } else if (data[i].menuPrivilege == "0") {
+                                Bvo.push(data[i]);
+                            } else if (data[i].menuPrivilege == "1") {
+                                Mvo.push(data[i]);
+                            } else {
+                                noLogin.push(data[i]);
+                            }
+                        }
+
+                        // console.log(admin);
+                        // console.log(Bvo);
+                        // console.log(Mvo);
+                        // console.log(noLogin);
+                        //按照当前登录状态获取初始化菜单
+                        var stateId = document.getElementById("stateId").innerText;
+                        //console.log(stateId);
+                        if (stateId == '未登陆') {
+                            setMenu(noLogin);
+                        } else if (stateId == '品牌商') {
+                            setMenu(Mvo);
+                        } else if (stateId == '借卖商') {
+                            setMenu(Bvo);
+                        } else {
+                            setMenu(admin);
+                        }
+                    },
+                    error: function (e) {
+                        alert("菜单刷新出错，请重新登陆");
+                    }
+                });
+            });
+        }
+
+
+        function setClickEvent() {
+            $("#leftmenubar").delegate("a", "click", function () {
+                var url = $(this).href;
+                changeMainFrame(url);
+            })
+        }
+
+        // 能够根据传递的数组组装页面
+        function setMenu(a) {
+            var htmlElem = document.getElementById('leftmenubar');
+            for (var i = 0; i < a.length; i++) {
+                //console.log(a[i].menuUrl+a[i].menuChildrenItem+a[i].menuName);
+                //组装一个模块节点
+                var html = '';
+                html += "<li class='layui-nav-item layui-nav-itemed'><a href='javascript:;' >" + a[i].menuName + "</a><dl class='layui-nav-child'>";
+                //组装一个功能节点
+                html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'>" + a[i].menuChildrenItem + "</a></dd>";
+
+                //console.log(a[i].menuName);
+                //把后面相同父功能的子功能都加入html
+                while (a[i + 1] != null && (a[i].menuName == a[i + 1].menuName)) {
+                    ++i;
+                    html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'>" + a[i].menuChildrenItem + "</a></dd>";
+                }
+                html += "</dl></li>";
+                var $addHtml = $(html);
+                $("#leftmenubar").append($addHtml);
+            }
+        }
+
+
+        //设置主内联框架
+        function changeMainFrame(url) {
+            document.getElementById('otherBar').src = url;
+        }
+
+        function setLoginState(state) {
+            document.getElementById("stateId").innerText = state;
+        }
+
+
+        function outLogin() {
+            changeMainFrame("../login.html");
+            setLoginState('未登陆');
+        }
+
+        function register() {
+            document.getElementById('otherBar').src = "../register.html"
+        }
+
+        function login() {
+            document.getElementById('otherBar').src = "../login.html"
+            setLoginState();
+        }
+
+    </script>
+    <script>
+        $(function () {
+            getCurrentUser();
+            //setLoginState('管理员');
+
+            initMenu();
+            //console.log(document.getElementById("stateId").innerText);
+
+            $("#leftmenubar").delegate("a", "click", function () {
+                var url = this.href;
+                changeMainFrame(url);
+            })
+        });
+    </script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        #Navigation {
+            width: 100%;
+            height: 20%;
+            left: 0px;
+            top: 0px;
+        }
+
+        #operation {
+            width: 100%;
+            height: 80%;
+            top: 20%;
+            left: 0px;
+        }
+
+        #menu {
+            float: left;
+            width: 15%;
+            height: 100%;
+            left: 0%;
+            top: 0%;
+        }
+
+        #frame {
+            float: left;
+            width: 85%;
+            height: 100%;
+            top: 0%;
+            left: 15%;
+        }
+
+        #otherBar {
+            width: 100%;
+            height: 100%;
+        }
+
+        #leftmenubar {
+            width: auto;
+            height: auto;
+        }
+
+        #topmenubar {
+            width: 100%;
+            height: 100%;
+        }
+
+        #systemTitle {
+            width: 100%;
+            height: 50%;
+        }
+
+        /*#setRighti {*/
+        /*margin-right: 30px;*/
+        /*}*/
+
+        /*#setRightj {*/
+        /*margin-right: 30px;*/
+
+        /*}*/
+    </style>
+</head>
+<body>
+<!--导航栏-->
+<div id="Navigation">
+    <!--<img src="../img/GMC.png" id="systemTitle">-->
+    <ul class="layui-nav" id="topmenubar">
+        <!--<li class="layui-nav-item"><a href="https://jupage.taobao.com/wow/tttj/act/index">最新活动</a></li>-->
+        <!--<li class="layui-nav-item layui-this">爆款产品</li>-->
+        <!--<li class="layui-nav-item"><a href=""></a></li>-->
+        <!--<li class="layui-nav-item">-->
+        <!--<a href="http://www.sdongpo.com/groupbuy">其他团购</a>-->
+        <!--<dl class="layui-nav-child">-->
+        <!--&lt;!&ndash; 二级菜单 &ndash;&gt;-->
+        <!--<dd><a href="https://github.com/tianxiaode/qTemplate-ExtJS">移动模块</a></dd>-->
+        <!--<dd><a href="https://github.com/ColorlibHQ/AdminLTE">后台模版</a></dd>-->
+        <!--<dd><a href="https://www.suning.com/">苏宁</a></dd>-->
+        <!--</dl>-->
+        <!--</li>-->
+        <!--<li class="layui-nav-item"><a href="https://index.bbs.taobao.com/home.html">社区</a></li>-->
+
+        <!--<li class="layui-nav-item">-->
+        <!--<a href="">控制台<span class="layui-badge">9</span></a>-->
+        <!--</li>-->
+        <li class="layui-nav-item" id="setRighti">
+            <a href="../login.html" id="RoleCenter">未登录<span class="layui-badge-dot"></span></a>
+        </li>
+        <li class="layui-nav-item" id="setRightj">
+            <a><img src="//t.cn/RCzsdCq" class="layui-nav-img">
+                <span id="stateId">品牌商</span>
+            </a>
+            <dl class="layui-nav-child">
+                <dd><a href="../login.html">登陆</a></dd>
+                <dd><a href="../register.html">注册</a></dd>
+                <dd><a href="../login.html">退出</a></dd>
+                <dd><a href="https://baike.baidu.com/item/借卖">关于GMC</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+
+
+<div id="operation">
+    <!--菜单栏-->
+    <div id="menu">
+        <ul class="layui-nav layui-nav-tree" lay-filter="test" id="leftmenubar">
+            <li class="layui-nav-item">
+                <a href="">菜单列表</a>
+            </li>
+        </ul>
+    </div>
+
+    <!--轮播-->
+    <div id="frame">
+        <iframe src="hotProduct.html" id="otherBar"></iframe>
+    </div>
+</div>
+</body>
+</html>

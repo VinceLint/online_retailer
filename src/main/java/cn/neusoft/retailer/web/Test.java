@@ -8,12 +8,19 @@ import cn.neusoft.retailer.web.service.BrandOrderService;
 import cn.neusoft.retailer.web.service.BrandService;
 import cn.neusoft.retailer.web.service.DictionaryService;
 import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.tools.FtpUtils;
 import cn.neusoft.retailer.web.tools.MvoType;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -23,7 +30,7 @@ import java.util.UUID;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:applicationContext.xml", "classpath*:springmvc.xml"})
+@ContextConfiguration(locations = {"classpath*:applicationContext.xml","classpath*:springmvc.xml"})
 
 public class Test {
     @Autowired
@@ -42,12 +49,12 @@ public class Test {
     private DictionaryMapper dictionaryMapper;
 
     /**
-     * @描述
-     * @参数
-     * @返回值
-     * @创建人
-     * @创建时间 2019/7/22 12:35
-     * @修改人和其它信息
+     *@描述
+     *@参数
+     *@返回值
+     *@创建人
+     *@创建时间 2019/7/22 12:35
+     *@修改人和其它信息
      */
     @org.junit.Test
     public void test() {
@@ -62,17 +69,15 @@ public class Test {
 //            brand.setBrandMerId(123);
 //            brandService.insert(brand);
 //        }
-
-        System.out.println(userService.selectAll());
     }
 
     /**
-     * @描述 测试OrderService
-     * @参数
-     * @返回值
-     * @创建人 胡献涛
-     * @创建时间 2019/7/24 21:35
-     * @修改人和其它信息
+     *@描述 测试OrderService
+     *@参数
+     *@返回值
+     *@创建人 胡献涛
+     *@创建时间 2019/7/24 21:35
+     *@修改人和其它信息
      */
     @org.junit.Test
     public void testOrderService() {
@@ -115,15 +120,16 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testSQL() {
-        User user = null;
-        try {
-            user = userService.selectByName("zhihong6");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(user);
+    public void testFtp2() throws Exception{
+        String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
+        FtpUtils ftpUtils = new FtpUtils();
+        System.out.println(ftpUtils.uploadFile("/usr/local/nginx/html","做一道菜啊.jpg",str));
     }
 
-
+    @org.junit.Test
+    public void testFtp3() throws Exception{
+        String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
+        FtpUtils ftpUtils = new FtpUtils();
+        System.out.println(ftpUtils.uploadFile("/","做一道菜1.jpg",str));
+    }
 }

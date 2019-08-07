@@ -21,9 +21,7 @@
 </head>
 
 <script>
-
     $(function () {
-
         $('#dialog').dialog({
             title: "新增商品",
             width: 700,
@@ -51,7 +49,6 @@
                 }
             ]
         });
-
         $('#dialog2').dialog({
             title: "编辑商品",
             width: 700,
@@ -72,7 +69,6 @@
                                 $('#dialog2').dialog('close');
                                 window.location.href = "${pageContext.request.contextPath}/Goods/insert";
                             }
-
                         });
                     }
                 },
@@ -85,17 +81,13 @@
                 }
             ]
         });
-
         $('#dialog').dialog('close');
-
         $('#dialog2').dialog('close');
-
         $('#add').click(function () {
             /*清空表单*/
             $('#myform').form('clear');
             $('#dialog').dialog('open');
         });
-
         $('#edit').click(function () {
             /*判断是否选择了数据*/
             var rowData = $('#dg').datagrid('getSelected');
@@ -105,10 +97,8 @@
             } else {
                 $('#myform2').form('clear');
                 $('#dialog2').dialog('open');
-
                 /*数据回显*/
                 console.log(rowData);
-
                 $('#myform2').form('load', {
                     title: rowData.goodsTitle,
                     price: rowData.goodsPrice,
@@ -120,11 +110,9 @@
                     height: rowData.goodsHeight,
                     weight: rowData.goodsWeight,
                     brandId: rowData.brandId
-
                 });
             }
         });
-
         $('#del').click(function () {
             var rowData = $('#dg').datagrid('getSelected');
             if (!rowData) {
@@ -138,7 +126,6 @@
                 }
             }
         });
-
         $('#clazz').combobox({
             editable: false,
             valueField: 'value',
@@ -171,7 +158,6 @@
             width: 160,
             panelHeight: 'auto'
         });
-
         $('#clazz2').combobox({
             editable: false,
             valueField: 'value',
@@ -204,7 +190,6 @@
             width: 160,
             panelHeight: 'auto'
         });
-
         $('#dg').datagrid({
             url: "${pageContext.request.contextPath}/Goods/searchGoods",
             columns: [[
@@ -285,27 +270,22 @@
             toolbar: '#tb',
             pagination: true
         });
-
     });
-
     function putin(goodsId) {
         console.log(goodsId);
         window.location.href = "${pageContext.request.contextPath}/Goods/putin/" + goodsId;
         alert("入仓成功");
     }
-
     function onshelves(goodsId) {
         console.log(goodsId);
         window.location.href = "${pageContext.request.contextPath}/Goods/onshelves/" + goodsId;
         alert("上架成功");
     }
-
     function offshelves(goodsId) {
         console.log(goodsId);
         window.location.href = "${pageContext.request.contextPath}/Goods/offshelves/" + goodsId;
         alert("下架成功");
     }
-
     $.extend($.fn.validatebox.defaults.rules, {
         numberCheckSub: {
             validator: function (value) {
@@ -320,7 +300,6 @@
             message: "只能包括中文字、英文字母、数字"
         }
     })
-
 </script>
 
 <body>
