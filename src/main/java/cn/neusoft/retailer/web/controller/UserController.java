@@ -720,7 +720,7 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             user = new User();
-            user.setUserPrivilege(1);
+            user.setUserPrivilege(3);
         }
         return user;
     }

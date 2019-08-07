@@ -38,11 +38,11 @@
                     success: function (data) {
                         var privilege = data.userPrivilege;
                         console.log(privilege);
-                        if (privilege == '1') {
+                        if (privilege == '3') {
                             setLoginState('未登陆');
                         } else if (privilege == '2') {
                             setLoginState('管理员');
-                        } else if (privilege == '3') {
+                        } else if (privilege == '0') {
                             setLoginState('借卖商');
                         } else {
                             setLoginState('品牌商');
@@ -76,15 +76,19 @@
                         for (i in data) {
                             if (data[i].menuPrivilege == "2") {
                                 admin.push(data[i]);
-                            } else if (data[i].menuPrivilege == "3") {
+                            } else if (data[i].menuPrivilege == "0") {
                                 Bvo.push(data[i]);
-                            } else if (data[i].menuPrivilege == "4") {
+                            } else if (data[i].menuPrivilege == "1") {
                                 Mvo.push(data[i]);
                             } else {
                                 noLogin.push(data[i]);
                             }
                         }
 
+                        // console.log(admin);
+                        // console.log(Bvo);
+                        // console.log(Mvo);
+                        // console.log(noLogin);
                         //按照当前登录状态获取初始化菜单
                         var stateId = document.getElementById("stateId").innerText;
                         //console.log(stateId);
@@ -120,7 +124,7 @@
                 //console.log(a[i].menuUrl+a[i].menuChildrenItem+a[i].menuName);
                 //组装一个模块节点
                 var html = '';
-                html += "<li class='layui-nav-item'><a href='hotProduct.html' onclick='return false;'>" + a[i].menuName + "</a><dl class='layui-nav-child'>";
+                html += "<li class='layui-nav-item layui-nav-itemed'><a href='javascript:;' >" + a[i].menuName + "</a><dl class='layui-nav-child'>";
                 //组装一个功能节点
                 html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'>" + a[i].menuChildrenItem + "</a></dd>";
 
@@ -165,8 +169,11 @@
     <script>
         $(function () {
             getCurrentUser();
-            //setLoginState('品牌商');
+            //setLoginState('管理员');
+
             initMenu();
+            //console.log(document.getElementById("stateId").innerText);
+
             $("#leftmenubar").delegate("a", "click", function () {
                 var url = this.href;
                 changeMainFrame(url);
@@ -221,8 +228,8 @@
         }
 
         #leftmenubar {
-            width: 100%;
-            height: 100%;
+            width: auto;
+            height: auto;
         }
 
         #topmenubar {
@@ -235,14 +242,14 @@
             height: 50%;
         }
 
-        #setRighti {
-            margin-right: 30px;
-        }
+        /*#setRighti {*/
+        /*margin-right: 30px;*/
+        /*}*/
 
-        #setRightj {
-            margin-right: 30px;
+        /*#setRightj {*/
+        /*margin-right: 30px;*/
 
-        }
+        /*}*/
     </style>
 </head>
 <body>
@@ -289,17 +296,9 @@
     <!--菜单栏-->
     <div id="menu">
         <ul class="layui-nav layui-nav-tree" lay-filter="test" id="leftmenubar">
-            <li class="layui-nav-item " id="menuItem">
-                <a href="javascript:;">菜单列表</a>
+            <li class="layui-nav-item">
+                <a href="">菜单列表</a>
             </li>
-            <!--<li class="layui-nav-item">-->
-            <!--<dl class="layui-nav-child">-->
-            <!--<dd><a href="javascript:;">选项1</a></dd>-->
-            <!--<dd><a href="javascript:;">选项2</a></dd>-->
-            <!--<dd><a href="javascript:;">跳转</a></dd>-->
-            <!--</dl>-->
-
-            <!--</li>-->
         </ul>
     </div>
 
