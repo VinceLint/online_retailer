@@ -88,7 +88,7 @@ public class TransationServiceImpl implements TransationService {
     }
 
     @Override
-    public JSONArray getAll(int p) {
+    public JSONArray getAllList(int p) {
         List<TransactionRecord> transactionlist = transactionRecordMapper.selectAll();
         List<TransactionRecord> toTraList =new ArrayList<TransactionRecord>();
         List<User> userList = new ArrayList<User>();

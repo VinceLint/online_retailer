@@ -1,101 +1,110 @@
 
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>借卖方心愿商品详情</title>
+<head>
+    <meta charset="UTF-8">
+    <title>借卖方心愿商品详情</title>
 
-        <!-- import CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-        <!-- import Vue before Element -->
-        <script src="https://unpkg.com/vue/dist/vue.js"></script>
-        <!-- import JavaScript -->
-        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>　　
-        <script src="https://unpkg.com/vue/dist/vue.js"></script>
-        <!-- import JavaScript -->
-        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-        <!-- import CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <!--  Vue  -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <!--  Axios  -->
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="//unpkg.com/vue/dist/vue.js"></script>
-        <script src="//unpkg.com/element-ui@2.11.0/lib/index.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>　　
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--  Vue  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--  Axios  -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="//unpkg.com/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.11.0/lib/index.js"></script>
 
-        <!-- fontawesome -->
-        <script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>
+    <!-- fontawesome -->
+    <script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>
 
-        <!-- 引入样式 -->
+    <!-- 引入样式 -->
 
-        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
-        <!-- 引入组件库 -->
+    <!-- 引入组件库 -->
 
-        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-
-
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 
-        <style type="text/css">
-            body,html{
-                width: 100%;
-                height: 100%;
-                background: #fff;
-            }
-            .goods-header{
-                overflow: hidden;
-            }
-            .goods-header-left{
-                width: 30%;
-                float: left;
-            }
-            .goods-header-right{
-                width: 70%;
-                float: left;
-            }
-            .goods-header-left img{
-                width: 100%;
-            }
-            #main-content{margin-left:170px;margin-right:170px;margin-top:0;min-height:100%;padding:0}
-             h4 {
-                margin-bottom: 33px;
-                margin-left: 0px;
-                margin-right: 33px;
-                margin-top: 0px;
-                font-family: inherit;
-                font-weight: bold;
-                line-height: 20px;
-                color: inherit;
-                text-rendering: optimizelegibility;
-            }
-
-            .el-tabs__nav-scroll {
-                overflow: hidden;
-                margin-top: 35px;
-            }
-        </style>
-    </head>
 
 
-    <body>
+    <style type="text/css">
+        body,html{
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+        .goods-header{
+            overflow: hidden;
+        }
+        .goods-header-left{
+            width: 30%;
+            float: left;
+        }
+        .goods-header-right{
+            width: 70%;
+            float: left;
+        }
+        .goods-header-left img{
+            width: 100%;
+        }
+        #app {
+            position: relative;
+            left: 0px;
+            top: -31px;
+        }
+        h4 {
+            margin-bottom: 33px;
+            margin-left: 0px;
+            margin-right: 33px;
+            margin-top: 0px;
+            font-family: inherit;
+            font-weight: bold;
+            line-height: 20px;
+            color: inherit;
+            text-rendering: optimizelegibility;
+        }
+
+        .el-tabs__nav-scroll {
+            overflow: hidden;
+            margin-top: 35px;
+        }
+        #app {
+            position: relative;
+            left: 7px;
+            top: -25px;
+        }
+    </style>
+</head>
+
+
+<body>
 <div id="app">
 
     <div id="main-content" class="">
         <div id="" class="">
             <div class="page-header">
-                <h1 style="color: #2679b5;">品牌商
+                <h1 style="color: #2679b5;">借卖方
                     <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 商品详情</small>
                 </h1>
             </div>
             <div class="goods-header">
                 <div class="goods-header-left"><el-image
                         style="width: 230px; height: 230px"
-                        :src="tableData[1].goodsPic"
-                        ></el-image></div>
+                        :src="getUrl(tableData[1].goodsPic)"
+                ></el-image></div>
                 <div class="goods-header-right">
                     <h4>{{tableData[1].goodsTitle}}</h4>
                     <p class="" style="color: red">￥{{tableData[1].goodsPrice}}</p>
@@ -104,7 +113,7 @@
                     <p>商品库存：{{tableData[1].goodsAmount}}</p>
 
                     <el-button type="primary" @click="adddropship(tableData[1].goodsTitle)">借卖此商品</el-button>
-                        <el-button type="primary" @click="addwish(tableData[1].goodsId)"> 添加心愿单</el-button>
+                    <el-button type="primary" @click="addwish(tableData[1].goodsId)"> 添加心愿单</el-button>
                 </div>
             </div>
             <template>
@@ -115,90 +124,96 @@
 
                 </el-tabs>
             </template>
-         <!--   <h4 class="a">商品描述</h4>
-            <div class="b">
+            <!--   <h4 class="a">商品描述</h4>
+               <div class="b">
 
-                <div class="f">
-                    <div id="g" class="h">
-                        <el-tag >{{tableData[1].goodsDescribe}}</el-tag>
-                    </div>
+                   <div class="f">
+                       <div id="g" class="h">
+                           <el-tag >{{tableData[1].goodsDescribe}}</el-tag>
+                       </div>
 
-                </div>
-            </div>-->
+                   </div>
+               </div>-->
 
         </div>
 
-     </div>
+    </div>
 </div>
-    </body>
+</body>
 
-    <style>
-        @import url("//unpkg.com/element-ui@2.11.0/lib/theme-chalk/index.css");
+<style>
+    @import url("//unpkg.com/element-ui@2.11.0/lib/theme-chalk/index.css");
 
-    </style>
+</style>
 
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <!-- import JavaScript -->
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script>
-        var ax = axios.create({baseURL: 'http://localhost:8080/online_retailer/'})
-        var app = new Vue({
-            el: "#app",
-            data: {
-                tableData:[]
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    var ax = axios.create({baseURL: 'http://localhost:8080/online_retailer/'})
+    var app = new Vue({
+        el: "#app",
+        data: {
+            tableData:[]
+        },
+        methods: {
+            addwish:function (goodsid) {
+                console.log(goodsid);
+                var self = this;
+                ax.post('/wishdetail/getgoodsid',{goodsId:parseInt(goodsid)} )
+                    .then(function (response) {
+                        if (response.data) {
+
+                            window.location.href = "/online_retailer/wishdetail/wishgoods"
+
+                        }
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
             },
-            methods: {
-                addwish:function (goodsid) {
-                    console.log(goodsid);
-                    var self = this;
-                    ax.post('/wishdetail/getgoodsid',{goodsId:parseInt(goodsid)} )
-                        .then(function (response) {
-                            if (response.data) {
+            adddropship:function (goodsTitle) {
+                var self = this;
+                ax.post('/dropship/getgoodsTitle', {goodsTitle:goodsTitle})
+                    .then(function (response) {
+                        console.log(response.data)
+                        if (response.data) {
 
-                                window.location.href = "/online_retailer/wishdetail/wishgoods"
+                            window.location.href = "/online_retailer/html/choosestore.html"
 
-                            }
+                        }
+                        else{
+                            alert("大哥您没店铺，借卖个啥？")
+                            window.location.href = "/online_retailer/html/goodslist.html"
 
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        })
-                },
-                adddropship:function (goodsTitle) {
-                    var self = this;
-                    ax.post('/dropship/getgoodsTitle', {goodsTitle:goodsTitle})
-                        .then(function (response) {
-                            console.log(response.data)
-                            if (response.data) {
+                        }
 
-                                window.location.href = "/online_retailer/html/choosestore.html"
-
-                            }
-                            else{
-                                alert("大哥您没店铺，借卖个啥？")
-                                window.location.href = "/online_retailer/html/goodslist.html"
-
-                            }
-
-                        })
-                        .catch(function (error) {
-                            console.log("出错里出不来");
-                        })
-                    console.log("ok");
-                }
-
+                    })
+                    .catch(function (error) {
+                        console.log("出错里出不来");
+                    })
+                console.log("ok");
             },
-            mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
-                var self = this
-                ax.post("/wishdetail/look").then(function(response) {
-                    /*self.tableData= response.data; //此时还是字符串
-                    console.log(self.tableData);*/
-                    self.tableData = [];
-                    for(var i in response.data){
-                        self.tableData.push(response.data[i]);
-                    }
-                })
+            getUrl:function(icon){
+                var lin="../goods_images/";
+                lin+=icon;
+                console.log(lin);
+                return lin;
             }
-        })
-    </script>
+
+        },
+        mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
+            var self = this
+            ax.post("/wishdetail/look").then(function(response) {
+                /*self.tableData= response.data; //此时还是字符串
+                console.log(self.tableData);*/
+                self.tableData = [];
+                for(var i in response.data){
+                    self.tableData.push(response.data[i]);
+                }
+            })
+        }
+    })
+</script>
 </html>

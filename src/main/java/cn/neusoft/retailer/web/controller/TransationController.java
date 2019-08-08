@@ -40,7 +40,7 @@ public class TransationController {
     public JSONArray init( ) throws Exception{
         JSONArray jsonArray=null;
 
-            List<TransactionRecord> transactionlist = transationService.getAll(1);
+            List<TransactionRecord> transactionlist = transationService.getAllList(1);
 
             jsonArray = JSONArray.fromObject(transactionlist);
 //        System.out.println(jsonArray);
@@ -145,7 +145,7 @@ public class TransationController {
 
         JSONArray jsonArray= null;
         try {
-            jsonArray = transationService.getAll(p);
+            jsonArray = transationService.getAllList(p);
         }catch (Exception e){
             e.printStackTrace();
         }

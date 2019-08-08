@@ -54,19 +54,26 @@
         .goods-header-left img {
             width: 100%;
         }
+        #app {
+            position: relative;
+            left: -160px;
+            top: -2px;
+        }
+        .h1, h1 {
+            font-size: 2.0rem;
+        }
     </style>
 
 </head>
 
 <body class="bg-light">
 
-
-<div id="main-content" class="container-fluid">
+<div id="app"><div id="main-content" class="container-fluid">
     <div id="page-content" class="container-fluid">
 
         <div class="page-header">
             <h1 style="color: #2679b5;">品牌商
-                <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 订单管理</small>
+                <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>订单管理</small>
             </h1>
         </div>
         <hr class="my-4">
@@ -413,12 +420,13 @@
         </div>
     </div>
 
-</div>
+</div></div>
+
 </body>
 
 
 <script>
-    var ax=axios.create({baseURL:'/online_retailer/brandOrder'});
+    var ax=axios.create({baseURL:'http://localhost:8080/online_retailer/brandOrder'});
 
     var app=new Vue({
         el:'#main-content',

@@ -19,6 +19,11 @@
         padding-top:20px;
         position:absolute;
     }
+    #app {
+        position: relative;
+        left: 0px;
+        top: -23px;
+    }
 </style>
 <body>
 <!-- import CSS -->
@@ -30,32 +35,32 @@
 
 
 <div id="app">
-<div class="page-header position-relative">
-    <h1 style="color: #2679b5;">{{who}} <small><i class="el-icon-d-arrow-right"></i> 交易流水</small></h1>
-    <hr><br>
+    <div class="page-header position-relative">
+        <h1 style="color: #2679b5;">{{who}} <small><i class="el-icon-d-arrow-right"style="color: grey"></i> <p style="color: grey; display: inline-block">交易流水</p></small></h1>
+        <hr><br>
 
-</div>
+    </div>
 
 
-<!--    <el-input-->
-<!--            v-model="search"-->
-<!--            size="mini"-->
-<!--            placeholder="输入关键字搜索"/>-->
+    <!--    <el-input-->
+    <!--            v-model="search"-->
+    <!--            size="mini"-->
+    <!--            placeholder="输入关键字搜索"/>-->
     <div id="table">
         <el-table
                 :data="tableData"
                 border
                 style="width: 100% ;text-align: center"
-                >
+                stripe>
             <el-table-column
                     label="交易流水号"
                     prop="tid">
             </el-table-column>
 
             <el-table-column
-                label="交易金额"
-                prop="tnum">
-        </el-table-column>
+                    label="交易金额"
+                    prop="tnum">
+            </el-table-column>
 
             <el-table-column
                     label="交易类型"
@@ -77,8 +82,8 @@
             <el-table-column
 
                     align="right"
-                label="状态"
-                prop="tstatus">
+                    label="状态"
+                    prop="tstatus">
 
             </el-table-column>
 
@@ -111,15 +116,15 @@
     </div>
     <div class="block">
         <nav style="text-align: center">
-        <span class="demonstration"></span>
-        <el-pagination
-                background
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-size="7"
-                layout="total, prev, pager, next, jumper"
-                :total="pageTotal">
-        </el-pagination>
+            <span class="demonstration"></span>
+            <el-pagination
+                    background
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage4"
+                    :page-size="7"
+                    layout="total, prev, pager, next, jumper"
+                    :total="pageTotal">
+            </el-pagination>
         </nav>
     </div>
 </div>
@@ -187,23 +192,23 @@
                     dataType:"json",
                     success:function(data){
 
-                            $.each(data, function (i, obj) {
-                                if(i!=data.length-2&&i!=data.length-1) {
-                                    this.tableData.push({
-                                        tid: obj.traRecId,
-                                        tnum: obj.traRecSum,
-                                        ttype: this.ztype[obj.traRecType],
-                                        tstatus: this.zstatus[obj.traRecStatus],
-                                        tbal: obj.traRecBalance,
-                                        ttime: obj.traRecDateStr,
-                                        picurl:".."+obj.traRecExchangememo,
-                                    })
-                                }
-                            }.bind(this))
+                        $.each(data, function (i, obj) {
+                            if(i!=data.length-2&&i!=data.length-1) {
+                                this.tableData.push({
+                                    tid: obj.traRecId,
+                                    tnum: obj.traRecSum,
+                                    ttype: this.ztype[obj.traRecType],
+                                    tstatus: this.zstatus[obj.traRecStatus],
+                                    tbal: obj.traRecBalance,
+                                    ttime: obj.traRecDateStr,
+                                    picurl:".."+obj.traRecExchangememo,
+                                })
+                            }
+                        }.bind(this))
 
                         this.pageTotal=data[data.length-2],
                             this.who=this.wtype[data[data.length-1]],
-                        console.log(data);
+                            console.log(data);
 
                     }.bind(this)
 
@@ -223,7 +228,7 @@
                         else{
                             window.location="http://localhost:8080/online_retailer/html/WalSignUp.html";
                         }
-                            console.log(data);
+                        console.log(data);
 
                     }.bind(this)
 
@@ -232,7 +237,7 @@
 
         },
         // created(){
-            // this.handleChangePage();
+        // this.handleChangePage();
         // },
         mounted:function(){
             this.handleChangePage();

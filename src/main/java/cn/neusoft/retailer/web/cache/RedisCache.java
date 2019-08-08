@@ -72,7 +72,7 @@ public class RedisCache implements Cache {
         JedisPoolConfig jedisConfig = (JedisPoolConfig) context.getBean("jedisConfig");
         jedisPool = new JedisPool(jedisConfig, redisProperties.getHost(), redisProperties.getPort());
         logger.debug(">>>>>>>>>>>>>>>>>>>>>MybatisRedisCache:id=" + id);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>MybatisRedisCache:id=" + id);
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>MybatisRedisCache:id=" + id);
         this.id = id;
     }
 

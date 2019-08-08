@@ -33,7 +33,7 @@
                     type: 'POST',
                     dataType: "json",
                     contentType: "application/json;charset=UTF-8",
-                    url: "/online_retailer/user/getCurrentUser",
+                    url: "http://localhost:8080/online_retailer/user/getCurrentUser",
                     data: {},
                     success: function (data) {
                         var privilege = data.userPrivilege;
@@ -64,7 +64,7 @@
                     type: 'POST',
                     dataType: "json",
                     contentType: "application/json",
-                    url: "/online_retailer/menu/initMenu",
+                    url: "http://localhost:8080/online_retailer/menu/initMenu",
                     data: {},
                     success: function (data) {
                         //菜单分类
@@ -124,15 +124,15 @@
                 //console.log(a[i].menuUrl+a[i].menuChildrenItem+a[i].menuName);
                 //组装一个模块节点
                 var html = '';
-                html += "<li class='layui-nav-item layui-nav-itemed'><a href='javascript:;' >" + a[i].menuName + "</a><dl class='layui-nav-child'>";
+                html += "<li class='layui-nav-item layui-nav-itemed'><a href='javascript:;' style='font-weight: bold; font-size:18px' class='a2'><i class='layui-icon layui-icon-search' style='color: #00b5f9;font-weight: bold;font-size: 21px'>   </i>" + a[i].menuName + "</a><dl class='layui-nav-child'>";
                 //组装一个功能节点
-                html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'>" + a[i].menuChildrenItem + "</a></dd>";
+                html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'><span class='l-line'><i class='layui-icon layui-icon-next'style='color: #0e90d2'>   </i></span>" + a[i].menuChildrenItem + "</a></dd>";
 
                 //console.log(a[i].menuName);
                 //把后面相同父功能的子功能都加入html
                 while (a[i + 1] != null && (a[i].menuName == a[i + 1].menuName)) {
                     ++i;
-                    html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'>" + a[i].menuChildrenItem + "</a></dd>";
+                    html += "<dd><a href='" + a[i].menuUrl + "' onclick='return false;'><span class='l-line'><i class='layui-icon layui-icon-next' style='color: #0e90d2'>   </i></span>" + a[i].menuChildrenItem + "</a></dd>";
                 }
                 html += "</dl></li>";
                 var $addHtml = $(html);
@@ -186,7 +186,7 @@
                 type: 'POST',
                 dataType: "json",
                 contentType: "application/json",
-                url: "/online_retailer/user/clearTokenAnyway",
+                url: "http://localhost:8080/online_retailer/user/clearTokenAnyway",
                 data: {},
                 success: function (data) {
                     if(data.MESSAGE==="FAILED"){
@@ -216,7 +216,7 @@
 
         #Navigation {
             width: 100%;
-            height: 10%;
+            height: 8%;
             left: 0px;
             top: 0px;
         }
@@ -230,7 +230,7 @@
 
         #menu {
             float: left;
-            width: 15%;
+            width: 12%;
             height: 100%;
             left: 0%;
             top: 0%;
@@ -238,7 +238,7 @@
 
         #frame {
             float: left;
-            width: 85%;
+            width: 88%;
             height: 100%;
             top: 0%;
             left: 15%;
@@ -257,6 +257,7 @@
         #topmenubar {
             width: 100%;
             height: 100%;
+            padding-right: 0;
         }
 
         #topmenubar{
@@ -275,13 +276,157 @@
         /*margin-right: 30px;*/
 
         /*}*/
+        .layui-bg-cyan {
+            background-color: #444c63!important;
+        }
+        .layui-bg-blue {
+            background-color:#00b5f9!important;
+        }
+        #a1{
+            position: fixed;
+            right: 0px;
+
+            height: 58px;
+
+            background-color:#000000;/* IE6和部分IE7内核的浏览器(如QQ浏览器)下颜色被覆盖 */
+            background-color:rgba(0,0,0,0.2); /* IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂，但解析为透明 */
+
+        }
+        .a2 {
+            padding-left: 15px;
+        }
+        .layui-nav-child {
+            display: none;
+            position: absolute;
+            left: 0px;
+            top: 59px;
+
+            min-width: 100%;
+            line-height: 36px;
+            padding: 5px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,.12);
+            border: 1px solid #d2d2d2;
+            background-color: #fff;
+            z-index: 100;
+            border-radius: 2px;
+            white-space: nowrap;
+
+        }
+
+        #dl1{
+            position: absolute;
+            right: 0px;
+            width: 50px;
+        }
+        #i1{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-weight: bolder;
+        }
+        #a2 {
+            position: fixed;
+            right: 0px;
+            height: 58px;
+            weight: 50px;
+            background-color: #000000;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+
+
+
+
+
+        ul, menu, dir {
+            display: block;
+            list-style-type: disc;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+            -webkit-padding-start: 40px;
+        }
+        .layui-nav {
+            position: relative;
+            padding: 0 20px;
+            background-color: #393D49;
+            color: #c2c2c2;
+            border-radius: 2px;
+            font-size: 0;
+            box-sizing: border-box!important;
+        }
+        .layui-nav-tree {
+            width: 200px;
+            padding: 0;
+        }
+        .main-layout-side .layui-nav {
+            background: #444c63;
+        }
+        .layui-nav-tree .layui-nav-item {
+            display: block;
+            width: 100%;
+            line-height: 45px;
+        }
+        .layui-nav .layui-nav-item {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 60px;
+        }
+        .layui-nav * {
+            font-size: 14px;
+        }
+        li {
+            list-style: none;
+        }
+        blockquote, body, button, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+        li {
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+        .layui-nav-tree .layui-nav-item a {
+            height: 45px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .layui-nav .layui-nav-item a {
+            display: block;
+            padding: 0 15px;
+            color: #c2c2c2;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+        }
+        .main-layout-side .layui-nav-tree .layui-nav-child a {
+            height: 40px;
+            line-height: 40px;
+            color: #77829f;
+        }
+        .l-line {
+            width: 12px;
+            display: inline-block;
+            line-height: 40px;
+            height: 40px;
+            float: left;
+            margin-right: 7px;
+            margin-left: 20px;
+            background: url(l-line.png) left center no-repeat;
+        }
     </style>
 </head>
 <body>
 <!--导航栏-->
 <div id="Navigation">
     <!--<img src="../img/GMC.png" id="systemTitle">-->
-    <ul class="layui-nav" id="topmenubar">
+
+    <ul class="layui-nav layui-bg-blue" id="topmenubar">
+        <i class="layui-icon layui-icon-face-smile" id="i1"style="font-size: 30px; color: #FFF;">GMC系统</i>
+
         <!--<li class="layui-nav-item"><a href="https://jupage.taobao.com/wow/tttj/act/index">最新活动</a></li>-->
         <!--<li class="layui-nav-item layui-this">爆款产品</li>-->
         <!--<li class="layui-nav-item"><a href=""></a></li>-->
@@ -300,19 +445,20 @@
         <!--<a href="">控制台<span class="layui-badge">9</span></a>-->
         <!--</li>-->
         <!--<li class="layui-nav-item" id="setRighti">-->
-            <!--<a href="../login.html" id="RoleCenter">未登录<span class="layui-badge-dot"></span></a>-->
+        <!--<a href="../login.html" id="RoleCenter">未登录<span class="layui-badge-dot"></span></a>-->
         <!--</li>-->
         <li class="layui-nav-item" id="setRightj">
-            <a><img src="//t.cn/RCzsdCq" class="layui-nav-img">
-                <span id="stateId">品牌商</span>
-            </a>
-            <dl class="layui-nav-child">
+            <div id="a1" > <a><img src="//t.cn/RCzsdCq" class="layui-nav-img">
+                <span id="stateId"style="font-size: 18px;">品牌商</span>
+            </a><dl class="layui-nav-child" id="dl1">
                 <dd><a href="../login.html">登陆</a></dd>
                 <dd><a href="../register.html">注册</a></dd>
                 <!--href="../login.html"-->
                 <dd><a href="#" onclick="exit()">退出</a></dd>
                 <dd><a href="https://baike.baidu.com/item/借卖">关于GMC</a></dd>
-            </dl>
+            </dl></div>
+
+
         </li>
     </ul>
 </div>
@@ -321,10 +467,8 @@
 <div id="operation">
     <!--菜单栏-->
     <div id="menu">
-        <ul class="layui-nav layui-nav-tree" lay-filter="test" id="leftmenubar">
-            <li class="layui-nav-item">
-                <a href="">菜单列表</a>
-            </li>
+        <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test" id="leftmenubar">
+
         </ul>
     </div>
 

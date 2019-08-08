@@ -22,7 +22,7 @@ public interface TransationService {
 
     JSONArray getAll(int p,int id);
 
-    JSONArray getAll(int p);
+    JSONArray getAllList(int p);
 
     int updateByPrimaryKey(TransactionRecord record);
 

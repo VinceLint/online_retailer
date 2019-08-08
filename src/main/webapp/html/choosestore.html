@@ -47,7 +47,11 @@
     }
 
 
-    #main-content{margin-left:170px;margin-right:170px;margin-top:0;min-height:100%;padding:0}
+    #app {
+        position: absolute;
+        left: 17px;
+        top: 8px;
+    }
 </style>
 </head>
 
@@ -58,36 +62,36 @@
     <div id="main-content" class="">
         <div id="" class="">
             <div class="page-header">
-                <h1 style="color: #2679b5;">品牌商
+                <h1 style="color: #2679b5;">借卖方
                     <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 商店选择</small>
                 </h1>
             </div>
-    <el-form ref="form" :model="re" label-width="80px">
-        <el-form-item label="商品名称">
-            <el-input v-model="re.form[2]" style="width: 520px; height: 50px"></el-input>
-        </el-form-item>
+            <el-form ref="form" :model="re" label-width="80px">
+                <el-form-item label="商品名称">
+                    <el-input v-model="re.form[2]" style="width: 520px; height: 50px"></el-input>
+                </el-form-item>
 
 
 
-        <el-form-item label="旗下网店">
-                <el-checkbox-group  v-model="re.choose">
+                <el-form-item label="旗下网店">
+                    <el-checkbox-group  v-model="re.choose">
 
-                    <el-checkbox class="info" v-for="(item,index) in re.form[0] " :key="index"  :label="re.form[0][index].storeId">Amazon：{{re.form[0][index].storeName}}</el-checkbox>
-                   <p></p>
-                    <el-checkbox class="info2" v-for="(item,index) in re.form[1] " :key="'info2'+index"  :label="re.form[1][index].storeId">eBay：{{re.form[1][index].storeName}}</el-checkbox>
-                    <!-- <el-checkbox label="001" name="type">{{form.type[0]}}</el-checkbox>
-             <el-checkbox label="002" name="type">{{form.type[1]}}</el-checkbox>
-             <el-checkbox label="003" name="type">{{form.type[2]}}</el-checkbox>
-             <el-checkbox label="004" name="type">{{form.type[3]}}</el-checkbox>-->
+                        <el-checkbox class="info" v-for="(item,index) in re.form[0] " :key="index"  :label="re.form[0][index].storeId">Amazon：{{re.form[0][index].storeName}}</el-checkbox>
+                        <p></p>
+                        <el-checkbox class="info2" v-for="(item,index) in re.form[1] " :key="'info2'+index"  :label="re.form[1][index].storeId">eBay：{{re.form[1][index].storeName}}</el-checkbox>
+                        <!-- <el-checkbox label="001" name="type">{{form.type[0]}}</el-checkbox>
+                 <el-checkbox label="002" name="type">{{form.type[1]}}</el-checkbox>
+                 <el-checkbox label="003" name="type">{{form.type[2]}}</el-checkbox>
+                 <el-checkbox label="004" name="type">{{form.type[3]}}</el-checkbox>-->
 
-                </el-checkbox-group>
-        </el-form-item>
+                    </el-checkbox-group>
+                </el-form-item>
 
-        <el-button type="primary" @click="onSubmit(re.choose)">立即发布</el-button>
-        <el-button>取消</el-button>
-        </el-form-item>
-    </el-form>
-</div>
+                <el-button type="primary" @click="onSubmit(re.choose)">立即发布</el-button>
+                <el-button>取消</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
     </div>
 </div>
 

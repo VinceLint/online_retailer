@@ -5,11 +5,23 @@
     <meta charset="UTF-8">
     <title></title>
     <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/2aa8f6bc42.js"></script>
 </head>
 <script src="../js/jquery-1.9.1.js"></script>
-
+<style>
+    #app {
+        position: relative;
+        left: 0px;
+        top: -3px;
+    }
+</style>
 <body>
 <div id="app">
+    <div class="page-header">
+        <h1 style="color: #2679b5;">管理员
+            <small style="color: #646464;"><i class="fa fa-angle-double-right" aria-hidden="true"></i>数据字典</small>
+        </h1>
+    </div>
     <el-table :data="dataForShow" @selection-change="handleSelectionChange" style="width: 100%">
         <el-table-column type="selection">
         </el-table-column>
@@ -61,7 +73,7 @@
                     <el-button @click="dialogVisible = false">取 消</el-button>
                     <el-button @click="onSubmit" type="primary">确 定</el-button>
                 </el-form-item>
-                </el-form>
+            </el-form>
         </el-dialog>
         <el-pagination :current-page="1" :page-size="7" :total="pageSum" @current-change="handleCurrentChange"
                        id="page" layout=" prev, pager, next, jumper">

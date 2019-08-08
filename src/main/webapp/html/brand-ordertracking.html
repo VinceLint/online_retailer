@@ -38,6 +38,14 @@
         .list-group-item{
             margin: 5px;
         }
+        #app {
+            position: relative;
+            left: -160px;
+            top: 21px;
+        }
+        .h1, h1 {
+            font-size: 2.0rem;
+        }
     </style>
 </head>
 
@@ -88,7 +96,7 @@
 </body>
 
 <script>
-    var ax=axios.create({baseURL:'/online_retailer/brandOrder'});
+    var ax=axios.create({baseURL:'http://localhost:8080/online_retailer/brandOrder'});
 
     var app=new Vue({
         el:"#app",
