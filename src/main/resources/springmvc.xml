@@ -76,7 +76,7 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!--kua yu-->
+    <!--跨域-->
     <mvc:cors>
 
         <!--<mvc:mapping path="/**"-->
@@ -87,7 +87,7 @@
                      <!--max-age="123" />-->
 
         <mvc:mapping path="/**"
-                     allowed-origins="http://localhost:8090" />
+                     allowed-origins="http://47.107.168.99:8080" />
 
     </mvc:cors>
 

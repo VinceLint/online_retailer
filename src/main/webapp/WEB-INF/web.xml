@@ -45,6 +45,18 @@
         <url-pattern>*.woff2</url-pattern>
     </servlet-mapping>
 
+    <!--  spring session 过滤器-->
+    <filter>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
     <!--中文乱码过滤器-->
     <filter>
         <filter-name>encodingFilter</filter-name>

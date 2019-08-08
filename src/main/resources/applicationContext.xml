@@ -220,6 +220,9 @@
         </property>
     </bean>
 
+    <!-- Spring Session with Redis 解决集群共享session-->
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+
 
     <!--这个注解是必要的，图片上传必要 该部分已移动到mvc配置文件-->
     <!--<bean id="multipartResolver"
