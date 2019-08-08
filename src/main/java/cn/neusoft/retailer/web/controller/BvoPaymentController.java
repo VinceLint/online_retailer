@@ -1,9 +1,13 @@
 package cn.neusoft.retailer.web.controller;
 
+import cn.neusoft.retailer.web.pojo.Goods;
 import cn.neusoft.retailer.web.pojo.Order;
 import cn.neusoft.retailer.web.pojo.User;
+import cn.neusoft.retailer.web.pojo.Wallet;
 import cn.neusoft.retailer.web.service.BvoOrderService;
 import cn.neusoft.retailer.web.service.BvoPaymentService;
+import cn.neusoft.retailer.web.service.GoodsService;
+import cn.neusoft.retailer.web.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +31,10 @@ public class BvoPaymentController {
     private BvoPaymentService bvoPaymentServiceImpl;
     @Autowired
     private BvoOrderService bvoOrderServiceImpl;
-
+    @Autowired
+    private WalletService walletService;
+    @Autowired
+    private GoodsService goodsService;
     /**
      *@描述  获取借卖方订单信息
      *@参数
@@ -71,8 +78,9 @@ public class BvoPaymentController {
     @ResponseBody
     public Map<String,Object> getLogInfo(HttpSession session){
         Integer orderId= (Integer) session.getAttribute("orderId");
-        session.removeAttribute("orderId");
+        //session.removeAttribute("orderId");
         Order order= bvoPaymentServiceImpl.selectByPrimaryKey(orderId);
+
         Map<String,Object> returnMap=new HashMap<String,Object>();
         returnMap.put("orderId",order.getOrderId());
         returnMap.put("deliverName",order.getDeliverName());
@@ -117,6 +125,45 @@ public class BvoPaymentController {
         return retMap;
     }
 
+    /**
+     * @描述 获取接收方物流信息和要发货的订单ID
+     * @参数 session
+     * @返回值 订单里的物流信息
+     * @创建人 林跃涛
+     * @创建时间  2019/8/8 14:30
+     * @修改人和其它信息
+     */
+    @GetMapping("/getPayMessage")
+    @ResponseBody
+    public Map<String,Object> getPayMessage(HttpSession session){
+        Integer orderId= (Integer) session.getAttribute("orderId");
+        User user = (User)session.getAttribute("user");
+        //session.removeAttribute("orderId");
+        //账号余额
+        Wallet wallet = walletService.selectByPrimaryKey(user.getUserWalId());
+        Float balance = wallet.getWalBalance();
+        //获取订单里的数量
+        Order order= bvoOrderServiceImpl.selectByPrimaryKey(orderId);
+        Integer amount = order.getOrderAmount();
+        //获取订单里物品的单价
+        int goodsId = order.getGoodsId();
+        Goods goods = goodsService.selectByPrimaryKey(goodsId);
+        Float goodsPrice = goods.getGoodsPrice();
+        Map<String,Object> returnMap=new HashMap<String,Object>();
+        String ss = String.format("%.2f", goodsPrice*amount);
+        Float payment = Float.parseFloat(ss);
+        //可以支付
+        if (goodsPrice*amount<=balance){
+            returnMap.put("message","OK");
+        }
+        //支付失败,余额不足
+        else{
+            returnMap.put("message","ERROR");
+        }
+        returnMap.put("payment",payment);
+        returnMap.put("balance",balance);
+        return returnMap;
+    }
 
 
 
