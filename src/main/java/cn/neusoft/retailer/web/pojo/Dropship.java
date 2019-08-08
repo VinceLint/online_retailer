@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class Dropship {
+import java.io.Serializable;
+
+public class Dropship implements Serializable {
+    private static final long serialVersionUID = -3437527981429348195L;
     private Integer dropshipId;
 
     private Integer bvoId;

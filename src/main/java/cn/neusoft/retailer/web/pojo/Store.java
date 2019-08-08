@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class Store {
+import java.io.Serializable;
+
+public class Store implements Serializable {
+    private static final long serialVersionUID = 2896351017841558574L;
     private Integer storeId;
 
     private String storeName;

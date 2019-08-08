@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class WishDetail {
+import java.io.Serializable;
+
+public class WishDetail implements Serializable {
+    private static final long serialVersionUID = -4104970358850770356L;
     private Integer wishDetailId;
 
     private Integer wishListId;

@@ -1,8 +1,10 @@
 package cn.neusoft.retailer.web.pojo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Menu {
+public class Menu implements Serializable {
+    private static final long serialVersionUID = -3960720517865650212L;
     private Integer menuId;
 
     private String menuName;

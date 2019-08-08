@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class Brand {
+import java.io.Serializable;
+
+public class Brand implements Serializable {
+    private static final long serialVersionUID = -4339126577022010874L;
     private Integer brandId;
 
     private String brandName;

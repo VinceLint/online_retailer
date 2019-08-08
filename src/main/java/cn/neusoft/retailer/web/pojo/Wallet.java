@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class Wallet {
+import java.io.Serializable;
+
+public class Wallet implements Serializable {
+    private static final long serialVersionUID = -3574610027675504449L;
     private Integer walId;
 
     private Integer walType;

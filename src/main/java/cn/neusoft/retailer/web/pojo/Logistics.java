@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class Logistics {
+import java.io.Serializable;
+
+public class Logistics implements Serializable {
+    private static final long serialVersionUID = 4739691790539523130L;
     private String logId;
 
     private String logComName;
