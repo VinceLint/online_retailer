@@ -70,7 +70,7 @@ public class TransationController {
 //        user.setUserPhone("13437814328");
 //        user.setUserPrivilege(0);
 
-        Integer id=user.getUserId();
+        Integer id=user.getUserWalId();
         Integer ty=user.getUserPrivilege();
         int p=Integer.valueOf(page);
         p-=1;

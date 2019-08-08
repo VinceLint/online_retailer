@@ -102,14 +102,14 @@
                 <div class="modal-body">
 
                     <div class="control-group">
-                        <h5>您应支付的总金额:<span class="red">$</span></h5>
+                        <h5>您应支付的总金额:<span class="red" >￥{{payment}}</span></h5>
                     </div>
                     <div class="control-group">
                         <div>
                             <input name="form-field-radio" type="radio"
                                    style="opacity: 1;position: inherit"><img src="../image/gmc.png" alt="" style="padding-left: 20px"> My Wallet
                             <p></p>
-                            <div class="blue" style="font-size: 15px;">账户余额:$</div>
+                            <div class="blue" style="font-size: 15px;">账户余额:￥{{balance}}</div>
                             <p></p>
                         </div>
                     </div>
@@ -166,7 +166,10 @@
                 receiver_code:'',
                 paymentPassword:''
             },
-            res:false//操作结果
+            res:false,//操作结果
+            payment : 0,
+            balance : 0,
+            isEnough: true
         },
         methods:{
             pay:function(){//支付
@@ -204,6 +207,19 @@
                 // }else{
                 //     $('#confirmModal').modal('show');
                 // }
+                var that=this;
+                that.isEnough = true
+                ax.get("/getPayMessage")
+                    .then(function(response){
+                        that.balance = response.data.balance;
+                        that.payment = response.data.payment;
+                        if(response.data.message==="ERROR"){
+                            that.isEnough = false;
+                        }
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                });
                 $('#confirmModal').modal('show');
             },
             back:function(){//返回订单管理主页面

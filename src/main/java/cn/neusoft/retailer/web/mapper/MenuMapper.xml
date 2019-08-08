@@ -26,7 +26,7 @@
     set menu_name = #{menuName,jdbcType=VARCHAR},
       menu_url = #{menuUrl,jdbcType=VARCHAR},
       menu_privilege = #{menuPrivilege,jdbcType=INTEGER}
-      menu_children_item== #{menuChildrenItem,jdbcType=VARCHAR}
+      menu_children_item= #{menuChildrenItem,jdbcType=VARCHAR}
     where menu_id = #{menuId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
