@@ -43,7 +43,7 @@ public class TransationController {
             List<TransactionRecord> transactionlist = transationService.getAll(1);
 
             jsonArray = JSONArray.fromObject(transactionlist);
-        System.out.println(jsonArray);
+//        System.out.println(jsonArray);
 
 
         return jsonArray;
@@ -53,11 +53,11 @@ public class TransationController {
     @ResponseBody
     public JSONArray changeList(@PathVariable("page") String page,HttpServletRequest request){
 
-        System.out.println("page"+page);
+//        System.out.println("page"+page);
         User user=new User();
 
                 HttpSession session=request.getSession();
-        System.out.println(session);
+//        System.out.println(session);
          user = (User) session.getAttribute("user");
 
         //模拟session
@@ -92,7 +92,7 @@ public class TransationController {
         User user=new User();
 
         HttpSession session=request.getSession();
-        System.out.println(session);
+//        System.out.println(session);
         user = (User) session.getAttribute("user");
 
         User user2= new User();
@@ -172,9 +172,9 @@ public class TransationController {
 //        String path = "/upload";
 
         File filePath = new File(path);
-        System.out.println("文件的保存路径：" + path);
+//        System.out.println("文件的保存路径：" + path);
         if (!filePath.exists() && !filePath.isDirectory()) {
-            System.out.println("目录不存在，创建目录:" + filePath);
+//            System.out.println("目录不存在，创建目录:" + filePath);
             filePath.mkdir();
         }
 

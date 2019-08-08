@@ -24,7 +24,7 @@ public class ClearRedies {
         boolean borrowOrOprSuccess = true;
         try {
             jedis = jedisPool.getResource();
-            jedis.select(DB_INDEX);
+//            jedis.select(DB_INDEX);
 //            清除缓存
             System.out.println("清除缓存" );
             jedis.flushDB();

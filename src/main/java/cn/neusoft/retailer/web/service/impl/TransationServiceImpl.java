@@ -77,11 +77,11 @@ public class TransationServiceImpl implements TransationService {
         }
         int total = userTraList.size();
         System.out.println("total"+total);
-        System.out.println("outlist"+outList);
+//        System.out.println("outlist"+outList);
         JSONArray jsonArray = JSONArray.fromObject(outList);
         jsonArray.add(total);
 
-        System.out.println(jsonArray);
+//        System.out.println(jsonArray);
 
 
         return jsonArray;
@@ -124,7 +124,7 @@ public class TransationServiceImpl implements TransationService {
             }
 
         }
-        System.out.println(toTraList);
+//        System.out.println(toTraList);
 
         List<TransactionRecord> outList =new ArrayList<TransactionRecord>();
 
@@ -136,12 +136,12 @@ public class TransationServiceImpl implements TransationService {
 
         }
         int total = toTraList.size();
-        System.out.println("total"+total);
-        System.out.println("outlist"+outList);
+//        System.out.println("total"+total);
+//        System.out.println("outlist"+outList);
         JSONArray jsonArray = JSONArray.fromObject(outList);
         jsonArray.add(total);
 
-        System.out.println(jsonArray);
+//        System.out.println(jsonArray);
 
 
         return jsonArray;
@@ -154,7 +154,7 @@ public class TransationServiceImpl implements TransationService {
 
     @Override
     public Result review(org.json.JSONArray json) {
-        System.out.println(json);
+//        System.out.println(json);
         //获取json
         JSONObject formObject = json.getJSONObject(0);
         JSONObject reviewObject = json.getJSONObject(1);

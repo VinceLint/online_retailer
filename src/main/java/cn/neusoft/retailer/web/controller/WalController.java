@@ -40,23 +40,7 @@ public class WalController {
 // System.out.println(user.toString());
         return "html/bvo-WalletList.html";}
 
-    @RequestMapping(value="/tobAddWal")
-    public String tobAdd(HttpServletRequest request){
-        User user=new User();
-        //模拟session
-//        user.setUserId(1);
-//        user.setUserName("zhihong");
-//        user.setUserPrivilege(0);
-        HttpSession session=request.getSession();
-        System.out.println("注册跳转session"+session);
-         user = (User) session.getAttribute("user");
 
-
-        System.out.println(user.toString());
-        if(user.getUserWalId()==null){
-        return "html/WalSignUp.html";}else{
-         return "html/bvo-WalletList.html"   ;
-        }}
     @RequestMapping(value="/topAddWal")
     public String topAdd(HttpServletRequest request){
         User user=new User();
@@ -65,11 +49,11 @@ public class WalController {
 //        user.setUserName("zhihong");
 //        user.setUserPrivilege(0);
         HttpSession session=request.getSession();
-        System.out.println("注册跳转session"+session);
+//        System.out.println("注册跳转session"+session);
         user = (User) session.getAttribute("user");
 
 
-        System.out.println(user.toString());
+//        System.out.println(user.toString());
         if(user.getUserWalId()==null){
             return "html/WalSignUp.html";}else{
             return "html/bvo-WalletList.html"   ;
@@ -84,11 +68,11 @@ public class WalController {
         String userName = (String) data.get("userName");
         String password =(String) data.get("userPassword");
         String email=(String) data.get("email");
-        System.out.println(data);
+//        System.out.println(data);
         //获取session
                 User user=new User();
         HttpSession session=request.getSession();
-        System.out.println("注册session"+session);
+//        System.out.println("注册session"+session);
          user = (User) session.getAttribute("user");
          User user2= new User();
          try{
@@ -130,12 +114,11 @@ public class WalController {
         user2.setUserWalId(user.getUserId());
         Wallet wallet = new Wallet();
         wallet.setWalId(user.getUserId());
-        //TODO 输入权限
         wallet.setWalType(user.getUserPrivilege());
         wallet.setWalBalance((float) 0);
         wallet.setWalEmail(email);
         wallet.setWalPassword(password);
-        System.out.println(wallet.toString());
+//        System.out.println(wallet.toString());
         try{
             walletService.insert(wallet);
             userService.updateByPrimaryKey(user2);
@@ -161,7 +144,7 @@ public class WalController {
         model.addAttribute(wallet.toString());
         wallet.setWalType(1);
         wallet.setWalBalance((float) 0);
-        System.out.println(wallet.toString());
+//        System.out.println(wallet.toString());
 
         walletService.insert(wallet);
         return "html/bvo-WalletList.html";
@@ -175,7 +158,7 @@ public class WalController {
     @PostMapping("/toWalList")
     @ResponseBody
     public List<Wallet> toWalList(HttpServletResponse response, HttpServletRequest request){
-        System.out.println("ok");
+//        System.out.println("ok");
 
         HttpSession session=request.getSession();
         User user = (User) session.getAttribute("user");
@@ -186,7 +169,7 @@ public class WalController {
             e.printStackTrace();
         }
         user=user2;
-        System.out.println("余额用户"+user.toString());
+//        System.out.println("余额用户"+user.toString());
 //        User user=new User();
         //模拟session
 //        user.setUserId(165108101);
@@ -199,15 +182,15 @@ public class WalController {
 
         int i=user.getUserWalId();
         List<Wallet> list = new ArrayList<Wallet>();
-        System.out.println(i);
+//        System.out.println(i);
         Wallet wallet=new Wallet();
        try {
            wallet=walletService.selectByPrimaryKey(i);
-           System.out.println(wallet.toString());
+//           System.out.println(wallet.toString());
            list.add(wallet) ;
 //        JSONObject jsonObject =new JSONObject();
 //        JSONArray jsonArray = JSONArray.fromObject(list);
-           System.out.println(list.get(0).toString());
+//           System.out.println(list.get(0).toString());
 //        OutUtil.print(jsonArray, response);
        }catch (Exception e){
            e.printStackTrace();
@@ -220,11 +203,11 @@ public class WalController {
     @ResponseBody
     public Result EditPw(@RequestBody String json,HttpServletRequest request){
         JSONArray jsonArray = new JSONArray(json);
-        System.out.println("pw+json"+jsonArray);
+//        System.out.println("pw+json"+jsonArray);
 
         HttpSession session = request.getSession();
         User user= (User) session.getAttribute("user");
-        System.out.println("pw+user"+user);
+//        System.out.println("pw+user"+user);
         JSONObject row=null;
         JSONObject pwObject=null;
         try {
@@ -238,7 +221,7 @@ public class WalController {
         int id = row.getInt("id");
         String opw = pwObject.getString("oldpw");
         String npw = pwObject.getString("newpw");
-        System.out.println("row+pw"+row+pwObject);
+//        System.out.println("row+pw"+row+pwObject);
 
         if(user.getUserId()!=id){
             return new Result(false,"session_id_error");
@@ -273,7 +256,7 @@ public class WalController {
     public Map<String, Object> EditWal(@RequestBody String json){
         Map<String,Object> resultmap = new HashMap<String,Object>();
         org.json.JSONArray jsonArray = new org.json.JSONArray(json);
-        System.out.println(jsonArray);
+//        System.out.println(jsonArray);
         int i=walletService.invest(jsonArray);
         if(i==7){
             resultmap.put("result","success");
@@ -289,7 +272,7 @@ public class WalController {
         {
                 resultmap.put("result","error");
             }
-        System.out.println(resultmap);
+//        System.out.println(resultmap);
 
         return resultmap;
     }
