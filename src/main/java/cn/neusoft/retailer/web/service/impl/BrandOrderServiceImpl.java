@@ -101,12 +101,10 @@ public class BrandOrderServiceImpl implements BrandOrderService {
         if (order == null) return false;
         order.setOrderStatus(OrderStatus.已取消.ordinal());
         order.setOrderCancelTime(new Date());
-        if(orderMapper.updateByPrimaryKey(order)<=0) return false;
 
         //退回库存
         Goods goods=goodsMapper.selectByPrimaryKey(order.getGoodsId());
         goods.setGoodsAmount(goods.getGoodsAmount()+order.getOrderAmount());
-        goodsMapper.updateByPrimaryKey(goods);
         //退款:从品牌商退款到借卖方，改两方余额、添加两方的交易流水
         Integer brandWalId=brandUser.getUserWalId();
         Integer bvoWalId=userMapper.selectByPrimaryKey(order.getBsId()).getUserWalId();
@@ -114,6 +112,13 @@ public class BrandOrderServiceImpl implements BrandOrderService {
         Wallet bvoWallet=walletMapper.selectByPrimaryKey(bvoWalId);
         //退款
         Float money=goodsMapper.selectByPrimaryKey(order.getGoodsId()).getGoodsPrice() * order.getOrderAmount();//订单总价
+        //如果余额不足，退款失败
+        if(brandWallet.getWalBalance()-money<0){
+            return false;
+        }
+        orderMapper.updateByPrimaryKey(order);
+        goodsMapper.updateByPrimaryKey(goods);
+
         brandWallet.setWalBalance(brandWallet.getWalBalance()-money);
         bvoWallet.setWalBalance(bvoWallet.getWalBalance()+money);
         if(walletMapper.updateByPrimaryKey(brandWallet)<=0||walletMapper.updateByPrimaryKey(bvoWallet)<=0)

@@ -26,15 +26,15 @@
 
     <!-- 配置拦截器 -->
     <mvc:interceptors>
-        <mvc:interceptor>
-            <!-- 拦截所有mvc控制器 -->
-            <mvc:mapping path="/**"/>
+<!--        <mvc:interceptor>-->
+<!--            &lt;!&ndash; 拦截所有mvc控制器 &ndash;&gt;-->
+<!--            <mvc:mapping path="/**"/>-->
 
-            <mvc:exclude-mapping path="/user/**"/>
-            <mvc:exclude-mapping path="/kaptcha/**"/>
-            <mvc:exclude-mapping path="/mail/**"/>
-            <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"/>
-        </mvc:interceptor>
+<!--            <mvc:exclude-mapping path="/user/**"/>-->
+<!--            <mvc:exclude-mapping path="/kaptcha/**"/>-->
+<!--            <mvc:exclude-mapping path="/mail/**"/>-->
+<!--            <bean class="cn.neusoft.retailer.web.interceptor.AuthenticationInterceptor"/>-->
+<!--        </mvc:interceptor>-->
 
         <!-- 拦截品牌商的请求 -->
         <mvc:interceptor>

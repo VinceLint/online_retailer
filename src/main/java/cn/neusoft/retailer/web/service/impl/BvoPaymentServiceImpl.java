@@ -99,7 +99,6 @@ public class BvoPaymentServiceImpl implements BvoPaymentService {
         order.setReceiverAddress((String) param.get("receiver_address"));
         order.setReceiverPhone((String) param.get("receiver_phone"));
         order.setReceiverCode((String) param.get("receiver_code"));
-        if(orderMapper.updateByPrimaryKey(order)<=0) return false;
 
         //库存修改
 //        Goods goods=goodsMapper.selectByPrimaryKey(order.getGoodsId());
@@ -107,12 +106,19 @@ public class BvoPaymentServiceImpl implements BvoPaymentService {
 //        goodsMapper.updateByPrimaryKey(goods);
         //付款:从借卖方付款到品牌商，改两方余额、添加两方的交易流水
         Integer bvoWalId=bvoUser.getUserWalId();
-        Integer brandWalId=userMapper.selectByPrimaryKey(brandMapper.selectByPrimaryKey(goodsMapper.selectByPrimaryKey(order.getGoodsId()).getGoodsId()).getBrandMerId()).getUserWalId();
+        Integer brandWalId=userMapper.selectByPrimaryKey(brandMapper.selectByPrimaryKey(goodsMapper.selectByPrimaryKey(order.getGoodsId()).getBrandId()).getBrandMerId()).getUserWalId();
         Wallet brandWallet=walletMapper.selectByPrimaryKey(brandWalId);
         Wallet bvoWallet=walletMapper.selectByPrimaryKey(bvoWalId);
         //付款
         Float money=goodsMapper.selectByPrimaryKey(order.getGoodsId()).getGoodsPrice() * order.getOrderAmount();//订单总价
         brandWallet.setWalBalance(brandWallet.getWalBalance()+money);
+        //如果钱不够，付款失败
+        if(bvoWallet.getWalBalance()-money<0){
+            return false;
+        }
+
+        if(orderMapper.updateByPrimaryKey(order)<=0) return false;
+
         bvoWallet.setWalBalance(bvoWallet.getWalBalance()-money);
         if(walletMapper.updateByPrimaryKey(brandWallet)<=0||walletMapper.updateByPrimaryKey(bvoWallet)<=0)
             return false;
