@@ -186,7 +186,7 @@ public class WalController {
         Wallet wallet=new Wallet();
        try {
            wallet=walletService.selectByPrimaryKey(i);
-//           System.out.println(wallet.toString());
+           System.out.println(wallet.toString());
            list.add(wallet) ;
 //        JSONObject jsonObject =new JSONObject();
 //        JSONArray jsonArray = JSONArray.fromObject(list);
