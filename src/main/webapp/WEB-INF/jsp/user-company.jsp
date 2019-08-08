@@ -92,7 +92,7 @@
 </div>
 
 <div class="container">
-    <form action="http://localhost:8080/online_retailer/Company/company" method="post" onsubmit="return checkform()">
+    <form action="/online_retailer/Company/company" method="post" onsubmit="return checkform()">
         <div class="form-group" style="display: none">
             <label>公司账号（品牌商ID：${user.userId}）</label> <span><font color="red"
                                                                                  id="errorChineseName">${errorInfoChineseName }</font></span>

@@ -48,6 +48,55 @@ public class FtpUtils {
         }
     }
 
+    public boolean uploadFileForNginx(String pathname, String fileName,File file){
+        boolean flag = false;
+        InputStream inputStream = null;
+        try{
+            System.out.println("开始上传文件");
+            inputStream = new FileInputStream(file);
+            initFtpClient();
+            ftpClient.setDataTimeout(60000);       //设置传输超时时间为60秒
+            ftpClient.setConnectTimeout(60000);       //连接超时为60秒
+            ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);
+            CreateDirecroty(pathname);
+            ftpClient.makeDirectory(pathname);
+            ftpClient.changeWorkingDirectory(pathname);
+            ftpClient.setControlEncoding("UTF-8");
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.setConnectTimeout(60000); // 一秒钟，如果超过就判定超时了
+            System.out.println("保存文件:"+ftpClient.storeUniqueFile(fileName, inputStream));
+            inputStream.close();
+            ftpClient.logout();
+            flag = true;
+            System.out.println("上传文件成功");
+        }catch (Exception e) {
+            System.out.println("上传文件失败");
+            e.printStackTrace();
+        }finally{
+            try{
+                if(ftpClient.isConnected()){
+                    try{
+                        ftpClient.disconnect();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+                if(null != inputStream){
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+
+        }
+        return true;
+    }
+
     /**
      * 上传文件
      * @param pathname ftp服务保存地址
@@ -62,11 +111,16 @@ public class FtpUtils {
             System.out.println("开始上传文件");
             inputStream = new FileInputStream(new File(originfilename));
             initFtpClient();
+            ftpClient.setDataTimeout(60000);       //设置传输超时时间为60秒
+            ftpClient.setConnectTimeout(60000);       //连接超时为60秒
             ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);
             CreateDirecroty(pathname);
             ftpClient.makeDirectory(pathname);
             ftpClient.changeWorkingDirectory(pathname);
-            ftpClient.storeFile(fileName, inputStream);
+            ftpClient.setControlEncoding("UTF-8");
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.setConnectTimeout(60000); // 一秒钟，如果超过就判定超时了
+            System.out.println("保存文件:"+ftpClient.storeUniqueFile(fileName, inputStream));
             inputStream.close();
             ftpClient.logout();
             flag = true;
@@ -75,22 +129,28 @@ public class FtpUtils {
             System.out.println("上传文件失败");
             e.printStackTrace();
         }finally{
-            if(ftpClient.isConnected()){
-                try{
-                    ftpClient.disconnect();
-                }catch(IOException e){
-                    e.printStackTrace();
+            try{
+                if(ftpClient.isConnected()){
+                    try{
+                        ftpClient.disconnect();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
                 }
-            }
-            if(null != inputStream){
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if(null != inputStream){
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+            }catch(Exception e){
+                e.printStackTrace();
             }
+
+
         }
-        return true;
+        return flag;
     }
     /**
      * 上传文件
@@ -296,11 +356,4 @@ public class FtpUtils {
         return flag;
     }
 
-    public static void main(String[] args) {
-        FtpUtils ftp =new FtpUtils();
-        //ftp.uploadFile("ftpFile/data", "123.docx", "E://123.docx");
-        //ftp.downloadFile("ftpFile/data", "123.docx", "F://");
-        ftp.deleteFile("ftpFile/data", "123.docx");
-        System.out.println("ok");
-    }
 }

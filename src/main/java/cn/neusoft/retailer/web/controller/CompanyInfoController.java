@@ -134,6 +134,7 @@ public class CompanyInfoController {
             HashMap<String, Object> hashMap1 = null;
             //判断是否是品牌商 品牌商可以修改自己品牌
             if (user.getUserPrivilege() == 1) {
+                //读取品牌信息 图片
                 hashMap1 = brandPage(pageNow, user.getUserId(), request);
                 userList.add(user);
                 for (int i = 0; i < userList.size(); i++) {
@@ -188,15 +189,15 @@ public class CompanyInfoController {
         List<Brand> brandList = brandService.selectByPage(userId, pageBean.getStart(), pageBean.getPageSize());
         for (int i = 0; i < brandList.size(); i++) {
             //当前页面的请求使用绝对路径，使用相对路径会加上controller前缀
-            brandList.get(i).setBrandUrl("http://localhost:8080/online_retailer" + brandList.get(i).getBrandUrl());
-            //中文乱码
-            try {
-                if (brandList.get(i).getBrandName() != null)
-                    brandList.get(i).setBrandName(new String(brandList.get(i).getBrandName().getBytes("ISO-8859-1"), "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-                System.out.println("中文乱码问题！");
-            }
+            brandList.get(i).setBrandUrl("http://47.107.168.99:8080/online_retailer/image/" + brandList.get(i).getBrandUrl());
+//            //中文乱码
+//            try {
+//                if (brandList.get(i).getBrandName() != null)
+//                    brandList.get(i).setBrandName(new String(brandList.get(i).getBrandName().getBytes("ISO-8859-1"), "UTF-8"));
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//                System.out.println("中文乱码问题！");
+//            }
         }
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("brandList", brandList);
@@ -208,6 +209,13 @@ public class CompanyInfoController {
     @ResponseBody
     public HashMap<String, String> deleteBrand(@PathVariable("brandId") Integer brandId) {
         HashMap<String, String> hashMap = new HashMap<>();
+        Brand brand = brandService.selectByPrimaryKey(brandId);
+        if(brand.getBrandUrl().equals("")){
+            //Do noting
+        }else{
+            FtpUtils ftpUtils = new FtpUtils();
+            ftpUtils.deleteFile("/usr/local/nginx/html/online_retailer/image",brand.getBrandUrl());
+        }
         if (brandService.deleteByPrimaryKey(brandId)) {
             hashMap.put("result", "true");
         } else {
@@ -224,19 +232,23 @@ public class CompanyInfoController {
         String imageName = basePath + "image/" + pictureUrl;
         System.out.println(imageName);
         try {
+            FtpUtils ftpUtils = new FtpUtils();
             Brand brand = brandService.selectByPrimaryKey(brandId);
             //删除之前的
             String OriginUrl = basePath + brand.getBrandUrl();
-            File file = new File(OriginUrl);
-            file.delete();
-            //存入数据库
-            uploadFile.transferTo(new File(imageName));
+            //删除nginx服务器的文件
+            ftpUtils.deleteFile("/usr/local/nginx/html/online_retailer/image",brand.getBrandUrl());
+            //上传nginx服务器并删除本地文件
+            File file1 = new File(imageName);
+            uploadFile.transferTo(file1);
+            ftpUtils.uploadFileForNginx("/usr/local/nginx/html/online_retailer/image",pictureUrl,file1);
+            file1.delete();
 //            String OriginUrl = basePath + brand.getBrandUrl();
 //            File file = new File(OriginUrl);
 //            if (file != null)
 //                file.delete();
             brand.setBrandName(brandName);
-            brand.setBrandUrl("/image/" + pictureUrl);
+            brand.setBrandUrl(pictureUrl);
             brandService.updateByPrimaryKey(brand);
             modelAndView.addObject("result", "1");
         } catch (IOException e) {
@@ -251,17 +263,25 @@ public class CompanyInfoController {
 
     @RequestMapping(value = "/companyAdd/{brandMerId}")
     public ModelAndView add(HttpServletRequest request, @RequestParam(value = "brandName", required = false) String brandName, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, @PathVariable("brandMerId") Integer brandMerId) {
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         System.out.println(uploadFile + " " + brandMerId + " " + brandName);
         ModelAndView modelAndView = new ModelAndView();
         String basePath = request.getServletContext().getRealPath("/");
         String pictureUrl = brandName + uploadFile.getOriginalFilename().substring(uploadFile.getOriginalFilename().lastIndexOf("."));
         String imageName = basePath + "image/" + pictureUrl;
         try {
-            uploadFile.transferTo(new File(imageName));
+            File file1 = new File(imageName);
+            uploadFile.transferTo(file1);
+            FtpUtils ftpUtils = new FtpUtils();
+            ftpUtils.uploadFileForNginx("/usr/local/nginx/html/online_retailer/image",pictureUrl,file1);
             //创建新的brand
             Brand brand = new Brand();
             brand.setBrandName(brandName);
-            brand.setBrandUrl("/image/" + pictureUrl);
+            brand.setBrandUrl(pictureUrl);
             brand.setBrandMerId(brandMerId);
             brand.setBrandId(Integer.valueOf(UniqueID.createID().substring(UniqueID.createID().length() - 6)));
             brandService.insert(brand);

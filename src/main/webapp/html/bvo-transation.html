@@ -192,19 +192,19 @@
                     dataType:"json",
                     success:function(data){
 
-                        $.each(data, function (i, obj) {
-                            if(i!=data.length-2&&i!=data.length-1) {
-                                this.tableData.push({
-                                    tid: obj.traRecId,
-                                    tnum: obj.traRecSum,
-                                    ttype: this.ztype[obj.traRecType],
-                                    tstatus: this.zstatus[obj.traRecStatus],
-                                    tbal: obj.traRecBalance,
-                                    ttime: obj.traRecDateStr,
-                                    picurl:".."+obj.traRecExchangememo,
-                                })
-                            }
-                        }.bind(this))
+                            $.each(data, function (i, obj) {
+                                if(i!=data.length-2&&i!=data.length-1) {
+                                    this.tableData.push({
+                                        tid: obj.traRecId,
+                                        tnum: obj.traRecSum,
+                                        ttype: this.ztype[obj.traRecType],
+                                        tstatus: this.zstatus[obj.traRecStatus],
+                                        tbal: obj.traRecBalance,
+                                        ttime: obj.traRecDateStr,
+                                        picurl:"../"+obj.traRecExchangememo,
+                                    })
+                                }
+                            }.bind(this))
 
                         this.pageTotal=data[data.length-2],
                             this.who=this.wtype[data[data.length-1]],

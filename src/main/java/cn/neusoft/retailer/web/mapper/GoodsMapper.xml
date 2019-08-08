@@ -50,7 +50,8 @@
       goods_length = #{goodsLength,jdbcType=REAL},
       goods_width = #{goodsWidth,jdbcType=REAL},
       goods_height = #{goodsHeight,jdbcType=REAL},
-      goods_weight = #{goodsWeight,jdbcType=REAL}
+      goods_weight = #{goodsWeight,jdbcType=REAL},
+      goods_pic = #{goodsPic,jdbcType=VARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
   <update id="updateStatus0ByPrimaryKey" parameterType="java.lang.Integer">

@@ -4,6 +4,7 @@ import cn.neusoft.retailer.web.pojo.TransactionRecord;
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.TransationService;
 import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.tools.FtpUtils;
 import cn.neusoft.retailer.web.tools.Result;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,7 +167,7 @@ public class TransationController {
 //        int id= oldJSONObject.getInt("tid");
 //        String ttype=oldJSONObject.getString("ttype");
 //        System.out.println("id+type"+id+ttype);
-
+        System.out.println(picture);
         //获取文件在服务器的储存位置
         String path = request.getSession().getServletContext().getRealPath("/upload");
 //        String path = "/upload";
@@ -201,10 +202,13 @@ public class TransationController {
         //将文件保存到服务器指定位置
         try {
             picture.transferTo(targetFile);
+            FtpUtils ftpUtils = new FtpUtils();
+            System.out.println(ftpUtils.uploadFileForNginx("/usr/local/nginx/html/online_retailer/upload",fileName,targetFile));
+            targetFile.delete();
             System.out.println("上传成功");
             System.out.println("路径"+targetFile.getPath());
             //将文件在服务器的存储路径返回
-            return new Result(true,"/upload/" + fileName);
+            return new Result(true,fileName);
         } catch (IOException e) {
             System.out.println("上传失败");
             e.printStackTrace();
