@@ -8,14 +8,20 @@ import cn.neusoft.retailer.web.service.BrandOrderService;
 import cn.neusoft.retailer.web.service.BrandService;
 import cn.neusoft.retailer.web.service.DictionaryService;
 import cn.neusoft.retailer.web.service.UserService;
+import cn.neusoft.retailer.web.tools.ClearRedies;
 import cn.neusoft.retailer.web.tools.FtpUtils;
 import cn.neusoft.retailer.web.tools.MvoType;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -131,5 +137,19 @@ public class Test {
         String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
         FtpUtils ftpUtils = new FtpUtils();
         System.out.println(ftpUtils.uploadFile("/","做一道菜1.jpg",str));
+    }
+    /**
+     * @描述 手动清除缓存类
+     * @参数
+     * @返回值
+     * @创建人 庄志宏
+     * @创建时间 2019/8/8 10:19
+     * @修改人和其它信息
+     */
+    @org.junit.Test
+    public void Test(){
+        ClearRedies clearRedies = new ClearRedies();
+        clearRedies.clearAll();
+
     }
 }

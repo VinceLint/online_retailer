@@ -91,17 +91,34 @@ public class TransationServiceImpl implements TransationService {
     public JSONArray getAll(int p) {
         List<TransactionRecord> transactionlist = transactionRecordMapper.selectAll();
         List<TransactionRecord> toTraList =new ArrayList<TransactionRecord>();
+        List<User> userList = new ArrayList<User>();
+        Integer WalId=null;
+        User user=null;
+        String UserName=null;
+        Integer userid=null;
+//        try{
+            userList=userMapper.selectAll();
+//        }catch (Exception e){e.printStackTrace();}
+//        System.out.println(userList);
         for (TransactionRecord t : transactionlist) {
             if(t.getTraRecStatus()==0){
                 String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm;ss").format(t.getTraRecDate());
 
                 t.setTraRecDateStr(dateStr);
                 //插入用户名
-                User user=null;
-                try{
-                 user=userMapper.selectByPrimaryKey(t.getTraRecWalId());}catch (Exception e){e.printStackTrace();}
-                String UserName=user.getUserName();
-                t.setTraRecUserName(UserName);
+                WalId=t.getTraRecWalId();
+//                System.out.println(userList);
+//                System.out.println(WalId);
+                for(User u:userList){
+//                    System.out.println(u.getUserName());
+//                    System.out.println(u.getUserId());
+                    userid=u.getUserId();
+                    if(userid.equals(WalId)){
+                        t.setTraRecUserName(u.getUserName());
+//                        System.out.println(t.getTraRecUserName());
+                    }
+                }
+
                 toTraList.add(t);
 
             }

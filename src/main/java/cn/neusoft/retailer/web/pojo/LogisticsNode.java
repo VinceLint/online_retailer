@@ -1,8 +1,10 @@
 package cn.neusoft.retailer.web.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class LogisticsNode {
+public class LogisticsNode implements Serializable {
+    private static final long serialVersionUID = -7345569712780863413L;
     private String logNodeId;
 
     private String logId;

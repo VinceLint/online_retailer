@@ -97,7 +97,7 @@
                     <el-button
                             size="mini"
                             type="danger"
-                            @click="handleReviewed(scope.$index, scope.row), visible = true">审核</el-button>
+                            @click="handleReviewed(scope.$index, scope.row)">审核</el-button>
 
                 </template>
             </el-table-column>
@@ -281,6 +281,7 @@
                 this.Form.tmoney=row.tbal;
                 this.dateForUpdate = [];
                 this.dateForUpdate.push(this.Form);
+                this.visible=true;
                 console.log(this.Form, this.dateForUpdate);
 
                 // $.ajax({

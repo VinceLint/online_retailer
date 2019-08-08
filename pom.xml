@@ -268,6 +268,11 @@
             <artifactId>commons-net</artifactId>
             <version>3.6</version>
         </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis -->
         <dependency>

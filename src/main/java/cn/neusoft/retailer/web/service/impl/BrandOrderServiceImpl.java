@@ -30,6 +30,8 @@ public class BrandOrderServiceImpl implements BrandOrderService {
     @Autowired
     private WalletMapper walletMapper;
     @Autowired
+    private BrandMapper brandMapper;
+    @Autowired
     private GoodsMapper goodsMapper;
     @Autowired
     private TransactionRecordMapper transactionRecordMapper;
@@ -122,8 +124,8 @@ public class BrandOrderServiceImpl implements BrandOrderService {
         brandTransactionRecord.setTraRecType(TraRecType.消费.ordinal());
         brandTransactionRecord.setTraRecSum(money);
         brandTransactionRecord.setTraRecStatus(TraRecStatus.通过.ordinal());
-        brandTransactionRecord.setTraRecWalId(brandWalId);
-        brandTransactionRecord.setTraRecBalance(brandWallet.getWalBalance());
+        brandTransactionRecord.setTraRecWalId(bvoWalId);
+        brandTransactionRecord.setTraRecBalance(bvoWallet.getWalBalance());
         if(transactionRecordMapper.insert(brandTransactionRecord)<=0) return false;
 
         TransactionRecord bvoTransactionRecord=new TransactionRecord();//借卖方交易记录
@@ -137,4 +139,58 @@ public class BrandOrderServiceImpl implements BrandOrderService {
 
         return true;
     }
+//    /**
+//     * @描述 支付订单，付款,
+//     * @参数 session
+//     * @返回值 是否成功
+//     * @创建人 庄志宏
+//     * @创建时间  2019/7/31 15:30
+//     * @修改人和其它信息
+//     */
+//    @Override
+//    public boolean payOrder(int orderId, User bvoUser) {
+//        Order order = orderMapper.selectByPrimaryKey(orderId);
+//        if (order == null) return false;
+//        order.setOrderStatus(OrderStatus.待发货.ordinal());
+//        order.setOrderPayTime(new Date());
+//
+//        if(orderMapper.updateByPrimaryKey(order)<=0) return false;
+//
+//        //库存不用修改
+////        Goods goods=goodsMapper.selectByPrimaryKey(order.getGoodsId());
+////        goods.setGoodsAmount(goods.getGoodsAmount()-order.getOrderAmount());
+////        goodsMapper.updateByPrimaryKey(goods);
+//        //付款:从借卖方付款到品牌商，改两方余额、添加两方的交易流水
+//        Integer bvoWalId=bvoUser.getUserWalId();
+//        Integer brandWalId=brandMapper.selectByPrimaryKey(goodsMapper.selectByPrimaryKey(order.getGoodsId()).getGoodsId()).getBrandMerId();
+//        Wallet brandWallet=walletMapper.selectByPrimaryKey(brandWalId);
+//        Wallet bvoWallet=walletMapper.selectByPrimaryKey(bvoWalId);
+//        //付款
+//        Float money=goodsMapper.selectByPrimaryKey(order.getGoodsId()).getGoodsPrice() * order.getOrderAmount();//订单总价
+//        brandWallet.setWalBalance(brandWallet.getWalBalance()+money);
+//        bvoWallet.setWalBalance(bvoWallet.getWalBalance()-money);
+//        if(walletMapper.updateByPrimaryKey(brandWallet)<=0||walletMapper.updateByPrimaryKey(bvoWallet)<=0)
+//            return false;
+//
+//        //添加交易流水
+//        TransactionRecord bvoTransactionRecord=new TransactionRecord();//借卖方交易记录
+//        bvoTransactionRecord.setTraRecDate(new Date());
+//        bvoTransactionRecord.setTraRecType(TraRecType.消费.ordinal());
+//        bvoTransactionRecord.setTraRecSum(money);
+//        bvoTransactionRecord.setTraRecStatus(TraRecStatus.通过.ordinal());
+//        bvoTransactionRecord.setTraRecWalId(bvoWalId);
+//        bvoTransactionRecord.setTraRecBalance(bvoWallet.getWalBalance());
+//        if(transactionRecordMapper.insert(bvoTransactionRecord)<=0) return false;
+//
+//        TransactionRecord brandTransactionRecord=new TransactionRecord();//品牌商交易记录
+//        brandTransactionRecord.setTraRecDate(new Date());
+//        brandTransactionRecord.setTraRecType(TraRecType.收入.ordinal());
+//        brandTransactionRecord.setTraRecSum(money);
+//        brandTransactionRecord.setTraRecStatus(TraRecStatus.通过.ordinal());
+//        brandTransactionRecord.setTraRecWalId(brandWalId);
+//        brandTransactionRecord.setTraRecBalance(brandWallet.getWalBalance());
+//        if(transactionRecordMapper.insert(brandTransactionRecord)<=0) return false;
+//
+//        return true;
+//    }
 }

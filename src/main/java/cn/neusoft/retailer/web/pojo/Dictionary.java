@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class Dictionary {
+import java.io.Serializable;
+
+public class Dictionary implements Serializable {
+    private static final long serialVersionUID = -6290159596950766665L;
     private Integer dicId;
 
     private String dicType;

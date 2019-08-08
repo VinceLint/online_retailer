@@ -1,8 +1,10 @@
 package cn.neusoft.retailer.web.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TransactionRecord {
+public class TransactionRecord implements Serializable {
+    private static final long serialVersionUID = -5761033661047171481L;
     private Integer traRecId;
 
     private Date traRecDate;

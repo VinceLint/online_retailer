@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class UserWishlist {
+import java.io.Serializable;
+
+public class UserWishlist implements Serializable {
+    private static final long serialVersionUID = 9082949110642871725L;
     private Integer wishlistId;
 
     private Integer bvoId;

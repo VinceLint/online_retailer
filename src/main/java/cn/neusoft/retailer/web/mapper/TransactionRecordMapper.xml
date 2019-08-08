@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.neusoft.retailer.web.mapper.TransactionRecordMapper" >
+  <cache eviction="LRU" type="cn.neusoft.retailer.web.cache.RedisCache" />
   <resultMap id="BaseResultMap" type="cn.neusoft.retailer.web.pojo.TransactionRecord" >
     <id column="tra_rec_id" property="traRecId" jdbcType="INTEGER" />
     <result column="tra_rec_date" property="traRecDate" jdbcType="TIMESTAMP" />
@@ -40,7 +41,7 @@
     from transaction_record
     where tra_rec_id = #{traRecId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <select id="selectAll" resultMap="BaseResultMap" useCache="true">
     select tra_rec_id, tra_rec_date, tra_rec_type, tra_rec_sum, tra_rec_status, tra_rec_wal_id, 
     tra_rec_balance, tra_rec_exchangeMemo
     from transaction_record

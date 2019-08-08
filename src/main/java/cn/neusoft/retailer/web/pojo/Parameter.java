@@ -1,6 +1,9 @@
 package cn.neusoft.retailer.web.pojo;
 
-public class Parameter {
+import java.io.Serializable;
+
+public class Parameter implements Serializable {
+    private static final long serialVersionUID = -3691686307057614455L;
     private String parId;
 
     private Integer parValue;

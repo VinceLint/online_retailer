@@ -1,8 +1,10 @@
 package cn.neusoft.retailer.web.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable {
+    private static final long serialVersionUID = 112136171151000080L;
     private Integer orderId;
 
     private Integer goodsId;
