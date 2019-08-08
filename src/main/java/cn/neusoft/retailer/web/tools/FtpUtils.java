@@ -1,5 +1,6 @@
 package cn.neusoft.retailer.web.tools;
 
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -23,6 +24,7 @@ public class FtpUtils {
     public String password = "lyt970611*";
 
     public FTPClient ftpClient = null;
+
 
     /**
      * 初始化ftp服务器

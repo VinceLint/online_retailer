@@ -32,6 +32,7 @@ public class RedisClient {
     public boolean set(String key, User user) {
         boolean result = false;
         try {
+
             redisTemplate.opsForValue().set(key, user, TOKEN_EXPIRES_SECOND, TimeUnit.SECONDS);
             result = true;
         } catch (Exception e) {
@@ -40,9 +41,10 @@ public class RedisClient {
         return result;
     }
 
-    public boolean set(String key, User user, long expireTime) {
+    public boolean Set(String key, User user, long expireTime) {
         boolean result = false;
         try {
+
             redisTemplate.opsForValue().set(key, user, expireTime, TimeUnit.SECONDS);
             result = true;
         } catch (Exception e) {

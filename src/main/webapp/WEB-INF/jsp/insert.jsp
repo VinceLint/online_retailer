@@ -17,6 +17,9 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/easyui-lang-zh_CN.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/easyui/uimaker/dialog.css">
 
+    <style>
+
+    </style>
 
 </head>
 
@@ -25,7 +28,7 @@
         $('#dialog').dialog({
             title: "新增商品",
             width: 700,
-            height: 650,
+            height: 600,
             buttons: [
                 {
                     text: "保存",
@@ -52,7 +55,7 @@
         $('#dialog2').dialog({
             title: "编辑商品",
             width: 700,
-            height: 620,
+            height: 600,
             buttons: [
                 {
                     text: "保存",
@@ -319,32 +322,32 @@
         <table align="center" style="border-spacing: 0px 10px">
             <tr>
                 <td>商品标题：</td>
-                <td><input type="text" name="title" style="width:400px;" class="easyui-validatebox"
+                <td><input type="text" name="title" style="width:400px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true, validType:'stringCheckSub'"></td>
             </tr>
             <tr>
                 <td>品牌id：</td>
-                <td><input type="text" name="brandId" style="width:400px;" class="easyui-validatebox"
+                <td><input type="text" name="brandId" style="width:400px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true, validType:'numberCheckSub'"></td>
             </tr>
             <tr>
                 <td>商品价格：</td>
-                <td><input type="text" name="price" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="price" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;元
                 </td>
             </tr>
             <tr>
                 <td>商品库存：</td>
-                <td><input type="text" name="amount" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="amount" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true, validType:'numberCheckSub'"></td>
             </tr>
             <tr>
                 <td>商品分类：</td>
-                <td><select id="clazz" name="clazz" style="width:400px;"></select></td>
+                <td><select id="clazz" name="clazz" style="width:400px;background-color: white;border: gray 1px solid"></select></td>
             </tr>
             <tr>
                 <td>商品描述：</td>
-                <td><textarea name="describe" style="width:400px;height:100px;"></textarea></td>
+                <td><textarea name="describe" style="width:400px;height:100px;background-color: white;border: gray 1px solid"></textarea></td>
             </tr>
             <tr>
                 <td>商品规格:</td>
@@ -352,25 +355,25 @@
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;长:</td>
-                <td><input type="text" name="length" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="length" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;m
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;宽:</td>
-                <td><input type="text" name="width" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="width" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;m
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;高:</td>
-                <td><input type="text" name="height" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="height" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;m
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;重量:</td>
-                <td><input type="text" name="weight" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="weight" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;kg
                 </td>
             </tr>
@@ -388,32 +391,32 @@
         <table align="center" style="border-spacing: 0px 10px">
             <tr>
                 <td>商品标题：</td>
-                <td><input type="text" name="title" style="width:400px;" class="easyui-validatebox"
+                <td><input type="text" name="title" style="width:400px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true"></td>
             </tr>
             <tr>
                 <td>品牌id：</td>
-                <td><input type="text" name="brandId" style="width:400px;" class="easyui-validatebox"
+                <td><input type="text" name="brandId" style="width:400px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true, validType:'numberCheckSub'"></td>
             </tr>
             <tr>
                 <td>商品价格：</td>
-                <td><input type="text" name="price" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="price" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;元
                 </td>
             </tr>
             <tr>
                 <td>商品库存：</td>
-                <td><input type="text" name="amount" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="amount" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true"></td>
             </tr>
             <tr>
                 <td>商品分类：</td>
-                <td><select id="clazz2" name="clazz" style="width:400px;"></select></td>
+                <td><select id="clazz2" name="clazz" style="width:400px;background-color: white;border: gray 1px solid"></select></td>
             </tr>
             <tr>
                 <td>商品描述：</td>
-                <td><textarea name="describe" style="width:400px;height:100px;"></textarea></td>
+                <td><textarea name="describe" style="width:400px;height:100px;background-color: white;border: gray 1px solid"></textarea></td>
             </tr>
             <tr>
                 <td>商品规格:</td>
@@ -421,25 +424,25 @@
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;长:</td>
-                <td><input type="text" name="length" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="length" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;m
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;宽:</td>
-                <td><input type="text" name="width" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="width" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;m
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;高:</td>
-                <td><input type="text" name="height" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="height" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;m
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;重量:</td>
-                <td><input type="text" name="weight" style="width:200px;" class="easyui-validatebox"
+                <td><input type="text" name="weight" style="width:200px;background-color: white;border: gray 1px solid" class="easyui-validatebox"
                            data-options="required:true">&nbsp;kg
                 </td>
             </tr>

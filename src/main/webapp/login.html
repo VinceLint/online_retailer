@@ -70,20 +70,19 @@
 <script>
     var path = "http://localhost:8080/online_retailer";
     var flag = false;
-    var flag2 = false;
     $(function () {
         $("#userName").focus(function(){
-            if(flag2){
+            if(flag){
                 $("#userName").val("");
                 $("#userPassword").val("");
                 $("input[name='remember-me']").prop("checked", false);
-                flag2 = false;
+                flag = false;
             }
         });
         // 登录页面加载时后台获取Cookies信息，并进行token校验
         $.ajax({
             contentType: "application/json; charset=utf-8",
-            url: path + "/user/tokenVilidation/" + flag,
+            url: path + "/user/tokenVilidation",
             success: function (data) {
                 if (data.SUCCESS) {
                     console.log(data.SUCCESS);
@@ -91,7 +90,6 @@
                     $("#userPassword").val(data.userPassword);
                     $("input[name='remember-me']").prop("checked", true);
                     flag = true;
-                    flag2 = true;
                 } else {
                     console.log(data.ERROR);
                 }
