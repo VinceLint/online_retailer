@@ -100,6 +100,7 @@ public class TransationServiceImpl implements TransationService {
             userList=userMapper.selectAll();
 //        }catch (Exception e){e.printStackTrace();}
 //        System.out.println(userList);
+//        System.out.println("transactionlist"+transactionlist);
         for (TransactionRecord t : transactionlist) {
             if(t.getTraRecStatus()==0){
                 String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm;ss").format(t.getTraRecDate());
@@ -108,7 +109,7 @@ public class TransationServiceImpl implements TransationService {
                 //插入用户名
                 WalId=t.getTraRecWalId();
 //                System.out.println(userList);
-//                System.out.println(WalId);
+                System.out.println(WalId);
                 for(User u:userList){
 //                    System.out.println(u.getUserName());
 //                    System.out.println(u.getUserId());
@@ -124,7 +125,7 @@ public class TransationServiceImpl implements TransationService {
             }
 
         }
-//        System.out.println(toTraList);
+//        System.out.println("toTraList"+toTraList);
 
         List<TransactionRecord> outList =new ArrayList<TransactionRecord>();
 
