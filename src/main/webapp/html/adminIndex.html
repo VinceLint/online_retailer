@@ -33,7 +33,7 @@
                     type: 'POST',
                     dataType: "json",
                     contentType: "application/json;charset=UTF-8",
-                    url: "http://localhost:8080/online_retailer/user/getCurrentUser",
+                    url: "/online_retailer/user/getCurrentUser",
                     data: {},
                     success: function (data) {
                         var privilege = data.userPrivilege;
@@ -64,7 +64,7 @@
                     type: 'POST',
                     dataType: "json",
                     contentType: "application/json",
-                    url: "http://localhost:8080/online_retailer/menu/initMenu",
+                    url: "/online_retailer/menu/initMenu",
                     data: {},
                     success: function (data) {
                         //菜单分类
@@ -186,7 +186,7 @@
                 type: 'POST',
                 dataType: "json",
                 contentType: "application/json",
-                url: "http://localhost:8080/online_retailer/user/clearTokenAnyway",
+                url: "/online_retailer/user/clearTokenAnyway",
                 data: {},
                 success: function (data) {
                     if(data.MESSAGE==="FAILED"){
