@@ -23,10 +23,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.List;
+import java.io.*;
 import java.util.UUID;
 
 /**
@@ -127,16 +124,39 @@ public class Test {
 
     @org.junit.Test
     public void testFtp2() throws Exception{
-        String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
+        String str = "G:\\林跃涛\\新建文件夹\\test.txt";
         FtpUtils ftpUtils = new FtpUtils();
-        System.out.println(ftpUtils.uploadFile("/usr/local/nginx/html","做一道菜啊.jpg",str));
+        System.out.println(ftpUtils.uploadFile("/usr/local/nginx/html/online_retailer/upload","4567.txt",str));
+//        /usr/local/nginx/html/online_retailer/upload
     }
 
     @org.junit.Test
-    public void testFtp3() throws Exception{
-        String str = "G:\\林跃涛\\新建文件夹\\做一道菜.jpg";
+    public void Test3() throws Exception{
+        //创建要提个FTPClient对像
+        FTPClient client = new FTPClient();
+        //创建FTP链接
+        client.connect("47.107.168.99", 21);
+        //登录FTP服务器：用户名密码
+        client.login("root", "lyt970611*");
+        //上传:服务端文件名，上传文件的InputStream
+        //读取文件
+        client.enterLocalPassiveMode();
+        FileInputStream in = new FileInputStream(new File("G:\\林跃涛\\新建文件夹\\做一道菜.jpg"));
+        //设置上传路径,远程站点路径
+        boolean falg = client.changeWorkingDirectory("/usr/local/nginx/html/online_retailer/upload");
+        //修改上传文件的格式，ftp默认传的文本，而图片是二进制
+        client.setFileType(FTP.BINARY_FILE_TYPE);
+        System.out.println(client.storeFile("hello.jpg", in));
+        //关闭链接
+
+    }
+
+    @org.junit.Test
+    public void Test4() throws Exception{
         FtpUtils ftpUtils = new FtpUtils();
-        System.out.println(ftpUtils.uploadFile("/","做一道菜1.jpg",str));
+
+        ftpUtils.deleteFile("/","做一道菜1.jpg");
+
     }
     /**
      * @描述 手动清除缓存类

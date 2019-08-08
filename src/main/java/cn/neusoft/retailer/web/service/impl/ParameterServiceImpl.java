@@ -77,9 +77,16 @@ public class ParameterServiceImpl implements ParameterService {
     public boolean insert(JSONObject jsonObject) {
         Parameter parameter = new Parameter(jsonObject.getString("parameterKey"),
                 jsonObject.getInt("parameterValue"),jsonObject.getString("parameterDescribe"));
+        List<Parameter> parameters = parameterMapper.selectAll();
+        for (Parameter p : parameters){
+            if(p.getParId().equals(jsonObject.getString("parameterKey")))
+            return false;
+        }
         if(parameterMapper.insert(parameter)==1){
+            System.out.println("修改了");
             return true;
         }
+        System.out.println("没修改");
         return false;
     }
 

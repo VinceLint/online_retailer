@@ -91,12 +91,12 @@ public class DropshipController {
         System.out.println(param.get("choose")+"!!!!!!!!!!!!!!!!!!!!!!");
         try{
             List<Integer>storeId= (List<Integer>) param.get("choose");
-            //System.out.println(storeId+"1");
+            System.out.println(storeId+"  1");
             Integer goodsId= (Integer) session.getAttribute("goodsId");
-           // System.out.println(goodsId+"2");
+            System.out.println(goodsId+"  2");
            /// Integer bvoId= (Integer) session.getAttribute("bvoId");
             Integer bvoId= ((User)session.getAttribute("user")).getUserId();
-           // System.out.println(bvoId+"3");
+            System.out.println(bvoId+"  3");
             Dropship dropship = new Dropship();
             for (Integer id : storeId) {
                 int storeid = id;

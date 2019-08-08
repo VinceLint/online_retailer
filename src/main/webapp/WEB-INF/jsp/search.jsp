@@ -39,7 +39,7 @@
             search_name = ""
         }
         $.ajax({
-            url: "http://localhost:8080/online_retailer/Brand/brandSearchResult/" + search_name,
+            url: "/online_retailer/Brand/brandSearchResult/" + search_name,
             async: false,
             type: "post",
             dataType: "json",

@@ -3,6 +3,7 @@ package cn.neusoft.retailer.web.controller;
 import cn.neusoft.retailer.web.pojo.Goods;
 import cn.neusoft.retailer.web.pojo.User;
 import cn.neusoft.retailer.web.service.GoodsService;
+import cn.neusoft.retailer.web.tools.FtpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -91,11 +92,14 @@ public class GoodsController {
 
             //开始上传
             file.transferTo(uploadPath);
-
+            FtpUtils ftpUtils = new FtpUtils();
+            ftpUtils.uploadFileForNginx("/usr/local/nginx/html/online_retailer/goods_images",fileName,uploadPath);
+            uploadPath.delete();
         }
 
         //将数据添加到goods表
         goodsService.save(title, id, price, amount, clazz, describe, length, width, height, weight, brandId, fileName);
+        System.out.println("save!!!");
         return "insert";
     }
 
@@ -126,26 +130,38 @@ public class GoodsController {
             System.out.println("There is not any pics");
         } else {
             //确认最终的路径  /文件夹/文件名
-            //确认最终的路径  /文件夹/文件名
             fileName = UUID.randomUUID().toString() + substring;
             uploadPath = new File(uploadPath + "/" + fileName);
             System.out.println(uploadPath);
             System.out.println(fileName);
 
-
+            //开始上传
+            file.transferTo(uploadPath);
+            FtpUtils ftpUtils = new FtpUtils();
+            Goods goods = goodsService.selectByPrimaryKey(goodsId);
+            if(!goods.getGoodsPic().equals("")){
+                ftpUtils.deleteFile("/usr/local/nginx/html/online_retailer/goods_images",goods.getGoodsPic());
+            }
+            ftpUtils.uploadFileForNginx("/usr/local/nginx/html/online_retailer/goods_images",fileName,uploadPath);
+            uploadPath.delete();
         }
         goodsService.updateByGoodsId(goodsId, title, price, amount, clazz, describe, length, width,
                 height, weight, brandId, fileName);
-
-
-
         return "insert";
     }
 
     @RequestMapping("/queryDelete/{goodsId}")
     public String queryDelete(@PathVariable int goodsId) {
         System.out.println(goodsId);
+        Goods goods = goodsService.selectByPrimaryKey(goodsId);
+        if(goods.getGoodsPic().equals("")){
+            //donoting
+        }else{
+            FtpUtils ftpUtils = new FtpUtils();
+            ftpUtils.deleteFile("/usr/local/nginx/html/online_retailer/goods_images",goods.getGoodsPic());
+        }
         goodsService.deleteByGoodsId(goodsId);
+
         return "insert";
     }
 
